@@ -1,0 +1,80 @@
+$page_color:  #b74ce9;
+$button_color: #43a724;
+$active_button_color: #cf8f46;
+
+@mixin flex_element($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+.header {
+  justify-content: space-between;
+  background-color: $page_color;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .header__content {
+    @include flex_element(row);
+    justify-content: space-around;
+  }
+
+  .header__content button {
+    margin: 5px;
+  }
+
+}
+
+.page-button {
+  background-color: $button_color;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+
+  &:hover {
+    background-color: $active_button_color;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+  }
+}
+
+.container-flex {
+  @include flex_element(column);
+  width: 100%;
+}
+
+.content-flex {
+  @include flex_element(row);
+  align-self: center;
+  flex: 0px 0px 1200px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.base-title {
+  margin: 0px;
+  padding: 0px;
+}
+
+.image-block {
+  background: url(../../images/plane_main.jpg) no-repeat;
+  min-height: 500px;
+}
+
+.image {
+	position	: relative;
+	width		: 100%;
+}
+
+.main-image {
+  max-width: 100%;
+}
+
+h2 {
+	position	: absolute;
+	top		: 25%;
+  left		: 0;
+  right: 0;
+  bottom: 0;
+	width		: 100%;
+}

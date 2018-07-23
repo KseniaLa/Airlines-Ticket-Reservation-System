@@ -12,15 +12,57 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import './style.scss';
+import mainImage from './plane_main.jpg';
 
-/* eslint-disable react/prefer-stateless-function */
+class Button extends React.Component {
+  render() {
+    return (
+      <button className='page-button'>{this.props.text}</button>
+    )
+  }
+}
+
+class Title extends React.Component {
+  render() {
+    return (
+      <h1 class={this.props.style}>{this.props.text}</h1>
+    )
+  }
+}
+
+class Header extends React.Component {
+  render() {
+    return (
+      <div className='content-flex header'>
+        <Title style='base-title' text='Airlines' />
+        <div className='header__content'>
+          <Button text='Войти' />
+          <Button text='Регистрация' />
+        </div>
+      </div>
+    )
+  }
+}
+
+class Image extends React.Component {
+  render() {
+    return (
+      <img src={this.props.path} className={this.props.style}/>
+    )
+  }
+}
+
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <h1>
-        <span>123123</span>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div className='container-flex'>
+        <Header />
+        <div className="image">
+          <Image path={mainImage} style='main-image' />
+          <h2>Hello<br />text here</h2>
+        </div>
+      </div>
     );
   }
 }

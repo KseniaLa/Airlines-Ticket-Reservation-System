@@ -10,6 +10,7 @@ $active_button_color: #cf8f46;
 .header {
   position: fixed;
   z-index: 9999;
+  background-color: #b74ce9;
 
   .header__content {
     justify-content: space-between;
@@ -53,7 +54,7 @@ $active_button_color: #cf8f46;
 .container-flex {
   @include flex_element(column);
   width: 100%;
-  background-color: #b74ce9;
+  /*background-color: #b74ce9;*/
 }
 
 .content-flex {
@@ -136,9 +137,53 @@ $active_button_color: #cf8f46;
 }
 
 .menu {
-
+  padding: 0px;
   li {
     display: inline-block;
     margin-right: 10px;
+  }
+}
+
+.socialicon {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background-color: #530969;
+  color: #ffffff;
+  font-size: 22px;
+  text-align: center;
+  line-height: 43px;
+
+  &:hover {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color:#530969;
+    font-size: 22px;
+    text-align: center;
+    line-height: 43px;
+  }
+}
+
+.footer {
+  background-color: #b74ce9;
+
+  .footer__content {
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0px;
+    @media screen and (max-width: 500px){
+      @include flex_element(column);
+      text-align: center;
+    }
+  }
+
+  .footer__social {
+    @include flex_element(row);
+
+    div {
+      margin: 5px;
+    }
   }
 }

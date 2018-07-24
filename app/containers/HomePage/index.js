@@ -17,16 +17,48 @@ import mainImage from './plane_main.jpg';
 import Header from '../header';
 import SearchBar from '../searchbar';
 import Image from '../basic/image';
+import 'font-awesome/css/font-awesome.min.css';
 
 class Menu extends React.Component {
+
+  createList = () => {
+    let list = []
+    for (let i = 0; i < this.props.items.length; i++) {
+      list.push(<li>{this.props.items[i]}</li>)
+    }
+    return list;
+  }
+
   render() {
     return (
       <ul className='menu'>
-        <li>{this.props.items[0]}</li>
-        <li>{this.props.items[1]}</li>
-        <li>{this.props.items[2]}</li>
-        <li>{this.props.items[3]}</li>
+        {this.createList()}
       </ul>
+    )
+  }
+}
+
+class SocialIcon extends React.Component {
+  render() {
+    return (
+      <div className='socialicon'><i className={this.props.icon}></i></div>
+    )
+  }
+}
+
+class Footer extends React.Component {
+  render() {
+    return (
+      <footer className='container-flex footer'>
+        <div className='content-flex footer__content'>
+          <Menu items={['О компании', 'Реклама', 'Вакансии', 'Помощь']} />
+          <div className='footer__social'>
+            <SocialIcon icon='fa fa-vk' />
+            <SocialIcon icon='fa fa-facebook-f' />
+            <SocialIcon icon='fa fa-twitter' />
+          </div>
+        </div>
+      </footer>
     )
   }
 }
@@ -43,8 +75,8 @@ export default class HomePage extends React.PureComponent {
               <SearchBar />
             </div>
           </div>
-          <Menu items={['О компании', 'Реклама', 'Вакансии', 'Помощь']} />
         </div>
+        <Footer />
       </div>
     );
   }

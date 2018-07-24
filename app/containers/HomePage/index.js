@@ -23,15 +23,19 @@ import 'font-awesome/css/font-awesome.min.css';
 
 class TextImageBlock extends React.Component {
   render() {
-    <div>
-      <Image />
-      <div></div>
-    </div>
+
   }
 }
 
 class TopList extends React.Component {
-  
+  render() {
+    return (
+      <div className='content-flex'>
+        <h1>Топ авиакомпаний</h1>
+        <Menu items={['компания', 'компания', 'компания', 'компания']} />
+      </div>
+    )
+  }
 }
 
 export default class HomePage extends React.PureComponent {
@@ -47,6 +51,7 @@ export default class HomePage extends React.PureComponent {
               <SearchBar />
             </div>
           </div>
+          <TopList />
         </div>
         <Footer />
       </div>

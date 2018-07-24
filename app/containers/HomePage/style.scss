@@ -1,5 +1,5 @@
-$page_color:  #b74ce9;
-$button_color: #530969;
+$page_color:  #530969;
+$button_color: #b74ce9;
 $active_button_color: #cf8f46;
 
 @mixin flex_element($direction) {
@@ -10,7 +10,7 @@ $active_button_color: #cf8f46;
 .header {
   position: fixed;
   z-index: 9999;
-  background-color: #b74ce9;
+  background-color: $page_color;
 
   .header__content {
     justify-content: space-between;
@@ -148,7 +148,7 @@ $active_button_color: #cf8f46;
   width: 43px;
   height: 43px;
   border-radius: 50%;
-  background-color: #530969;
+  background-color: $button_color;
   color: #ffffff;
   font-size: 22px;
   text-align: center;
@@ -167,7 +167,7 @@ $active_button_color: #cf8f46;
 }
 
 .footer {
-  background-color: #b74ce9;
+  background-color: $page_color;
 
   .footer__content {
     justify-content: space-between;

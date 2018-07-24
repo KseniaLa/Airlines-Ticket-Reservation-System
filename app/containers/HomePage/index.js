@@ -34,13 +34,15 @@ class Title extends React.Component {
 class Header extends React.Component {
   render() {
     return (
-      <div className='content-flex header'>
-        <Title style='base-title' text='Airlines' />
-        <div className='header__content'>
-          <Button text='Войти' />
-          <Button text='Регистрация' />
+      <header className='container-flex header'>
+        <div className='content-flex header__content'>
+          <Title style='base-title site-name' text='Airlines' />
+          <div className='header__options'>
+            <Button text='Войти' />
+            <Button text='Регистрация' />
+          </div>
         </div>
-      </div>
+      </header>
     )
   }
 }
@@ -48,19 +50,48 @@ class Header extends React.Component {
 class Image extends React.Component {
   render() {
     return (
-      <img src={this.props.path} className={this.props.style}/>
+      <img src={this.props.path} className={this.props.style} />
     )
   }
 }
 
+class Field extends React.Component {
+  render() {
+    return (
+      <input className='field' type={this.props.type} placeholder={this.props.hint} />
+    )
+  }
+}
+
+class SearchBar extends React.Component {
+  render() {
+    return (
+      <div className='search-bar'>
+        <div className='search-bar__input-area'>
+          <Field hint='откуда' />
+          <Field hint='откуда' />
+          <Field hint='откуда' type='date' />
+          <Field hint='откуда' type='date' />
+        </div>
+        <Button text='Найти билеты' />
+      </div>
+    )
+  }
+}
+
+
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <div className='container-flex'>
+      <div>
         <Header />
-        <div className="image">
-          <Image path={mainImage} style='main-image' />
-          <h2>Hello<br />text here</h2>
+        <div className='container-flex'>
+          <div className="image">
+            <Image path={mainImage} style='main-image' />
+            <div className='overlay'>
+              <SearchBar />
+            </div>
+          </div>
         </div>
       </div>
     );

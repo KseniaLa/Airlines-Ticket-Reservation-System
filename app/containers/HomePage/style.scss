@@ -1,5 +1,5 @@
 $page_color:  #b74ce9;
-$button_color: #43a724;
+$button_color: #530969;
 $active_button_color: #cf8f46;
 
 @mixin flex_element($direction) {
@@ -8,20 +8,29 @@ $active_button_color: #cf8f46;
 }
 
 .header {
-  justify-content: space-between;
-  background-color: $page_color;
-  padding: 10px;
-  box-sizing: border-box;
+  position: fixed;
+  z-index: 9999;
 
   .header__content {
+    justify-content: space-between;
+    background-color: $page_color;
+    padding: 10px;
+    box-sizing: border-box;
+    @media screen and (max-width: 400px){
+      @include flex_element(column);
+      text-align: center;
+    }
+  }
+
+  .header__options {
     @include flex_element(row);
     justify-content: space-around;
   }
 
-  .header__content button {
+  .header__options button {
     margin: 5px;
+    padding: 10px;
   }
-
 }
 
 .page-button {
@@ -29,18 +38,22 @@ $active_button_color: #cf8f46;
   border: none;
   border-radius: 5px;
   color: #ffffff;
+  font-weight: bold;
 
   &:hover {
     background-color: $active_button_color;
     border: none;
     border-radius: 5px;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #530969;
+    font-weight: bold;
   }
 }
 
 .container-flex {
   @include flex_element(column);
   width: 100%;
+  background-color: #b74ce9;
 }
 
 .content-flex {
@@ -56,25 +69,68 @@ $active_button_color: #cf8f46;
   padding: 0px;
 }
 
-.image-block {
-  background: url(../../images/plane_main.jpg) no-repeat;
-  min-height: 500px;
+.site-name {
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .image {
 	position	: relative;
-	width		: 100%;
+  width		: 100%;
+  @include flex_element(row);
+  align-self: center;
+  justify-content: center;
+  flex: 0px 0px 1200px;
+  width: 100%;
 }
 
 .main-image {
   max-width: 100%;
 }
 
-h2 {
+.overlay {
 	position	: absolute;
-	top		: 25%;
-  left		: 0;
+  top		: 25%;
+  border-radius: 5px;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  /*left		: 0;
   right: 0;
   bottom: 0;
-	width		: 100%;
+	width		: 100%;*/
+}
+
+.field {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #faebd7;
+}
+
+.search-bar {
+  @include flex_element(column);
+  justify-content: center;
+  max-width: 900px;
+  padding: 30px;
+ 
+  .search-bar__input-area {
+    @include flex_element(row);
+    margin-bottom: 30px;
+    @media screen and (max-width: 900px){
+      @include flex_element(column);
+    }
+    /*align-self: center;
+    background-color: #cf8f46;
+    flex: 0px 0px 1200px;
+    width: 100%;*/
+
+    input {
+      margin: 10px;
+    }
+    
+  }
+
+  button {
+    width: 200px;
+    align-self: center;
+    padding: 10px;
+  }
 }

@@ -18,8 +18,21 @@ import Header from '../header';
 import SearchBar from '../searchbar';
 import Image from '../basic/image';
 import Footer from '../footer';
+import Menu from '../basic/menu';
 import 'font-awesome/css/font-awesome.min.css';
 
+class TextImageBlock extends React.Component {
+  render() {
+    <div>
+      <Image />
+      <div></div>
+    </div>
+  }
+}
+
+class TopList extends React.Component {
+  
+}
 
 export default class HomePage extends React.PureComponent {
   render() {
@@ -30,6 +43,7 @@ export default class HomePage extends React.PureComponent {
           <div className="image">
             <Image path={mainImage} style='main-image' />
             <div className='overlay'>
+              <h1>Поиск билетов</h1>
               <SearchBar />
             </div>
           </div>

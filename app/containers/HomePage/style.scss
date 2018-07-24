@@ -90,10 +90,14 @@ $active_button_color: #cf8f46;
 }
 
 .overlay {
-	position	: absolute;
-  top		: 25%;
+	position: absolute;
+  top: 25%;
   border-radius: 5px;
   background-color: rgba($color: #000000, $alpha: 0.7);
+  text-align: center;
+  h1 {
+    color: #ffffff;
+  }
   /*left		: 0;
   right: 0;
   bottom: 0;

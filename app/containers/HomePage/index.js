@@ -14,71 +14,22 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './style.scss';
 import mainImage from './plane_main.jpg';
+import Header from '../header';
+import SearchBar from '../searchbar';
+import Image from '../basic/image';
 
-class Button extends React.Component {
+class Menu extends React.Component {
   render() {
     return (
-      <button className='page-button'>{this.props.text}</button>
+      <ul className='menu'>
+        <li>{this.props.items[0]}</li>
+        <li>{this.props.items[1]}</li>
+        <li>{this.props.items[2]}</li>
+        <li>{this.props.items[3]}</li>
+      </ul>
     )
   }
 }
-
-class Title extends React.Component {
-  render() {
-    return (
-      <h1 class={this.props.style}>{this.props.text}</h1>
-    )
-  }
-}
-
-class Header extends React.Component {
-  render() {
-    return (
-      <header className='container-flex header'>
-        <div className='content-flex header__content'>
-          <Title style='base-title site-name' text='Airlines' />
-          <div className='header__options'>
-            <Button text='Войти' />
-            <Button text='Регистрация' />
-          </div>
-        </div>
-      </header>
-    )
-  }
-}
-
-class Image extends React.Component {
-  render() {
-    return (
-      <img src={this.props.path} className={this.props.style} />
-    )
-  }
-}
-
-class Field extends React.Component {
-  render() {
-    return (
-      <input className='field' type={this.props.type} placeholder={this.props.hint} />
-    )
-  }
-}
-
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <div className='search-bar'>
-        <div className='search-bar__input-area'>
-          <Field hint='откуда' />
-          <Field hint='откуда' />
-          <Field hint='откуда' type='date' />
-          <Field hint='откуда' type='date' />
-        </div>
-        <Button text='Найти билеты' />
-      </div>
-    )
-  }
-}
-
 
 export default class HomePage extends React.PureComponent {
   render() {
@@ -92,6 +43,7 @@ export default class HomePage extends React.PureComponent {
               <SearchBar />
             </div>
           </div>
+          <Menu items={['О компании', 'Реклама', 'Вакансии', 'Помощь']} />
         </div>
       </div>
     );

@@ -52,6 +52,7 @@ export default class HomePage extends React.PureComponent {
     return (
       <div>
         <Header />
+        <div className=''></div>
         <div className='container-flex' id='main'>
           <div className="image">
             <Image path={mainImage} style='main-image' />

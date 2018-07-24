@@ -118,10 +118,6 @@ $active_button_color: #cf8f46;
     @media screen and (max-width: 900px){
       @include flex_element(column);
     }
-    /*align-self: center;
-    background-color: #cf8f46;
-    flex: 0px 0px 1200px;
-    width: 100%;*/
 
     input {
       margin: 10px;

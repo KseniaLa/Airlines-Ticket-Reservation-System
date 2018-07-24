@@ -76,17 +76,17 @@ $active_button_color: #cf8f46;
 }
 
 .image {
-	position	: relative;
-  width		: 100%;
+	position: relative;
+  /*width: 100%;*/
   @include flex_element(row);
   align-self: center;
   justify-content: center;
   flex: 0px 0px 1200px;
-  width: 100%;
 }
 
 .main-image {
-  max-width: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .overlay {
@@ -98,10 +98,6 @@ $active_button_color: #cf8f46;
   h1 {
     color: #ffffff;
   }
-  /*left		: 0;
-  right: 0;
-  bottom: 0;
-	width		: 100%;*/
 }
 
 .field {
@@ -115,7 +111,7 @@ $active_button_color: #cf8f46;
   justify-content: center;
   max-width: 900px;
   padding: 30px;
- 
+
   .search-bar__input-area {
     @include flex_element(row);
     margin-bottom: 30px;
@@ -126,7 +122,7 @@ $active_button_color: #cf8f46;
     input {
       margin: 10px;
     }
-    
+
   }
 
   button {
@@ -165,6 +161,45 @@ $active_button_color: #cf8f46;
     line-height: 43px;
   }
 }
+
+/*******************/
+.imgblocks-container {
+  @include flex_element(row);
+  justify-content: space-between;
+  margin-bottom: 20px;
+  @media screen and (max-width: 900px){
+    @include flex_element(column);
+    margin-bottom: 0px;
+  }
+}
+
+.top-container {
+  @include flex_element(column);
+  margin: 20px;
+
+}
+
+.textimage-block {
+  width: 45%;
+  height: 200px;
+  background-color: #faebd7;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.1);
+  @media screen and (max-width: 900px){
+    width: 90%;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  img {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+/***************************/
 
 .footer {
   background-color: $page_color;

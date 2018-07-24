@@ -13,7 +13,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './style.scss';
-import mainImage from './plane_main.jpg';
+
+import mainImage from './plane.png';
+import cityImage from './moscow.jpg';
+
 import Header from '../header';
 import SearchBar from '../searchbar';
 import Image from '../basic/image';
@@ -23,7 +26,12 @@ import 'font-awesome/css/font-awesome.min.css';
 
 class TextImageBlock extends React.Component {
   render() {
-
+    return (
+      <div className='textimage-block'>
+        <Image path={cityImage} style='' />
+        <div>dfght</div>
+      </div>
+    )
   }
 }
 
@@ -51,7 +59,21 @@ export default class HomePage extends React.PureComponent {
               <SearchBar />
             </div>
           </div>
-          <TopList />
+          <div className='content-flex top-container'>
+            <div className='imgblocks-container'>
+              <TextImageBlock />
+              <TextImageBlock />
+            </div>
+            <div className='imgblocks-container'>
+              <TextImageBlock />
+              <TextImageBlock />
+            </div>
+            <div className='imgblocks-container'>
+              <TextImageBlock />
+              <TextImageBlock />
+            </div>
+
+          </div>
         </div>
         <Footer />
       </div>

@@ -47,15 +47,16 @@ class TopList extends React.Component {
 }
 
 export default class HomePage extends React.PureComponent {
+
   render() {
     return (
       <div>
         <Header />
-        <div className='container-flex'>
+        <div className='container-flex' id='main'>
           <div className="image">
             <Image path={mainImage} style='main-image' />
             <div className='overlay'>
-              <h1>Поиск билетов</h1>
+              <h1 onClick={this.tick}>Поиск билетов</h1>
               <SearchBar />
             </div>
           </div>

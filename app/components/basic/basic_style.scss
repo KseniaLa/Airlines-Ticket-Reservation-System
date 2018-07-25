@@ -7,6 +7,7 @@
   color: #ffffff;
   font-weight: bold;
   transition: 500ms;
+  outline: none;
 
   &:hover {
       background-color: $active_button_color;
@@ -21,7 +22,8 @@
 .field {
   padding: 10px;
   border-radius: 5px;
-  background-color: #faebd7;
+  background-color: #ffffff;
+  outline: none;
 }
 
 .menu {

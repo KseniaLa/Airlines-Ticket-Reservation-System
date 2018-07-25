@@ -12,6 +12,14 @@
   opacity: 1;
 }
 
+.container {
+  width: 100%;
+  @include flex_element(column);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .close-button {
   position: absolute;
   top: 5px;
@@ -27,9 +35,6 @@
 }
 
 .sign-page {
-  @include flex_element(column);
-  align-items: center;
-  justify-content: center;
   margin: 70px auto;
   padding: 20px;
   background: #ffffff;
@@ -44,6 +49,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-bottom: 30px;
 
     button {
       background-color: $page_color;

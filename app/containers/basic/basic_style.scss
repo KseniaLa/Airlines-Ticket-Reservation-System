@@ -6,6 +6,7 @@
   border-radius: 5px;
   color: #ffffff;
   font-weight: bold;
+  transition: 500ms;
 
   &:hover {
       background-color: $active_button_color;

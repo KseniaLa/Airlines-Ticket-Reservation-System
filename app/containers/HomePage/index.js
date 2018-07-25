@@ -58,7 +58,7 @@ export default class HomePage extends React.PureComponent {
           <div className="image">
             <Image path={mainImage} style='main-image' />
             <div className='overlay'>
-              <h1 onClick={this.tick}>Поиск билетов</h1>
+              <h1>Поиск билетов</h1>
               <SearchBar />
             </div>
           </div>

@@ -21,8 +21,10 @@ import Header from '../header';
 import SearchBar from '../searchbar';
 import Image from '../../components/basic/image';
 import Footer from '../footer';
+import Main from '../main';
 import Menu from '../../components/basic/menu';
 import SignIn from '../SignInPage/index';
+import ImageSearch from '../ImageSearch';
 import 'font-awesome/css/font-awesome.min.css';
 
 class TextImageBlock extends React.Component {
@@ -54,14 +56,8 @@ export default class HomePage extends React.PureComponent {
       <div>
         <Header />
         <SignIn />
-        <div className='container-flex' id='main'>
-          <div className="image">
-            <Image path={mainImage} style='main-image' />
-            <div className='overlay'>
-              <h1>Поиск билетов</h1>
-              <SearchBar />
-            </div>
-          </div>
+        <Main>
+          <ImageSearch image={mainImage}/>
           <div className='content-flex top-container'>
             <div className='imgblocks-container'>
               <TextImageBlock />
@@ -69,7 +65,7 @@ export default class HomePage extends React.PureComponent {
             </div>
             <div className='imgblocks-container'>
               <TextImageBlock />
-              <TextImageBlock />
+              <TextImageBlock /> 
             </div>
             <div className='imgblocks-container'>
               <TextImageBlock />
@@ -77,7 +73,7 @@ export default class HomePage extends React.PureComponent {
             </div>
 
           </div>
-        </div>
+        </Main>
         <Footer />
       </div>
     );

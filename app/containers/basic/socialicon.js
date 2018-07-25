@@ -1,4 +1,5 @@
 import React from 'react';
+import './basic_style.scss';
 
 export default class SocialIcon extends React.Component {
     render() {

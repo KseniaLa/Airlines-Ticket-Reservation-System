@@ -22,6 +22,7 @@ import SearchBar from '../searchbar';
 import Image from '../basic/image';
 import Footer from '../footer';
 import Menu from '../basic/menu';
+import SignIn from '../SignInPage/index';
 import 'font-awesome/css/font-awesome.min.css';
 
 class TextImageBlock extends React.Component {
@@ -52,7 +53,7 @@ export default class HomePage extends React.PureComponent {
     return (
       <div>
         <Header />
-        <div className=''></div>
+        <SignIn />
         <div className='container-flex' id='main'>
           <div className="image">
             <Image path={mainImage} style='main-image' />

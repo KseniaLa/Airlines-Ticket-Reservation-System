@@ -1,0 +1,54 @@
+@import '../common.scss';
+
+.page-button {
+  background-color: $button_color;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+
+  &:hover {
+      background-color: $active_button_color;
+      border: none;
+      border-radius: 5px;
+      background-color: #ffffff;
+      color: #530969;
+      font-weight: bold;
+  }
+}
+
+.field {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #faebd7;
+}
+
+.menu {
+  padding: 0px;
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.socialicon {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background-color: $button_color;
+  color: #ffffff;
+  font-size: 22px;
+  text-align: center;
+  line-height: 43px;
+
+  &:hover {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color:#530969;
+    font-size: 22px;
+    text-align: center;
+    line-height: 43px;
+  }
+}

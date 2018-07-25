@@ -1,0 +1,8 @@
+$page_color:  #530969;
+$button_color: #b74ce9;
+$active_button_color: #cf8f46;
+
+@mixin flex_element($direction) {
+  display: flex;
+  flex-direction: $direction;
+}

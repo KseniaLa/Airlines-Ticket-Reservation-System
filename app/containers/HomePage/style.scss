@@ -1,24 +1,4 @@
-$page_color:  #530969;
-$button_color: #b74ce9;
-$active_button_color: #cf8f46;
-
-@mixin flex_element($direction) {
-  display: flex;
-  flex-direction: $direction;
-}
-
-.ooverlay {
-  position: fixed;
-  z-index: 9999999999;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  transition: opacity 500ms;
-
-  opacity: 1;
-}
+@import '../common';
 
 .header {
   position: fixed;
@@ -44,23 +24,6 @@ $active_button_color: #cf8f46;
   .header__options button {
     margin: 5px;
     padding: 10px;
-  }
-}
-
-.page-button {
-  background-color: $button_color;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  font-weight: bold;
-
-  &:hover {
-    background-color: $active_button_color;
-    border: none;
-    border-radius: 5px;
-    background-color: #ffffff;
-    color: #530969;
-    font-weight: bold;
   }
 }
 
@@ -113,12 +76,6 @@ $active_button_color: #cf8f46;
   }
 }
 
-.field {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #faebd7;
-}
-
 .search-bar {
   @include flex_element(column);
   justify-content: center;
@@ -145,35 +102,9 @@ $active_button_color: #cf8f46;
   }
 }
 
-.menu {
-  padding: 0px;
-  li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-}
 
-.socialicon {
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  background-color: $button_color;
-  color: #ffffff;
-  font-size: 22px;
-  text-align: center;
-  line-height: 43px;
 
-  &:hover {
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    color:#530969;
-    font-size: 22px;
-    text-align: center;
-    line-height: 43px;
-  }
-}
+
 
 /*******************/
 .imgblocks-container {

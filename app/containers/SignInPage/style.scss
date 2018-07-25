@@ -18,6 +18,17 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 1.2rem;
+}
+
+.change-mode {
+  border-top: #000000 1px dashed;
+  margin-top: 5px;
+  width: 100%;
+
+  h6 {
+    margin: 10px;
+  }
 }
 
 .close-button {
@@ -43,6 +54,9 @@
   width: 80%;
   position: relative;
   font-size: 1.5rem;
+  @media screen and (max-width: 1900px){
+    padding: 10px;
+  }
 
   .sign-page__form {
     @include flex_element(column);
@@ -50,6 +64,9 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 30px;
+    @media screen and (max-width: 1900px){
+      margin-bottom: 10px;
+    }
 
     button {
       background-color: $page_color;
@@ -70,7 +87,7 @@
 
   input {
     background-color: #eeebee;
-    margin: 20px;
+    margin: 15px;
     width: 80%;
     box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.2);
   }

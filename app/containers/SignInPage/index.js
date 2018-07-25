@@ -28,8 +28,8 @@ export default class SignInPage extends React.Component {
           <Field type='password' hint='password' />
           <Button text='Войти' />
         </form>
-        <div>
-          <h1>cfgvyj</h1>
+        <div className='change-mode'>
+          <h6>Я новый пользователь</h6>
         <Button text='Зарегистрироваться' onClick={this.handleChangeModeClick} />
         </div>
       </div>
@@ -44,7 +44,10 @@ export default class SignInPage extends React.Component {
           <Field type='text' hint='e-mail' />
           <Button text='Зарегистрироваться' />
         </form>
+        <div className='change-mode'>
+          <h6>Уже есть логин</h6>
         <Button text='Войти' onClick={this.handleChangeModeClick} />
+        </div>
       </div>
     );
   }

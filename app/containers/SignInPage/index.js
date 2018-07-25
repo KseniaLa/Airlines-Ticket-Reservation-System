@@ -1,9 +1,9 @@
 import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 
-import Button from '../basic/button';
-import Field from '../basic/textfield';
-import Title from '../basic/title';
+import Button from '../../components/basic/button';
+import Field from '../../components/basic/textfield';
+import Title from '../../components/basic/title';
 import './style.scss';
 
 class CloseButton extends React.Component {

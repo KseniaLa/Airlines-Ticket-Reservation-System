@@ -1,6 +1,6 @@
 import React from 'react';
-import Title from './basic/title';
-import Button from './basic/button';
+import Title from '../components/basic/title';
+import Button from '../components/basic/button';
 
 export default class Header extends React.Component {
   showSignIn() {

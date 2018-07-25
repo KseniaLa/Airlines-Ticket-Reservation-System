@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from './basic/button';
-import TextField from './basic/textfield';
-import DateField from './basic/datefield';
+import Button from '../components/basic/button';
+import TextField from '../components/basic/textfield';
+import DateField from '../components/basic/datefield';
 
 export default class SearchBar extends React.Component {
     render() {

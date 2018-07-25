@@ -1,6 +1,6 @@
 import React from 'react';
-import Menu from './basic/menu';
-import SocialIcon from './basic/socialicon';
+import Menu from '../components/basic/menu';
+import SocialIcon from '../components/basic/socialicon';
 
 export default class Footer extends React.Component {
   render() {

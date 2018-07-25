@@ -19,9 +19,9 @@ import cityImage from './moscow.jpg';
 
 import Header from '../header';
 import SearchBar from '../searchbar';
-import Image from '../basic/image';
+import Image from '../../components/basic/image';
 import Footer from '../footer';
-import Menu from '../basic/menu';
+import Menu from '../../components/basic/menu';
 import SignIn from '../SignInPage/index';
 import 'font-awesome/css/font-awesome.min.css';
 

@@ -65,7 +65,7 @@ export default class HomePage extends React.PureComponent {
             </div>
             <div className='imgblocks-container'>
               <TextImageBlock />
-              <TextImageBlock /> 
+              <TextImageBlock />
             </div>
             <div className='imgblocks-container'>
               <TextImageBlock />

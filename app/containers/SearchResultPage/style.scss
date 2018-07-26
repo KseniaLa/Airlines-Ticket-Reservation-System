@@ -1,0 +1,24 @@
+@import '../../common';
+
+.search {
+  @include flex_element(column);
+  background-color: $page_color;
+  padding-top: 50px;
+  margin-bottom: 10px;
+  
+  @media screen and (max-width: 400px){
+    display: none;
+  }
+}
+
+.ticket-area {
+  @include flex_element(column);
+  
+}
+
+.ticket {
+  background-color: #dddfdf;
+  min-height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+}

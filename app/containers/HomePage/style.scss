@@ -87,16 +87,24 @@
   justify-content: center;
   max-width: 900px;
   padding: 30px;
+  @media screen and (max-width: 800px){
+    width: 100%;
+    justify-content: center;
+  }
 
   .search-bar__input-area {
     @include flex_element(row);
     margin-bottom: 30px;
-    @media screen and (max-width: 900px){
+    @media screen and (max-width: 800px){
       @include flex_element(column);
+      justify-content: center;
     }
 
     input {
       margin: 10px;
+      @media screen and (max-width: 800px){
+        width: 80%;
+      }
     }
 
   }

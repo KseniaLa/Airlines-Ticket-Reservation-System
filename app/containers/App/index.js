@@ -24,6 +24,8 @@ import SignIn from '../SignInPage/index';
 import UserPage from '../UserPage/index';
 import 'font-awesome/css/font-awesome.min.css';
 
+import './style.scss';
+
 //let browserHistory = ReactRouter.browserHistory;
 
 /*export default*/ class App extends React.Component {

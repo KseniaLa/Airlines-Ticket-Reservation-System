@@ -1,11 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import Title from '../../components/basic/title';
 import Button from '../../components/basic/button';
+import SocialIcon from '../../components/basic/socialicon';
 import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default class Header extends React.Component {
+/*export default*/ class Header extends React.Component {
   showSignIn() {
     alert("hello");
   }
@@ -16,7 +20,9 @@ export default class Header extends React.Component {
         <div className='content-flex header__content'>
           <Link to='/'><Title style='base-title site-name' text='Airlines' /></Link>
           <div className='header__options'>
-            <Link to='/signin'><Button text='Войти' onClick={this.showSignIn}/></Link>
+            <Link to='/user'><SocialIcon icon='fa fa-user' /></Link>
+            <Link to='/user'><SocialIcon icon='fa fa-shopping-cart' /></Link>
+            <Button text='Войти' onClick={this.props.showSignIn} />
           </div>
         </div>
       </header>
@@ -24,9 +30,9 @@ export default class Header extends React.Component {
   }
 }
 
-/*export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
-    showSignIn: function() {
+    showSignIn: function () {
       dispatch({
         type: 'SHOW_SIGN_MODAL',
         modalVisible: true
@@ -35,9 +41,14 @@ export default class Header extends React.Component {
   }
 }
 
+const visibleSelector = (store) => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
-  // ...
+  visible: visibleSelector
 });
+
+/*const mapStateToProps = function(store) {
+  return {};
+}*/
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
@@ -46,4 +57,4 @@ const withReducer = injectReducer({ key: 'header', reducer });
 export default compose(
   withReducer,
   withConnect,
-)(Header);*/
+)(Header);

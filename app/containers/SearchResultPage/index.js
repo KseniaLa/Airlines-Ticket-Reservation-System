@@ -33,11 +33,6 @@ export default class SearchResultPage extends React.Component {
         <section className='content-flex ticket-area'>
           <Ticket />
           <Ticket />
-          <Ticket />
-          <Ticket />
-          <Ticket />
-          <Ticket />
-          <Ticket />
           </section>
       </div>
     );

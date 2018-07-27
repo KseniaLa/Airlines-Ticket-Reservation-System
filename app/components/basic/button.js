@@ -5,7 +5,9 @@ import './basic_style.scss';
 export default class Button extends React.Component {
   render() {
     return (
-      <button className='page-button' onClick={this.props.onClick}>{this.props.text}</button>
+      <button className='page-button' onClick={this.props.onClick}>
+      {this.props.text}
+      </button>
     )
   }
 }

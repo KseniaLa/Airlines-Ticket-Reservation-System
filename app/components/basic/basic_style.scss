@@ -1,5 +1,9 @@
 @import '../../common';
 
+a {
+    text-decoration: none;
+}
+
 .page-button {
   background-color: $button_color;
   border: none;
@@ -17,6 +21,8 @@
       color: #530969;
       font-weight: bold;
   }
+
+
 }
 
 .field {

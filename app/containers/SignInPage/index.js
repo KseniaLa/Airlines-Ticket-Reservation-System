@@ -1,6 +1,9 @@
 import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 
+import injectReducer from 'utils/injectReducer';
+import reducer from './reducer';
+
 import Button from '../../components/basic/button';
 import Field from '../../components/basic/textfield';
 import Title from '../../components/basic/title';
@@ -84,3 +87,21 @@ export default class SignInPage extends React.Component {
     return (<div></div>);
   }
 }
+
+/*export function mapDispatchToProps(dispatch) {
+  // ...
+}
+
+const mapStateToProps = createStructuredSelector({
+  visible: store.modalVisible
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'signpage', reducer });
+
+export default compose(
+  withReducer,
+  withConnect,
+)(SignInPage);*/
+

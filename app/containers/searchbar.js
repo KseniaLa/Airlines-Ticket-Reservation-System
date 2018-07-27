@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../components/basic/button';
 import TextField from '../components/basic/textfield';
 import DateField from '../components/basic/datefield';
+import {Link} from 'react-router-dom';
 
 export default class SearchBar extends React.Component {
     render() {
@@ -13,7 +14,7 @@ export default class SearchBar extends React.Component {
             <DateField />
             <DateField />
           </div>
-          <Button text='Найти билеты' />
+          <Link to='/results'><Button text='Найти билеты' path='/results' /></Link>
         </div>
       )
     }

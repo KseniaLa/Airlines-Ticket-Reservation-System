@@ -24,12 +24,27 @@ export default class SearchResultPage extends React.Component {
         <section className='content-flex ticket-area'>
           <Ticket 
           title='Минск-Москва'
-          company='aero'
+          company='Аэрофлот'
           description='без пересадок'
-          date='12.12.2018'
+          time='12.30'
           price='500'
           count='345'/>
-          <Ticket />
+
+          <Ticket 
+          title='Минск-Москва'
+          company='Аэрофлот'
+          description='без пересадок'
+          time='12.30'
+          price='1000'
+          count='345'/>
+
+          <Ticket 
+          title='Минск-Москва'
+          company='Аэрофлот'
+          description='без пересадок'
+          time='12.30'
+          price='500'
+          count='5'/>
           </section>
       </div>
     );

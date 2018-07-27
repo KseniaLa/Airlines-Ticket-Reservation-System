@@ -6,9 +6,9 @@
   grid-template-rows: auto auto auto;
   grid-template-areas: 
     "title price"
-    "company ."
+    "company category"
     "description count"
-    "date add";
+    "time add";
   background-color: #dddfdf;
   min-height: 100px;
   margin: 10px;
@@ -22,17 +22,23 @@
 }
 
 .ticket__title {
+  background-color: #b8cdf0;
   grid-area: title;
   margin: 0;
-  padding: 0;
+  padding-left: 5px;
+}
+
+.category {
+  grid-area: category;
+  padding-left: 10px;
+  border-left: #000000 3px solid;
 }
 
 .ticket__company {
   grid-area: company;
-  background-color: #e7ccf3;
-  
+  background-color: #d9eecd;
   margin: 0;
-  padding: 0;
+  padding: 5px;
 }
 
 .ticket__price {
@@ -42,8 +48,9 @@
   align-items: baseline;
 }
 
-.ticket__date {
-  grid-area: date;
+.ticket__time {
+  grid-area: time;
+  background-color: #e4bfae;
 }
 
 .ticket__add-button-area {
@@ -64,6 +71,7 @@
 
 .ticket__description {
   grid-area: description;
+  background-color: #e8f0ba;
 }
 
 .ticket-field {
@@ -81,6 +89,6 @@
   padding: 0;
 
   &::before {
-    content: '/';
+    content: '/ ';
   }
 }

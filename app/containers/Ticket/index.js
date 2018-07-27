@@ -8,9 +8,10 @@ export default class Ticket extends React.Component {
       <section className='ticket'>
         <h2 className='ticket__title'>{this.props.title}</h2>
         <div className='ticket__company'>{this.props.company}</div>
+        <div className='category'><h3>business</h3></div>
         <div className='ticket__description'>{this.props.description}</div>
-        <h3 className='ticket__date'>Дата: {this.props.date}</h3>
-        <div className='ticket__price'><h3>Цена: {this.props.price}</h3></div>
+        <h3 className='ticket__time'>Время: {this.props.time}</h3>
+        <div className='ticket__price'><h3>Цена: {this.props.price} BYN</h3></div>
         <div className='ticket__count'>
           Количество
         <input className='ticket-field' />

@@ -8,12 +8,11 @@ export default class SearchBar extends React.Component {
     render() {
       return (
         <form className='search-bar'>
-          <div className='search-bar__input-area'>
+          {/*<div className='search-bar__input-area'>*/}
             <TextField hint='откуда' />
-            <TextField hint='откуда' />
+            <TextField hint='куда' />
             <DateField />
-            <DateField />
-          </div>
+          {/*</div>*/}
           <Link to='/results'><Button text='Найти билеты' /></Link>
         </form>
       )

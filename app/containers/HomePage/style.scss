@@ -41,36 +41,31 @@
 }
 
 .search-bar {
-  @include flex_element(column);
+  @include flex_element(row);
   justify-content: center;
   max-width: 900px;
   padding: 30px;
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 900px){
+    @include flex_element(column);
     width: 100%;
     justify-content: center;
   }
 
-  .search-bar__input-area {
-    @include flex_element(row);
-    margin-bottom: 30px;
-    @media screen and (max-width: 800px){
-      @include flex_element(column);
-      justify-content: center;
+  input {
+    margin-right: 10px;
+    @media screen and (max-width: 900px){
+      margin-right: 0px;
+      margin-bottom: 5px;
     }
-
-    input {
-      margin: 10px;
-      @media screen and (max-width: 800px){
-        width: 80%;
-      }
-    }
-
   }
 
   button {
     width: 200px;
     align-self: center;
     padding: 10px;
+    @media screen and (max-width: 900px){
+      width: 100%;
+    }
   }
 }
 

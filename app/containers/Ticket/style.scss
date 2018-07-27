@@ -1,0 +1,86 @@
+@import '../../common';
+
+.ticket {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 
+    "title price"
+    "company ."
+    "description count"
+    "date add";
+  background-color: #dddfdf;
+  min-height: 100px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+
+  h2, h3 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.ticket__title {
+  grid-area: title;
+  margin: 0;
+  padding: 0;
+}
+
+.ticket__company {
+  grid-area: company;
+  background-color: #e7ccf3;
+  
+  margin: 0;
+  padding: 0;
+}
+
+.ticket__price {
+  grid-area: price;
+  border-left: #000000 3px solid;
+  padding-left: 10px;
+  align-items: baseline;
+}
+
+.ticket__date {
+  grid-area: date;
+}
+
+.ticket__add-button-area {
+  grid-area: add;
+  border-left: #000000 3px solid;
+  padding-left: 10px;
+
+  button {
+    padding: 10px;
+  }
+}
+
+.ticket__count {
+  grid-area: count;
+  border-left: #000000 3px solid;
+  padding-left: 10px;
+}
+
+.ticket__description {
+  grid-area: description;
+}
+
+.ticket-field {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.actual-count-block {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
+  &::before {
+    content: '/';
+  }
+}

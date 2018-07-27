@@ -20,12 +20,14 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from '../Header/header';
 import Footer from '../footer';
 import SignInPage from '../SignInPage';
+import SignIn from '../SignInPage/index';
 
 /*export default*/ class App extends React.Component {
   render() {
     return (
       <div>
         <Header />
+        <SignIn />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/results" component={SearchResultPage} />

@@ -10,7 +10,7 @@ a {
   border-radius: 5px;
   color: #ffffff;
   font-weight: bold;
-  transition: 500ms;
+  transition: 300ms;
   outline: none;
 
   &:hover {
@@ -49,6 +49,7 @@ a {
   font-size: 22px;
   text-align: center;
   line-height: 43px;
+  transition: 300ms;
 
   &:hover {
     width: 43px;

@@ -7,7 +7,7 @@ export default class UserPage extends React.Component {
   render() {
     return (
       <div className='container-flex'>
-        <section className='content-flex user-card'>
+        <section className='user-card'>
           <h1 className='user-card__name'>User Name</h1>
           <div className='user-card__navbar'>
             <div>

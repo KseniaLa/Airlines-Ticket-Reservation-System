@@ -1,26 +1,53 @@
 @import '../../common';
 
 .addticket-area {
+  @include flex_element(column);
+  align-self: center;
   flex: 0px 0px 1200px;
+  width: 100%;
+  max-width: 900px;
+  @media screen and (max-width: 400px) {
+    align-items: center;
+  }
+
+  h3 {
+    color: $page_color;
+    font-size: 1.8rem;
+  }
+}
+
+.info-area {
   align-self: center;
   width: 100%;
   min-height: 500px;
   background-color: #e2e1de;
-  margin: 70px;
+  margin: 10px;
   border-radius: 10px;
   padding: 10px;
-  max-width: 1000px;
+  max-width: 900px;
 
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
   grid-template-areas:
-    "title title"
     "from to"
     "time date"
     "class company"
     "desc desc"
-    "count add-button-area";
+    "count .";
+    @media screen and (max-width: 400px){
+      grid-template-columns: auto;
+      grid-template-rows: auto auto auto auto auto auto auto;
+      grid-template-areas:
+        "from"
+        "to"
+        "time"
+        "date"
+        "class"
+        "company"
+        "desc"
+        "count";
+    }
 
   .title {
     grid-area: title;
@@ -39,12 +66,28 @@
     }
   }
 
+  .class {
+
+    &:hover {
+
+    }
+  }
+
   input {
     width: 100%;
   }
 
   select {
     width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+
+    option {
+      padding: 10px;
+    }
   }
 
   div {

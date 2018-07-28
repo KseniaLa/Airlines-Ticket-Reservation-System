@@ -38,20 +38,13 @@ export default class HomePage extends React.PureComponent {
     return (
       <div className='container-flex' >
         <ImageSearch image={mainImage} />
-        <div className='content-flex top-container'>
-          <div className='imgblocks-container'>
-            <TextImageBlock />
-            <TextImageBlock />
-          </div>
-          <div className='imgblocks-container'>
-            <TextImageBlock />
-            <TextImageBlock />
-          </div>
-          <div className='imgblocks-container'>
-            <TextImageBlock />
-            <TextImageBlock />
-          </div>
-
+        <div className='content-flex imageset-box'>
+          <div className='imageste-box__item'><TextImageBlock /></div>
+          <div className='imageste-box__item'><TextImageBlock /></div>
+          <div className='imageste-box__item'><TextImageBlock /></div>
+          <div className='imageste-box__item'><TextImageBlock /></div>
+          <div className='imageste-box__item'><TextImageBlock /></div>
+          <div className='imageste-box__item'><TextImageBlock /></div>
         </div>
       </div >
     );

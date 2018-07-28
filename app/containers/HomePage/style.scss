@@ -39,7 +39,55 @@
     color: #ffffff;
   }
 }
+/*****/
+.search-bar {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto;
+  padding: 30px;
+  grid-template-areas:
+    "field1 field2 field3 field4 button";
+  @media screen and (max-width: 1120px){
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+    "field1 field2"
+    "field3 field4"
+    "button button";
+  }
+  @media screen and (max-width: 500px){
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+    "field1"
+    "field2"
+    "field3"
+    "field4"
+    "button";
+  }
 
+  input {
+    margin-right: 10px;
+    @media screen and (max-width: 1120px){
+      margin: 5px;
+    }
+  }
+
+  button {
+    width: 200px;
+    align-self: center;
+    padding: 10px;
+    @media screen and (max-width: 1120px){
+      width: 100%;
+    }
+  }
+
+  .search-bar__button {
+    grid-area: button;
+    margin: 5px;
+  }
+}
+/****
 .search-bar {
   @include flex_element(row);
   justify-content: center;
@@ -67,45 +115,43 @@
       width: 100%;
     }
   }
-}
+}*/
 
 /*******************/
-.imgblocks-container {
-  @include flex_element(row);
-  justify-content: space-between;
-  margin-bottom: 20px;
-  @media screen and (max-width: 900px){
-    @include flex_element(column);
-    margin-bottom: 0px;
-  }
-}
-
-.top-container {
-  @include flex_element(column);
-  margin: 20px;
-
-}
 
 .textimage-block {
-  width: 45%;
+  width: 100%;
   height: 200px;
   background-color: #faebd7;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.1);
   @media screen and (max-width: 900px){
-    width: 90%;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+    width: 100%;
+
   }
 
   img {
     width: 100%;
     height: 75%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
   }
 }
+
+
+.imageset-box {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  @media screen and (max-width: 400px){
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto auto auto;
+  }
+
+  .imageste-box__item {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
 /***************************/
-
-

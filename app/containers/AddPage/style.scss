@@ -77,6 +77,23 @@
     width: 100%;
   }
 
+  .datepicker {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    outline: none;
+    width: 100%;
+    margin: 0px;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+
+    .react-datepicker__input-container {
+      width: 100%;
+    }
+  }
+
   select {
     width: 100%;
     padding: 10px;
@@ -90,7 +107,7 @@
     }
   }
 
-  div {
+  & > div {
     margin: 5px;
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
@@ -25,10 +26,13 @@ class TextImageBlock extends React.Component {
 }
 
 export default class HomePage extends React.PureComponent {
+
+
   render() {
     return (
       <div className='container-flex' >
         <ImageSearch image={mainImage} />
+
         <div className='content-flex imageset-box'>
           <div className='imageste-box__item'><TextImageBlock image={cityImage}/></div>
           <div className='imageste-box__item'><TextImageBlock image={cityImage2}/></div>

@@ -1,6 +1,9 @@
 import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 
@@ -17,7 +20,7 @@ class CloseButton extends React.Component {
   }
 }
 
-export default class SignInPage extends React.Component {
+/*export default*/ class SignInPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: true, signIn: true };
@@ -72,11 +75,11 @@ export default class SignInPage extends React.Component {
       mainPart = this.signUpPart;
     }
 
-    if (this.state.visible) {
+    if (this.props.visible) {
       return (
         <div className='sign-overlay'>
           <section className='sign-page'>
-            <button className='close-button' onClick={this.handleCloseClick}>
+            <button className='close-button' onClick={this.props.hideSignIn}>
               <i class="fa fa-times"></i>
             </button>
             {mainPart}
@@ -88,12 +91,20 @@ export default class SignInPage extends React.Component {
   }
 }
 
-/*export function mapDispatchToProps(dispatch) {
-  // ...
+export function mapDispatchToProps(dispatch) {
+  return {
+    hideSignIn: function () {
+      dispatch({
+        type: 'SHOW_SIGN_MODAL',
+        modalVisible: false
+      });
+    }
+  }
 }
 
+const visibleSelector = (store) => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
-  visible: store.modalVisible
+  visible: visibleSelector
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -103,5 +114,5 @@ const withReducer = injectReducer({ key: 'signpage', reducer });
 export default compose(
   withReducer,
   withConnect,
-)(SignInPage);*/
+)(SignInPage);
 

@@ -2,7 +2,7 @@ const initialState = {
   modalVisible: false
 };
 
-const signReducer = function(state = initialState, action) {
+const headerReducer = function(state = initialState, action) {
   switch(action.type) {
     case 'SHOW_SIGN_MODAL':
       return Object.assign({}, state, {
@@ -12,4 +12,4 @@ const signReducer = function(state = initialState, action) {
   return state;
 }
 
-export default signReducer;
+export default headerReducer;

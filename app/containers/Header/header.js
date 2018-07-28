@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
           <Link to='/'><Title style='base-title site-name' text='Airlines' /></Link>
           <div className='header__options'>
             <Link to='/user'><SocialIcon icon='fa fa-user' /></Link>
+            <Link to='/add'><SocialIcon icon='fa fa-plus' /></Link>
             <Link to='/user'><SocialIcon icon='fa fa-shopping-cart' /></Link>
             <Button text='Войти' onClick={this.props.showSignIn} />
           </div>
@@ -45,10 +46,6 @@ const visibleSelector = (store) => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
   visible: visibleSelector
 });
-
-/*const mapStateToProps = function(store) {
-  return {};
-}*/
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

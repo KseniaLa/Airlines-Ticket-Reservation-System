@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import HomePage from 'containers/HomePage/index';
 import SearchResultPage from '../SearchResultPage/index';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import AddPage from '../AddPage/index';
 import Header from '../Header/header';
 import Footer from '../footer';
 import SignInPage from '../SignInPage';
@@ -34,11 +35,12 @@ import './style.scss';
       <div className='wrapper'>
       <div className='content'>
         <Header />
-        {/*<SignIn />*/}
+        <SignIn />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/results" component={SearchResultPage} />
           <Route exact path="/user" component={UserPage} />
+          <Route exact path="/add" component={AddPage} />
           <Route component={NotFoundPage} />
         </Switch>
         </div>

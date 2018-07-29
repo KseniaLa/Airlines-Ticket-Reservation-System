@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
-import reducer from './reducer';
+import reducer from '../reducers/autorization-reducer';
 
 import Button from '../../components/basic/button';
 import Field from '../../components/basic/textfield';
@@ -23,7 +23,7 @@ class CloseButton extends React.Component {
 /*export default*/ class SignInPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: true, signIn: true };
+    this.state = { signIn: true };
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.signInPart = (
@@ -94,22 +94,28 @@ class CloseButton extends React.Component {
 export function mapDispatchToProps(dispatch) {
   return {
     hideSignIn: function () {
+      alert('hello');
       dispatch({
         type: 'SHOW_SIGN_MODAL',
-        modalVisible: false
+        payload: false
       });
     }
   }
 }
 
-const visibleSelector = (store) => store.modalVisible;
+/*const visibleSelector = (store) => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
   visible: visibleSelector
-});
+});*/
+export function mapStateToProps(state){
+  return {
+    visible: state.modalVisible
+  };
+}
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'signpage', reducer });
+const withReducer = injectReducer({ key: 'auth', reducer });
 
 export default compose(
   withReducer,

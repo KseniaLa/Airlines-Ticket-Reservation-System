@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 export default class SearchBar extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       startDate: moment()
     };
@@ -29,7 +29,7 @@ export default class SearchBar extends React.Component {
         <TextField hint='откуда' />
         <TextField hint='куда' />
         <DatePicker selected={this.state.startDate}
-          onChange={this.handleChange} className='field' />
+          onChange={this.handleChange} className='field'/>
         <TextField hint='куда' />
         <div className='search-bar__button'><Link to='/results'><Button text='Найти билеты' /></Link></div>
       </form>

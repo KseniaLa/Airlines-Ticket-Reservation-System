@@ -29,7 +29,7 @@ import './style.scss';
 
 //let browserHistory = ReactRouter.browserHistory;
 
-/*export default*/ class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <div className='wrapper'>
@@ -39,7 +39,7 @@ import './style.scss';
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/results" component={SearchResultPage} />
-          <Route exact path="/user" component={UserPage} />
+          <Route path="/user" component={UserPage} />
           <Route exact path="/add" component={AddPage} />
           <Route component={NotFoundPage} />
         </Switch>
@@ -50,10 +50,10 @@ import './style.scss';
   }
 }
 
-export default connect(
+/*export default connect(
   state => ({
     testStore: state
   }),
   dispatch => ({})
-)(App);
+)(App);*/
 

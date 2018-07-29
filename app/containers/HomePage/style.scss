@@ -13,6 +13,20 @@
   max-width: 900px;
 }
 
+.content-flex-column {
+  @include flex_element(column);
+  flex: 0px 0px 1200px;
+  align-self: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 5px;
+
+  h1 {
+    color: $page_color;
+  }
+}
+
 .main-image-block {
   @include flex_element(row);
   flex: 0px 0px 1200px;
@@ -113,6 +127,15 @@
   &:hover {
     transform: scale(1.05);
 
+  }
+
+  .textimage-block__title {
+    padding: 10px;
+    text-align: center;
+
+    h3 {
+      margin: 0;
+    }
   }
 
   img {

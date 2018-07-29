@@ -19,7 +19,7 @@ class TextImageBlock extends React.Component {
     return (
       <div className='textimage-block'>
         <Image path={this.props.image} style='' />
-        <div>dfght</div>
+        <div className='textimage-block__title'><h3>{this.props.text}</h3></div>
       </div>
     )
   }
@@ -32,14 +32,16 @@ export default class HomePage extends React.PureComponent {
     return (
       <div className='container-flex' >
         <ImageSearch image={mainImage} />
-
-        <div className='content-flex imageset-box'>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage}/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage2}/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage3}/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage}/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage2}/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage3}/></div>
+        <div className='content-flex-column'>
+        <h1>Популярные направления</h1>
+        <div className='imageset-box'>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City'/></div>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City'/></div>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City'/></div>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City'/></div>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City'/></div>
+          <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City'/></div>
+        </div>
         </div>
       </div >
     );

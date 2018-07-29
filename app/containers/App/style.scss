@@ -24,8 +24,9 @@
 }
 
 .header {
-  /*position: fixed;
-  z-index: 9999;*/
+  position: sticky;
+  z-index: 9999;
+  top: 0px;
   background-color: $page_color;
   @media screen and (max-width: 400px){
     position: static;
@@ -45,7 +46,7 @@
   .header__options {
     @include flex_element(row);
     justify-content: space-around;
-    
+
     div {
       margin-left: 5px;
     }

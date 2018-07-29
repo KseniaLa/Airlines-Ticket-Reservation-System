@@ -107,7 +107,7 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   visible: visibleSelector
 });*/
-export function mapStateToProps(state){
+const mapStateToProps = (state) => {
   return {
     visible: state.modalVisible
   };

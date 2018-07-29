@@ -1,6 +1,8 @@
-const initialState = {
+import { fromJS } from 'immutable';
+
+const initialState = fromJS({
   modalVisible: false
-};
+});
 
 const authReducer = function(state = initialState, action) {
   switch(action.type) {

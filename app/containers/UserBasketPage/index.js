@@ -2,11 +2,12 @@ import React from 'react';
 import Button from '../../components/basic/button';
 import Ticket from '../Ticket/index';
 import Header from '../Header/header';
+import './style.scss';
 
 export default class UserBasketPage extends React.Component {
   render() {
     return (
-      <div className='container-flex'>
+      <div className='basket-container'>
       <Button text='Подтвердить заказ' />
         <Ticket
           title='Минск-Москва'

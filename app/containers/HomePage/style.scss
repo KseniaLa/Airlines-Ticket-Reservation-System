@@ -7,49 +7,54 @@
 
 .content-flex {
   @include flex_element(row);
-  align-self: center;
   flex: 0px 0px 1200px;
+  align-self: center;
   width: 100%;
   max-width: 900px;
 }
 
-.image {
-	position: relative;
+.main-image-block {
   @include flex_element(row);
+  flex: 0px 0px 1200px;
+  position: relative;
   align-self: center;
   justify-content: center;
-  flex: 0px 0px 1200px;
+
+
+  .main-image-block__image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .main-image-block__overlay {
+    position: absolute;
+    top: 25%;
+    border-radius: 5px;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    text-align: center;
+    @media screen and (max-width: 1120px){
+      top: 10%;
+    }
+    @media screen and (max-width: 400px){
+      top: 10%;
+    }
+    h1 {
+      color: #ffffff;
+    }
+  }
 }
 
-.main-image {
-  width: 100%;
-  object-fit: cover;
-}
 
-.overlay {
-	position: absolute;
-  top: 25%;
-  border-radius: 5px;
-  background-color: rgba($color: #000000, $alpha: 0.7);
-  text-align: center;
-  @media screen and (max-width: 1120px){
-    top: 10%;
-  }
-  @media screen and (max-width: 400px){
-    top: 10%;
-  }
-  h1 {
-    color: #ffffff;
-  }
-}
+
+
 /*****/
 .search-bar {
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto;
-  padding: 30px;
   grid-template-areas:
     "field1 field2 field3 field4 button";
+  padding: 30px;
   @media screen and (max-width: 1120px){
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -92,35 +97,6 @@
     }
   }
 }
-/****
-.search-bar {
-  @include flex_element(row);
-  justify-content: center;
-  max-width: 900px;
-  padding: 30px;
-  @media screen and (max-width: 900px){
-    @include flex_element(column);
-    width: 100%;
-    justify-content: center;
-  }
-
-  input {
-    margin-right: 10px;
-    @media screen and (max-width: 900px){
-      margin-right: 0px;
-      margin-bottom: 5px;
-    }
-  }
-
-  button {
-    width: 200px;
-    align-self: center;
-    padding: 10px;
-    @media screen and (max-width: 900px){
-      width: 100%;
-    }
-  }
-}*/
 
 /*******************/
 
@@ -144,8 +120,6 @@
     height: 75%;
     object-fit: cover;
     border-radius: 10px 10px 0px 0px;
-
-
   }
 }
 

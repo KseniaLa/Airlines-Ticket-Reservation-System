@@ -17,7 +17,7 @@ export default class Ticket extends React.Component {
         <input className='ticket-field' />
           <h1 className='actual-count-block'>{this.props.count}</h1>
         </div>
-        <div className='ticket__add-button-area'><Button text='Добавить' /></div>
+        <div className='ticket__add-button-area'><Button text={this.props.action} /></div>
       </section>
     );
   }

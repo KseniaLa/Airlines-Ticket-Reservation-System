@@ -15,7 +15,8 @@ export default class UserBasketPage extends React.Component {
           description='без пересадок'
           time='12.30'
           price='500'
-          count='345' />
+          count='345'
+          action='Удалить'/>
 
         <Ticket
           title='Минск-Москва'
@@ -23,7 +24,8 @@ export default class UserBasketPage extends React.Component {
           description='без пересадок'
           time='12.30'
           price='500'
-          count='345' />
+          count='345'
+          action='Удалить'/>
 
         <Ticket
           title='Минск-Москва'
@@ -31,7 +33,8 @@ export default class UserBasketPage extends React.Component {
           description='без пересадок'
           time='12.30'
           price='500'
-          count='345' />
+          count='345'
+          action='Удалить'/>
       </div>
     );
   }

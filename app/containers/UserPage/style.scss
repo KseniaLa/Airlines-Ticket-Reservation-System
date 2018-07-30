@@ -3,7 +3,7 @@
 .user-card {
   flex-direction: column;
   align-self: center;
-  flex: 0 0 1200px;
+  flex: 0px 0px 1200px;
   width: 100%;
   min-height: 500px;
   background-color: #dbdad8;
@@ -16,8 +16,8 @@
     display: block;
     color: $page_color;
     font-size: 2.0rem;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
   }
 
   .user-card__navbar {

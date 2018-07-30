@@ -19,13 +19,13 @@
 }
 
 .base-title {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
 .header {
   position: sticky;
-  top: 0;
+  top: 0px;
   z-index: 9999;
   background-color: $page_color;
   @media screen and (max-width: 400px){
@@ -65,7 +65,7 @@
   .footer__content {
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0;
+    padding: 30px 0px;
     @media screen and (max-width: 500px){
       @include flex_element(column);
       text-align: center;

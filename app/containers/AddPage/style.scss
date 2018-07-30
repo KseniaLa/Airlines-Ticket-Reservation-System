@@ -3,7 +3,7 @@
 .addticket-area {
   @include flex_element(column);
   align-self: center;
-  flex: 0 0 1200px;
+  flex: 0px 0px 1200px;
   width: 100%;
   max-width: 900px;
   margin-bottom: 20px;
@@ -90,7 +90,7 @@
     background-color: #ffffff;
     outline: none;
     width: 100%;
-    margin: 0;
+    margin: 0px;
   }
 
   .react-datepicker-wrapper {

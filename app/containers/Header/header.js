@@ -43,15 +43,15 @@ export function mapDispatchToProps(dispatch) {
   }
 }
 
-/*const visibleSelector = (store) => store.modalVisible;
+const visibleSelector = (store) => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
   visible: visibleSelector
-});*/
-const mapStateToProps = (state) => {
+});
+/*const mapStateToProps = (state) => {
   return {
     visible: state.modalVisible
   };
-}
+}*/
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

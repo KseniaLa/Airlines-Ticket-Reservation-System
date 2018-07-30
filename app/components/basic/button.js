@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import './basic_style.scss';
 
-export default class Button extends React.Component {
+class Button extends React.Component {
   render() {
     return (
       <button className='page-button' onClick={this.props.onClick}>
@@ -11,3 +11,10 @@ export default class Button extends React.Component {
     )
   }
 }
+
+Button.propTypes = {
+  text: PropTypes.object,
+  onClick: PropTypes.func,
+};
+
+export default Button;

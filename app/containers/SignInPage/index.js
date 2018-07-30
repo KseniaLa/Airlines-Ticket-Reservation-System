@@ -1,8 +1,11 @@
 import React from 'react';
-import 'font-awesome/css/font-awesome.min.css';
-
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import 'font-awesome/css/font-awesome.min.css';
+
+import messages from './messages';
 
 import Button from '../../components/basic/button';
 import Field from '../../components/basic/textfield';
@@ -19,15 +22,18 @@ class SignInPage extends React.PureComponent {
     this.signInPart = (
       <div className="container">
         <form className="sign-page__form">
-          <Title style="sign-page__title" text="Авторизация" />
+          <Title
+            style="sign-page__title"
+            text={<FormattedMessage {...messages.signintitle} />}
+          />
           <Field type="text" hint="e-mail" />
           <Field type="password" hint="password" />
-          <Button text="Войти" />
+          <Button text={<FormattedMessage {...messages.signin} />} />
         </form>
         <div className="change-mode">
-          <h6>Я новый пользователь</h6>
+          <h6>{<FormattedMessage {...messages.newuser} />}</h6>
           <Button
-            text="Зарегистрироваться"
+            text={<FormattedMessage {...messages.signup} />}
             onClick={this.handleChangeModeClick}
           />
         </div>
@@ -37,15 +43,21 @@ class SignInPage extends React.PureComponent {
     this.signUpPart = (
       <div className="container">
         <form className="sign-page__form">
-          <Title style="sign-page__title" text="Регистрация" />
+          <Title
+            style="sign-page__title"
+            text={<FormattedMessage {...messages.signuptitle} />}
+          />
           <Field type="text" hint="e-mail" />
           <Field type="text" hint="e-mail" />
           <Field type="text" hint="e-mail" />
-          <Button text="Зарегистрироваться" />
+          <Button text={<FormattedMessage {...messages.signup} />} />
         </form>
         <div className="change-mode">
-          <h6>Уже есть логин</h6>
-          <Button text="Войти" onClick={this.handleChangeModeClick} />
+          <h6>{<FormattedMessage {...messages.loginexists} />}</h6>
+          <Button
+            text={<FormattedMessage {...messages.signin} />}
+            onClick={this.handleChangeModeClick}
+          />
         </div>
       </div>
     );
@@ -83,6 +95,11 @@ class SignInPage extends React.PureComponent {
     return <div />;
   }
 }
+
+SignInPage.propTypes = {
+  hideSignIn: PropTypes.func,
+  visible: PropTypes.bool,
+};
 
 export function mapDispatchToProps(dispatch) {
   return {

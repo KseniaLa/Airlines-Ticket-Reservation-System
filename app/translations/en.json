@@ -24,6 +24,12 @@
   "app.components.footer.about": "About us",
   "app.components.footer.advert": "Advertising",
   "app.components.footer.vacancy": "Vacancies",
-  "app.components.footer.help": "Help"
+  "app.components.footer.help": "Help",
+  "app.components.SignInPage.signin": "Sign in",
+  "app.components.SignInPage.signup": "Sign up",
+  "app.components.SignInPage.signuptitle": "Registration",
+  "app.components.SignInPage.signintitle": "Authorization",
+  "app.components.SignInPage.newuser": "I'm new to this site",
+  "app.components.SignInPage.loginexists": "Login already exists"
 
 }

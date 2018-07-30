@@ -24,5 +24,11 @@
   "app.components.footer.about": "О компании",
   "app.components.footer.advert": "Реклама",
   "app.components.footer.vacancy": "Вакансии",
-  "app.components.footer.help": "Помощь"
+  "app.components.footer.help": "Помощь",
+  "app.components.SignInPage.signin": "Войти",
+  "app.components.SignInPage.signup": "Зарегистрироваться",
+  "app.components.SignInPage.signuptitle": "Регистрация",
+  "app.components.SignInPage.signintitle": "Авторизация",
+  "app.components.SignInPage.newuser": "Я новый пользователь",
+  "app.components.SignInPage.loginexists": "Уже есть логин"
 }

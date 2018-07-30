@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Button from '../../components/basic/button';
 import './style.scss';
 
 import messages from './messages';
 
-export default class Ticket extends React.Component {
+class Ticket extends React.Component {
   render() {
     return (
       <section className="ticket">
@@ -35,3 +36,15 @@ export default class Ticket extends React.Component {
     );
   }
 }
+
+Ticket.propTypes = {
+  title: PropTypes.string,
+  company: PropTypes.string,
+  description: PropTypes.string,
+  time: PropTypes.string,
+  price: PropTypes.string,
+  count: PropTypes.string,
+  action: PropTypes.string,
+};
+
+export default Ticket;

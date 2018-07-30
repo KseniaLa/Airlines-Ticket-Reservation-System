@@ -17,4 +17,12 @@ export default defineMessages({
     id: 'app.components.SignInPage.signintitle',
     defaultMessage: 'Авторизация',
   },
+  newuser: {
+    id: 'app.components.SignInPage.newuser',
+    defaultMessage: 'Я новый пользователь',
+  },
+  loginexists: {
+    id: 'app.components.SignInPage.loginexists',
+    defaultMessage: 'Уже есть логин',
+  },
 });

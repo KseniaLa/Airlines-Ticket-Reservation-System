@@ -2,18 +2,15 @@ import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import injectReducer from 'utils/injectReducer';
-import reducer from '../reducers/autorization-reducer';
 
 import Button from '../../components/basic/button';
 import Field from '../../components/basic/textfield';
 import Title from '../../components/basic/title';
 import './style.scss';
+import { makeSelectIsModalVisible } from '../App/selectors/globalSelectors';
 
-
-class SignInPage extends React.Component {
+class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { signIn: true };
@@ -90,7 +87,6 @@ class SignInPage extends React.Component {
 export function mapDispatchToProps(dispatch) {
   return {
     hideSignIn() {
-      alert('hello');
       dispatch({
         type: 'SHOW_SIGN_MODAL',
         payload: false,
@@ -99,22 +95,9 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-/* const visibleSelector = (store) => store.modalVisible;
+
 const mapStateToProps = createStructuredSelector({
-  visible: visibleSelector
-}); */
-const mapStateToProps = state => ({
-  visible: state.modalVisible,
-});
+  visible: makeSelectIsModalVisible(),
+}); 
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-const withReducer = injectReducer({ key: 'auth', reducer });
-
-export default compose(
-  withReducer,
-  withConnect,
-)(SignInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

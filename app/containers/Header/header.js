@@ -1,18 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Title from '../../components/basic/title';
 import Button from '../../components/basic/button';
 import SocialIcon from '../../components/basic/socialicon';
-import injectReducer from 'utils/injectReducer';
-import reducer from '../reducers/autorization-reducer';
-import { Link } from 'react-router-dom';
+import { makeSelectIsModalVisible } from '../App/selectors/globalSelectors';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   render() {
     return (
       <header className="container-flex header">
@@ -44,7 +43,6 @@ class Header extends React.Component {
 export function mapDispatchToProps(dispatch) {
   return {
     showSignIn() {
-      alert('Hello!');
       dispatch({
         type: 'SHOW_SIGN_MODAL',
         payload: true,
@@ -53,19 +51,8 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-const visibleSelector = store => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
-  visible: visibleSelector,
+  visible: makeSelectIsModalVisible(),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-const withReducer = injectReducer({ key: 'auth', reducer });
-
-export default compose(
-  withReducer,
-  withConnect,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

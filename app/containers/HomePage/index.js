@@ -41,22 +41,20 @@ class TextImageBlock extends React.Component {
 }
 
 export default class HomePage extends React.PureComponent {
-
-
   render() {
     return (
       <div className='container-flex' >
         <ImageSearch image={mainImage} />
         <div className='content-flex-column'>
-        <h1><FormattedMessage {...messages.toptitle} /></h1>
-        <div className='imageset-box'>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City'/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City'/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City'/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City'/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City'/></div>
-          <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City'/></div>
-        </div>
+          <h1><FormattedMessage {...messages.toptitle} /></h1>
+          <div className='imageset-box'>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City' /></div>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City' /></div>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City' /></div>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City' /></div>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City' /></div>
+            <div className='imageste-box__item'><TextImageBlock image={cityImage3} text='City' /></div>
+          </div>
         </div>
       </div >
     );

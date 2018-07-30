@@ -13,47 +13,55 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 class Header extends React.Component {
-
   render() {
     return (
-      <header className='container-flex header'>
-        <div className='content-flex header__content'>
-          <Link to='/'><Title style='base-title site-name' text='Airlines' /></Link>
-          <div className='header__options'>
-            <Link to='/user/tickets'><SocialIcon icon='fa fa-user' /></Link>
-            <Link to='/add'><SocialIcon icon='fa fa-plus' /></Link>
-            <Link to='/user/basket'><SocialIcon icon='fa fa-shopping-cart' /></Link>
-            <Button text={<FormattedMessage {...messages.enter} />} onClick={this.props.showSignIn} />
+      <header className="container-flex header">
+        <div className="content-flex header__content">
+          <Link to="/">
+            <Title style="base-title site-name" text="Airlines" />
+          </Link>
+          <div className="header__options">
+            <Link to="/user/tickets">
+              <SocialIcon icon="fa fa-user" />
+            </Link>
+            <Link to="/add">
+              <SocialIcon icon="fa fa-plus" />
+            </Link>
+            <Link to="/user/basket">
+              <SocialIcon icon="fa fa-shopping-cart" />
+            </Link>
+            <Button
+              text={<FormattedMessage {...messages.enter} />}
+              onClick={this.props.showSignIn}
+            />
           </div>
         </div>
       </header>
-    )
+    );
   }
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
-    showSignIn: function () {
+    showSignIn() {
       alert('Hello!');
       dispatch({
         type: 'SHOW_SIGN_MODAL',
-        payload: true
+        payload: true,
       });
-    }
-  }
+    },
+  };
 }
 
-const visibleSelector = (store) => store.modalVisible;
+const visibleSelector = store => store.modalVisible;
 const mapStateToProps = createStructuredSelector({
-  visible: visibleSelector
+  visible: visibleSelector,
 });
-/*const mapStateToProps = (state) => {
-  return {
-    visible: state.modalVisible
-  };
-}*/
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 const withReducer = injectReducer({ key: 'auth', reducer });
 

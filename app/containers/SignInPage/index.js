@@ -12,47 +12,43 @@ import Field from '../../components/basic/textfield';
 import Title from '../../components/basic/title';
 import './style.scss';
 
-class CloseButton extends React.Component {
-  render() {
-    return (
-      <button className='close-button'></button>
-    )
-  }
-}
 
-/*export default*/ class SignInPage extends React.Component {
+class SignInPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { signIn: true };
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.signInPart = (
-      <div className='container'>
-        <form className='sign-page__form'>
-          <Title style='sign-page__title' text='Авторизация' />
-          <Field type='text' hint='e-mail' />
-          <Field type='password' hint='password' />
-          <Button text='Войти' />
+      <div className="container">
+        <form className="sign-page__form">
+          <Title style="sign-page__title" text="Авторизация" />
+          <Field type="text" hint="e-mail" />
+          <Field type="password" hint="password" />
+          <Button text="Войти" />
         </form>
-        <div className='change-mode'>
+        <div className="change-mode">
           <h6>Я новый пользователь</h6>
-        <Button text='Зарегистрироваться' onClick={this.handleChangeModeClick} />
+          <Button
+            text="Зарегистрироваться"
+            onClick={this.handleChangeModeClick}
+          />
         </div>
       </div>
     );
 
     this.signUpPart = (
-      <div className='container'>
-        <form className='sign-page__form'>
-          <Title style='sign-page__title' text='Регистрация' />
-          <Field type='text' hint='e-mail' />
-          <Field type='text' hint='e-mail' />
-          <Field type='text' hint='e-mail' />
-          <Button text='Зарегистрироваться' />
+      <div className="container">
+        <form className="sign-page__form">
+          <Title style="sign-page__title" text="Регистрация" />
+          <Field type="text" hint="e-mail" />
+          <Field type="text" hint="e-mail" />
+          <Field type="text" hint="e-mail" />
+          <Button text="Зарегистрироваться" />
         </form>
-        <div className='change-mode'>
+        <div className="change-mode">
           <h6>Уже есть логин</h6>
-        <Button text='Войти' onClick={this.handleChangeModeClick} />
+          <Button text="Войти" onClick={this.handleChangeModeClick} />
         </div>
       </div>
     );
@@ -63,7 +59,7 @@ class CloseButton extends React.Component {
   }
 
   handleChangeModeClick() {
-    let sign = this.state.signIn;
+    const sign = this.state.signIn;
     this.setState({ signIn: !sign });
   }
 
@@ -77,43 +73,44 @@ class CloseButton extends React.Component {
 
     if (this.props.visible) {
       return (
-        <div className='sign-overlay'>
-          <section className='sign-page'>
-            <button className='close-button' onClick={this.props.hideSignIn}>
-              <i class="fa fa-times"></i>
+        <div className="sign-overlay">
+          <section className="sign-page">
+            <button className="close-button" onClick={this.props.hideSignIn}>
+              <i className="fa fa-times" />
             </button>
             {mainPart}
           </section>
         </div>
-      )
+      );
     }
-    return (<div></div>);
+    return <div />;
   }
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
-    hideSignIn: function () {
+    hideSignIn() {
       alert('hello');
       dispatch({
         type: 'SHOW_SIGN_MODAL',
-        payload: false
+        payload: false,
       });
-    }
-  }
-}
-
-/*const visibleSelector = (store) => store.modalVisible;
-const mapStateToProps = createStructuredSelector({
-  visible: visibleSelector
-});*/
-const mapStateToProps = (state) => {
-  return {
-    visible: state.modalVisible
+    },
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+/* const visibleSelector = (store) => store.modalVisible;
+const mapStateToProps = createStructuredSelector({
+  visible: visibleSelector
+}); */
+const mapStateToProps = state => ({
+  visible: state.modalVisible,
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 const withReducer = injectReducer({ key: 'auth', reducer });
 
@@ -121,4 +118,3 @@ export default compose(
   withReducer,
   withConnect,
 )(SignInPage);
-

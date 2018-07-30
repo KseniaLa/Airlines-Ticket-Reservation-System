@@ -11,49 +11,38 @@
  * the linting exception.
  */
 
+import 'font-awesome/css/font-awesome.min.css';
+import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import React from 'react';
 import { Switch, Route, ReactRouter, Router } from 'react-router-dom';
-import { connect } from 'react-redux';
 import HomePage from 'containers/HomePage/index';
 import SearchResultPage from '../SearchResultPage/index';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import AddPage from '../AddPage/index';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
-import SignInPage from '../SignInPage';
 import SignIn from '../SignInPage/index';
 import UserPage from '../UserPage/index';
-import 'font-awesome/css/font-awesome.min.css';
 
 import './style.scss';
-
-//let browserHistory = ReactRouter.browserHistory;
 
 export default class App extends React.Component {
   render() {
     return (
-      <div className='wrapper'>
-      <div className='content'>
-        <Header />
-        <SignIn />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/results" component={SearchResultPage} />
-          <Route path="/user" component={UserPage} />
-          <Route exact path="/add" component={AddPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
+      <div className="wrapper">
+        <div className="content">
+          <Header />
+          <SignIn />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/results" component={SearchResultPage} />
+            <Route path="/user" component={UserPage} />
+            <Route exact path="/add" component={AddPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
         </div>
         <Footer />
       </div>
     );
   }
 }
-
-/*export default connect(
-  state => ({
-    testStore: state
-  }),
-  dispatch => ({})
-)(App);*/
 

@@ -17,7 +17,7 @@ export default class UserBasketPage extends React.Component {
           description="без пересадок"
           time="12.30"
           price="500"
-          count="345"
+          count="35"
           action="Удалить"
         />
 

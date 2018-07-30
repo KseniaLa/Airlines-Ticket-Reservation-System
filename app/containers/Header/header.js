@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Title from '../../components/basic/title';
 import Button from '../../components/basic/button';
 import SocialIcon from '../../components/basic/socialicon';
 import { makeSelectIsModalVisible } from '../App/selectors/globalSelectors';
-
-import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 class Header extends React.PureComponent {
@@ -55,4 +53,7 @@ const mapStateToProps = createStructuredSelector({
   visible: makeSelectIsModalVisible(),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header);

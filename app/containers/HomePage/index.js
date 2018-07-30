@@ -74,20 +74,3 @@ export default class HomePage extends React.PureComponent {
     );
   }
 }
-
-/* export function mapDispatchToProps(dispatch) {
-  // ...
-}
-
-const mapStateToProps = createStructuredSelector({
-  // ...
-});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-const withReducer = injectReducer({ key: 'homepage', reducer });
-
-export default compose(
-  withReducer,
-  withConnect,
-)(HomePage); */

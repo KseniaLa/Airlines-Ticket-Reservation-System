@@ -95,9 +95,11 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-
 const mapStateToProps = createStructuredSelector({
   visible: makeSelectIsModalVisible(),
-}); 
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignInPage);

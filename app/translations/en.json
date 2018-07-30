@@ -1,1 +1,29 @@
-[]
+{
+  "app.components.AddPage.add": "Add",
+  "app.components.AddPage.budget": "budget",
+  "app.components.AddPage.business": "business",
+  "app.components.AddPage.company": "company",
+  "app.components.AddPage.count": "count",
+  "app.components.AddPage.description": "description",
+  "app.components.AddPage.first": "first",
+  "app.components.AddPage.fromfield": "from",
+  "app.components.AddPage.title": "Add tickets",
+  "app.components.AddPage.tofield": "to",
+  "app.components.HomePage.search": "",
+  "app.components.HomePage.searchtitle": "Search",
+  "app.components.HomePage.toptitle": "Popular directions",
+  "app.components.NotFoundPage.header": "Page not found",
+  "app.components.Ticket.count": "Count",
+  "app.components.Ticket.price": "Price",
+  "app.components.Ticket.time": "Time",
+  "app.components.UserBasketPage.submit": "Submit",
+  "app.components.UserPage.basket": "Basket",
+  "app.components.UserPage.tickets": "My tickets",
+  "app.components.header.enter": "Sign in",
+  "app.components.SerchBar.search": "Search for tickets",
+  "app.components.footer.about": "About us",
+  "app.components.footer.advert": "Advertising",
+  "app.components.footer.vacancy": "Vacancies",
+  "app.components.footer.help": "Help"
+
+}

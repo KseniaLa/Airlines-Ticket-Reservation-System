@@ -10,8 +10,9 @@
     position: sticky;
     z-index: 9999999999;
     top: 60px;
+    align-self: flex-end;
     max-width: 200px;
-    margin-left: 10px;
+    margin-right: 10px;
     background-color: #008000;
     padding: 10px;
     @media screen and (max-width: 400px){

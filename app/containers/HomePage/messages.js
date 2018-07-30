@@ -14,8 +14,4 @@ export default defineMessages({
     id: 'app.components.HomePage.searchtitle',
     defaultMessage: 'Поиск билетов',
   },
-  search: {
-    id: 'app.components.HomePage.search',
-    defaultMessage: 'Популярные направления',
-  },
 });

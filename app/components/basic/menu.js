@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './basic_style.scss';
 
 export default class Menu extends React.Component {
@@ -6,7 +7,7 @@ export default class Menu extends React.Component {
     createList = () => {
       let list = []
       for (let i = 0; i < this.props.items.length; i++) {
-        list.push(<li>{this.props.items[i]}</li>)
+        list.push(<li><Link to='/somepath'>{this.props.items[i]}</Link></li>)
       }
       return list;
     }

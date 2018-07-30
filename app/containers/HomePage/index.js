@@ -11,8 +11,23 @@ import mainImage from './img/plane.png';
 import cityImage from './img/moscow.jpg';
 import cityImage2 from './img/saintp.jpg';
 import cityImage3 from './img/istanbul.jpg';
-import ImageSearch from '../ImageSearch';
+//import ImageSearch from '../ImageSearch';
+import SearchBar from '../SearchBar/searchbar';
 import Image from '../../components/basic/image';
+
+class ImageSearch extends React.Component {
+  render() {
+    return (
+      <div className="main-image-block">
+        <Image path={this.props.image} style='main-image-block__image' />
+        <div className='main-image-block__overlay'>
+          <h1><FormattedMessage {...messages.searchtitle} /></h1>
+          <SearchBar />
+        </div>
+      </div>
+    )
+  }
+}
 
 class TextImageBlock extends React.Component {
   render() {

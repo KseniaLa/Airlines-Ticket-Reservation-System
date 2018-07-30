@@ -19,7 +19,7 @@ import SearchResultPage from '../SearchResultPage/index';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import AddPage from '../AddPage/index';
 import Header from '../Header/header';
-import Footer from '../footer';
+import Footer from '../Footer/footer';
 import SignInPage from '../SignInPage';
 import SignIn from '../SignInPage/index';
 import UserPage from '../UserPage/index';

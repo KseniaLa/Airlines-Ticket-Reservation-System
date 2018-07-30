@@ -4,11 +4,15 @@ import Ticket from '../Ticket/index';
 import Header from '../Header/header';
 import './style.scss';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+
 export default class UserBasketPage extends React.Component {
   render() {
     return (
       <div className='basket-container'>
-      <Button text='Подтвердить заказ' />
+      <Button text={<FormattedMessage {...messages.submit} />} />
         <Ticket
           title='Минск-Москва'
           company='Аэрофлот'

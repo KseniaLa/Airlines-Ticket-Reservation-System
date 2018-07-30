@@ -6,6 +6,7 @@
   flex: 0px 0px 1200px;
   width: 100%;
   max-width: 900px;
+  margin-bottom: 20px;
   @media screen and (max-width: 400px) {
     align-items: center;
   }
@@ -13,6 +14,12 @@
   h3 {
     color: $page_color;
     font-size: 1.8rem;
+  }
+
+  button {
+    max-width: 200px;
+    padding: 10px;
+    align-self: flex-end;
   }
 }
 

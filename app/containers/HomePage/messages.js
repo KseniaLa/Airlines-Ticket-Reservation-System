@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.HomePage.header',
-    defaultMessage: 'This is HomePage component!',
+  toptitle: {
+    id: 'app.components.HomePage.toptitle',
+    defaultMessage: 'Популярные направления',
+  },
+  searchtitle: {
+    id: 'app.components.HomePage.searchtitle',
+    defaultMessage: 'Поиск билетов',
+  },
+  search: {
+    id: 'app.components.HomePage.search',
+    defaultMessage: 'Популярные направления',
   },
 });

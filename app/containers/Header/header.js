@@ -9,6 +9,9 @@ import injectReducer from 'utils/injectReducer';
 import reducer from '../reducers/autorization-reducer';
 import { Link } from 'react-router-dom';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 class Header extends React.Component {
 
   render() {
@@ -20,7 +23,7 @@ class Header extends React.Component {
             <Link to='/user/tickets'><SocialIcon icon='fa fa-user' /></Link>
             <Link to='/add'><SocialIcon icon='fa fa-plus' /></Link>
             <Link to='/user/basket'><SocialIcon icon='fa fa-shopping-cart' /></Link>
-            <Button text='Войти' onClick={this.props.showSignIn} />
+            <Button text={<FormattedMessage {...messages.enter} />} onClick={this.props.showSignIn} />
           </div>
         </div>
       </header>

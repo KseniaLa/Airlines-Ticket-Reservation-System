@@ -7,6 +7,9 @@ import { Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.scss';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 export default class UserPage extends React.Component {
   render() {
     return (
@@ -15,8 +18,8 @@ export default class UserPage extends React.Component {
           <h1 className='user-card__name'>User Name</h1>
           <div className='user-card__navbar'>
             <div>
-              <Link to='/user/tickets'><Button text='Заказанные билеты' /></Link>
-              <Link to='/user/basket'><Button text='Корзина' /></Link>
+    <Link to='/user/tickets'><Button text={<FormattedMessage {...messages.bookedtickets} />} /></Link>
+              <Link to='/user/basket'><Button text={<FormattedMessage {...messages.basket} />} /></Link>
             </div>
           </div>
           <div className='user-card__tickets-area'>

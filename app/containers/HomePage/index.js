@@ -7,10 +7,10 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 
 import './style.scss';
-import mainImage from './plane.png';
-import cityImage from './moscow.jpg';
-import cityImage2 from './saintp.jpg';
-import cityImage3 from './istanbul.jpg';
+import mainImage from './img/plane.png';
+import cityImage from './img/moscow.jpg';
+import cityImage2 from './img/saintp.jpg';
+import cityImage3 from './img/istanbul.jpg';
 import ImageSearch from '../ImageSearch';
 import Image from '../../components/basic/image';
 
@@ -33,7 +33,7 @@ export default class HomePage extends React.PureComponent {
       <div className='container-flex' >
         <ImageSearch image={mainImage} />
         <div className='content-flex-column'>
-        <h1>Популярные направления</h1>
+        <h1><FormattedMessage {...messages.toptitle} /></h1>
         <div className='imageset-box'>
           <div className='imageste-box__item'><TextImageBlock image={cityImage} text='City'/></div>
           <div className='imageste-box__item'><TextImageBlock image={cityImage2} text='City'/></div>

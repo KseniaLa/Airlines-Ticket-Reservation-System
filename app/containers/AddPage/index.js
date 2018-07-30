@@ -7,6 +7,10 @@ import DateField from '../../components/basic/datefield';
 import Button from '../../components/basic/button';
 import './style.scss';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+
 class AddTicketForm extends React.Component {
 
   constructor(props) {
@@ -26,16 +30,16 @@ class AddTicketForm extends React.Component {
   render() {
     return (
       <div className='info-area'>
-        <div className='from'><TextField type='text' hint='откуда' /></div>
-        <div className='to'><TextField type='text' hint='куда' /></div>
+        <div className='from'><TextField type='text' hint={<FormattedMessage {...messages.from} />} /></div>
+        <div className='to'><TextField type='text' hint={<FormattedMessage {...messages.to} />} /></div>
         <div className='time'><TextField type='time' /></div>
         <div className='date'><DatePicker selected={this.state.startDate}
           onChange={this.handleChange} className='datepicker' /></div>
         <div className='class'>
           <select>
-            <option>бизнес</option>
-            <option>первый</option>
-            <option>эконом</option>
+            <option><FormattedMessage {...messages.businessclass} /></option>
+            <option><FormattedMessage {...messages.firstclass} /></option>
+            <option><FormattedMessage {...messages.budgetclass} /></option>
           </select>
         </div>
         <div className='company'><TextField type='text' hint='компания' /></div>
@@ -54,9 +58,9 @@ export default class AddPage extends React.Component {
     return (
       <form className='container-flex'>
         <div className='addticket-area'>
-          <h3>Добавление билетов</h3>
+          <h3><FormattedMessage {...messages.title} /></h3>
           <AddTicketForm />
-          <Button text='Добавить' />
+          <Button text={<FormattedMessage {...messages.addbutton} />} />
         </div>
       </form>
     )

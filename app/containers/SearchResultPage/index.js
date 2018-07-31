@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from '../SearchBar/searchbar';
-import Ticket from '../Ticket/index';
+import Ticket from '../../components/Ticket/index';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './style.scss';

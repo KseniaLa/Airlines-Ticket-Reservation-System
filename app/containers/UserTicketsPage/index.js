@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Ticket from '../Ticket/index';
+import Ticket from '../../components/Ticket/index';
 
 export default class UserTicketsPage extends React.Component {
   render() {

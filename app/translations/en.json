@@ -20,7 +20,7 @@
   "app.components.UserPage.basket": "Basket",
   "app.components.UserPage.tickets": "My tickets",
   "app.components.header.enter": "Sign in",
-  "app.components.SerchBar.search": "Search for tickets",
+  "app.components.SearchBar.search": "Search for tickets",
   "app.components.footer.about": "About us",
   "app.components.footer.advert": "Advertising",
   "app.components.footer.vacancy": "Vacancies",

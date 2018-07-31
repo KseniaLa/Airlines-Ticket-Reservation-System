@@ -28,13 +28,14 @@ class AddTicketForm extends React.Component {
     return (
       <div className="info-area">
         <div className="from">
-          <TextField
-            type="text"
-            hint={<FormattedMessage {...messages.from} />}
-          />
+          <FormattedMessage id="app.components.AddPage.fromfield">
+            {placeholder => <TextField type="text" hint={placeholder} />}
+          </FormattedMessage>
         </div>
         <div className="to">
-          <TextField type="text" hint={<FormattedMessage {...messages.to} />} />
+          <FormattedMessage id="app.components.AddPage.tofield">
+            {placeholder => <TextField type="text" hint={placeholder} />}
+          </FormattedMessage>
         </div>
         <div className="time">
           <TextField type="time" />
@@ -60,10 +61,14 @@ class AddTicketForm extends React.Component {
           </select>
         </div>
         <div className="company">
-          <TextField type="text" hint="компания" />
+          <FormattedMessage id="app.components.AddPage.company">
+            {placeholder => <TextField type="text" hint={placeholder} />}
+          </FormattedMessage>
         </div>
         <div className="count">
-          <TextField type="number" hint="количество" />
+          <FormattedMessage id="app.components.AddPage.count">
+            {placeholder => <TextField type="number" hint={placeholder} />}
+          </FormattedMessage>
         </div>
       </div>
     );

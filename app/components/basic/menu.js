@@ -1,22 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './basic_style.scss';
 
-export default class Menu extends React.Component {
+class Menu extends React.Component {
+  createList = () => {
+    let list = [];
+    const { items } = this.props;
+    items.forEach(element => {
+      list.push(
+        <li>
+          <Link to="/somepath">{element}</Link>
+        </li>,
+      );
+    });
+    return list;
+  };
 
-    createList = () => {
-      let list = []
-      for (let i = 0; i < this.props.items.length; i++) {
-        list.push(<li><Link to='/somepath'>{this.props.items[i]}</Link></li>)
-      }
-      return list;
-    }
-  
-    render() {
-      return (
-        <ul className='menu'>
-          {this.createList()}
-        </ul>
-      )
-    }
+  render() {
+    return <ul className="menu">{this.createList()}</ul>;
   }
+}
+
+Menu.propTypes = {
+  items: PropTypes.array,
+};
+
+export default Menu;

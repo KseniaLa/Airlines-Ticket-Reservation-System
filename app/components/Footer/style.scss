@@ -1,0 +1,24 @@
+@import '../../common';
+
+.footer {
+  flex: 0 0 auto;
+  background-color: $page_color;
+
+  .footer__content {
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0px;
+    @media screen and (max-width: 500px){
+      @include flex_element(column);
+      text-align: center;
+    }
+  }
+
+  .footer__social {
+    @include flex_element(row);
+
+    div {
+      margin: 5px;
+    }
+  }
+}

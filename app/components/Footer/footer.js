@@ -4,6 +4,7 @@ import Menu from '../../components/basic/menu';
 import SocialIcon from '../../components/basic/socialicon';
 
 import messages from './messages';
+import './style.scss';
 
 export default class Footer extends React.Component {
   render() {

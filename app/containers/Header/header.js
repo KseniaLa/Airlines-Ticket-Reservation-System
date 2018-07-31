@@ -18,6 +18,7 @@ import { setModalState, logout } from '../App/globalActions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 import messages from './messages';
+import './style.scss';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 class Header extends React.PureComponent {

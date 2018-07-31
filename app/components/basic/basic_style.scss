@@ -101,3 +101,15 @@ a {
     line-height: 43px;
   }
 }
+
+.select {
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  outline: none;
+
+  option {
+    padding: 10px;
+  }
+}

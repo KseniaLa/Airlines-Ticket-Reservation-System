@@ -6,8 +6,11 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../../components/basic/button';
 import TextField from '../../components/basic/textfield';
+import Select from '../basic/select';
 
-import messages from './messages';
+import messages from '../../containers/AddPage/messages';
+import localMessages from './messages';
+import './style.scss';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -27,17 +30,27 @@ export default class SearchBar extends React.Component {
   render() {
     return (
       <form className="search-bar">
-        <TextField hint="откуда" />
-        <TextField hint="куда" />
+        <FormattedMessage id="app.components.AddPage.fromfield">
+          {placeholder => <TextField type="text" hint={placeholder} />}
+        </FormattedMessage>
+        <FormattedMessage id="app.components.AddPage.tofield">
+          {placeholder => <TextField type="text" hint={placeholder} />}
+        </FormattedMessage>
         <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange}
           className="field"
         />
-        <TextField hint="куда" />
+        <Select
+          items={[
+            <FormattedMessage {...messages.businessclass} />,
+            <FormattedMessage {...messages.firstclass} />,
+            <FormattedMessage {...messages.budgetclass} />,
+          ]}
+        />
         <div className="search-bar__button">
           <Link to="/results">
-            <Button text={<FormattedMessage {...messages.search} />} />
+            <Button text={<FormattedMessage {...localMessages.search} />} />
           </Link>
         </div>
       </form>

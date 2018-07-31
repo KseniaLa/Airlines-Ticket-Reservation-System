@@ -13,9 +13,11 @@ import {
   makeSelectIsAuthorized,
   makeSelectUser,
   makeSelectIsAdmin,
-} from '../App/selectors/globalSelectors';
+} from '../App/globalSelectors';
+import { setModalState, logout } from '../App/globalActions';
+import { changeLocale } from '../LanguageProvider/actions';
+import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 import messages from './messages';
-import { CHANGE_LOCALE } from '../LanguageProvider/constants';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 class Header extends React.PureComponent {
@@ -44,17 +46,23 @@ class Header extends React.PureComponent {
       ? [
         <div className="header__options">
           <Link to="/user/tickets">
-            <SocialIcon icon="fa fa-user" />
+            <SocialIcon
+              icon="fa fa-user"
+              onClick={this.props.showTicketsPage}
+            />
           </Link>
           {adminButton}
           <Link to="/user/basket">
-            <SocialIcon icon="fa fa-shopping-cart" />
+            <SocialIcon
+              icon="fa fa-shopping-cart"
+              onClick={this.props.showCartPage}
+            />
           </Link>
           <Toggle value={nextLang} callback={this.handle} />
-          {/* <Button
-            text={<FormattedMessage {...messages.enter} />}
-            onClick={this.props.showSignIn}
-          /> */}
+          <Button
+            text={<FormattedMessage {...messages.logout} />}
+            onClick={this.props.logout}
+          />
         </div>,
       ]
       : [
@@ -83,6 +91,9 @@ class Header extends React.PureComponent {
 Header.propTypes = {
   changeLang: PropTypes.func,
   showSignIn: PropTypes.func,
+  logout: PropTypes.func,
+  showTicketsPage: PropTypes.func,
+  showCartPage: PropTypes.func,
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -91,18 +102,24 @@ Header.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
     showSignIn() {
-      dispatch({
-        type: 'SHOW_SIGN_MODAL',
-        payload: true,
-      });
+      dispatch(setModalState(true));
     },
 
     changeLang(lang) {
       const nextLang = lang === 'ru' ? 'en' : 'ru';
-      dispatch({
-        type: CHANGE_LOCALE,
-        locale: nextLang,
-      });
+      dispatch(changeLocale(nextLang));
+    },
+
+    logout() {
+      dispatch(logout());
+    },
+
+    showTicketsPage() {
+      dispatch(setTicketsPageShown());
+    },
+
+    showCartPage() {
+      dispatch(setCartPageShown());
     },
   };
 }

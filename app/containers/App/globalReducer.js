@@ -1,8 +1,9 @@
 import { fromJS } from 'immutable';
+import { MODAL_STATE, LOGOUT } from './constants';
 
 const initialState = fromJS({
   modalVisible: false,
-  isAuthorized: false, // it should be false, but now it's true to show user buttons
+  isAuthorized: true, // it should be false, but now it's true to show user buttons
   user: {
     name: 'Unknown',
     id: '',
@@ -12,8 +13,10 @@ const initialState = fromJS({
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SHOW_SIGN_MODAL':
+    case MODAL_STATE:
       return state.set('modalVisible', action.payload);
+    case LOGOUT:
+      return state.set('isAuthorized', false);
     default:
       return state;
   }

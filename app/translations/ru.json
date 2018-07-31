@@ -33,5 +33,6 @@
   "app.components.SignInPage.loginexists": "Уже есть логин",
   "app.components.SearchResultsPage.add": "Добавить",
   "app.components.UserBasketPage.remove": "Удалить",
-  "app.components.UserBasketPage.undo" : "Отменить"
+  "app.components.UserBasketPage.undo" : "Отменить",
+  "app.components.header.logout": "Выйти"
 }

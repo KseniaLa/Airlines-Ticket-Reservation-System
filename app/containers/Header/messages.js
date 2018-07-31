@@ -5,4 +5,8 @@ export default defineMessages({
     id: 'app.components.header.enter',
     defaultMessage: 'Войти',
   },
+  logout: {
+    id: 'app.components.header.logout',
+    defaultMessage: 'Выйти',
+  },
 });

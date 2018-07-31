@@ -8,3 +8,5 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
+export const MODAL_STATE = 'airlines/App/SHOW_SIGN_MODAL';
+export const LOGOUT = 'airlines/App/LOGOUT';

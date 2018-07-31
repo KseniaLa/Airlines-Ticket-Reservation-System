@@ -33,5 +33,6 @@
   "app.components.SignInPage.loginexists": "Login already exists",
   "app.components.SearchResultsPage.add": "Add",
   "app.components.UserBasketPage.remove": "Remove",
-  "app.components.UserBasketPage.undo" : "Undo"
+  "app.components.UserBasketPage.undo" : "Undo",
+  "app.components.header.logout": "Sign out"
 }

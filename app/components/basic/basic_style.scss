@@ -23,6 +23,15 @@ a {
   }
 }
 
+.page-button_active {
+  background-color: $active_button_color;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  outline: none;
+}
+
 .toggle-button {
   background-color: $button_color;
   border: none;

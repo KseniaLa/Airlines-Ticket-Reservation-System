@@ -9,7 +9,7 @@ import mainImage from './img/plane.png';
 import cityImage from './img/moscow.jpg';
 import cityImage2 from './img/saintp.jpg';
 import cityImage3 from './img/istanbul.jpg';
-import SearchBar from '../SearchBar/searchbar';
+import SearchBar from '../../components/SearchBar/searchbar';
 import Image from '../../components/basic/image';
 
 class ImageSearch extends React.Component {

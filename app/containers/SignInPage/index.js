@@ -11,7 +11,8 @@ import Button from '../../components/basic/button';
 import Field from '../../components/basic/textfield';
 import Title from '../../components/basic/title';
 import './style.scss';
-import { makeSelectIsModalVisible } from '../App/selectors/globalSelectors';
+import { makeSelectIsModalVisible } from '../App/globalSelectors';
+import { setModalState } from '../App/globalActions';
 
 class SignInPage extends React.PureComponent {
   constructor(props) {
@@ -104,10 +105,7 @@ SignInPage.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
     hideSignIn() {
-      dispatch({
-        type: 'SHOW_SIGN_MODAL',
-        payload: false,
-      });
+      dispatch(setModalState(false));
     },
   };
 }

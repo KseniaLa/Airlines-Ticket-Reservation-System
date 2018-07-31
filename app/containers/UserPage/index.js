@@ -1,20 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import Button from '../../components/basic/button';
 import UserBasketPage from '../UserBasketPage/index';
 import UserTicketsPage from '../UserTicketsPage/index';
+import { makeSelectUserName } from '../App/selectors/globalSelectors';
 import './style.scss';
 
 import messages from './messages';
 
-export default class UserPage extends React.Component {
+class UserPage extends React.PureComponent {
   render() {
     return (
       <div className="container-flex">
         <section className="user-card">
-          <h1 className="user-card__name">User Name</h1>
+          <h1 className="user-card__name">{this.props.userName}</h1>
           <div className="user-card__navbar">
             <div>
               <Link to="/user/tickets">
@@ -38,3 +41,27 @@ export default class UserPage extends React.Component {
     );
   }
 }
+
+UserPage.propTypes = {
+  userName: PropTypes.string,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    showSignIn() {
+      dispatch({
+        type: 'SHOW_SIGN_MODAL',
+        payload: true,
+      });
+    },
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  userName: makeSelectUserName(),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserPage);

@@ -14,11 +14,19 @@ export default class UserBasketPage extends React.Component {
         <Ticket
           title="Минск-Москва"
           company="Аэрофлот"
-          description="без пересадок"
           time="12.30"
           price="500"
           count="35"
-          action="Удалить"
+          action={<FormattedMessage {...messages.remove} />}
+        />
+
+        <Ticket
+          title="Минск-Москва"
+          company="Аэрофлот"
+          time="12.30"
+          price="500"
+          count="345"
+          action={<FormattedMessage {...messages.remove} />}
         />
 
         <Ticket
@@ -28,17 +36,7 @@ export default class UserBasketPage extends React.Component {
           time="12.30"
           price="500"
           count="345"
-          action="Удалить"
-        />
-
-        <Ticket
-          title="Минск-Москва"
-          company="Аэрофлот"
-          description="без пересадок"
-          time="12.30"
-          price="500"
-          count="345"
-          action="Удалить"
+          action={<FormattedMessage {...messages.remove} />}
         />
       </div>
     );

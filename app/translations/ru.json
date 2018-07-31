@@ -30,5 +30,8 @@
   "app.components.SignInPage.signuptitle": "Регистрация",
   "app.components.SignInPage.signintitle": "Авторизация",
   "app.components.SignInPage.newuser": "Я новый пользователь",
-  "app.components.SignInPage.loginexists": "Уже есть логин"
+  "app.components.SignInPage.loginexists": "Уже есть логин",
+  "app.components.SearchResultsPage.add": "Добавить",
+  "app.components.UserBasketPage.remove": "Удалить",
+  "app.components.UserBasketPage.undo" : "Отменить"
 }

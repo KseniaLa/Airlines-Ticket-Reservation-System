@@ -14,12 +14,12 @@
 import 'font-awesome/css/font-awesome.min.css';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import React from 'react';
-import { Switch, Route, ReactRouter, Router } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/index';
 import SearchResultPage from '../SearchResultPage/index';
 import AddPage from '../AddPage/index';
 import Header from '../Header/header';
-import Footer from '../Footer/footer';
+import Footer from '../../components/Footer/footer';
 import SignIn from '../SignInPage/index';
 import UserPage from '../UserPage/index';
 

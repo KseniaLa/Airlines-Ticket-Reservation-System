@@ -62,9 +62,6 @@ class AddTicketForm extends React.Component {
         <div className="company">
           <TextField type="text" hint="компания" />
         </div>
-        <div className="description">
-          <textarea placeholder="описание" />
-        </div>
         <div className="count">
           <TextField type="number" hint="количество" />
         </div>

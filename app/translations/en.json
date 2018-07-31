@@ -30,6 +30,8 @@
   "app.components.SignInPage.signuptitle": "Registration",
   "app.components.SignInPage.signintitle": "Authorization",
   "app.components.SignInPage.newuser": "I'm new to this site",
-  "app.components.SignInPage.loginexists": "Login already exists"
-
+  "app.components.SignInPage.loginexists": "Login already exists",
+  "app.components.SearchResultsPage.add": "Add",
+  "app.components.UserBasketPage.remove": "Remove",
+  "app.components.UserBasketPage.undo" : "Undo"
 }

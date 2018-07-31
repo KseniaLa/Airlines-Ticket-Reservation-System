@@ -8,37 +8,72 @@ import Toggle from '../../components/basic/toggleButton';
 import Title from '../../components/basic/title';
 import Button from '../../components/basic/button';
 import SocialIcon from '../../components/basic/socialicon';
-import { makeSelectIsModalVisible } from '../App/selectors/globalSelectors';
+import {
+  makeSelectIsModalVisible,
+  makeSelectIsAuthorized,
+  makeSelectUser,
+  makeSelectIsAdmin,
+} from '../App/selectors/globalSelectors';
 import messages from './messages';
 import { CHANGE_LOCALE } from '../LanguageProvider/constants';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 class Header extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.handle = this.handle.bind(this);
+  }
+
+  handle() {
+    this.props.changeLang(this.props.language);
+  }
 
   render() {
+    const lang = this.props.language;
+    const nextLang = lang === 'ru' ? 'en' : 'ru';
+    const { isAuthorized } = this.props;
+    const { isAdmin } = this.props;
+    const adminButton = isAdmin
+      ? [
+        <Link to="/add">
+          <SocialIcon icon="fa fa-plus" />
+        </Link>
+      ]
+      : null;
+    const headerOptions = isAuthorized
+      ? [
+        <div className="header__options">
+          <Link to="/user/tickets">
+            <SocialIcon icon="fa fa-user" />
+          </Link>
+          {adminButton}
+          <Link to="/user/basket">
+            <SocialIcon icon="fa fa-shopping-cart" />
+          </Link>
+          <Toggle value={nextLang} callback={this.handle} />
+          {/* <Button
+            text={<FormattedMessage {...messages.enter} />}
+            onClick={this.props.showSignIn}
+          /> */}
+        </div>,
+      ]
+      : [
+        <div className="header__options">
+          <Toggle value={nextLang} callback={this.handle} />
+          <Button
+            text={<FormattedMessage {...messages.enter} />}
+            onClick={this.props.showSignIn}
+          />
+        </div>,
+      ];
+
     return (
       <header className="container-flex header">
         <div className="content-flex header__content">
           <Link to="/">
             <Title style="base-title site-name" text="Airlines" />
           </Link>
-          <div className="header__options">
-            <Link to="/user/tickets">
-              <SocialIcon icon="fa fa-user" />
-            </Link>
-            <Link to="/add">
-              <SocialIcon icon="fa fa-plus" />
-            </Link>
-            <Link to="/user/basket">
-              <SocialIcon icon="fa fa-shopping-cart" />
-            </Link>
-            <Toggle on="EN" off="RU" callback={this.props.changeLang.bind(this, this.props.language)} />
-            <Button
-              text={<FormattedMessage {...messages.enter} />}
-              onClick={this.props.showSignIn}
-            />
-          </div>
+          {headerOptions}
         </div>
       </header>
     );
@@ -49,6 +84,8 @@ Header.propTypes = {
   changeLang: PropTypes.func,
   showSignIn: PropTypes.func,
   language: PropTypes.string,
+  isAuthorized: PropTypes.bool,
+  isAdmin: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -73,6 +110,9 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   visible: makeSelectIsModalVisible(),
   language: makeSelectLocale(),
+  isAuthorized: makeSelectIsAuthorized(),
+  isAdmin: makeSelectIsAdmin(),
+  user: makeSelectUser(),
 });
 
 export default connect(

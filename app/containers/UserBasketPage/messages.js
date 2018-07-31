@@ -5,4 +5,8 @@ export default defineMessages({
     id: 'app.components.UserBasketPage.submit',
     defaultMessage: 'Подтвердить заказ',
   },
+  remove: {
+    id: 'app.components.UserBasketPage.remove',
+    defaultMessage: 'Удалить',
+  },
 });

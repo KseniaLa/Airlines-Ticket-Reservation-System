@@ -23,6 +23,17 @@ a {
   }
 }
 
+.toggle-button {
+  background-color: $button_color;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 300ms;
+  outline: none;
+}
+
 .field {
   padding: 10px;
   border-radius: 5px;

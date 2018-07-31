@@ -30,7 +30,7 @@ class Ticket extends React.Component {
           <h1 className="actual-count-block">{this.props.count}</h1>
         </div>
         <div className="ticket__add-button-area">
-          <Button text={this.props.action} />
+          <Button text={this.props.action} onClick={this.props.onClick}/>
         </div>
       </section>
     );
@@ -45,6 +45,7 @@ Ticket.propTypes = {
   price: PropTypes.string,
   count: PropTypes.string,
   action: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Ticket;

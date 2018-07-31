@@ -18,7 +18,6 @@ class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { signIn: true };
-    this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.signInPart = (
       <div className="container">
@@ -62,10 +61,6 @@ class SignInPage extends React.PureComponent {
         </div>
       </div>
     );
-  }
-
-  handleCloseClick() {
-    this.setState({ visible: false });
   }
 
   handleChangeModeClick() {

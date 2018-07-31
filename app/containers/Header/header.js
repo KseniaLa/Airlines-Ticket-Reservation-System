@@ -39,7 +39,7 @@ class Header extends React.PureComponent {
       ? [
         <Link to="/add">
           <SocialIcon icon="fa fa-plus" />
-        </Link>
+        </Link>,
       ]
       : null;
     const headerOptions = isAuthorized
@@ -59,10 +59,12 @@ class Header extends React.PureComponent {
             />
           </Link>
           <Toggle value={nextLang} callback={this.handle} />
-          <Button
-            text={<FormattedMessage {...messages.logout} />}
-            onClick={this.props.logout}
-          />
+          <Link to="/">
+            <Button
+              text={<FormattedMessage {...messages.logout} />}
+              onClick={this.props.logout}
+            />
+          </Link>
         </div>,
       ]
       : [

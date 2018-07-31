@@ -16,7 +16,6 @@ import './style.scss';
 import messages from './messages';
 
 class UserPage extends React.PureComponent {
-
   render() {
     const { areTicketsShown, isCartShown } = this.props;
     const ticketsButton = areTicketsShown
@@ -26,7 +25,7 @@ class UserPage extends React.PureComponent {
             text={<FormattedMessage {...messages.bookedtickets} />}
             onClick={this.props.showTicketsPage}
           />
-        </Link>
+        </Link>,
       ]
       : [
         <Link to="/user/tickets">
@@ -34,7 +33,7 @@ class UserPage extends React.PureComponent {
             text={<FormattedMessage {...messages.bookedtickets} />}
             onClick={this.props.showTicketsPage}
           />
-        </Link>
+        </Link>,
       ];
     const cartButton = isCartShown
       ? [
@@ -47,13 +46,15 @@ class UserPage extends React.PureComponent {
               />
             }
           />
-        </Link>
+        </Link>,
       ]
       : [
         <Link to="/user/basket">
           <Button
-            text={<FormattedMessage {...messages.basket} />} onClick={this.props.showCartPage} />
-        </Link>
+            text={<FormattedMessage {...messages.basket} />}
+            onClick={this.props.showCartPage}
+          />
+        </Link>,
       ];
     return (
       <div className="container-flex">
@@ -79,6 +80,10 @@ class UserPage extends React.PureComponent {
 
 UserPage.propTypes = {
   userName: PropTypes.string,
+  areTicketsShown: PropTypes.bool,
+  isCartShown: PropTypes.bool,
+  showTicketsPage: PropTypes.func,
+  showCartPage: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {

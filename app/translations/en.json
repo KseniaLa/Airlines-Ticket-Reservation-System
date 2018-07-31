@@ -34,5 +34,9 @@
   "app.components.SearchResultsPage.add": "Add",
   "app.components.UserBasketPage.remove": "Remove",
   "app.components.UserBasketPage.undo" : "Undo",
-  "app.components.header.logout": "sign out"
+  "app.components.header.logout": "sign out",
+  "app.components.SignInPage.name": "name",
+  "app.components.SignInPage.surname": "surname",
+  "app.components.SignInPage.email" : "e-mail",
+  "app.components.SignInPage.password": "password"
 }

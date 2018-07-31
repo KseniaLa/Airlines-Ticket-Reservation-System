@@ -25,4 +25,20 @@ export default defineMessages({
     id: 'app.components.SignInPage.loginexists',
     defaultMessage: 'Уже есть логин',
   },
+  name: {
+    id: 'app.components.SignInPage.name',
+    defaultMessage: 'имя',
+  },
+  surname: {
+    id: 'app.components.SignInPage.surname',
+    defaultMessage: 'фамилия',
+  },
+  email: {
+    id: 'app.components.SignInPage.email',
+    defaultMessage: 'e-mail',
+  },
+  password: {
+    id: 'app.components.SignInPage.password',
+    defaultMessage: 'пароль',
+  },
 });

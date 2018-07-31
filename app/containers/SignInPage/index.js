@@ -21,13 +21,17 @@ class SignInPage extends React.PureComponent {
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.signInPart = (
       <div className="container">
-        <form className="sign-page__form">
+        <form className="sign-page__form" name="signin-form">
           <Title
             style="sign-page__title"
             text={<FormattedMessage {...messages.signintitle} />}
           />
-          <Field type="text" hint="e-mail" />
-          <Field type="password" hint="password" />
+          <FormattedMessage id="app.components.SignInPage.email">
+            {placeholder => <Field type="text" hint={placeholder} />}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.password">
+            {placeholder => <Field type="text" hint={placeholder} />}
+          </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signin} />} />
         </form>
         <div className="change-mode">
@@ -42,14 +46,20 @@ class SignInPage extends React.PureComponent {
 
     this.signUpPart = (
       <div className="container">
-        <form className="sign-page__form">
+        <form className="sign-page__form" name="signup-form">
           <Title
             style="sign-page__title"
             text={<FormattedMessage {...messages.signuptitle} />}
           />
-          <Field type="text" hint="e-mail" />
-          <Field type="text" hint="e-mail" />
-          <Field type="text" hint="e-mail" />
+          <FormattedMessage id="app.components.SignInPage.name">
+            {placeholder => <Field type="text" hint={placeholder} />}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.surname">
+            {placeholder => <Field type="text" hint={placeholder} />}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.email">
+            {placeholder => <Field type="text" hint={placeholder} />}
+          </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signup} />} />
         </form>
         <div className="change-mode">

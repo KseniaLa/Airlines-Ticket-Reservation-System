@@ -23,6 +23,7 @@ import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
+
 class Header extends React.PureComponent {
   constructor(props) {
     super(props);

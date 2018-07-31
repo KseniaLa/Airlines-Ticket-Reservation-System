@@ -34,5 +34,9 @@
   "app.components.SearchResultsPage.add": "добавить",
   "app.components.UserBasketPage.remove": "удалить",
   "app.components.UserBasketPage.undo" : "отменить",
-  "app.components.header.logout": "выйти"
+  "app.components.header.logout": "выйти",
+  "app.components.SignInPage.name": "имя",
+  "app.components.SignInPage.surname": "фамилия",
+  "app.components.SignInPage.email" : "e-mail",
+  "app.components.SignInPage.password": "пароль"
 }

@@ -8,6 +8,8 @@ import Toggle from '../../components/basic/toggleButton';
 import Title from '../../components/basic/title';
 import Button from '../../components/basic/button';
 import SocialIcon from '../../components/basic/socialicon';
+import messages from './messages';
+import './style.scss';
 import {
   makeSelectIsModalVisible,
   makeSelectIsAuthorized,
@@ -17,8 +19,8 @@ import {
 import { setModalState, logout } from '../App/globalActions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
-import messages from './messages';
-import './style.scss';
+
+
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 class Header extends React.PureComponent {

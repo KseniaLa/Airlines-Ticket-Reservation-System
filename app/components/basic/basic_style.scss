@@ -13,6 +13,10 @@ a {
   transition: 300ms;
   outline: none;
 
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
   &:hover {
       background-color: $active_button_color;
       border: none;

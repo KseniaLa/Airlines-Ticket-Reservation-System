@@ -1,5 +1,5 @@
 {
-  "app.components.AddPage.add": "Add",
+  "app.components.AddPage.add": "add",
   "app.components.AddPage.budget": "budget",
   "app.components.AddPage.business": "business",
   "app.components.AddPage.company": "company",
@@ -25,8 +25,8 @@
   "app.components.footer.advert": "Advertising",
   "app.components.footer.vacancy": "Vacancies",
   "app.components.footer.help": "Help",
-  "app.components.SignInPage.signin": "Sign in",
-  "app.components.SignInPage.signup": "Sign up",
+  "app.components.SignInPage.signin": "sign in",
+  "app.components.SignInPage.signup": "sign up",
   "app.components.SignInPage.signuptitle": "Registration",
   "app.components.SignInPage.signintitle": "Authorization",
   "app.components.SignInPage.newuser": "I'm new to this site",
@@ -34,5 +34,5 @@
   "app.components.SearchResultsPage.add": "Add",
   "app.components.UserBasketPage.remove": "Remove",
   "app.components.UserBasketPage.undo" : "Undo",
-  "app.components.header.logout": "Sign out"
+  "app.components.header.logout": "sign out"
 }

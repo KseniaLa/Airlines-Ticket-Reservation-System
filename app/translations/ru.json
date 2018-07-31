@@ -1,5 +1,5 @@
 {
-  "app.components.AddPage.add": "Добавить",
+  "app.components.AddPage.add": "добавить",
   "app.components.AddPage.budget": "эконом",
   "app.components.AddPage.business": "бизнес",
   "app.components.AddPage.company": "компания",
@@ -25,14 +25,14 @@
   "app.components.footer.advert": "Реклама",
   "app.components.footer.vacancy": "Вакансии",
   "app.components.footer.help": "Помощь",
-  "app.components.SignInPage.signin": "Войти",
+  "app.components.SignInPage.signin": "войти",
   "app.components.SignInPage.signup": "Зарегистрироваться",
   "app.components.SignInPage.signuptitle": "Регистрация",
   "app.components.SignInPage.signintitle": "Авторизация",
   "app.components.SignInPage.newuser": "Я новый пользователь",
   "app.components.SignInPage.loginexists": "Уже есть логин",
-  "app.components.SearchResultsPage.add": "Добавить",
-  "app.components.UserBasketPage.remove": "Удалить",
-  "app.components.UserBasketPage.undo" : "Отменить",
-  "app.components.header.logout": "Выйти"
+  "app.components.SearchResultsPage.add": "добавить",
+  "app.components.UserBasketPage.remove": "удалить",
+  "app.components.UserBasketPage.undo" : "отменить",
+  "app.components.header.logout": "выйти"
 }

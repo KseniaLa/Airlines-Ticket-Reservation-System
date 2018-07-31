@@ -78,15 +78,17 @@ class AddTicketForm extends React.Component {
 export default class AddPage extends React.Component {
   render() {
     return (
-      <form className="container-flex">
+      <div className="container-flex">
         <div className="addticket-area">
           <h3>
             <FormattedMessage {...messages.title} />
           </h3>
+          <Button text={<FormattedMessage {...messages.addgroup} />} />
+          <AddTicketForm />
           <AddTicketForm />
           <Button text={<FormattedMessage {...messages.addbutton} />} />
         </div>
-      </form>
+      </div>
     );
   }
 }

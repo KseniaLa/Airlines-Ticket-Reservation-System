@@ -9,7 +9,7 @@ import messages from './messages';
 export default class UserBasketPage extends React.Component {
   render() {
     return (
-      <div className="basket-container">
+      <section className="basket-container">
         <Button text={<FormattedMessage {...messages.submit} />} />
         <Ticket
           title="Минск-Москва"
@@ -38,7 +38,7 @@ export default class UserBasketPage extends React.Component {
           count="345"
           action={<FormattedMessage {...messages.remove} />}
         />
-      </div>
+      </section>
     );
   }
 }

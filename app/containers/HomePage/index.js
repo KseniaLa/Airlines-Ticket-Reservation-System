@@ -15,7 +15,7 @@ import Image from '../../components/basic/image';
 class ImageSearch extends React.Component {
   render() {
     return (
-      <div className="main-image-block">
+      <section className="main-image-block">
         <Image path={this.props.image} style="main-image-block__image" />
         <div className="main-image-block__overlay">
           <h1>
@@ -23,7 +23,7 @@ class ImageSearch extends React.Component {
           </h1>
           <SearchBar />
         </div>
-      </div>
+      </section>
     );
   }
 }
@@ -53,7 +53,7 @@ TextImageBlock.propTypes = {
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <div className="container-flex">
+      <section className="container-flex">
         <ImageSearch image={mainImage} />
         <div className="content-flex-column">
           <h1>
@@ -80,7 +80,7 @@ export default class HomePage extends React.PureComponent {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

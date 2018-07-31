@@ -41,4 +41,8 @@ export default defineMessages({
     id: 'app.components.AddPage.add',
     defaultMessage: 'Добавить',
   },
+  addgroup: {
+    id: 'app.components.AddPage.addgroup',
+    defaultMessage: 'Добавить группу',
+  },
 });

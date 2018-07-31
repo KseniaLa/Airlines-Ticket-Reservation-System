@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './basic_style.scss';
 
 
@@ -16,5 +17,10 @@ class Toggle extends React.PureComponent {
     );
   }
 }
+
+Toggle.propTypes = {
+  value: PropTypes.string,
+  callback: PropTypes.func,
+};
 
 export default Toggle;

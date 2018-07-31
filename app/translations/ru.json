@@ -38,5 +38,6 @@
   "app.components.SignInPage.name": "имя",
   "app.components.SignInPage.surname": "фамилия",
   "app.components.SignInPage.email" : "e-mail",
-  "app.components.SignInPage.password": "пароль"
+  "app.components.SignInPage.password": "пароль",
+  "app.components.empty.notfound": "Ничего не найдено"
 }

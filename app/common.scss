@@ -1,6 +1,7 @@
 $page_color:  #530969;
 $button_color: #9b13da;
 $active_button_color: #be6c53;
+$page_base_color:  #f0f0f0;
 
 @mixin flex_element($direction) {
   display: flex;

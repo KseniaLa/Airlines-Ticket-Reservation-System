@@ -3,6 +3,7 @@
 .container-flex {
   @include flex_element(column);
   width: 100%;
+  background-color: $page_base_color;
 }
 
 .content-flex {

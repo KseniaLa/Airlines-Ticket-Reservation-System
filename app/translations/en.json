@@ -38,5 +38,6 @@
   "app.components.SignInPage.name": "name",
   "app.components.SignInPage.surname": "surname",
   "app.components.SignInPage.email" : "e-mail",
-  "app.components.SignInPage.password": "password"
+  "app.components.SignInPage.password": "password",
+  "app.components.empty.notfound": "Not found"
 }

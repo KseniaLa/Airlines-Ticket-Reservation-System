@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './basic_style.scss';
 
-export default class SocialIcon extends React.Component {
+class SocialIcon extends React.Component {
   render() {
     return (
       <div className="socialicon" onClick={this.props.onClick}>
@@ -10,3 +11,10 @@ export default class SocialIcon extends React.Component {
     )
   }
 }
+
+SocialIcon.propTypes = {
+  icon: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default SocialIcon;

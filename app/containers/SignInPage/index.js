@@ -27,10 +27,10 @@ class SignInPage extends React.PureComponent {
             text={<FormattedMessage {...messages.signintitle} />}
           />
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} />}
+            {placeholder => <Field type="text" hint={placeholder} name=""/>}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.password">
-            {placeholder => <Field type="text" hint={placeholder} />}
+            {placeholder => <Field type="text" hint={placeholder} name=""/>}
           </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signin} />} />
         </form>
@@ -52,13 +52,13 @@ class SignInPage extends React.PureComponent {
             text={<FormattedMessage {...messages.signuptitle} />}
           />
           <FormattedMessage id="app.components.SignInPage.name">
-            {placeholder => <Field type="text" hint={placeholder} />}
+            {placeholder => <Field type="text" hint={placeholder} name=""/>}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.surname">
-            {placeholder => <Field type="text" hint={placeholder} />}
+            {placeholder => <Field type="text" hint={placeholder} name=""/>}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} />}
+            {placeholder => <Field type="text" hint={placeholder} name=""/>}
           </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signup} />} />
         </form>
@@ -88,14 +88,14 @@ class SignInPage extends React.PureComponent {
 
     if (this.props.visible) {
       return (
-        <div className="sign-overlay">
+        <section className="sign-overlay">
           <section className="sign-page">
             <button className="close-button" onClick={this.props.hideSignIn}>
               <i className="fa fa-times" />
             </button>
             {mainPart}
           </section>
-        </div>
+        </section>
       );
     }
     return <div />;

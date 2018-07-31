@@ -14,7 +14,7 @@
     padding: 10px;
     box-sizing: border-box;
     background-color: $page_color;
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: 450px){
       @include flex_element(column);
       text-align: center;
     }

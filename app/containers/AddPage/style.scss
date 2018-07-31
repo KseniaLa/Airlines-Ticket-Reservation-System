@@ -2,11 +2,12 @@
 
 .addticket-area {
   @include flex_element(column);
-  align-self: center;
   flex: 0px 0px 1200px;
+  align-self: center;
   width: 100%;
   max-width: 900px;
   margin-bottom: 20px;
+  padding: 10px;
   @media screen and (max-width: 400px) {
     align-items: center;
   }
@@ -14,6 +15,9 @@
   h3 {
     color: $page_color;
     font-size: 1.8rem;
+    @media screen and (max-width: 500px) {
+      align-self: center;
+    }
   }
 
   button {
@@ -26,7 +30,6 @@
 .info-area {
   align-self: center;
   width: 100%;
-  min-height: 500px;
   background-color: #e2e1de;
   margin: 10px;
   border-radius: 10px;

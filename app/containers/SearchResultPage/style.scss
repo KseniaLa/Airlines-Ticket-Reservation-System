@@ -17,3 +17,15 @@
   @include flex_element(column);
 }
 
+.button-set {
+  align-self: flex-end;
+
+  button {
+    margin: 5px;
+  }
+}
+
+.button-set_central {
+  align-self: center;
+}
+

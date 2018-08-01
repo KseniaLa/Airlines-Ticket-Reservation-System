@@ -5,14 +5,13 @@ import './basic_style.scss';
 class Image extends React.Component {
   render() {
     return (
-      <img src={this.props.path} className={this.props.style} />
+      <img src={this.props.path} className={this.props.className} />
     )
   }
 }
 
 Image.propTypes = {
   path: PropTypes.string,
-  style: PropTypes.string,
 };
 
 export default Image;

@@ -19,14 +19,26 @@
 
 .button-set {
   align-self: flex-end;
+  margin-right: 10px;
 
-
-  button {
+  div {
+    display: inline-block;
     margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    text-align: center;
+    color: #ffffff;
+    background-color: $button_color;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 
-.button-set_central {
+.central {
   align-self: center;
   margin-bottom: 10px;  
 }

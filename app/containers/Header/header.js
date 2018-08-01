@@ -84,7 +84,7 @@ class Header extends React.PureComponent {
         <div className="content-flex header__content">
           <Link to="/">
             <Title
-              style="base-title site-name"
+              className="base-title site-name"
               text={<FormattedMessage {...messages.title} />}
             />
           </Link>

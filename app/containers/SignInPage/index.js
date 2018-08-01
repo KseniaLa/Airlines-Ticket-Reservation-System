@@ -23,14 +23,14 @@ class SignInPage extends React.PureComponent {
       <div className="container">
         <form className="sign-page__form" name="signin-form">
           <Title
-            style="sign-page__title"
+            className="sign-page__title"
             text={<FormattedMessage {...messages.signintitle} />}
           />
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} name=""/>}
+            {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.password">
-            {placeholder => <Field type="text" hint={placeholder} name=""/>}
+            {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signin} />} />
         </form>
@@ -48,17 +48,17 @@ class SignInPage extends React.PureComponent {
       <div className="container">
         <form className="sign-page__form" name="signup-form">
           <Title
-            style="sign-page__title"
+            className="sign-page__title"
             text={<FormattedMessage {...messages.signuptitle} />}
           />
           <FormattedMessage id="app.components.SignInPage.name">
-            {placeholder => <Field type="text" hint={placeholder} name=""/>}
+            {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.surname">
-            {placeholder => <Field type="text" hint={placeholder} name=""/>}
+            {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} name=""/>}
+            {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
           <Button text={<FormattedMessage {...messages.signup} />} />
         </form>

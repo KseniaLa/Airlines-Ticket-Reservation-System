@@ -12,7 +12,7 @@ class ImageSearch extends React.PureComponent {
   render() {
     return (
       <section className="main-image-block">
-        <Image path={this.props.image} style="main-image-block__image" />
+        <Image path={this.props.image} className="main-image-block__image" />
         <div className="main-image-block__overlay">
           <h1>
             <FormattedMessage {...messages.searchtitle} />

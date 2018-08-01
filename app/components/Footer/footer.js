@@ -6,6 +6,7 @@ import SocialIcon from '../../components/basic/socialicon';
 import messages from './messages';
 import './style.scss';
 
+/* eslint-disable react/prefer-stateless-function */
 export default class Footer extends React.PureComponent {
   render() {
     return (

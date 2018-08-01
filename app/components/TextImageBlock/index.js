@@ -8,7 +8,7 @@ class TextImageBlock extends React.PureComponent {
   render() {
     return (
       <div className="textimage-block">
-        <Image path={this.props.image} style="" />
+        <Image path={this.props.image} className="" />
         <div className="textimage-block__title">
           <h3>{this.props.text}</h3>
         </div>

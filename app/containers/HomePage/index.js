@@ -11,6 +11,7 @@ import cityImage3 from './img/istanbul.jpg';
 import ImageSearch from '../../components/ImageSearch/index';
 import TextImageBlock from '../../components/TextImageBlock/index';
 
+/* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
     return (

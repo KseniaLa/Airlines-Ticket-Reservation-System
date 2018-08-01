@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import 'font-awesome/css/font-awesome.min.css';
 import SearchBar from '../../components/SearchBar/searchbar';
-import Button from '../../components/basic/button';
 import Ticket from '../../components/Ticket/index';
 
 import messages from './messages';
 import './style.scss';
 
+/* eslint-disable react/prefer-stateless-function */
 export default class SearchResultPage extends React.PureComponent {
   render() {
     return (
@@ -16,9 +17,9 @@ export default class SearchResultPage extends React.PureComponent {
         </div>
         <section className="content-flex ticket-area">
           <div className="button-set">
-            <Button text="20" />
-            <Button text="50" />
-            <Button text="100" />
+            <div>20</div>
+            <div>50</div>
+            <div>100</div>
           </div>
           <Ticket
             title="Минск-Москва"
@@ -47,9 +48,13 @@ export default class SearchResultPage extends React.PureComponent {
             action={<FormattedMessage {...messages.add} />}
           />
 
-          <div className="button-set_central">
-            <Button text="<" />
-            <Button text=">" />
+          <div className="button-set central">
+            <div>
+              <i className="fa fa-chevron-left" />
+            </div>
+            <div>
+              <i className="fa fa-chevron-right" />
+            </div>
           </div>
         </section>
       </section>

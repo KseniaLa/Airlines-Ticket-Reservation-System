@@ -44,7 +44,7 @@ class UserPage extends React.PureComponent {
                 onClick={this.props.showCartPage}
               />
             }
-          />
+         />
         </Link>,
       ]
       : [

@@ -1,13 +1,13 @@
 import { fromJS } from 'immutable';
-import { MODAL_STATE, LOGOUT } from './constants';
+import { MODAL_STATE, LOGOUT, SIGN_IN } from './constants';
 
 const initialState = fromJS({
   modalVisible: false,
-  isAuthorized: true, // it should be false, but now it's true to show user buttons
+  isAuthorized: false,
   user: {
     name: 'Unknown',
     id: '',
-    isAdmin: true,
+    isAdmin: false,
   },
 });
 
@@ -16,7 +16,15 @@ const authReducer = (state = initialState, action) => {
     case MODAL_STATE:
       return state.set('modalVisible', action.payload);
     case LOGOUT:
-      return state.set('isAuthorized', false);
+      return state
+        .set('isAuthorized', false)
+        .setIn(['user', 'name'], 'Unknown')
+        .setIn(['user', 'isAdmin'], false);
+    case SIGN_IN:
+      return state
+        .setIn(['user', 'name'], action.payload)
+        .setIn(['user', 'isAdmin'], action.isadmin)
+        .set('isAuthorized', true);
     default:
       return state;
   }

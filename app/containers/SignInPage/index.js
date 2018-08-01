@@ -12,13 +12,16 @@ import Field from '../../components/basic/TextField/textfield';
 import Title from '../../components/basic/Title/title';
 import './style.scss';
 import { makeSelectIsModalVisible } from '../App/selectors';
-import { setModalState } from '../App/actions';
+import { setModalState, login } from '../App/actions';
+
+import { user } from './user.json';
 
 class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { signIn: true };
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
+    this.setUserData = this.setUserData.bind(this);
     this.signInPart = (
       <div className="container">
         <form className="sign-page__form" name="signin-form">
@@ -32,8 +35,12 @@ class SignInPage extends React.PureComponent {
           <FormattedMessage id="app.components.SignInPage.password">
             {placeholder => <Field type="text" hint={placeholder} name="" />}
           </FormattedMessage>
-          <Button text={<FormattedMessage {...messages.signin} />} />
+          <Button
+            text={<FormattedMessage {...messages.signin} />}
+            onClick={this.setUserData}
+          />
         </form>
+
         <div className="change-mode">
           <h6>{<FormattedMessage {...messages.newuser} />}</h6>
           <Button
@@ -73,6 +80,13 @@ class SignInPage extends React.PureComponent {
     );
   }
 
+  setUserData(e) {
+    e.preventDefault();
+    const { name, surname, isAdmin } = user;
+    this.props.login(name, surname, isAdmin);
+    this.props.hideSignIn();
+  }
+
   handleChangeModeClick() {
     const sign = this.state.signIn;
     this.setState({ signIn: !sign });
@@ -104,6 +118,7 @@ class SignInPage extends React.PureComponent {
 
 SignInPage.propTypes = {
   hideSignIn: PropTypes.func,
+  login: PropTypes.func,
   visible: PropTypes.bool,
 };
 
@@ -111,6 +126,9 @@ export function mapDispatchToProps(dispatch) {
   return {
     hideSignIn() {
       dispatch(setModalState(false));
+    },
+    login(name, surname, isAdmin) {
+      dispatch(login(name, surname, isAdmin));
     },
   };
 }

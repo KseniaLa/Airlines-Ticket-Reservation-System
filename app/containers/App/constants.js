@@ -10,3 +10,4 @@
  */
 export const MODAL_STATE = 'airlines/App/SHOW_SIGN_MODAL';
 export const LOGOUT = 'airlines/App/LOGOUT';
+export const SIGN_IN = 'airlines/App/SIGN_IN';

@@ -1,4 +1,4 @@
-import { MODAL_STATE, LOGOUT } from './constants';
+import { MODAL_STATE, LOGOUT, SIGN_IN } from './constants';
 
 export function setModalState(isVisible) {
   return {
@@ -10,5 +10,13 @@ export function setModalState(isVisible) {
 export function logout() {
   return {
     type: LOGOUT,
+  };
+}
+
+export function login(name, surname, isAdmin) {
+  return {
+    type: SIGN_IN,
+    payload: `${name} ${surname}`,
+    isadmin: isAdmin,
   };
 }

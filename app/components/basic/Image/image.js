@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../basic_style.scss';
 
-/* eslint-disable react/prefer-stateless-function */
-class Image extends React.Component {
+class Image extends React.PureComponent {
   render() {
     return (
       <img src={this.props.path} className={this.props.className} alt="" />

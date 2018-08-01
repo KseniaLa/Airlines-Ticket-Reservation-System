@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../basic_style.scss';
 
-class ActiveButton extends React.Component {
+class ActiveButton extends React.PureComponent {
   render() {
     return (
       <button className='page-button_active' onClick={this.props.onClick}>
       {this.props.text}
       </button>
-    )
+    );
   }
 }
 

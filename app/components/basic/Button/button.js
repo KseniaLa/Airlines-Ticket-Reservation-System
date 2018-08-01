@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../basic_style.scss';
 
-/* eslint-disable react/prefer-stateless-function */
-class Button extends React.Component {
+
+class Button extends React.PureComponent {
   render() {
     return (
       <button className="page-button" onClick={this.props.onClick}>

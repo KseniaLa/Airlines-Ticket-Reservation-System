@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../basic_style.scss';
 
-/* eslint-disable react/prefer-stateless-function */
-class TextField extends React.Component {
+class TextField extends React.PureComponent {
   render() {
     return (
       <input

@@ -7,7 +7,7 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import globalReducer from 'containers/App/globalReducer';
+import globalReducer from 'containers/App/reducer';
 import userPageReducer from 'containers/UserPage/reducer';
 
 /*

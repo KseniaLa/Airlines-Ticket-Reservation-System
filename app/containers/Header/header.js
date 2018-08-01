@@ -15,8 +15,8 @@ import {
   makeSelectIsAuthorized,
   makeSelectUser,
   makeSelectIsAdmin,
-} from '../App/globalSelectors';
-import { setModalState, logout } from '../App/globalActions';
+} from '../App/selectors';
+import { setModalState, logout } from '../App/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 

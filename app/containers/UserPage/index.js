@@ -8,7 +8,7 @@ import Button from '../../components/basic/Button/button';
 import ActiveButton from '../../components/basic/ActiveButton/active_button';
 import UserBasketPage from '../UserBasketPage';
 import UserTicketsPage from '../UserTicketsPage';
-import { makeSelectUserName } from '../App/globalSelectors';
+import { makeSelectUserName } from '../App/selectors';
 import { makeSelectAreTicketsShown, makeSelectIsCartShown } from './selectors';
 import { setTicketsPageShown, setCartPageShown } from './actions';
 import './style.scss';

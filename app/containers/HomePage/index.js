@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 import './style.scss';
-import mainImage from './img/plane.png';
-import cityImage from './img/moscow.jpg';
-import cityImage2 from './img/saintp.jpg';
-import cityImage3 from './img/istanbul.jpg';
+import mainImage from '../../images/plane.png';
+import cityImage from '../../images/moscow.jpg';
+import cityImage2 from '../../images/saintp.jpg';
+import cityImage3 from '../../images/istanbul.jpg';
 import ImageSearch from '../../components/ImageSearch';
 import TextImageBlock from '../../components/TextImageBlock';
 

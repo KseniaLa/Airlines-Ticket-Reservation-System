@@ -1,0 +1,23 @@
+@import '../../../common';
+
+.socialicon {
+  display: block;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background-color: $button_color;
+  color: #ffffff;
+  font-size: 2.2rem;
+  text-align: center;
+  transition: 300ms;
+
+  &:hover {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color:#530969;
+    font-size: 2.2rem;
+    text-align: center;
+  }
+}

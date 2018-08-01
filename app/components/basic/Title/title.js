@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../basic_style.scss';
 
 class Title extends React.PureComponent {
   render() {

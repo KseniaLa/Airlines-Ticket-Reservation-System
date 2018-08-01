@@ -9,6 +9,10 @@ body {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 .wrapper {
   @include flex_element(column);
   height: 100%;

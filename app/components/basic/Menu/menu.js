@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import '../basic_style.scss';
+import './style.scss';
 
 class Menu extends React.PureComponent {
   createList = () => {

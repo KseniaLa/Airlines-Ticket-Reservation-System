@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../basic_style.scss';
+import './style.scss';
 
 class Select extends React.PureComponent {
   createOptions = () => {

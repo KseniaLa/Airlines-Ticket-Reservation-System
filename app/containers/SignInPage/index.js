@@ -11,8 +11,8 @@ import Button from '../../components/basic/Button/button';
 import Field from '../../components/basic/TextField/textfield';
 import Title from '../../components/basic/Title/title';
 import './style.scss';
-import { makeSelectIsModalVisible } from '../App/globalSelectors';
-import { setModalState } from '../App/globalActions';
+import { makeSelectIsModalVisible } from '../App/selectors';
+import { setModalState } from '../App/actions';
 
 class SignInPage extends React.PureComponent {
   constructor(props) {

@@ -21,7 +21,7 @@
     }
   }
 
-  button {
+  & > button {
     max-width: 200px;
     padding: 10px;
     align-self: flex-end;
@@ -93,11 +93,14 @@
 
   .react-datepicker-wrapper {
     width: 100%;
+    
 
     .react-datepicker__input-container {
       width: 100%;
+      
     }
   }
+  
 
   select {
     width: 100%;

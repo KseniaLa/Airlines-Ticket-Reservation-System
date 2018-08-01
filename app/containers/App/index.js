@@ -3,12 +3,12 @@ import 'font-awesome/css/font-awesome.min.css';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/index';
-import SearchResultPage from '../SearchResultPage/index';
-import AddPage from '../AddPage/index';
+import SearchResultPage from '../SearchResultPage';
+import AddPage from '../AddPage';
 import Header from '../Header/header';
 import Footer from '../../components/Footer/footer';
-import SignIn from '../SignInPage/index';
-import UserPage from '../UserPage/index';
+import SignIn from '../SignInPage';
+import UserPage from '../UserPage';
 
 import './style.scss';
 

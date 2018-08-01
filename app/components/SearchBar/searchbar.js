@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from '../../components/basic/Button/button';
-import TextField from '../../components/basic/TextField/textfield';
+import Button from '../basic/Button/button';
+import TextField from '../basic/TextField/textfield';
 import Select from '../basic/Select/select';
 
 import messages from '../../containers/AddPage/messages';

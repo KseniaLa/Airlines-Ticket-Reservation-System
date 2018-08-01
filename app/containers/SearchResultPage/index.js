@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import 'font-awesome/css/font-awesome.min.css';
 import SearchBar from '../../components/SearchBar/searchbar';
-import Ticket from '../../components/Ticket/index';
+import Ticket from '../../components/Ticket';
 
 import messages from './messages';
 import './style.scss';

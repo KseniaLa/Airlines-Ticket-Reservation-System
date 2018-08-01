@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from '../../components/basic/Button/button';
-import Ticket from '../../components/Ticket/index';
+import Ticket from '../../components/Ticket';
 import './style.scss';
 
 import messages from './messages';

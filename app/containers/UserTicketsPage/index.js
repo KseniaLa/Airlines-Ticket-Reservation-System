@@ -1,5 +1,5 @@
 import React from 'react';
-import EmptyResult from '../../components/EmptyResult/index';
+import EmptyResult from '../../components/EmptyResult';
 
 export default class UserTicketsPage extends React.Component {
   componentDidMount() {}

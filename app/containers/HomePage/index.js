@@ -8,8 +8,8 @@ import mainImage from './img/plane.png';
 import cityImage from './img/moscow.jpg';
 import cityImage2 from './img/saintp.jpg';
 import cityImage3 from './img/istanbul.jpg';
-import ImageSearch from '../../components/ImageSearch/index';
-import TextImageBlock from '../../components/TextImageBlock/index';
+import ImageSearch from '../../components/ImageSearch';
+import TextImageBlock from '../../components/TextImageBlock';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {

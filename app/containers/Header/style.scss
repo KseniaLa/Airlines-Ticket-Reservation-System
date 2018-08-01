@@ -23,7 +23,7 @@
   .header__options {
     @include flex_element(row);
     justify-content: space-around;
-    align-items: baseline;
+    /*align-items: baseline;*/
 
     div {
       margin-left: 5px;

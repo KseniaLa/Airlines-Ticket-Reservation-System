@@ -1,0 +1,72 @@
+{
+  "tickets": {
+    "en": [
+      {
+        "from": "Minsk",
+        "to": "Moscow",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "300"
+      },
+      {
+        "from": "Minsk",
+        "to": "Kiev",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "200"
+      },
+      {
+        "from": "Moscow",
+        "to": "NY",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "500"
+      },
+      {
+        "from": "Minsk",
+        "to": "Moscow",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "700"
+      }
+    ],
+    "ru": [
+      {
+        "from": "Минск",
+        "to": "Москва",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "300"
+      },
+      {
+        "from": "Минск",
+        "to": "Киев",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "200"
+      },
+      {
+        "from": "Москва",
+        "to": "Нью-Йорк",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "500"
+      },
+      {
+        "from": "Минск",
+        "to": "Москва",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "700"
+      }
+    ]
+  }
+}

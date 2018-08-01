@@ -17,7 +17,7 @@
   .footer__social {
     @include flex_element(row);
 
-    div {
+    button {
       margin: 5px;
     }
   }

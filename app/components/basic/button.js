@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './basic_style.scss';
 
+/* eslint-disable react/prefer-stateless-function */
 class Button extends React.Component {
   render() {
     return (
-      <button className='page-button' onClick={this.props.onClick}>
-      {this.props.text}
+      <button className="page-button" onClick={this.props.onClick}>
+        {this.props.text}
       </button>
-    )
+    );
   }
 }
 

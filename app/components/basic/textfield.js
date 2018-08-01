@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './basic_style.scss';
 
+/* eslint-disable react/prefer-stateless-function */
 class TextField extends React.Component {
   render() {
     return (
@@ -10,8 +11,9 @@ class TextField extends React.Component {
         type={this.props.type}
         placeholder={this.props.hint}
         min="1"
-        name={this.props.name} />
-    )
+        name={this.props.name}
+      />
+    );
   }
 }
 
@@ -22,4 +24,3 @@ TextField.propTypes = {
 };
 
 export default TextField;
-

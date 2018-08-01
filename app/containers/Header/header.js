@@ -137,7 +137,7 @@ const mapStateToProps = createStructuredSelector({
   isAuthorized: makeSelectIsAuthorized(),
   isAdmin: makeSelectIsAdmin(),
   user: makeSelectUser(),
-});
+}); 
 
 export default connect(
   mapStateToProps,

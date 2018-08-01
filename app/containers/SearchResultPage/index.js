@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
 import SearchBar from '../../components/SearchBar/searchbar';
 import Ticket from '../../components/Ticket';
+import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 import messages from './messages';
@@ -31,6 +32,9 @@ class SearchResultPage extends React.PureComponent {
         />,
       );
     });
+    if (list.length === 0) {
+      return <EmptyResult />;
+    }
     return list;
   }
 

@@ -1,0 +1,56 @@
+{
+  "cities": {
+    "en": [
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Minsk",
+        "url": "./images/moscow.jpg"
+      }
+    ],
+    "ru": [
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      },
+      {
+        "name": "Минск",
+        "url": "./images/moscow.jpg"
+      }
+    ]
+  }
+}

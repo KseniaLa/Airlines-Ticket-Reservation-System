@@ -1,0 +1,33 @@
+@import '../../common';
+
+.main-image-block {
+  @include flex_element(row);
+  flex: 0px 0px 1200px;
+  position: relative;
+  align-self: center;
+  justify-content: center;
+
+
+  .main-image-block__image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .main-image-block__overlay {
+    position: absolute;
+    top: 25%;
+    border-radius: 5px;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    text-align: center;
+    @media screen and (max-width: 1120px){
+      top: 10%;
+    }
+    @media screen and (max-width: 400px){
+      top: 10%;
+    }
+    h1 {
+      color: #ffffff;
+      font-size: 2.6rem;
+    }
+  }
+}

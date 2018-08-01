@@ -22,76 +22,16 @@
   width: 100%;
   max-width: 900px;
   margin: 5px;
+  font-size: 1.6rem;
 
   h1 {
     color: $page_color;
     align-self: center;
     text-align: center;
+    font-size: 2.6rem;
   }
 }
 
-.main-image-block {
-  @include flex_element(row);
-  flex: 0px 0px 1200px;
-  position: relative;
-  align-self: center;
-  justify-content: center;
-
-
-  .main-image-block__image {
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .main-image-block__overlay {
-    position: absolute;
-    top: 25%;
-    border-radius: 5px;
-    background-color: rgba($color: #000000, $alpha: 0.7);
-    text-align: center;
-    @media screen and (max-width: 1120px){
-      top: 10%;
-    }
-    @media screen and (max-width: 400px){
-      top: 10%;
-    }
-    h1 {
-      color: #ffffff;
-    }
-  }
-}
-
-.textimage-block {
-  width: 100%;
-  height: 200px;
-  background-color: #faebd7;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.1);
-  @media screen and (max-width: 900px){
-    width: 100%;
-  }
-
-  &:hover {
-    transform: scale(1.05);
-
-  }
-
-  .textimage-block__title {
-    padding: 10px;
-    text-align: center;
-
-    h3 {
-      margin: 0;
-    }
-  }
-
-  img {
-    width: 100%;
-    height: 75%;
-    object-fit: cover;
-    border-radius: 10px 10px 0px 0px;
-  }
-}
 
 
 .imageset-box {

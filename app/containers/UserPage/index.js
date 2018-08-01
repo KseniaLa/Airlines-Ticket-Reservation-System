@@ -12,7 +12,6 @@ import { makeSelectUserName } from '../App/globalSelectors';
 import { makeSelectAreTicketsShown, makeSelectIsCartShown } from './selectors';
 import { setTicketsPageShown, setCartPageShown } from './actions';
 import './style.scss';
-
 import messages from './messages';
 
 class UserPage extends React.PureComponent {

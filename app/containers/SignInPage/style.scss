@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
 .change-mode {
@@ -28,6 +28,7 @@
 
   h6 {
     margin: 10px;
+    font-size: 1.2rem;
   }
 }
 
@@ -44,6 +45,7 @@
   line-height: 40px;
   box-sizing: border-box;
   outline: none;
+  font-size: 2rem;
 }
 
 .sign-page {
@@ -54,7 +56,7 @@
   border-radius: 5px;
   overflow: hidden;
   width: 80%;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   @media screen and (max-width: 1900px){
     padding: 10px;
   }
@@ -72,7 +74,7 @@
     button {
       background-color: $page_color;
       padding: 15px;
-      font-size: 1rem;
+      font-size: 1.6rem;
     }
 
     button:hover {
@@ -84,7 +86,7 @@
 
   .sign-page__title {
     color: $page_color;
-    font-size: 2.0rem;
+    font-size: 2.5rem;
   }
 
   input {
@@ -92,5 +94,6 @@
     margin: 15px;
     width: 80%;
     box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.2);
+    font-size: 1.6rem;
   }
 }

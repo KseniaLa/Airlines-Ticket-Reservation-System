@@ -6,7 +6,7 @@ import SocialIcon from '../../components/basic/socialicon';
 import messages from './messages';
 import './style.scss';
 
-export default class Footer extends React.Component {
+export default class Footer extends React.PureComponent {
   render() {
     return (
       <footer className="container-flex footer">
@@ -18,6 +18,7 @@ export default class Footer extends React.Component {
               <FormattedMessage {...messages.vacancy} />,
               <FormattedMessage {...messages.help} />,
             ]}
+            keys={['val1', 'val2', 'val3', 'val4']}
           />
           <div className="footer__social">
             <a href="https://www.vk.com/" target="_blank">

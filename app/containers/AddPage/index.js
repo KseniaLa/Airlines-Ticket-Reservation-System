@@ -9,7 +9,7 @@ import './style.scss';
 
 import messages from './messages';
 
-class AddTicketForm extends React.Component {
+class AddTicketForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

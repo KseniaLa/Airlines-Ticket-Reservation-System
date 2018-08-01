@@ -12,7 +12,7 @@ class Title extends React.Component {
 
 Title.propTypes = {
   style: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.object,
 };
 
 export default Title;

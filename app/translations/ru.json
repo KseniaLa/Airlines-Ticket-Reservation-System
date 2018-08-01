@@ -1,4 +1,5 @@
 {
+  "app.components.header.title": "airlines",
   "app.components.AddPage.add": "добавить",
   "app.components.AddPage.budget": "эконом",
   "app.components.AddPage.business": "бизнес",
@@ -39,5 +40,6 @@
   "app.components.SignInPage.surname": "фамилия",
   "app.components.SignInPage.email" : "e-mail",
   "app.components.SignInPage.password": "пароль",
-  "app.components.empty.notfound": "Ничего не найдено"
+  "app.components.empty.notfound": "Ничего не найдено",
+  "app.components.AddPage.addgroup": "добавить группу"
 }

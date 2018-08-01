@@ -7,7 +7,7 @@
   .footer__content {
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0px;
+    padding: 30px 10px;
     @media screen and (max-width: 500px){
       @include flex_element(column);
       text-align: center;

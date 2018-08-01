@@ -12,7 +12,7 @@ import messages from '../../containers/AddPage/messages';
 import localMessages from './messages';
 import './style.scss';
 
-export default class SearchBar extends React.Component {
+export default class SearchBar extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +47,7 @@ export default class SearchBar extends React.Component {
             <FormattedMessage {...messages.firstclass} />,
             <FormattedMessage {...messages.budgetclass} />,
           ]}
+          keys={['bus', 'first', 'budg']}
         />
         <div className="search-bar__button">
           <Link to="/results">

@@ -1,4 +1,5 @@
 {
+  "app.components.header.title": "airlines",
   "app.components.AddPage.add": "add",
   "app.components.AddPage.budget": "budget",
   "app.components.AddPage.business": "business",
@@ -39,5 +40,6 @@
   "app.components.SignInPage.surname": "surname",
   "app.components.SignInPage.email" : "e-mail",
   "app.components.SignInPage.password": "password",
-  "app.components.empty.notfound": "Not found"
+  "app.components.empty.notfound": "Not found",
+  "app.components.AddPage.addgroup": "add group"
 }

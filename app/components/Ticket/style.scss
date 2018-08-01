@@ -14,17 +14,21 @@
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
+  font-size: 1.6rem;
 
-  h2, h3 {
+  h3 {
     margin: 0;
-    padding: 0;
+    padding: 5px;
+    font-size: 1.8rem;
+    border-radius: 10px;
   }
+
 }
 
 .ticket__title {
   background-color: #b8cdf0;
   grid-area: title;
-  margin: 0;
+  margin: 5px;
   padding-left: 5px;
 }
 
@@ -56,7 +60,7 @@
 .ticket__add-button-area {
   grid-area: add;
   border-left: #000000 3px solid;
-  padding-left: 10px;
+  padding-left: 15px;
 
   button {
     padding: 10px;
@@ -66,12 +70,13 @@
 .ticket__count {
   grid-area: count;
   border-left: #000000 3px solid;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .ticket__description {
   grid-area: description;
   background-color: #e8f0ba;
+  border-radius: 10px;
 }
 
 .ticket-field {

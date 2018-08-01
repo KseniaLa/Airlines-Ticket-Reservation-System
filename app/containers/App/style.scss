@@ -1,5 +1,10 @@
 @import '../../common';
 
+html,
+body {
+  font-size: 62.5%;
+}
+
 #app {
   height: 100%;
 }
@@ -17,6 +22,7 @@
 .site-name {
   text-transform: uppercase;
   color: #ffffff;
+  font-size: 3rem;
 }
 
 .base-title {

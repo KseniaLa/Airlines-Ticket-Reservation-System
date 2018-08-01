@@ -5,11 +5,11 @@ import './basic_style.scss';
 
 class Menu extends React.Component {
   createList = () => {
-    let list = [];
-    const { items } = this.props;
-    items.forEach(element => {
+    const list = [];
+    const { items, keys } = this.props;
+    items.forEach((element, index) => {
       list.push(
-        <li>
+        <li key={keys[index]}>
           <Link to="/somepath">{element}</Link>
         </li>,
       );
@@ -24,6 +24,7 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
   items: PropTypes.array,
+  keys: PropTypes.array,
 };
 
 export default Menu;

@@ -6,11 +6,11 @@ import './style.scss';
 
 import messages from './messages';
 
-class Ticket extends React.Component {
+class Ticket extends React.PureComponent {
   render() {
     return (
       <section className="ticket">
-        <h2 className="ticket__title">{this.props.title}</h2>
+        <h3 className="ticket__title">{this.props.title}</h3>
         <div className="ticket__company">{this.props.company}</div>
         <div className="category">
           <h3>business</h3>
@@ -30,7 +30,7 @@ class Ticket extends React.Component {
           <h1 className="actual-count-block">{this.props.count}</h1>
         </div>
         <div className="ticket__add-button-area">
-          <Button text={this.props.action} onClick={this.props.onClick}/>
+          <Button text={this.props.action} onClick={this.props.onClick} />
         </div>
       </section>
     );
@@ -44,7 +44,7 @@ Ticket.propTypes = {
   time: PropTypes.string,
   price: PropTypes.string,
   count: PropTypes.string,
-  action: PropTypes.string,
+  action: PropTypes.object,
   onClick: PropTypes.func,
 };
 

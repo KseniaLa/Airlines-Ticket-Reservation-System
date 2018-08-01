@@ -1,27 +1,19 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import SearchBar from '../../components/SearchBar/searchbar';
 import Button from '../../components/basic/button';
 import Ticket from '../../components/Ticket/index';
-import { FormattedMessage } from 'react-intl';
+
 import messages from './messages';
 import './style.scss';
 
-class SmallSearchBar extends React.Component {
-  render() {
-    return (
-      <div className="search">
-        <SearchBar />
-      </div>
-    );
-  }
-}
-
-export default class SearchResultPage extends React.Component {
+export default class SearchResultPage extends React.PureComponent {
   render() {
     return (
       <section className="container-flex">
-        <SmallSearchBar />
-
+        <div className="search">
+          <SearchBar />
+        </div>
         <section className="content-flex ticket-area">
           <div className="button-set">
             <Button text="20" />

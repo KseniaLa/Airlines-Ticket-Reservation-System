@@ -20,9 +20,7 @@ import { setModalState, logout } from '../App/globalActions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 
-
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-
 
 class Header extends React.PureComponent {
   constructor(props) {
@@ -85,7 +83,10 @@ class Header extends React.PureComponent {
       <header className="container-flex header">
         <div className="content-flex header__content">
           <Link to="/">
-            <Title style="base-title site-name" text="Airlines" />
+            <Title
+              style="base-title site-name"
+              text={<FormattedMessage {...messages.title} />}
+            />
           </Link>
           {headerOptions}
         </div>

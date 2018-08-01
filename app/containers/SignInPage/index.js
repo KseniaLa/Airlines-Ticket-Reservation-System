@@ -7,9 +7,9 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import messages from './messages';
 
-import Button from '../../components/basic/Button/button';
-import Field from '../../components/basic/TextField/textfield';
-import Title from '../../components/basic/Title/title';
+import Button from '../../components/basic/Button';
+import Field from '../../components/basic/TextField';
+import Title from '../../components/basic/Title';
 import './style.scss';
 import { makeSelectIsModalVisible } from '../App/selectors';
 import { setModalState, login } from '../App/actions';

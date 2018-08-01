@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import Toggle from '../../components/basic/ToggleButton/toggleButton';
-import Title from '../../components/basic/Title/title';
-import Button from '../../components/basic/Button/button';
-import SocialIcon from '../../components/basic/Icon/socialicon';
+import Toggle from '../../components/basic/ToggleButton';
+import Title from '../../components/basic/Title';
+import Button from '../../components/basic/Button';
+import SocialIcon from '../../components/basic/Icon';
 import messages from './messages';
 import './style.scss';
 import {

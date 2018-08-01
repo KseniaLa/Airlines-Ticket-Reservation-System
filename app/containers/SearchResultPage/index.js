@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
-import SearchBar from '../../components/SearchBar/searchbar';
+import SearchBar from '../../components/SearchBar';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
@@ -23,6 +23,7 @@ class SearchResultPage extends React.PureComponent {
     langTickets.forEach(element => {
       list.push(
         <Ticket
+          key={element.id}
           title={`${element.from}-${element.to}`}
           company={element.company}
           time={element.time}

@@ -3,53 +3,65 @@
     "en": [
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-1"
       },
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-2"
       },
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-3"
       },
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-4"
       },
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-5"
       },
       {
         "name": "Minsk",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "1-6"
       }
     ],
     "ru": [
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-1"
       },
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-2"
       },
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-3"
       },
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-4"
       },
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-5"
       },
       {
         "name": "Минск",
-        "url": "./images/moscow.jpg"
+        "url": "./images/moscow.jpg",
+        "id": "2-6"
       }
     ]
   }

@@ -6,8 +6,8 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/index';
 import SearchResultPage from '../SearchResultPage';
 import AddPage from '../AddPage';
-import Header from '../Header/header';
-import Footer from '../../components/Footer/footer';
+import Header from '../Header';
+import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
 

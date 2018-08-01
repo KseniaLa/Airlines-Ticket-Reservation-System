@@ -21,7 +21,7 @@ class HomePage extends React.PureComponent {
     const langCities = cities[this.props.language];
     langCities.forEach(element => {
       list.push(
-        <div className="imageste-box__item">
+        <div className="imageste-box__item" key={element.id}>
           <TextImageBlock image={cityImage2} text={element.name} />
         </div>,
       );

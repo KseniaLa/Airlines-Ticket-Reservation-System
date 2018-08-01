@@ -7,7 +7,8 @@
         "company": "Belavia",
         "time": "13.30",
         "count": "30",
-        "price": "300"
+        "price": "300",
+        "id": "1-1"
       },
       {
         "from": "Minsk",
@@ -15,7 +16,8 @@
         "company": "Belavia",
         "time": "13.30",
         "count": "30",
-        "price": "200"
+        "price": "200",
+        "id": "2-1"
       },
       {
         "from": "Moscow",
@@ -23,7 +25,8 @@
         "company": "Belavia",
         "time": "13.30",
         "count": "30",
-        "price": "500"
+        "price": "500",
+        "id": "3-1"
       },
       {
         "from": "Minsk",
@@ -31,7 +34,8 @@
         "company": "Belavia",
         "time": "13.30",
         "count": "30",
-        "price": "700"
+        "price": "700",
+        "id": "4-1"
       }
     ],
     "ru": [
@@ -41,7 +45,8 @@
         "company": "Белавиа",
         "time": "13.30",
         "count": "30",
-        "price": "300"
+        "price": "300",
+        "id": "1-2"
       },
       {
         "from": "Минск",
@@ -49,7 +54,8 @@
         "company": "Белавиа",
         "time": "13.30",
         "count": "30",
-        "price": "200"
+        "price": "200",
+        "id": "2-2"
       },
       {
         "from": "Москва",
@@ -57,7 +63,8 @@
         "company": "Белавиа",
         "time": "13.30",
         "count": "30",
-        "price": "500"
+        "price": "500",
+        "id": "3-2"
       },
       {
         "from": "Минск",
@@ -65,7 +72,8 @@
         "company": "Белавиа",
         "time": "13.30",
         "count": "30",
-        "price": "700"
+        "price": "700",
+        "id": "4-2"
       }
     ]
   }

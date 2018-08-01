@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import messages from '../../containers/HomePage/messages';
 
 import './style.scss';
-import SearchBar from '../SearchBar/searchbar';
-import Image from '../basic/Image/image';
+import SearchBar from '../SearchBar';
+import Image from '../basic/Image';
 
 class ImageSearch extends React.PureComponent {
   render() {

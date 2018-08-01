@@ -47,7 +47,6 @@ export default class SearchBar extends React.PureComponent {
             <FormattedMessage {...messages.firstclass} />,
             <FormattedMessage {...messages.budgetclass} />,
           ]}
-          keys={['bus', 'first', 'budg']}
         />
         <div className="search-bar__button">
           <Link to="/results">

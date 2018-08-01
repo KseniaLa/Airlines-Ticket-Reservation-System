@@ -19,7 +19,6 @@ export default class Footer extends React.PureComponent {
               <FormattedMessage {...messages.vacancy} />,
               <FormattedMessage {...messages.help} />,
             ]}
-            keys={['val1', 'val2', 'val3', 'val4']}
           />
           <div className="footer__social">
             <a href="https://www.vk.com/" target="_blank">

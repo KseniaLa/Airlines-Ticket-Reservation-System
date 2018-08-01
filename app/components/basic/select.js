@@ -5,9 +5,9 @@ import './basic_style.scss';
 class Select extends React.PureComponent {
   createOptions = () => {
     const list = [];
-    const { items, keys } = this.props;
+    const { items } = this.props;
     items.forEach((element, index) => {
-      list.push(<option key={keys[index]}>{element}</option>);
+      list.push(<option key={index}>{element}</option>);
     });
     return list;
   };
@@ -19,7 +19,6 @@ class Select extends React.PureComponent {
 
 Select.propTypes = {
   items: PropTypes.array,
-  keys: PropTypes.array,
 };
 
 export default Select;

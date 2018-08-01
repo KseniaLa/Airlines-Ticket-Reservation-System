@@ -2,13 +2,12 @@
 
 .sign-overlay {
   position: fixed;
-  overflow-y: scroll;
+  overflow: auto;
   z-index: 99999;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   transition: opacity 500ms;
   opacity: 1;

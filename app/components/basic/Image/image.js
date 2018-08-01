@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './basic_style.scss';
+import '../basic_style.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class Image extends React.Component {

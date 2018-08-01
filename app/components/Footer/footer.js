@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Menu from '../../components/basic/menu';
-import SocialIcon from '../../components/basic/socialicon';
+import Menu from '../../components/basic/Menu/menu';
+import SocialIcon from '../../components/basic/Icon/socialicon';
 
 import messages from './messages';
 import './style.scss';

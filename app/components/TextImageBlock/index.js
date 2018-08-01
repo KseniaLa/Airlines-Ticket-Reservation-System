@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './style.scss';
-import Image from '../../components/basic/image';
+import Image from '../../components/basic/Image/image';
 
 class TextImageBlock extends React.PureComponent {
   render() {

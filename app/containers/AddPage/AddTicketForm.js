@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import TextField from '../../components/basic/textfield';
+import TextField from '../../components/basic/TextField/textfield';
 import './style.scss';
 
 import messages from './messages';

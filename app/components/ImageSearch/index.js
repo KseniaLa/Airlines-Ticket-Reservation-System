@@ -6,7 +6,7 @@ import messages from '../../containers/HomePage/messages';
 
 import './style.scss';
 import SearchBar from '../../components/SearchBar/searchbar';
-import Image from '../../components/basic/image';
+import Image from '../../components/basic/Image/image';
 
 class ImageSearch extends React.PureComponent {
   render() {

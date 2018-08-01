@@ -68,9 +68,18 @@
 }
 
 .ticket__count {
+  @include flex_element(row);
+  align-items: center;
   grid-area: count;
   border-left: #000000 3px solid;
   padding-left: 15px;
+  @media screen and (max-width: 700px){
+    @include flex_element(column);
+  }
+
+  div {
+    display: table;
+  }
 }
 
 .ticket__description {

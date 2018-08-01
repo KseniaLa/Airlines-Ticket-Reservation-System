@@ -25,7 +25,7 @@ class Ticket extends React.PureComponent {
           </h3>
         </div>
         <div className="ticket__count">
-          {<FormattedMessage {...messages.count} />}
+          <div>{<FormattedMessage {...messages.count} />}</div>
           <input className="ticket-field" />
           <h1 className="actual-count-block">{this.props.count}</h1>
         </div>

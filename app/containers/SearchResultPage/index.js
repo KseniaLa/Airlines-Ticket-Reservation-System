@@ -7,8 +7,8 @@ import Ticket from '../../components/Ticket/index';
 import messages from './messages';
 import './style.scss';
 
-/* eslint-disable react/prefer-stateless-function */
 export default class SearchResultPage extends React.PureComponent {
+  componentDidMount() {}
   render() {
     return (
       <section className="container-flex">

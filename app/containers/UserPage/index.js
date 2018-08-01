@@ -17,44 +17,40 @@ import messages from './messages';
 class UserPage extends React.PureComponent {
   render() {
     const { areTicketsShown, isCartShown } = this.props;
-    const ticketsButton = areTicketsShown
-      ? [
-        <Link to="/user/tickets">
-          <ActiveButton
-            text={<FormattedMessage {...messages.bookedtickets} />}
-            onClick={this.props.showTicketsPage}
-          />
-        </Link>,
-      ]
-      : [
-        <Link to="/user/tickets">
-          <Button
-            text={<FormattedMessage {...messages.bookedtickets} />}
-            onClick={this.props.showTicketsPage}
-          />
-        </Link>,
-      ];
-    const cartButton = isCartShown
-      ? [
-        <Link to="/user/basket">
-          <ActiveButton
-            text={
-              <FormattedMessage
-                {...messages.basket}
-                onClick={this.props.showCartPage}
-              />
-            }
-         />
-        </Link>,
-      ]
-      : [
-        <Link to="/user/basket">
-          <Button
-            text={<FormattedMessage {...messages.basket} />}
-            onClick={this.props.showCartPage}
-          />
-        </Link>,
-      ];
+    const ticketsButton = areTicketsShown ? (
+      <Link to="/user/tickets">
+        <ActiveButton
+          text={<FormattedMessage {...messages.bookedtickets} />}
+          onClick={this.props.showTicketsPage}
+        />
+      </Link>
+    ) : (
+      <Link to="/user/tickets">
+        <Button
+          text={<FormattedMessage {...messages.bookedtickets} />}
+          onClick={this.props.showTicketsPage}
+        />
+      </Link>
+    );
+    const cartButton = isCartShown ? (
+      <Link to="/user/basket">
+        <ActiveButton
+          text={
+            <FormattedMessage
+              {...messages.basket}
+              onClick={this.props.showCartPage}
+            />
+          }
+        />
+      </Link>
+    ) : (
+      <Link to="/user/basket">
+        <Button
+          text={<FormattedMessage {...messages.basket} />}
+          onClick={this.props.showCartPage}
+        />
+      </Link>
+    );
     return (
       <div className="container-flex">
         <section className="user-card">

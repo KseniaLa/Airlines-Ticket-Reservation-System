@@ -5,9 +5,9 @@ import '../basic_style.scss';
 class SocialIcon extends React.PureComponent {
   render() {
     return (
-      <div className="socialicon" onClick={this.props.onClick}>
+      <button className="socialicon" onClick={this.props.onClick}>
         <i className={this.props.icon} />
-      </div>
+      </button>
     );
   }
 }

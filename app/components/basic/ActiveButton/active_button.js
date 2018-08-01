@@ -5,8 +5,8 @@ import '../basic_style.scss';
 class ActiveButton extends React.PureComponent {
   render() {
     return (
-      <button className='page-button_active' onClick={this.props.onClick}>
-      {this.props.text}
+      <button className="page-button_active" onClick={this.props.onClick}>
+        {this.props.text}
       </button>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -37,47 +37,40 @@ class Header extends React.PureComponent {
     const nextLang = lang === 'ru' ? 'en' : 'ru';
     const { isAuthorized } = this.props;
     const { isAdmin } = this.props;
-    const adminButton = isAdmin
-      ? [
-        <Link to="/add">
-          <SocialIcon icon="fa fa-plus" />
-        </Link>,
-      ]
-      : null;
-    const headerOptions = isAuthorized
-      ? [
-        <div className="header__options">
-          <Link to="/user/tickets">
-            <SocialIcon
-              icon="fa fa-user"
-              onClick={this.props.showTicketsPage}
-            />
-          </Link>
-          {adminButton}
-          <Link to="/user/basket">
-            <SocialIcon
-              icon="fa fa-shopping-cart"
-              onClick={this.props.showCartPage}
-            />
-          </Link>
-          <Toggle value={nextLang} callback={this.handle} />
-          <Link to="/">
-            <Button
-              text={<FormattedMessage {...messages.logout} />}
-              onClick={this.props.logout}
-            />
-          </Link>
-        </div>,
-      ]
-      : [
-        <div className="header__options">
-          <Toggle value={nextLang} callback={this.handle} />
-          <Button
-            text={<FormattedMessage {...messages.enter} />}
-            onClick={this.props.showSignIn}
+    const adminButton = isAdmin ? (
+      <NavLink to="/add" activeClassName="selected">
+        <SocialIcon icon="fa fa-plus" />
+      </NavLink>
+    ) : null;
+    const headerOptions = isAuthorized ? (
+      <div className="header__options">
+        <NavLink to="/user/tickets" activeClassName="selected">
+          <SocialIcon icon="fa fa-user" onClick={this.props.showTicketsPage} />
+        </NavLink>
+        {adminButton}
+        <NavLink to="/user/basket" activeClassName="selected">
+          <SocialIcon
+            icon="fa fa-shopping-cart"
+            onClick={this.props.showCartPage}
           />
-        </div>,
-      ];
+        </NavLink>
+        <Toggle value={nextLang} callback={this.handle} />
+        <Link to="/">
+          <Button
+            text={<FormattedMessage {...messages.logout} />}
+            onClick={this.props.logout}
+          />
+        </Link>
+      </div>
+    ) : (
+      <div className="header__options">
+        <Toggle value={nextLang} callback={this.handle} />
+        <Button
+          text={<FormattedMessage {...messages.enter} />}
+          onClick={this.props.showSignIn}
+        />
+      </div>
+    );
 
     return (
       <header className="container-flex header">
@@ -137,7 +130,7 @@ const mapStateToProps = createStructuredSelector({
   isAuthorized: makeSelectIsAuthorized(),
   isAdmin: makeSelectIsAdmin(),
   user: makeSelectUser(),
-}); 
+});
 
 export default connect(
   mapStateToProps,

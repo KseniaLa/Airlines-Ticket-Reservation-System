@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../basic_style.scss';
 
-
 class Button extends React.PureComponent {
   render() {
     return (

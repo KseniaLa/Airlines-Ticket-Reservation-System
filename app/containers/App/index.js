@@ -12,8 +12,8 @@ import UserPage from '../UserPage/index';
 
 import './style.scss';
 
-/* eslint-disable react/prefer-stateless-function */
 export default class App extends React.Component {
+  componentDidMount() {}
   render() {
     return (
       <div className="wrapper">

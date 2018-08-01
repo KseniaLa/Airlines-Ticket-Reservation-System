@@ -6,8 +6,8 @@ import './style.scss';
 
 import messages from './messages';
 
-/* eslint-disable react/prefer-stateless-function */
 export default class UserBasketPage extends React.Component {
+  componentDidMount() {}
   render() {
     return (
       <section className="basket-container">

@@ -25,27 +25,23 @@ class AddTicketForm extends React.PureComponent {
   render() {
     return (
       <div className="info-area">
-        <div className="from">
+        <div>
           <FormattedMessage id="app.components.AddPage.fromfield">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>
-        </div>
-        <div className="to">
           <FormattedMessage id="app.components.AddPage.tofield">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>
         </div>
-        <div className="time">
+        <div className="date-time">
           <TextField type="time" />
-        </div>
-        <div className="date">
           <DatePicker
             selected={this.state.startDate}
             onChange={this.handleChange}
             className="datepicker"
           />
         </div>
-        <div className="class">
+        <div>
           <Select
             items={[
               <FormattedMessage id="app.components.AddPage.business">
@@ -59,8 +55,6 @@ class AddTicketForm extends React.PureComponent {
               </FormattedMessage>,
             ]}
           />
-        </div>
-        <div className="company">
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>

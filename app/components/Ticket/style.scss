@@ -1,6 +1,100 @@
 @import '../../common';
 
 .ticket {
+  @include flex_element(row);
+  background-color: #dddfdf;
+  min-height: 100px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  @media screen and (max-width: 700px){
+    @include flex_element(column);
+  }
+
+  & > div {
+    align-items: stretch;
+    width: 50%;
+    border: $page_color 3px solid;
+    @media screen and (max-width: 700px){
+      width: 100%;
+    }
+  }
+}
+
+.ticket__title {
+  background-color: #b8cdf0;
+  margin: 0px;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.ticket__company {
+  background-color: #d9eecd;
+  margin: 0;
+  padding: 5px;
+}
+
+.ticket__price {
+  padding-left: 10px;
+  align-items: baseline;
+}
+
+.ticket__description {
+  background-color: #e8f0ba;
+  border-radius: 10px;
+}
+
+.ticket__category {
+  padding-left: 10px;
+}
+
+.ticket__time {
+  padding-left: 5px;
+  background-color: #e4bfae;
+}
+
+.ticket-field {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.ticket__count {
+  @include flex_element(row);
+  align-items: center;
+  padding-left: 10px;
+
+  div {
+    display: table;
+  }
+}
+
+.actual-count-block {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
+  &::before {
+    content: '/ ';
+  }
+}
+
+.ticket__add-button-area {
+  padding-left: 15px;
+  text-align: right;
+
+  button {
+    padding: 10px;
+    margin: 10px;
+  }
+}
+
+
+/*.ticket {
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: auto auto auto;
@@ -105,4 +199,4 @@
   &::before {
     content: '/ ';
   }
-}
+}*/

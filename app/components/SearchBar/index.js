@@ -29,30 +29,34 @@ export default class SearchBar extends React.PureComponent {
   render() {
     return (
       <form className="search-bar">
-        <FormattedMessage id="app.components.AddPage.fromfield">
-          {placeholder => <TextField type="text" hint={placeholder} />}
-        </FormattedMessage>
-        <FormattedMessage id="app.components.AddPage.tofield">
-          {placeholder => <TextField type="text" hint={placeholder} />}
-        </FormattedMessage>
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleChange}
-          className="field"
-        />
-        <Select
-          items={[
-            <FormattedMessage id="app.components.AddPage.business">
-              {ticketclass => ticketclass}
-            </FormattedMessage>,
-            <FormattedMessage id="app.components.AddPage.first">
-              {ticketclass => ticketclass}
-            </FormattedMessage>,
-            <FormattedMessage id="app.components.AddPage.budget">
-              {ticketclass => ticketclass}
-            </FormattedMessage>,
-          ]}
-        />
+        <div>
+          <FormattedMessage id="app.components.AddPage.fromfield">
+            {placeholder => <TextField type="text" hint={placeholder} />}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.AddPage.tofield">
+            {placeholder => <TextField type="text" hint={placeholder} />}
+          </FormattedMessage>
+        </div>
+        <div>
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+            className="field"
+          />
+          <Select
+            items={[
+              <FormattedMessage id="app.components.AddPage.business">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.first">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.budget">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+            ]}
+          />
+        </div>
         <div className="search-bar__button">
           <Link to="/results">
             <Button text={<FormattedMessage {...localMessages.search} />} />

@@ -29,6 +29,79 @@
 }
 
 .info-area {
+  @include flex_element(column);
+  align-self: center;
+  width: 100%;
+  background-color: #e2e1de;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 900px;
+
+  & > div {
+    @include flex_element(row);
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0px;
+    @media screen and (max-width: 400px) {
+      @include flex_element(column);
+    }
+  }
+
+  input {
+    width: 49%;
+    @media screen and (max-width: 400px) {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  .datepicker {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    outline: none;
+    width: 100%;
+    margin: 0px;
+  }
+
+  .date-time {
+    & > div {
+      width: 49%;
+      @media screen and (max-width: 400px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .react-datepicker__input-container {
+    width: 100%;
+  }
+
+  select {
+    width: 49%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    @media screen and (max-width: 400px) {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    option {
+      padding: 10px;
+    }
+  }
+
+}
+
+/*.info-area {
   align-self: center;
   width: 100%;
   background-color: #e2e1de;
@@ -93,14 +166,14 @@
 
   .react-datepicker-wrapper {
     width: 100%;
-    
+
 
     .react-datepicker__input-container {
       width: 100%;
-      
+
     }
   }
-  
+
 
   select {
     width: 100%;
@@ -120,3 +193,4 @@
   }
 
 }
+*/

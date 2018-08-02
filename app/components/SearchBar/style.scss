@@ -1,6 +1,7 @@
 @import '../../common.scss';
 
 .search-bar {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto;

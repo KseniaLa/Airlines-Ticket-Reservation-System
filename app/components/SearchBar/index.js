@@ -8,7 +8,6 @@ import Button from '../basic/Button';
 import TextField from '../basic/TextField';
 import Select from '../basic/Select';
 
-import messages from '../../containers/AddPage/messages';
 import localMessages from './messages';
 import './style.scss';
 
@@ -43,9 +42,15 @@ export default class SearchBar extends React.PureComponent {
         />
         <Select
           items={[
-            <FormattedMessage {...messages.businessclass} />,
-            <FormattedMessage {...messages.firstclass} />,
-            <FormattedMessage {...messages.budgetclass} />,
+            <FormattedMessage id="app.components.AddPage.business">
+              {ticketclass => ticketclass}
+            </FormattedMessage>,
+            <FormattedMessage id="app.components.AddPage.first">
+              {ticketclass => ticketclass}
+            </FormattedMessage>,
+            <FormattedMessage id="app.components.AddPage.budget">
+              {ticketclass => ticketclass}
+            </FormattedMessage>,
           ]}
         />
         <div className="search-bar__button">

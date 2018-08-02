@@ -4,9 +4,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import TextField from '../../components/basic/TextField';
+import Select from '../../components/basic/Select';
 import './style.scss';
-
-import messages from './messages';
 
 class AddTicketForm extends React.PureComponent {
   constructor(props) {
@@ -47,17 +46,19 @@ class AddTicketForm extends React.PureComponent {
           />
         </div>
         <div className="class">
-          <select>
-            <option>
-              <FormattedMessage {...messages.businessclass} />
-            </option>
-            <option>
-              <FormattedMessage {...messages.firstclass} />
-            </option>
-            <option>
-              <FormattedMessage {...messages.budgetclass} />
-            </option>
-          </select>
+          <Select
+            items={[
+              <FormattedMessage id="app.components.AddPage.business">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.first">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.budget">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+            ]}
+          />
         </div>
         <div className="company">
           <FormattedMessage id="app.components.AddPage.company">

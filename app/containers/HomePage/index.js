@@ -19,13 +19,18 @@ class HomePage extends React.PureComponent {
   getData() {
     const list = [];
     const langCities = cities[this.props.language];
-    langCities.forEach(element => {
+    for (let i = 0; i < langCities.length - 1; i += 2) {
       list.push(
-        <div className="imageste-box__item" key={element.id}>
-          <TextImageBlock image={cityImage2} text={element.name} />
+        <div key={langCities[i].id}>
+          <div className="imageste-box__item">
+            <TextImageBlock image={cityImage2} text={langCities[i].name} />
+          </div>
+          <div className="imageste-box__item">
+            <TextImageBlock image={cityImage2} text={langCities[i + 1].name} />
+          </div>
         </div>,
       );
-    });
+    }
     return list;
   }
 

@@ -13,11 +13,17 @@ import ImageSearch from '../../components/ImageSearch';
 import TextImageBlock from '../../components/TextImageBlock';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
-import { cities } from './popular.json';
+import { makeSelectIsDataReceived, makeSelectCities } from './selectors';
+import { searchForCities } from './actions';
 
 class HomePage extends React.PureComponent {
+  componentDidMount() {
+    this.props.getCities();
+  }
+
   getData() {
     const list = [];
+    const { cities } = this.props;
     const langCities = cities[this.props.language];
     for (let i = 0; i < langCities.length - 1; i += 2) {
       list.push(
@@ -35,7 +41,7 @@ class HomePage extends React.PureComponent {
   }
 
   render() {
-    const popularCities = this.getData();
+    const popularCities = this.props.dataReady ? this.getData() : null;
     return (
       <section className="container-flex">
         <ImageSearch image={mainImage} />
@@ -52,13 +58,26 @@ class HomePage extends React.PureComponent {
 
 HomePage.propTypes = {
   language: PropTypes.string,
+  dataReady: PropTypes.bool,
+  cities: PropTypes.object,
+  getCities: PropTypes.func,
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    getCities() {
+      dispatch(searchForCities());
+    },
+  };
+}
 
 const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
+  cities: makeSelectCities(),
+  dataReady: makeSelectIsDataReceived(),
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(HomePage);

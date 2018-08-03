@@ -10,6 +10,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import globalReducer from 'containers/App/reducer';
 import userPageReducer from 'containers/UserPage/reducer';
 import searchReducer from 'containers/SearchResultPage/reducer';
+import citiesReducer from 'containers/HomePage/reducer';
 
 /*
  * routeReducer
@@ -49,6 +50,7 @@ export default function createReducer(injectedReducers) {
     global: globalReducer,
     userPage: userPageReducer,
     searchResult: searchReducer,
+    citiesResult: citiesReducer,
     ...injectedReducers,
   });
 }

@@ -113,14 +113,6 @@ export function mapDispatchToProps(dispatch) {
     logout() {
       dispatch(logout());
     },
-
-    showTicketsPage() {
-      dispatch(setTicketsPageShown());
-    },
-
-    showCartPage() {
-      dispatch(setCartPageShown());
-    },
   };
 }
 

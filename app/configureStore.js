@@ -9,6 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import { ticketsResultSaga } from './containers/SearchResultPage/saga';
 import { citiesSaga } from './containers/HomePage/saga';
+import { userTicketsSaga } from './containers/UserTicketsPage/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,6 +42,7 @@ export default function configureStore(initialState = {}, history) {
   // Extensions
   sagaMiddleware.run(ticketsResultSaga);
   sagaMiddleware.run(citiesSaga);
+  sagaMiddleware.run(userTicketsSaga);
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry

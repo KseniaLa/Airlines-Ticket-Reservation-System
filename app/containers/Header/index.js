@@ -18,7 +18,6 @@ import {
 } from '../App/selectors';
 import { setModalState, logout } from '../App/actions';
 import { changeLocale } from '../LanguageProvider/actions';
-import { setTicketsPageShown, setCartPageShown } from '../UserPage/actions';
 
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 

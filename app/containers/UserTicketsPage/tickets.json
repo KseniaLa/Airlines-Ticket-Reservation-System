@@ -1,0 +1,44 @@
+{
+  "tickets": {
+    "en": [
+      {
+        "from": "Minsk",
+        "to": "Moscow",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "300",
+        "id": "1-1"
+      },
+      {
+        "from": "Minsk",
+        "to": "Kiev",
+        "company": "Belavia",
+        "time": "13.30",
+        "count": "30",
+        "price": "200",
+        "id": "2-1"
+      }
+    ],
+    "ru": [
+      {
+        "from": "Минск",
+        "to": "Москва",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "300",
+        "id": "1-2"
+      },
+      {
+        "from": "Минск",
+        "to": "Киев",
+        "company": "Белавиа",
+        "time": "13.30",
+        "count": "30",
+        "price": "200",
+        "id": "2-2"
+      }
+    ]
+  }
+}

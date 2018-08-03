@@ -11,6 +11,7 @@ import globalReducer from 'containers/App/reducer';
 import userPageReducer from 'containers/UserPage/reducer';
 import searchReducer from 'containers/SearchResultPage/reducer';
 import citiesReducer from 'containers/HomePage/reducer';
+import userTicketsReducer from 'containers/UserTicketsPage/reducer';
 
 /*
  * routeReducer
@@ -51,6 +52,7 @@ export default function createReducer(injectedReducers) {
     userPage: userPageReducer,
     searchResult: searchReducer,
     citiesResult: citiesReducer,
+    userTickets: userTicketsReducer,
     ...injectedReducers,
   });
 }

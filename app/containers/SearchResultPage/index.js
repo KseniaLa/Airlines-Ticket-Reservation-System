@@ -8,17 +8,18 @@ import SearchBar from '../../components/SearchBar';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
+import { searchForTickets } from './actions';
+import { makeSelectTickets } from './selectors';
 
 import messages from './messages';
 import './style.scss';
 
-import { tickets } from './result.json';
+// import { tickets } from './result.json';
 
 class SearchResultPage extends React.PureComponent {
-  componentDidMount() {}
-
   getData() {
     const list = [];
+    const { tickets } = this.props;
     const langTickets = tickets[this.props.language];
     langTickets.forEach(element => {
       list.push(
@@ -40,6 +41,7 @@ class SearchResultPage extends React.PureComponent {
   }
 
   render() {
+    this.props.getTickets();
     const result = this.getData();
     return (
       <section className="container-flex">
@@ -69,13 +71,24 @@ class SearchResultPage extends React.PureComponent {
 
 SearchResultPage.propTypes = {
   language: PropTypes.string,
+  tickets: PropTypes.object,
+  getTickets: PropTypes.func,
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    getTickets() {
+      dispatch(searchForTickets());
+    },
+  };
+}
 
 const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
+  tickets: makeSelectTickets(),
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(SearchResultPage);

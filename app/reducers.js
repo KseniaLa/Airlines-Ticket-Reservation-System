@@ -9,6 +9,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import globalReducer from 'containers/App/reducer';
 import userPageReducer from 'containers/UserPage/reducer';
+import searchReducer from 'containers/SearchResultPage/reducer';
 
 /*
  * routeReducer
@@ -47,6 +48,7 @@ export default function createReducer(injectedReducers) {
     language: languageProviderReducer,
     global: globalReducer,
     userPage: userPageReducer,
+    searchResult: searchReducer,
     ...injectedReducers,
   });
 }

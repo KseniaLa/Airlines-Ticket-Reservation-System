@@ -35,10 +35,12 @@
 
 .imageset-box {
   @include flex_element(column);
+  width: 100%;
 
 
   & > div {
     @include flex_element(row);
+    width: 100%;
     @media screen and (max-width: 600px) {
       @include flex_element(column);
     }

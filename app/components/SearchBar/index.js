@@ -41,7 +41,7 @@ export default class SearchBar extends React.PureComponent {
           <DatePicker
             selected={this.state.startDate}
             onChange={this.handleChange}
-            className="field"
+            className="field datepic"
           />
           <Select
             items={[

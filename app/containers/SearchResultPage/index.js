@@ -6,17 +6,20 @@ import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
 import SearchBar from '../../components/SearchBar';
 import Ticket from '../../components/Ticket';
+import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { searchForTickets } from './actions';
-import { makeSelectTickets } from './selectors';
+import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
 
 import messages from './messages';
 import './style.scss';
 
-// import { tickets } from './result.json';
-
 class SearchResultPage extends React.PureComponent {
+  componentDidMount() {
+    this.props.getTickets();
+  }
+
   getData() {
     const list = [];
     const { tickets } = this.props;
@@ -41,8 +44,7 @@ class SearchResultPage extends React.PureComponent {
   }
 
   render() {
-    this.props.getTickets();
-    const result = this.getData();
+    const content = this.props.dataReady ? this.getData() : <Spinner />;
     return (
       <section className="container-flex">
         <div className="search">
@@ -54,7 +56,7 @@ class SearchResultPage extends React.PureComponent {
             <div>50</div>
             <div>100</div>
           </div>
-          {result}
+          {content}
           <div className="button-set central">
             <div>
               <i className="fa fa-chevron-left" />
@@ -71,6 +73,7 @@ class SearchResultPage extends React.PureComponent {
 
 SearchResultPage.propTypes = {
   language: PropTypes.string,
+  dataReady: PropTypes.bool,
   tickets: PropTypes.object,
   getTickets: PropTypes.func,
 };
@@ -86,6 +89,7 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
   tickets: makeSelectTickets(),
+  dataReady: makeSelectIsDataReceived(),
 });
 
 export default connect(

@@ -10,14 +10,18 @@ import { makeSelectLocale } from '../LanguageProvider/selectors';
 import './style.scss';
 
 import messages from './messages';
-import { tickets } from '../SearchResultPage/result.json';
 
 class UserBasketPage extends React.Component {
   componentDidMount() {}
 
+  onButtonClick() {}
+
   getData() {
     const list = [];
-    const langTickets = tickets[this.props.language];
+    const langTickets = JSON.parse(localStorage.getItem('cartTickets'));
+    if (!langTickets) {
+      return <EmptyResult />;
+    }
     langTickets.forEach(element => {
       list.push(
         <Ticket
@@ -28,6 +32,8 @@ class UserBasketPage extends React.Component {
           price={element.price}
           count={element.count}
           action={<FormattedMessage {...messages.remove} />}
+          onClick={this.onButtonClick}
+          hideOnClick
         />,
       );
     });

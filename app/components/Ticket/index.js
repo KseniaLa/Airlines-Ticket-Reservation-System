@@ -7,7 +7,23 @@ import './style.scss';
 import messages from './messages';
 
 class Ticket extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { isVisible: true };
+    this.onButtonClick = this.onButtonClick.bind(this);
+  }
+
+  onButtonClick() {
+    this.props.onClick(this.props.info);
+    if (this.props.hideOnClick) {
+      this.setState({ isVisible: false });
+    }
+  }
+
   render() {
+    if (!this.state.isVisible) {
+      return null;
+    }
     return (
       <section className="ticket">
         <div>
@@ -31,7 +47,7 @@ class Ticket extends React.PureComponent {
             <h1 className="actual-count-block">{this.props.count}</h1>
           </div>
           <div className="ticket__add-button-area">
-            <Button text={this.props.action} onClick={this.props.onClick} />
+            <Button text={this.props.action} onClick={this.onButtonClick} />
           </div>
         </div>
       </section>
@@ -40,6 +56,7 @@ class Ticket extends React.PureComponent {
 }
 
 Ticket.propTypes = {
+  info: PropTypes.object,
   title: PropTypes.string,
   company: PropTypes.string,
   description: PropTypes.string,
@@ -47,6 +64,7 @@ Ticket.propTypes = {
   price: PropTypes.string,
   count: PropTypes.string,
   action: PropTypes.object,
+  hideOnClick: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

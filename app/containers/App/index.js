@@ -64,7 +64,13 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/results" component={SearchResultPage} />
+            <Route
+              exact
+              path="/results"
+              render={() => (
+                <SearchResultPage onNotAuth={this.handleOpenModal} />
+              )}
+            />
             <Route path="/user" component={UserPage} />
             <Route exact path="/add" component={AddPage} />
             <Route component={NotFoundPage} />

@@ -11,13 +11,33 @@ import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { searchForTickets } from './actions';
 import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
-
+import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
 import './style.scss';
 
 class SearchResultPage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.addTicketToCart = this.addTicketToCart.bind(this);
+  }
+
   componentDidMount() {
     this.props.getTickets();
+  }
+
+  addTicketToCart(ticket) {
+    if (!this.props.isAuthorized) {
+      this.props.onNotAuth();
+      return;
+    }
+    if (localStorage.getItem('cartTickets') === null) {
+      localStorage.setItem('cartTickets', JSON.stringify([ticket]));
+      return;
+    }
+    const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
+    currTickets.push = [].push;
+    currTickets.push(ticket);
+    localStorage.setItem('cartTickets', JSON.stringify(currTickets));
   }
 
   getData() {
@@ -27,13 +47,16 @@ class SearchResultPage extends React.PureComponent {
     langTickets.forEach(element => {
       list.push(
         <Ticket
+          info={element}
           key={element.id}
-          title={`${element.from}-${element.to}`}
+          title={`${element.from} - ${element.to}`}
           company={element.company}
           time={element.time}
           price={element.price}
           count={element.count}
           action={<FormattedMessage {...messages.add} />}
+          onClick={this.addTicketToCart}
+          hideOnClick={false}
         />,
       );
     });
@@ -72,10 +95,12 @@ class SearchResultPage extends React.PureComponent {
 }
 
 SearchResultPage.propTypes = {
+  isAuthorized: PropTypes.bool,
   language: PropTypes.string,
   dataReady: PropTypes.bool,
   tickets: PropTypes.object,
   getTickets: PropTypes.func,
+  onNotAuth: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -87,6 +112,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  isAuthorized: makeSelectIsAuthorized(),
   language: makeSelectLocale(),
   tickets: makeSelectTickets(),
   dataReady: makeSelectIsDataReceived(),

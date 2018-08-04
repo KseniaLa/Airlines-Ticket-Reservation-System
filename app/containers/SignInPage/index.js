@@ -84,7 +84,7 @@ class SignInPage extends React.PureComponent {
     e.preventDefault();
     const { name, surname, isAdmin } = user;
     this.props.login(name, surname, isAdmin);
-    this.props.hideSignIn();
+    this.props.onCloseClick();
   }
 
   handleChangeModeClick() {
@@ -100,24 +100,20 @@ class SignInPage extends React.PureComponent {
       mainPart = this.signUpPart;
     }
 
-    if (this.props.visible) {
-      return (
-        <section className="sign-overlay">
-          <section className="sign-page">
-            <button className="close-button" onClick={this.props.hideSignIn}>
-              <i className="fa fa-times" />
-            </button>
-            {mainPart}
-          </section>
-        </section>
-      );
-    }
-    return <div />;
+    return (
+      <section className="sign-page">
+        <button className="close-button" onClick={this.props.onCloseClick}>
+          <i className="fa fa-times" />
+        </button>
+        {mainPart}
+      </section>
+    );
   }
 }
 
 SignInPage.propTypes = {
   hideSignIn: PropTypes.func,
+  onCloseClick: PropTypes.func,
   login: PropTypes.func,
   visible: PropTypes.bool,
 };

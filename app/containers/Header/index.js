@@ -10,13 +10,8 @@ import Button from '../../components/basic/Button';
 import SocialIcon from '../../components/basic/Icon';
 import messages from './messages';
 import './style.scss';
-import {
-  makeSelectIsModalVisible,
-  makeSelectIsAuthorized,
-  makeSelectUser,
-  makeSelectIsAdmin,
-} from '../App/selectors';
-import { setModalState, logout } from '../App/actions';
+import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
+import { logout } from '../App/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 
 import { makeSelectLocale } from '../LanguageProvider/selectors';
@@ -44,14 +39,11 @@ class Header extends React.Component {
     const headerOptions = isAuthorized ? (
       <div className="header__options">
         <NavLink to="/user/tickets" activeClassName="selected">
-          <SocialIcon icon="fa fa-user" onClick={this.props.showTicketsPage} />
+          <SocialIcon icon="fa fa-user" />
         </NavLink>
         {adminButton}
         <NavLink to="/user/basket" activeClassName="selected">
-          <SocialIcon
-            icon="fa fa-shopping-cart"
-            onClick={this.props.showCartPage}
-          />
+          <SocialIcon icon="fa fa-shopping-cart" />
         </NavLink>
         <Toggle value={nextLang} callback={this.handle} />
         <Link to="/">
@@ -66,7 +58,7 @@ class Header extends React.Component {
         <Toggle value={nextLang} callback={this.handle} />
         <Button
           text={<FormattedMessage {...messages.enter} />}
-          onClick={this.props.showSignIn}
+          onClick={this.props.onOpenClick}
         />
       </div>
     );
@@ -89,10 +81,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
   changeLang: PropTypes.func,
-  showSignIn: PropTypes.func,
+  onOpenClick: PropTypes.func,
   logout: PropTypes.func,
-  showTicketsPage: PropTypes.func,
-  showCartPage: PropTypes.func,
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -100,10 +90,6 @@ Header.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    showSignIn() {
-      dispatch(setModalState(true));
-    },
-
     changeLang(lang) {
       const nextLang = lang === 'ru' ? 'en' : 'ru';
       dispatch(changeLocale(nextLang));
@@ -116,11 +102,9 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  visible: makeSelectIsModalVisible(),
   language: makeSelectLocale(),
   isAuthorized: makeSelectIsAuthorized(),
   isAdmin: makeSelectIsAdmin(),
-  user: makeSelectUser(),
 });
 
 export default connect(

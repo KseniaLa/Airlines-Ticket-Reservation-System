@@ -49,3 +49,28 @@ a {
   }
 }
 
+.modal {
+  position: relative;
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 80%;
+  font-size: 1.6rem;
+  @media screen and (max-width: 1900px){
+    padding: 10px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  z-index: 999999999999;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+

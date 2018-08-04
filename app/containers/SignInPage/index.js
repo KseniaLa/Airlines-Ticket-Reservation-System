@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import 'font-awesome/css/font-awesome.min.css';
 
 import messages from './messages';
@@ -11,8 +10,7 @@ import Button from '../../components/basic/Button';
 import Field from '../../components/basic/TextField';
 import Title from '../../components/basic/Title';
 import './style.scss';
-import { makeSelectIsModalVisible } from '../App/selectors';
-import { setModalState, login } from '../App/actions';
+import { login } from '../App/actions';
 
 import { user } from './user.json';
 
@@ -112,28 +110,19 @@ class SignInPage extends React.PureComponent {
 }
 
 SignInPage.propTypes = {
-  hideSignIn: PropTypes.func,
   onCloseClick: PropTypes.func,
   login: PropTypes.func,
-  visible: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    hideSignIn() {
-      dispatch(setModalState(false));
-    },
     login(name, surname, isAdmin) {
       dispatch(login(name, surname, isAdmin));
     },
   };
 }
 
-const mapStateToProps = createStructuredSelector({
-  visible: makeSelectIsModalVisible(),
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(SignInPage);

@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.min.css';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/index';
 import SearchResultPage from '../SearchResultPage';
 import AddPage from '../AddPage';
-import Header from '../Header';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
+import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
+import { logout } from './actions';
+import { changeLocale } from '../LanguageProvider/actions';
+import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 import './style.scss';
 
 ReactModal.setAppElement('#app');
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -37,7 +44,14 @@ export default class App extends React.Component {
     return (
       <div className="wrapper">
         <div className="content">
-          <Header onOpenClick={this.handleOpenModal} />
+          <Header
+            language={this.props.language}
+            isAuthorized={this.props.isAuthorized}
+            isAdmin={this.props.isAdmin}
+            onOpenClick={this.handleOpenModal}
+            changeLang={this.props.changeLang}
+            logout={this.props.logout}
+          />
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="signIn modal"
@@ -61,3 +75,37 @@ export default class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  changeLang: PropTypes.func,
+  logout: PropTypes.func,
+  language: PropTypes.string,
+  isAuthorized: PropTypes.bool,
+  isAdmin: PropTypes.bool,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    changeLang(lang) {
+      const nextLang = lang === 'ru' ? 'en' : 'ru';
+      dispatch(changeLocale(nextLang));
+    },
+
+    logout() {
+      dispatch(logout());
+    },
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  language: makeSelectLocale(),
+  isAuthorized: makeSelectIsAuthorized(),
+  isAdmin: makeSelectIsAdmin(),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { pure: false },
+)(App);

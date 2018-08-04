@@ -1,28 +1,21 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
-import Toggle from '../../components/basic/ToggleButton';
-import Title from '../../components/basic/Title';
-import Button from '../../components/basic/Button';
-import SocialIcon from '../../components/basic/Icon';
+import Toggle from '../basic/ToggleButton';
+import Title from '../basic/Title';
+import Button from '../basic/Button';
+import SocialIcon from '../basic/Icon';
 import messages from './messages';
 import './style.scss';
-import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
-import { logout } from '../App/actions';
-import { changeLocale } from '../LanguageProvider/actions';
 
-import { makeSelectLocale } from '../LanguageProvider/selectors';
-
-class Header extends React.Component {
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.handle = this.handle.bind(this);
+    this.handleChangeLang = this.handleChangeLang.bind(this);
   }
 
-  handle() {
+  handleChangeLang() {
     this.props.changeLang(this.props.language);
   }
 
@@ -45,7 +38,7 @@ class Header extends React.Component {
         <NavLink to="/user/basket" activeClassName="selected">
           <SocialIcon icon="fa fa-shopping-cart" />
         </NavLink>
-        <Toggle value={nextLang} callback={this.handle} />
+        <Toggle value={nextLang} callback={this.handleChangeLang} />
         <Link to="/">
           <Button
             text={<FormattedMessage {...messages.logout} />}
@@ -87,29 +80,3 @@ Header.propTypes = {
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
 };
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    changeLang(lang) {
-      const nextLang = lang === 'ru' ? 'en' : 'ru';
-      dispatch(changeLocale(nextLang));
-    },
-
-    logout() {
-      dispatch(logout());
-    },
-  };
-}
-
-const mapStateToProps = createStructuredSelector({
-  language: makeSelectLocale(),
-  isAuthorized: makeSelectIsAuthorized(),
-  isAdmin: makeSelectIsAdmin(),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { pure: false },
-)(Header);

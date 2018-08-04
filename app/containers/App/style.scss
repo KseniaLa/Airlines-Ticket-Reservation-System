@@ -53,11 +53,12 @@ a {
   position: relative;
   margin: 70px auto;
   padding: 20px;
-  background: #ffffff;
   border-radius: 5px;
   overflow: hidden;
+  outline: none;
   width: 80%;
   font-size: 1.6rem;
+  background: #ffffff;
   @media screen and (max-width: 1900px){
     padding: 10px;
   }

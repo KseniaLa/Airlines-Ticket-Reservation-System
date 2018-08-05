@@ -48,7 +48,7 @@ export default class Header extends React.Component {
       </div>
     ) : (
       <div className="header__options">
-        <Toggle value={nextLang} callback={this.handle} />
+        <Toggle value={nextLang} callback={this.handleChangeLang} />
         <Button
           text={<FormattedMessage {...messages.enter} />}
           onClick={this.props.onOpenClick}

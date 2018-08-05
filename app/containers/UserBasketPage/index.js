@@ -18,19 +18,20 @@ class UserBasketPage extends React.Component {
 
   getData() {
     const list = [];
-    const langTickets = JSON.parse(localStorage.getItem('cartTickets'));
-    if (!langTickets) {
+    const tickets = JSON.parse(localStorage.getItem('cartTickets'));
+    if (!tickets) {
       return <EmptyResult />;
     }
-    langTickets.forEach(element => {
+    tickets.forEach(element => {
+      const ticket = element[this.props.language];
       list.push(
         <Ticket
-          key={element.id}
-          title={`${element.from}-${element.to}`}
-          company={element.company}
-          time={element.time}
-          price={element.price}
-          count={element.count}
+          key={ticket.id}
+          title={`${ticket.from}-${ticket.to}`}
+          company={ticket.company}
+          time={ticket.time}
+          price={ticket.price}
+          count={ticket.count}
           action={<FormattedMessage {...messages.remove} />}
           onClick={this.onButtonClick}
           hideOnClick

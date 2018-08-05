@@ -43,17 +43,17 @@ class SearchResultPage extends React.PureComponent {
   getData() {
     const list = [];
     const { tickets } = this.props;
-    const langTickets = tickets[this.props.language];
-    langTickets.forEach(element => {
+    tickets.forEach(element => {
+      const ticket = element[this.props.language];
       list.push(
         <Ticket
           info={element}
-          key={element.id}
-          title={`${element.from} - ${element.to}`}
-          company={element.company}
-          time={element.time}
-          price={element.price}
-          count={element.count}
+          key={ticket.id}
+          title={`${ticket.from} - ${ticket.to}`}
+          company={ticket.company}
+          time={ticket.time}
+          price={ticket.price}
+          count={ticket.count}
           action={<FormattedMessage {...messages.add} />}
           onClick={this.addTicketToCart}
           hideOnClick={false}
@@ -98,7 +98,7 @@ SearchResultPage.propTypes = {
   isAuthorized: PropTypes.bool,
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  tickets: PropTypes.object,
+  tickets: PropTypes.array,
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
 };

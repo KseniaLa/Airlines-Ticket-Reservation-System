@@ -23,7 +23,6 @@
   .header__options {
     @include flex_element(row);
     justify-content: space-around;
-    /*align-items: baseline;*/
 
     div {
       margin-left: 5px;
@@ -33,6 +32,10 @@
   .header__options button {
     margin: 5px;
     padding: 10px;
+    height: 43px;
+    @media screen and (max-width: 400px){
+      padding: 5px;
+    }
   }
 }
 

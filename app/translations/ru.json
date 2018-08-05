@@ -22,6 +22,7 @@
   "app.components.UserPage.tickets": "Заказанные билеты",
   "app.components.header.enter": "Войти",
   "app.components.SearchBar.search": "Найти билеты",
+  "app.components.SearchBar.invalidinput": "Некоторые поля не заполнены",
   "app.components.footer.about": "О компании",
   "app.components.footer.advert": "Реклама",
   "app.components.footer.vacancy": "Вакансии",

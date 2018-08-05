@@ -3,23 +3,40 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import 'font-awesome/css/font-awesome.min.css';
-
+import { createStructuredSelector } from 'reselect';
 import messages from './messages';
 
 import Button from '../../components/basic/Button';
 import Field from '../../components/basic/TextField';
 import Title from '../../components/basic/Title';
+import { tryLogin } from './actions';
+import {
+  makeSelectIsLoginStateReceived,
+  makeSelectIsLoginError,
+} from './selectors';
+import { makeSelectIsAuthorized } from '../App/selectors';
 import './style.scss';
-import { login } from '../App/actions';
-
-import { user } from './user.json';
 
 class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { signIn: true };
+    this.state = {
+      signIn: true,
+      signInEmail: '',
+      signInPassword: '',
+      signUpName: '',
+      signUpSurname: '',
+      signUpEmail: '',
+      isInputError: false,
+    };
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
-    this.setUserData = this.setUserData.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
+    this.updateSignInEmailField = this.updateSignInEmailField.bind(this);
+    this.updateSignInPasswordField = this.updateSignInPasswordField.bind(this);
+    this.updateSignUpEmailField = this.updateSignUpEmailField.bind(this);
+    this.updateNameField = this.updateNameField.bind(this);
+    this.updateSurnameField = this.updateSurnameField.bind(this);
     this.signInPart = (
       <div className="container">
         <form className="sign-page__form" name="signin-form">
@@ -27,15 +44,33 @@ class SignInPage extends React.PureComponent {
             className="sign-page__title"
             text={<FormattedMessage {...messages.signintitle} />}
           />
+          {this.props.loginStateReceived &&
+            !this.props.isAuthorized && <div>invalid data</div>}
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} name="" />}
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignInEmailField}
+                isError
+              />
+            )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.password">
-            {placeholder => <Field type="text" hint={placeholder} name="" />}
+            {placeholder => (
+              <Field
+                type="password"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignInPasswordField}
+                isError={this.state.isInputError}
+              />
+            )}
           </FormattedMessage>
           <Button
             text={<FormattedMessage {...messages.signin} />}
-            onClick={this.setUserData}
+            onClick={this.onSignIn}
           />
         </form>
 
@@ -57,15 +92,42 @@ class SignInPage extends React.PureComponent {
             text={<FormattedMessage {...messages.signuptitle} />}
           />
           <FormattedMessage id="app.components.SignInPage.name">
-            {placeholder => <Field type="text" hint={placeholder} name="" />}
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateNameField}
+                isError={this.state.isInputError}
+              />
+            )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.surname">
-            {placeholder => <Field type="text" hint={placeholder} name="" />}
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSurnameField}
+                isError={this.state.isInputError}
+              />
+            )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.email">
-            {placeholder => <Field type="text" hint={placeholder} name="" />}
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignUpEmailField}
+                isError={this.state.isInputError}
+              />
+            )}
           </FormattedMessage>
-          <Button text={<FormattedMessage {...messages.signup} />} />
+          <Button
+            text={<FormattedMessage {...messages.signup} />}
+            onClick={this.onSignUp}
+          />
         </form>
         <div className="change-mode">
           <h6>{<FormattedMessage {...messages.loginexists} />}</h6>
@@ -78,11 +140,27 @@ class SignInPage extends React.PureComponent {
     );
   }
 
-  setUserData(e) {
+  onSignIn(e) {
     e.preventDefault();
-    const { name, surname, isAdmin } = user;
-    this.props.login(name, surname, isAdmin);
-    this.props.onCloseClick();
+    const { signInEmail, signInPassword } = this.state;
+    if (signInEmail !== '' && signInPassword !== '') {
+      this.setState({ isInputError: false });
+      this.props.tryLogin(signInEmail, signInPassword);
+    } else {
+      this.setState({ isInputError: true });
+    }
+  }
+
+  onSignUp(e) {
+    e.preventDefault();
+    const { signUpName, signUpSurname, signUpEmail } = this.state;
+    if (signUpName !== '' && signUpSurname !== '' && signUpEmail !== '') {
+      this.setState({ isInputError: false });
+      console.log('registered');
+      this.props.onCloseClick();
+    } else {
+      this.setState({ isInputError: true });
+    }
   }
 
   handleChangeModeClick() {
@@ -90,12 +168,139 @@ class SignInPage extends React.PureComponent {
     this.setState({ signIn: !sign });
   }
 
+  updateSignInEmailField(e) {
+    this.setState({ signInEmail: e.target.value });
+  }
+
+  updateSignInPasswordField(e) {
+    this.setState({ signInPassword: e.target.value });
+  }
+
+  updateSignUpEmailField(e) {
+    this.setState({ signUpEmail: e.target.value });
+  }
+
+  updateNameField(e) {
+    this.setState({ signUpName: e.target.value });
+  }
+
+  updateSurnameField(e) {
+    this.setState({ signUpSurname: e.target.value });
+  }
+
   render() {
+    if (this.props.loginStateReceived && this.props.isAuthorized) {
+      this.props.onCloseClick(); // shouldn't be here!!!
+      return null;
+    }
+    const signInPart = (
+      <div className="container">
+        <form className="sign-page__form" name="signin-form">
+          <Title
+            className="sign-page__title"
+            text={<FormattedMessage {...messages.signintitle} />}
+          />
+          {this.props.loginStateReceived &&
+            !this.props.isAuthorized && <div>invalid data</div>}
+          {this.props.isLoginError && <div>authorization error</div>}
+          <FormattedMessage id="app.components.SignInPage.email">
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignInEmailField}
+                isError
+              />
+            )}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.password">
+            {placeholder => (
+              <Field
+                type="password"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignInPasswordField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
+          <Button
+            text={<FormattedMessage {...messages.signin} />}
+            onClick={this.onSignIn}
+          />
+        </form>
+
+        <div className="change-mode">
+          <h6>{<FormattedMessage {...messages.newuser} />}</h6>
+          <Button
+            text={<FormattedMessage {...messages.signup} />}
+            onClick={this.handleChangeModeClick}
+          />
+        </div>
+      </div>
+    );
+
+    const signUpPart = (
+      <div className="container">
+        <form className="sign-page__form" name="signup-form">
+          <Title
+            className="sign-page__title"
+            text={<FormattedMessage {...messages.signuptitle} />}
+          />
+          <FormattedMessage id="app.components.SignInPage.name">
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateNameField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.surname">
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSurnameField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.email">
+            {placeholder => (
+              <Field
+                type="text"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignUpEmailField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
+          <Button
+            text={<FormattedMessage {...messages.signup} />}
+            onClick={this.onSignUp}
+          />
+        </form>
+        <div className="change-mode">
+          <h6>{<FormattedMessage {...messages.loginexists} />}</h6>
+          <Button
+            text={<FormattedMessage {...messages.signin} />}
+            onClick={this.handleChangeModeClick}
+          />
+        </div>
+      </div>
+    );
+
     let mainPart;
     if (this.state.signIn) {
-      mainPart = this.signInPart;
+      mainPart = signInPart;
     } else {
-      mainPart = this.signUpPart;
+      mainPart = signUpPart;
     }
 
     return (
@@ -111,18 +316,27 @@ class SignInPage extends React.PureComponent {
 
 SignInPage.propTypes = {
   onCloseClick: PropTypes.func,
-  login: PropTypes.func,
+  tryLogin: PropTypes.func,
+  isAuthorized: PropTypes.bool,
+  loginStateReceived: PropTypes.bool,
+  isLoginError: PropTypes.bool,
 };
+
+const mapStateToProps = createStructuredSelector({
+  isAuthorized: makeSelectIsAuthorized(),
+  loginStateReceived: makeSelectIsLoginStateReceived(),
+  isLoginError: makeSelectIsLoginError(),
+});
 
 export function mapDispatchToProps(dispatch) {
   return {
-    login(name, surname, isAdmin) {
-      dispatch(login(name, surname, isAdmin));
+    tryLogin(email, password) {
+      dispatch(tryLogin(email, password));
     },
   };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(SignInPage);

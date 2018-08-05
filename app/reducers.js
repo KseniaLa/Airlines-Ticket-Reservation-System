@@ -12,6 +12,7 @@ import userPageReducer from 'containers/UserPage/reducer';
 import searchReducer from 'containers/SearchResultPage/reducer';
 import citiesReducer from 'containers/HomePage/reducer';
 import userTicketsReducer from 'containers/UserTicketsPage/reducer';
+import loginReducer from 'containers/SignInPage/reducer';
 
 /*
  * routeReducer
@@ -53,6 +54,7 @@ export default function createReducer(injectedReducers) {
     searchResult: searchReducer,
     citiesResult: citiesReducer,
     userTickets: userTicketsReducer,
+    loginResult: loginReducer,
     ...injectedReducers,
   });
 }

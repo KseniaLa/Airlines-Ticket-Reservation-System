@@ -36,8 +36,6 @@ export default class SearchBar extends React.PureComponent {
     e.preventDefault();
     if (this.state.from !== '' && this.state.to !== '') {
       this.setState({ toResults: true });
-    } else {
-      alert("fill in");
     }
   }
 
@@ -61,7 +59,7 @@ export default class SearchBar extends React.PureComponent {
               <TextField
                 type="text"
                 hint={placeholder}
-                update={this.updateFromField}
+                onUpdate={this.updateFromField}
               />
             )}
           </FormattedMessage>
@@ -70,7 +68,7 @@ export default class SearchBar extends React.PureComponent {
               <TextField
                 type="text"
                 hint={placeholder}
-                update={this.updateToField}
+                onUpdate={this.updateToField}
               />
             )}
           </FormattedMessage>
@@ -96,9 +94,7 @@ export default class SearchBar extends React.PureComponent {
           />
         </div>
         <div className="search-bar__button">
-          {/* <Link to="/results"> */}
           <Button text={<FormattedMessage {...localMessages.search} />} />
-          {/* </Link> */}
         </div>
       </form>
     );

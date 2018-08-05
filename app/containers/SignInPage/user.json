@@ -2,6 +2,8 @@
   "user": {
     "name": "Ksenia",
     "surname": "Lashch",
+    "email": "ksenia",
+    "password": "ksenia",
     "isAdmin": true
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -16,8 +16,14 @@ export default class SearchBar extends React.PureComponent {
     super(props);
     this.state = {
       startDate: moment(),
+      toResults: false,
+      from: '',
+      to: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.updateFromField = this.updateFromField.bind(this);
+    this.updateToField = this.updateToField.bind(this);
   }
 
   handleChange(date) {
@@ -26,15 +32,47 @@ export default class SearchBar extends React.PureComponent {
     });
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+    if (this.state.from !== '' && this.state.to !== '') {
+      this.setState({ toResults: true });
+    } else {
+      alert("fill in");
+    }
+  }
+
+  updateFromField(e) {
+    this.setState({ from: e.target.value });
+  }
+
+  updateToField(e) {
+    this.setState({ to: e.target.value });
+  }
+
   render() {
+    if (this.state.toResults) {
+      return <Redirect to="/results" />;
+    }
     return (
-      <form className="search-bar">
+      <form className="search-bar" onSubmit={this.onSubmit}>
         <div>
           <FormattedMessage id="app.components.AddPage.fromfield">
-            {placeholder => <TextField type="text" hint={placeholder} />}
+            {placeholder => (
+              <TextField
+                type="text"
+                hint={placeholder}
+                update={this.updateFromField}
+              />
+            )}
           </FormattedMessage>
           <FormattedMessage id="app.components.AddPage.tofield">
-            {placeholder => <TextField type="text" hint={placeholder} />}
+            {placeholder => (
+              <TextField
+                type="text"
+                hint={placeholder}
+                update={this.updateToField}
+              />
+            )}
           </FormattedMessage>
         </div>
         <div>
@@ -58,9 +96,9 @@ export default class SearchBar extends React.PureComponent {
           />
         </div>
         <div className="search-bar__button">
-          <Link to="/results">
-            <Button text={<FormattedMessage {...localMessages.search} />} />
-          </Link>
+          {/* <Link to="/results"> */}
+          <Button text={<FormattedMessage {...localMessages.search} />} />
+          {/* </Link> */}
         </div>
       </form>
     );

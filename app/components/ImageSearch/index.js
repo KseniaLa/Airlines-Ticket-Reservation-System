@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import messages from '../../containers/HomePage/messages';
 
 import './style.scss';
-import SearchBar from '../../components/SearchBar/searchbar';
-import Image from '../../components/basic/image';
+import SearchBar from '../SearchBar';
+import Image from '../basic/Image';
 
 class ImageSearch extends React.PureComponent {
   render() {
@@ -17,7 +17,7 @@ class ImageSearch extends React.PureComponent {
           <h1>
             <FormattedMessage {...messages.searchtitle} />
           </h1>
-          <SearchBar />
+          <SearchBar onSearch={this.props.onSearch} />
         </div>
       </section>
     );
@@ -26,6 +26,7 @@ class ImageSearch extends React.PureComponent {
 
 ImageSearch.propTypes = {
   image: PropTypes.string,
+  onSearch: PropTypes.func,
 };
 
 export default ImageSearch;

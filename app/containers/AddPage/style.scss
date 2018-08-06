@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .addticket-area {
   @include flex_element(column);
@@ -9,14 +10,14 @@
   margin-bottom: 20px;
   padding: 10px;
   font-size: 1.6rem;
-  @media screen and (max-width: 400px) {
+  @include media("<=phone"){
     align-items: center;
   }
 
   h3 {
     color: $page_color;
     font-size: 2.8rem;
-    @media screen and (max-width: 500px) {
+    @include media("<=large-phone"){
       align-self: center;
     }
   }
@@ -29,6 +30,7 @@
 }
 
 .info-area {
+  @include flex_element(column);
   align-self: center;
   width: 100%;
   background-color: #e2e1de;
@@ -37,49 +39,22 @@
   padding: 10px;
   max-width: 900px;
 
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto auto auto;
-  grid-template-areas:
-    "from to"
-    "time date"
-    "class company"
-    "desc desc"
-    "count .";
-    @media screen and (max-width: 400px){
-      grid-template-columns: auto;
-      grid-template-rows: auto auto auto auto auto auto auto;
-      grid-template-areas:
-        "from"
-        "to"
-        "time"
-        "date"
-        "class"
-        "company"
-        "desc"
-        "count";
-    }
-
-  .title {
-    grid-area: title;
-    background-color: #e2e1de;
-  }
-
-  .description {
-    grid-area: desc;
-    background-color: bisque;
-
-    textarea {
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff;
-      font-size: 1.8rem;
+  & > div {
+    @include flex_element(row);
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0px;
+    @include media("<=phone"){
+      @include flex_element(column);
     }
   }
-
 
   input {
-    width: 100%;
+    width: 49%;
+    @include media("<=phone"){
+      width: 100%;
+      margin-bottom: 10px;
+    }
   }
 
   .datepicker {
@@ -91,32 +66,38 @@
     margin: 0px;
   }
 
-  .react-datepicker-wrapper {
-    width: 100%;
-    
-
-    .react-datepicker__input-container {
-      width: 100%;
-      
+  .date-time {
+    & > div {
+      width: 49%;
+      @include media("<=phone"){
+        width: 100%;
+      }
     }
   }
-  
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .react-datepicker__input-container {
+    width: 100%;
+  }
 
   select {
-    width: 100%;
+    width: 49%;
     padding: 10px;
     background-color: #ffffff;
     border-radius: 5px;
     -webkit-appearance: none;
     outline: none;
+    @include media("<=phone"){
+      width: 100%;
+      margin-bottom: 10px;
+    }
 
     option {
       padding: 10px;
     }
-  }
-
-  & > div {
-    margin: 5px;
   }
 
 }

@@ -3,10 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import TextField from '../../components/basic/textfield';
+import TextField from '../../components/basic/TextField';
+import Select from '../../components/basic/Select';
 import './style.scss';
-
-import messages from './messages';
 
 class AddTicketForm extends React.PureComponent {
   constructor(props) {
@@ -26,40 +25,36 @@ class AddTicketForm extends React.PureComponent {
   render() {
     return (
       <div className="info-area">
-        <div className="from">
+        <div>
           <FormattedMessage id="app.components.AddPage.fromfield">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>
-        </div>
-        <div className="to">
           <FormattedMessage id="app.components.AddPage.tofield">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>
         </div>
-        <div className="time">
+        <div className="date-time">
           <TextField type="time" />
-        </div>
-        <div className="date">
           <DatePicker
             selected={this.state.startDate}
             onChange={this.handleChange}
             className="datepicker"
           />
         </div>
-        <div className="class">
-          <select>
-            <option>
-              <FormattedMessage {...messages.businessclass} />
-            </option>
-            <option>
-              <FormattedMessage {...messages.firstclass} />
-            </option>
-            <option>
-              <FormattedMessage {...messages.budgetclass} />
-            </option>
-          </select>
-        </div>
-        <div className="company">
+        <div>
+          <Select
+            items={[
+              <FormattedMessage id="app.components.AddPage.business">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.first">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+              <FormattedMessage id="app.components.AddPage.budget">
+                {ticketclass => ticketclass}
+              </FormattedMessage>,
+            ]}
+          />
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => <TextField type="text" hint={placeholder} />}
           </FormattedMessage>

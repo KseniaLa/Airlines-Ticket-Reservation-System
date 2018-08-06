@@ -4,14 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './style.scss';
 
-export default class EmptyResult extends React.PureComponent {
-  render() {
-    return (
-      <div className="empty-block">
-        <i className="fa fa-search" />
-        <FormattedMessage {...messages.notfound} />
-      </div>
-    )
-  }
-}
+const EmptyResult = () => (
+  <div className="empty-block">
+    <i className="fa fa-search" />
+    <FormattedMessage {...messages.notfound} />
+  </div>
+);
 
+export default EmptyResult;

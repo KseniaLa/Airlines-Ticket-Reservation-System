@@ -22,6 +22,7 @@
   "app.components.UserPage.tickets": "Заказанные билеты",
   "app.components.header.enter": "Войти",
   "app.components.SearchBar.search": "Найти билеты",
+  "app.components.SearchBar.invalidinput": "Некоторые поля не заполнены",
   "app.components.footer.about": "О компании",
   "app.components.footer.advert": "Реклама",
   "app.components.footer.vacancy": "Вакансии",
@@ -40,6 +41,9 @@
   "app.components.SignInPage.surname": "фамилия",
   "app.components.SignInPage.email" : "e-mail",
   "app.components.SignInPage.password": "пароль",
+  "app.components.SignInPage.invalidinput": "Некоторые поля не заполнены",
+  "app.components.SignInPage.invalidemailpassword": "Неверный логин или пароль",
+  "app.components.SignInPage.autherror": "Ошибка авторизации. Повторите запрос позже",
   "app.components.empty.notfound": "Ничего не найдено",
   "app.components.AddPage.addgroup": "добавить группу"
 }

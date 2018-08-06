@@ -1,14 +1,16 @@
 @import '../../common';
+@import '../../include-media';
 
 .search {
   @include flex_element(row);
   justify-content: center;
+  text-align: center;
   background-color: $page_color;
   margin-bottom: 10px;
-  @media screen and (max-width: 900px){
+  @include media("<=tablet") {
     justify-content: center;
   }
-  @media screen and (max-width: 400px){
+  @include media("<=phone") {
     display: none;
   }
 }
@@ -40,6 +42,6 @@
 
 .central {
   align-self: center;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
 }
 

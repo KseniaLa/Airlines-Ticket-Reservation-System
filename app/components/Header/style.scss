@@ -1,0 +1,43 @@
+@import '../../common';
+@import '../../include-media';
+
+.header {
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
+  background-color: $page_color;
+  @include media("<=phone"){
+    position: static;
+  }
+
+  .header__content {
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: $page_color;
+    @include media("<=450px"){
+      @include flex_element(column);
+      text-align: center;
+    }
+  }
+
+  .header__options {
+    @include flex_element(row);
+    justify-content: space-around;
+
+    div {
+      margin-left: 5px;
+    }
+  }
+
+  .header__options button {
+    margin: 5px;
+    padding: 10px;
+    height: 43px;
+    @include media("<=phone"){
+      padding: 5px;
+    }
+  }
+}
+
+

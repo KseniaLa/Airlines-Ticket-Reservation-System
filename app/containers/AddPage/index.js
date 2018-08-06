@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from '../../components/basic/button';
+import Button from '../../components/basic/Button';
 import AddTicketForm from './AddTicketForm';
 import './style.scss';
 

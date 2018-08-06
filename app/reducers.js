@@ -7,8 +7,13 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import globalReducer from 'containers/App/globalReducer';
+import globalReducer from 'containers/App/reducer';
 import userPageReducer from 'containers/UserPage/reducer';
+import searchReducer from 'containers/SearchResultPage/reducer';
+import citiesReducer from 'containers/HomePage/reducer';
+import userTicketsReducer from 'containers/UserTicketsPage/reducer';
+import loginReducer from 'containers/SignInPage/reducer';
+import cartReducer from 'containers/UserBasketPage/reducer';
 
 /*
  * routeReducer
@@ -47,6 +52,11 @@ export default function createReducer(injectedReducers) {
     language: languageProviderReducer,
     global: globalReducer,
     userPage: userPageReducer,
+    searchResult: searchReducer,
+    citiesResult: citiesReducer,
+    userTickets: userTicketsReducer,
+    loginResult: loginReducer,
+    cartResult: cartReducer,
     ...injectedReducers,
   });
 }

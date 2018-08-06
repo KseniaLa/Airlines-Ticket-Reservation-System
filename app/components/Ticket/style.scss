@@ -1,91 +1,58 @@
 @import '../../common';
+@import '../../include-media';
 
 .ticket {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "title price"
-    "company category"
-    "description count"
-    "time add";
+  @include flex_element(row);
   background-color: #dddfdf;
   min-height: 100px;
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
   font-size: 1.6rem;
-
-  h3 {
-    margin: 0;
-    padding: 5px;
-    font-size: 1.8rem;
-    border-radius: 10px;
+  @include media("<=small-tablet"){
+    @include flex_element(column);
   }
 
+  & > div {
+    align-items: stretch;
+    width: 50%;
+    border: $page_color 3px solid;
+    @include media("<=small-tablet"){
+      width: 100%;
+    }
+  }
 }
 
 .ticket__title {
   background-color: #b8cdf0;
-  grid-area: title;
-  margin: 5px;
+  margin: 0px;
   padding-left: 5px;
-}
-
-.category {
-  grid-area: category;
-  padding-left: 10px;
-  border-left: #000000 3px solid;
+  font-weight: bold;
 }
 
 .ticket__company {
-  grid-area: company;
   background-color: #d9eecd;
   margin: 0;
   padding: 5px;
 }
 
 .ticket__price {
-  grid-area: price;
-  border-left: #000000 3px solid;
   padding-left: 10px;
   align-items: baseline;
 }
 
-.ticket__time {
-  grid-area: time;
-  background-color: #e4bfae;
-}
-
-.ticket__add-button-area {
-  grid-area: add;
-  border-left: #000000 3px solid;
-  padding-left: 15px;
-
-  button {
-    padding: 10px;
-  }
-}
-
-.ticket__count {
-  @include flex_element(row);
-  align-items: center;
-  grid-area: count;
-  border-left: #000000 3px solid;
-  padding-left: 15px;
-  @media screen and (max-width: 700px){
-    @include flex_element(column);
-  }
-
-  div {
-    display: table;
-  }
-}
-
 .ticket__description {
-  grid-area: description;
   background-color: #e8f0ba;
   border-radius: 10px;
+}
+
+.ticket__category {
+  padding-left: 10px;
+}
+
+.ticket__time {
+  padding-left: 5px;
+  background-color: #e4bfae;
 }
 
 .ticket-field {
@@ -97,6 +64,16 @@
   background-color: #ffffff;
 }
 
+.ticket__count {
+  @include flex_element(row);
+  align-items: center;
+  padding-left: 10px;
+
+  div {
+    display: table;
+  }
+}
+
 .actual-count-block {
   display: inline-block;
   margin: 0;
@@ -104,5 +81,15 @@
 
   &::before {
     content: '/ ';
+  }
+}
+
+.ticket__add-button-area {
+  padding-left: 15px;
+  text-align: right;
+
+  button {
+    padding: 10px;
+    margin: 10px;
   }
 }

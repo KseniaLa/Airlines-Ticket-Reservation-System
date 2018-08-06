@@ -1,0 +1,13 @@
+@import '../../../common';
+
+.spinner {
+  @include flex_element(row);
+  flex: 0px 0px 1200px;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 30px;
+  font-size: 4rem;
+  color: $page_color;
+}

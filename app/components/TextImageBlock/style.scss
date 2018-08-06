@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .textimage-block {
     width: 100%;
@@ -6,25 +7,26 @@
     background-color: #faebd7;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.1);
-    @media screen and (max-width: 900px){
+    cursor: pointer;
+    @include media("<=tablet"){
       width: 100%;
     }
-  
+
     &:hover {
       transform: scale(1.05);
-  
+
     }
-  
+
     .textimage-block__title {
       padding: 10px;
       text-align: center;
-  
+
       h3 {
         margin: 0;
         font-size: 1.6rem;
       }
     }
-  
+
     img {
       width: 100%;
       height: 75%;
@@ -32,4 +34,3 @@
       border-radius: 10px 10px 0px 0px;
     }
   }
-  

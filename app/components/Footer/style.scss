@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .footer {
   flex: 0 0 auto;
@@ -8,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 10px;
-    @media screen and (max-width: 500px){
+    @include media("<=large-phone"){
       @include flex_element(column);
       text-align: center;
     }
@@ -17,7 +18,7 @@
   .footer__social {
     @include flex_element(row);
 
-    div {
+    button {
       margin: 5px;
     }
   }

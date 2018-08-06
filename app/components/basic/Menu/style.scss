@@ -1,0 +1,28 @@
+@import '../../../common';
+
+.menu {
+  padding: 0px;
+  color: #ffffff;
+  font-weight: bolder;
+  font-size: 1.6rem;
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+
+    &::after {
+      content: ' / ';
+      margin-left: 5px;
+    }
+
+    &:last-child::after {
+      content: '';
+    }
+
+    a {
+      outline: none;
+      color: #ffffff;
+    }
+  }
+}

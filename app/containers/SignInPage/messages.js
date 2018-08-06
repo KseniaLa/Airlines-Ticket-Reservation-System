@@ -41,4 +41,16 @@ export default defineMessages({
     id: 'app.components.SignInPage.password',
     defaultMessage: 'пароль',
   },
+  invalidinput: {
+    id: 'app.components.SignInPage.invalidinput',
+    defaultMessage: 'Некоторые поля не заполнены',
+  },
+  invalidemailpassword: {
+    id: 'app.components.SignInPage.invalidemailpassword',
+    defaultMessage: 'Неверный логин или пароль',
+  },
+  autherror: {
+    id: 'app.components.SignInPage.autherror',
+    defaultMessage: 'Ошибка авторизации. Повторите запрос позже',
+  },
 });

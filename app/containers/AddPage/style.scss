@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .addticket-area {
   @include flex_element(column);
@@ -9,14 +10,14 @@
   margin-bottom: 20px;
   padding: 10px;
   font-size: 1.6rem;
-  @media screen and (max-width: 400px) {
+  @include media("<=phone"){
     align-items: center;
   }
 
   h3 {
     color: $page_color;
     font-size: 2.8rem;
-    @media screen and (max-width: 500px) {
+    @include media("<=large-phone"){
       align-self: center;
     }
   }
@@ -43,14 +44,14 @@
     justify-content: space-between;
     width: 100%;
     margin: 5px 0px;
-    @media screen and (max-width: 400px) {
+    @include media("<=phone"){
       @include flex_element(column);
     }
   }
 
   input {
     width: 49%;
-    @media screen and (max-width: 400px) {
+    @include media("<=phone"){
       width: 100%;
       margin-bottom: 10px;
     }
@@ -68,7 +69,7 @@
   .date-time {
     & > div {
       width: 49%;
-      @media screen and (max-width: 400px) {
+      @include media("<=phone"){
         width: 100%;
       }
     }
@@ -89,7 +90,7 @@
     border-radius: 5px;
     -webkit-appearance: none;
     outline: none;
-    @media screen and (max-width: 400px) {
+    @include media("<=phone"){
       width: 100%;
       margin-bottom: 10px;
     }

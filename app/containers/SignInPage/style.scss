@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .sign-overlay {
   position: fixed;
@@ -59,7 +60,7 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 30px;
-    @media screen and (max-width: 1900px){
+    @include media("<=laptop") {
       margin-bottom: 10px;
     }
 

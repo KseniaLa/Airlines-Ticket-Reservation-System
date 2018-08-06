@@ -1,33 +1,34 @@
 @import '../../common.scss';
+@import '../../include-media';
 
 .search-bar{
   @include flex_element(row);
   padding: 30px;
-  @media screen and (max-width: 1120px){
+  @include media("<=small-laptop"){
     @include flex_element(column);
   }
 
   & > div {
     @include flex_element(row);
-    @media screen and (max-width: 500px){
+    @include media("<=large-phone"){
       @include flex_element(column);
     }
   }
 
   input {
     margin-right: 10px;
-    @media screen and (max-width: 1120px){
+    @include media("<=small-laptop"){
       margin: 5px;
     }
   }
 
   select {
     margin-right: 10px;
-    @media screen and (max-width: 1120px){
+    @include media("<=small-laptop"){
       margin: 5px;
       width: 100%;
     }
-    @media screen and (max-width: 500px){
+    @include media("<=large-phone"){
       margin: 5px;
       width: auto;
     }
@@ -35,7 +36,7 @@
 
   .search-bar__button {
     align-self: center;
-    @media screen and (max-width: 1120px){
+    @include media("<=small-laptop"){
       margin: 5px;
     }
 
@@ -43,7 +44,7 @@
       align-self: center;
       padding: 10px;
       width: 100%;
-      @media screen and (max-width: 1120px){
+      @include media("<=small-laptop"){
         width: 100%;
       }
     }
@@ -53,6 +54,5 @@
   .datepic {
     padding: 15px 10px;
   }
-
 }
 

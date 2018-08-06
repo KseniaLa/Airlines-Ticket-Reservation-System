@@ -33,9 +33,11 @@
 ///
 $breakpoints: (
   'phone': 400px,
-  'tablet': 768px,
+  'large-phone': 500px,
+  'small-tablet': 700px,
+  'tablet': 900px,
+  'small-laptop': 1120px,
   'laptop': 1900px,
-  'desktop': 1024px
 ) !default;
 
 

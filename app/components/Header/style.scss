@@ -1,11 +1,12 @@
 @import '../../common';
+@import '../../include-media';
 
 .header {
   position: sticky;
   top: 0px;
   z-index: 9999;
   background-color: $page_color;
-  @media screen and (max-width: 400px){
+  @include media("<=phone"){
     position: static;
   }
 
@@ -14,7 +15,7 @@
     padding: 10px;
     box-sizing: border-box;
     background-color: $page_color;
-    @media screen and (max-width: 450px){
+    @include media("<=450px"){
       @include flex_element(column);
       text-align: center;
     }
@@ -33,7 +34,7 @@
     margin: 5px;
     padding: 10px;
     height: 43px;
-    @media screen and (max-width: 400px){
+    @include media("<=phone"){
       padding: 5px;
     }
   }

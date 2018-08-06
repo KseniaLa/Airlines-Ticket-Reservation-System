@@ -1,4 +1,5 @@
 @import '../../../common';
+@import '../../../include-media';
 
 .select {
   padding: 0px 10px;
@@ -7,7 +8,7 @@
   appearance: none;
   outline: none;
   font-size: 1.6rem;
-  @media screen and (max-width: 500px){
+  @include media("<=large-phone") {
     padding: 10px;
   }
 

@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .container-flex {
   @include flex_element(column);
@@ -41,7 +42,7 @@
   & > div {
     @include flex_element(row);
     width: 100%;
-    @media screen and (max-width: 600px) {
+    @include media("<=600px") {
       @include flex_element(column);
     }
   }

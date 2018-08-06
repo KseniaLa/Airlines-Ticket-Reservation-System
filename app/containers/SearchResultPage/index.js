@@ -9,7 +9,7 @@ import Ticket from '../../components/Ticket';
 import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { searchForTickets } from './actions';
+import { searchForTickets, discardDataReady } from './actions';
 import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
@@ -19,14 +19,6 @@ class SearchResultPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.addTicketToCart = this.addTicketToCart.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.getTickets(localStorage.getItem('lol'));
-  }
-
-  componentDidUpdate() {
-    this.props.getTickets(localStorage.getItem('lol'));
   }
 
   addTicketToCart(ticket) {
@@ -75,7 +67,7 @@ class SearchResultPage extends React.PureComponent {
     return (
       <section className="container-flex">
         <div className="search">
-          <SearchBar />
+          <SearchBar onSearch={this.props.onSearch} />
         </div>
         <section className="content-flex ticket-area">
           <div className="button-set">
@@ -105,11 +97,13 @@ SearchResultPage.propTypes = {
   tickets: PropTypes.array,
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     getTickets(search) {
+      dispatch(discardDataReady());
       dispatch(searchForTickets(search));
     },
   };

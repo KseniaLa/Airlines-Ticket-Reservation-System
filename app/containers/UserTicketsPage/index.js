@@ -48,7 +48,7 @@ class UserTicketsPage extends React.Component {
 UserTicketsPage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  tickets: PropTypes.object,
+  tickets: PropTypes.array,
   getTickets: PropTypes.func,
 };
 

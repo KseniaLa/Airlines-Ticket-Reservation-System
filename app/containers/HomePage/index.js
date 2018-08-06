@@ -44,7 +44,7 @@ class HomePage extends React.PureComponent {
     const popularCities = this.props.dataReady ? this.getData() : null;
     return (
       <section className="container-flex">
-        <ImageSearch image={mainImage} />
+        <ImageSearch image={mainImage} onSearch={this.props.onSearch} />
         <div className="content-flex-column">
           <h1>
             <FormattedMessage {...messages.toptitle} />
@@ -61,6 +61,7 @@ HomePage.propTypes = {
   dataReady: PropTypes.bool,
   cities: PropTypes.object,
   getCities: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {

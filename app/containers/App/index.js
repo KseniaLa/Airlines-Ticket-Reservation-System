@@ -15,6 +15,10 @@ import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
 import { logout } from './actions';
+import {
+  searchForTickets,
+  discardDataReady,
+} from '../SearchResultPage/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { discardLogin } from '../SignInPage/actions';
@@ -64,12 +68,19 @@ class App extends React.Component {
           </ReactModal>
 
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route
+              exact
+              path="/"
+              render={() => <HomePage onSearch={this.props.getTickets} />}
+            />
             <Route
               exact
               path="/results"
               render={() => (
-                <SearchResultPage onNotAuth={this.handleOpenModal} />
+                <SearchResultPage
+                  onNotAuth={this.handleOpenModal}
+                  onSearch={this.props.getTickets}
+                />
               )}
             />
             <Route path="/user" component={UserPage} />
@@ -86,6 +97,7 @@ class App extends React.Component {
 App.propTypes = {
   changeLang: PropTypes.func,
   logout: PropTypes.func,
+  getTickets: PropTypes.func,
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -101,6 +113,11 @@ export function mapDispatchToProps(dispatch) {
     logout() {
       dispatch(logout());
       dispatch(discardLogin());
+    },
+
+    getTickets(search) {
+      dispatch(discardDataReady());
+      dispatch(searchForTickets(search));
     },
   };
 }

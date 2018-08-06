@@ -2,6 +2,7 @@ import {
   RESULT_TICKETS_REQUESTED,
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
+  DISCARD_DATA_READY,
 } from './constants';
 
 export function searchForTickets(search) {
@@ -21,5 +22,11 @@ export function getTicketsSuccess(result) {
 export function getTicketsError() {
   return {
     type: TICKETS_FETCH_FAILED,
+  };
+}
+
+export function discardDataReady() {
+  return {
+    type: DISCARD_DATA_READY,
   };
 }

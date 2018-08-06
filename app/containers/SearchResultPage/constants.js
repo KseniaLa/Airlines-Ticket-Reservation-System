@@ -6,3 +6,6 @@ export const TICKETS_FETCH_SUCCEEDED =
 
 export const TICKETS_FETCH_FAILED =
   'airlines/SearchResultPage/TICKETS_FETCH_FAILED';
+
+export const DISCARD_DATA_READY =
+  'airlines/SearchResultPage/DISCARD_DATA_READY';

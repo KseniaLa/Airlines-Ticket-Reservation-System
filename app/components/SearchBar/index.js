@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -36,7 +37,7 @@ class SearchBar extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.state.from !== '' && this.state.to !== '') {
-      localStorage.setItem('lol', this.state.from);
+      this.props.onSearch(this.state.from);
       this.props.history.push('/results');
     } else {
       this.setState({ isInputError: true });
@@ -52,9 +53,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    // if (this.state.toResults) {
-    //   return <Redirect push to="/results" />;
-    // }
     return (
       <div>
         {this.state.isInputError && (
@@ -111,5 +109,9 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func,
+};
 
 export default withRouter(SearchBar);

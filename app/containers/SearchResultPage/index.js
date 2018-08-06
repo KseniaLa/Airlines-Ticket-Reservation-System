@@ -9,7 +9,7 @@ import Ticket from '../../components/Ticket';
 import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { searchForTickets, discardDataReady } from './actions';
+import { searchForTickets, discardDataReady, addTicket } from './actions';
 import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
@@ -26,14 +26,7 @@ class SearchResultPage extends React.PureComponent {
       this.props.onNotAuth();
       return;
     }
-    if (localStorage.getItem('cartTickets') === null) {
-      localStorage.setItem('cartTickets', JSON.stringify([[ticket, count]]));
-      return;
-    }
-    const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
-    currTickets.push = [].push;
-    currTickets.push([ticket, count]);
-    localStorage.setItem('cartTickets', JSON.stringify(currTickets));
+    this.props.addTicketToCart([ticket, count]);
   }
 
   getData() {
@@ -52,7 +45,7 @@ class SearchResultPage extends React.PureComponent {
           count={ticket.count}
           action={<FormattedMessage {...messages.add} />}
           onClick={this.addTicketToCart}
-          hideOnClick
+          hideOnClick={false}
         />,
       );
     });
@@ -98,6 +91,7 @@ SearchResultPage.propTypes = {
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
   onSearch: PropTypes.func,
+  addTicketToCart: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -105,6 +99,10 @@ export function mapDispatchToProps(dispatch) {
     getTickets(search) {
       dispatch(discardDataReady());
       dispatch(searchForTickets(search));
+    },
+
+    addTicketToCart(ticket) {
+      dispatch(addTicket(ticket));
     },
   };
 }

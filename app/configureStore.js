@@ -7,7 +7,10 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
-import { ticketsResultSaga } from './containers/SearchResultPage/saga';
+import {
+  ticketsResultSaga,
+  addTicketSaga,
+} from './containers/SearchResultPage/saga';
 import { citiesSaga } from './containers/HomePage/saga';
 import { userTicketsSaga } from './containers/UserTicketsPage/saga';
 import { tryLoginSaga } from './containers/SignInPage/saga';
@@ -42,6 +45,7 @@ export default function configureStore(initialState = {}, history) {
 
   // Extensions
   sagaMiddleware.run(ticketsResultSaga);
+  sagaMiddleware.run(addTicketSaga);
   sagaMiddleware.run(citiesSaga);
   sagaMiddleware.run(userTicketsSaga);
   sagaMiddleware.run(tryLoginSaga);

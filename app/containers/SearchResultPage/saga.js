@@ -1,6 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { RESULT_TICKETS_REQUESTED } from './constants';
-import { getTicketsSuccess, getTicketsError } from './actions';
+import { RESULT_TICKETS_REQUESTED, ADD_TICKET } from './constants';
+import {
+  getTicketsSuccess,
+  getTicketsError,
+  addTicketSuccess,
+  addTicketError,
+} from './actions';
 
 import { tickets } from './result.json';
 import { notickets } from './emptyresult.json';
@@ -19,6 +24,26 @@ function* fetchTickets(action) {
   }
 }
 
+function* addTicketToStorage(action) {
+  try {
+    if (localStorage.getItem('cartTickets') === null) {
+      localStorage.setItem('cartTickets', JSON.stringify([action.payload]));
+    } else {
+      const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
+      currTickets.push = [].push;
+      currTickets.push(action.payload);
+      localStorage.setItem('cartTickets', JSON.stringify(currTickets));
+    }
+    yield put(addTicketSuccess());
+  } catch (e) {
+    yield put(addTicketError());
+  }
+}
+
 export function* ticketsResultSaga() {
   yield takeEvery(RESULT_TICKETS_REQUESTED, fetchTickets);
+}
+
+export function* addTicketSaga() {
+  yield takeEvery(ADD_TICKET, addTicketToStorage);
 }

@@ -9,3 +9,5 @@ export const TICKETS_FETCH_FAILED =
 
 export const DISCARD_DATA_READY =
   'airlines/SearchResultPage/DISCARD_DATA_READY';
+
+export const ADD_TICKET = 'airlines/SearchResultPage/ADD_TICKET';

@@ -3,6 +3,9 @@ import {
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
   DISCARD_DATA_READY,
+  ADD_SUCCEEDED,
+  ADD_FAILED,
+  ADD_TICKET,
 } from './constants';
 
 export function searchForTickets(search) {
@@ -28,5 +31,24 @@ export function getTicketsError() {
 export function discardDataReady() {
   return {
     type: DISCARD_DATA_READY,
+  };
+}
+
+export function addTicket(ticket) {
+  return {
+    type: ADD_TICKET,
+    payload: ticket,
+  };
+}
+
+export function addTicketSuccess() {
+  return {
+    type: ADD_SUCCEEDED,
+  };
+}
+
+export function addTicketError() {
+  return {
+    type: ADD_FAILED,
   };
 }

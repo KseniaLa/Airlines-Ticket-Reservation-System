@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/index';
+import { config } from '../../utils/configLoader';
 import SearchResultPage from '../SearchResultPage';
 import AddPage from '../AddPage';
 import Header from '../../components/Header';
@@ -106,7 +107,10 @@ App.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
     changeLang(lang) {
-      const nextLang = lang === 'ru' ? 'en' : 'ru';
+      const nextLang =
+        lang === config.defaultLanguage
+          ? config.availableLanguages[1]
+          : config.availableLanguages[0];
       dispatch(changeLocale(nextLang));
     },
 

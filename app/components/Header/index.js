@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { config } from '../../utils/configLoader';
 import Toggle from '../basic/ToggleButton';
 import Title from '../basic/Title';
 import Button from '../basic/Button';
@@ -21,7 +22,10 @@ export default class Header extends React.Component {
 
   render() {
     const lang = this.props.language;
-    const nextLang = lang === 'ru' ? 'en' : 'ru';
+    const nextLang =
+      lang === config.defaultLanguage
+        ? config.availableLanguages[1]
+        : config.availableLanguages[0];
     const { isAuthorized } = this.props;
     const { isAdmin } = this.props;
     const adminButton = isAdmin ? (

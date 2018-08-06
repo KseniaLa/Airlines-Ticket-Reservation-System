@@ -9,7 +9,8 @@ export function logout() {
 export function login(name, surname, isAdmin) {
   return {
     type: SIGN_IN,
-    payload: `${name} ${surname}`,
+    userName: name,
+    userSurname: surname,
     isadmin: isAdmin,
   };
 }

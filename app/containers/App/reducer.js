@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action) => {
         .setIn(['user', 'isAdmin'], false);
     case SIGN_IN:
       return state
-        .setIn(['user', 'name'], action.payload)
+        .setIn(['user', 'name'], `${action.userName} ${action.userSurname}`)
         .setIn(['user', 'isAdmin'], action.isadmin)
         .set('isAuthorized', true);
     default:

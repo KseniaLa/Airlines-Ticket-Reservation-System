@@ -37,6 +37,7 @@ class SearchBar extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.state.from !== '' && this.state.to !== '') {
+      this.setState({ isInputError: false });
       this.props.onSearch(this.state.from);
       this.props.history.push('/results');
     } else {
@@ -112,6 +113,7 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   onSearch: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default withRouter(SearchBar);

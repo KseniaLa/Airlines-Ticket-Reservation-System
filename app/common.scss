@@ -4,8 +4,6 @@ $active_button_color: #be6c53;
 $page_base_color:  #f0f0f0;
 
 @mixin flex_element($direction) {
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   flex-direction: $direction;
 }

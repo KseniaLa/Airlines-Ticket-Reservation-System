@@ -4,7 +4,8 @@
   padding: 0px 10px;
   background-color: #ffffff;
   border-radius: 5px;
-  -webkit-appearance: none;
+  //-webkit-appearance: none;
+  appearance: none;
   outline: none;
   font-size: 1.6rem;
   @media screen and (max-width: 500px){

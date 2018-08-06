@@ -9,15 +9,22 @@ import messages from './messages';
 class Ticket extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { isVisible: true };
+    this.state = { isVisible: true, count: 0 };
     this.onButtonClick = this.onButtonClick.bind(this);
+    this.updateCount = this.updateCount.bind(this);
   }
 
   onButtonClick() {
-    this.props.onClick(this.props.info);
-    if (this.props.hideOnClick) {
-      this.setState({ isVisible: false });
+    if (this.state.count !== 0) {
+      this.props.onClick(this.props.info, this.state.count);
+      if (this.props.hideOnClick) {
+        this.setState({ isVisible: false });
+      }
     }
+  }
+
+  updateCount(e) {
+    this.setState({ count: e.target.value });
   }
 
   render() {
@@ -43,7 +50,11 @@ class Ticket extends React.PureComponent {
           </div>
           <div className="ticket__count">
             <div>{<FormattedMessage {...messages.count} />}</div>
-            <input className="ticket-field" />
+            <input
+              className="ticket-field"
+              onChange={this.updateCount}
+              value={this.props.actualCount}
+            />
             <h1 className="actual-count-block">{this.props.count}</h1>
           </div>
           <div className="ticket__add-button-area">
@@ -60,6 +71,7 @@ Ticket.propTypes = {
   title: PropTypes.string,
   company: PropTypes.string,
   description: PropTypes.string,
+  actualCount: PropTypes.number,
   time: PropTypes.string,
   price: PropTypes.string,
   count: PropTypes.string,

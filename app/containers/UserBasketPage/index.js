@@ -23,7 +23,7 @@ class UserBasketPage extends React.Component {
       return <EmptyResult />;
     }
     tickets.forEach(element => {
-      const ticket = element[this.props.language];
+      const ticket = element[0][this.props.language];
       list.push(
         <Ticket
           key={ticket.id}
@@ -32,6 +32,7 @@ class UserBasketPage extends React.Component {
           time={ticket.time}
           price={ticket.price}
           count={ticket.count}
+          actualCount={+element[1]}
           action={<FormattedMessage {...messages.remove} />}
           onClick={this.onButtonClick}
           hideOnClick

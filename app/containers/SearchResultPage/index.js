@@ -21,18 +21,18 @@ class SearchResultPage extends React.PureComponent {
     this.addTicketToCart = this.addTicketToCart.bind(this);
   }
 
-  addTicketToCart(ticket) {
+  addTicketToCart(ticket, count) {
     if (!this.props.isAuthorized) {
       this.props.onNotAuth();
       return;
     }
     if (localStorage.getItem('cartTickets') === null) {
-      localStorage.setItem('cartTickets', JSON.stringify([ticket]));
+      localStorage.setItem('cartTickets', JSON.stringify([[ticket, count]]));
       return;
     }
     const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
     currTickets.push = [].push;
-    currTickets.push(ticket);
+    currTickets.push([ticket, count]);
     localStorage.setItem('cartTickets', JSON.stringify(currTickets));
   }
 
@@ -52,7 +52,7 @@ class SearchResultPage extends React.PureComponent {
           count={ticket.count}
           action={<FormattedMessage {...messages.add} />}
           onClick={this.addTicketToCart}
-          hideOnClick={false}
+          hideOnClick
         />,
       );
     });

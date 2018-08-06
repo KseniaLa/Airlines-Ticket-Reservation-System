@@ -1,4 +1,9 @@
-import { TRY_LOGIN, TRY_LOGIN_SUCCEEDED, TRY_LOGIN_FAILED } from './constants';
+import {
+  TRY_LOGIN,
+  TRY_LOGIN_SUCCEEDED,
+  TRY_LOGIN_FAILED,
+  DISCARD_LOGIN_INFO,
+} from './constants';
 
 export function tryLogin(uemail, upassword) {
   return {
@@ -17,5 +22,11 @@ export function tryLoginSuccess(status) {
 export function tryLoginError() {
   return {
     type: TRY_LOGIN_FAILED,
+  };
+}
+
+export function discardLogin() {
+  return {
+    type: DISCARD_LOGIN_INFO,
   };
 }

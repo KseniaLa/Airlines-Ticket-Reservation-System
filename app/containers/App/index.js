@@ -17,6 +17,7 @@ import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
 import { logout } from './actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
+import { discardLogin } from '../SignInPage/actions';
 
 import './style.scss';
 
@@ -99,6 +100,7 @@ export function mapDispatchToProps(dispatch) {
 
     logout() {
       dispatch(logout());
+      dispatch(discardLogin());
     },
   };
 }

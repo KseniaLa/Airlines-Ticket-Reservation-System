@@ -4,10 +4,10 @@ import {
   TICKETS_FETCH_FAILED,
 } from './constants';
 
-export function searchForTickets() {
+export function searchForTickets(search) {
   return {
     type: RESULT_TICKETS_REQUESTED,
-    // here should be some extra data
+    payload: search,
   };
 }
 

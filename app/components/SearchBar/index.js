@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -12,12 +12,11 @@ import ErrorMessage from '../basic/ErrorMessage';
 import localMessages from './messages';
 import './style.scss';
 
-export default class SearchBar extends React.PureComponent {
+class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: moment(),
-      toResults: false,
       isInputError: false,
       from: '',
       to: '',
@@ -37,7 +36,8 @@ export default class SearchBar extends React.PureComponent {
   onSubmit(e) {
     e.preventDefault();
     if (this.state.from !== '' && this.state.to !== '') {
-      this.setState({ toResults: true });
+      localStorage.setItem('lol', this.state.from);
+      this.props.history.push('/results');
     } else {
       this.setState({ isInputError: true });
     }
@@ -52,9 +52,9 @@ export default class SearchBar extends React.PureComponent {
   }
 
   render() {
-    if (this.state.toResults) {
-      return <Redirect to="/results" />;
-    }
+    // if (this.state.toResults) {
+    //   return <Redirect push to="/results" />;
+    // }
     return (
       <div>
         {this.state.isInputError && (
@@ -111,3 +111,5 @@ export default class SearchBar extends React.PureComponent {
     );
   }
 }
+
+export default withRouter(SearchBar);

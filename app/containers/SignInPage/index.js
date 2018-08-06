@@ -40,11 +40,11 @@ class SignInPage extends React.PureComponent {
     this.updateSurnameField = this.updateSurnameField.bind(this);
   }
 
-  // componentDidMount() {
-  //   if (this.props.loginStateReceived && this.props.isAuthorized) {
-  //     this.props.onCloseClick();
-  //   }
-  // }
+  componentDidUpdate() {
+    if (this.props.loginStateReceived && this.props.isAuthorized) {
+      this.props.onCloseClick();
+    }
+  }
 
   onSignIn(e) {
     e.preventDefault();

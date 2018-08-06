@@ -22,7 +22,11 @@ class SearchResultPage extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.getTickets();
+    this.props.getTickets(localStorage.getItem('lol'));
+  }
+
+  componentDidUpdate() {
+    this.props.getTickets(localStorage.getItem('lol'));
   }
 
   addTicketToCart(ticket) {
@@ -105,8 +109,8 @@ SearchResultPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getTickets() {
-      dispatch(searchForTickets());
+    getTickets(search) {
+      dispatch(searchForTickets(search));
     },
   };
 }

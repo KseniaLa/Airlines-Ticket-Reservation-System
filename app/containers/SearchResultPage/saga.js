@@ -3,10 +3,16 @@ import { RESULT_TICKETS_REQUESTED } from './constants';
 import { getTicketsSuccess, getTicketsError } from './actions';
 
 import { tickets } from './result.json';
+import { notickets } from './emptyresult.json';
 
-function* fetchTickets() {
+function* fetchTickets(action) {
   try {
-    const result = tickets;
+    let result;
+    if (action.payload === 'no') {
+      result = notickets;
+    } else {
+      result = tickets;
+    }
     yield put(getTicketsSuccess(result));
   } catch (e) {
     yield put(getTicketsError());

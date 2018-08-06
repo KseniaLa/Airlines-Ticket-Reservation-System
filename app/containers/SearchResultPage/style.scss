@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .search {
   @include flex_element(row);
@@ -9,7 +10,7 @@
   @media screen and (max-width: 900px){
     justify-content: center;
   }
-  @media screen and (max-width: 400px){
+  @include media("<=phone") {
     display: none;
   }
 }

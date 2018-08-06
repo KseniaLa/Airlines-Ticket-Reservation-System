@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 html,
 body {
@@ -59,7 +60,7 @@ a {
   width: 80%;
   font-size: 1.6rem;
   background: #ffffff;
-  @media screen and (max-width: 1900px){
+  @include media("<=laptop") {
     padding: 10px;
   }
 }

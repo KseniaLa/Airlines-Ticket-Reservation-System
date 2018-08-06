@@ -4,21 +4,26 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../components/basic/Button';
+import Spinner from '../../components/basic/Spinner';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
+import { getCartTickets } from './actions';
+import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
 import './style.scss';
 
 import messages from './messages';
 
 class UserBasketPage extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getTickets();
+  }
 
   onButtonClick() {}
 
   getData() {
     const list = [];
-    const tickets = JSON.parse(localStorage.getItem('cartTickets'));
+    const { tickets } = this.props;
     if (!tickets) {
       return <EmptyResult />;
     }
@@ -46,7 +51,7 @@ class UserBasketPage extends React.Component {
   }
 
   render() {
-    const bookedTickets = this.getData();
+    const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
     return (
       <section className="basket-container">
         <Button text={<FormattedMessage {...messages.submit} />} />
@@ -58,13 +63,26 @@ class UserBasketPage extends React.Component {
 
 UserBasketPage.propTypes = {
   language: PropTypes.string,
+  tickets: PropTypes.array,
+  dataReady: PropTypes.bool,
+  getTickets: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
+  tickets: makeSelectTickets(),
+  dataReady: makeSelectIsDataReceived(),
 });
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    getTickets() {
+      dispatch(getCartTickets());
+    },
+  };
+}
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(UserBasketPage);

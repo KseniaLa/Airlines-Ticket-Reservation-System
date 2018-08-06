@@ -11,3 +11,7 @@ export const DISCARD_DATA_READY =
   'airlines/SearchResultPage/DISCARD_DATA_READY';
 
 export const ADD_TICKET = 'airlines/SearchResultPage/ADD_TICKET';
+
+export const ADD_SUCCEEDED = 'airlines/SearchResultPage/ADD_SUCCEEDED';
+
+export const ADD_FAILED = 'airlines/SearchResultPage/ADD_FAILED';

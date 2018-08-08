@@ -14,8 +14,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NameRu = table.Column<string>(maxLength: 50, nullable: false),
-                    NameEn = table.Column<string>(maxLength: 50, nullable: false),
                     Rating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -29,12 +27,24 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NameRu = table.Column<string>(maxLength: 50, nullable: false),
-                    NameEn = table.Column<string>(maxLength: 50, nullable: false)
+                    Stars = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Language",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Language", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +89,67 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                         name: "FK_Flights_Cities_DestinationId",
                         column: x => x.DestinationId,
                         principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityTranslate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CityId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
+                    CompanyId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityTranslate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CityTranslate_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CityTranslate_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CityTranslate_Language_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Language",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompanyTranslate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CompanyId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    LanguageId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyTranslate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompanyTranslate_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompanyTranslate_Language_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Language",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -140,6 +211,31 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CityTranslate_CityId",
+                table: "CityTranslate",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CityTranslate_CompanyId",
+                table: "CityTranslate",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CityTranslate_LanguageId",
+                table: "CityTranslate",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyTranslate_CompanyId",
+                table: "CompanyTranslate",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyTranslate_LanguageId",
+                table: "CompanyTranslate",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Flights_DepartureId",
                 table: "Flights",
                 column: "DepartureId");
@@ -173,7 +269,16 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CityTranslate");
+
+            migrationBuilder.DropTable(
+                name: "CompanyTranslate");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Language");
 
             migrationBuilder.DropTable(
                 name: "Tickets");

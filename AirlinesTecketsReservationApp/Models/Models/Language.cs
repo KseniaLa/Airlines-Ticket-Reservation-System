@@ -6,11 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
-    public class City : Model
+    public class Language : Model
     {
           [Required]
-          public int Rating { get; set; }
+          [MaxLength(2)]
+          public string Name { get; set; }
 
           public virtual ICollection<CityTranslate> CityTranslates { get; set; }
+          public virtual ICollection<CompanyTranslate> CompanyTranslates { get; set; }
      }
 }

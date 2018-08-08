@@ -25,19 +25,38 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("NameRu")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<int>("Rating");
 
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Models.CityTranslate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId");
+
+                    b.Property<int?>("CompanyId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("CityTranslate");
                 });
 
             modelBuilder.Entity("Models.Company", b =>
@@ -46,17 +65,34 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<int>("Stars");
 
-                    b.Property<string>("NameRu")
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("Models.CompanyTranslate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("CompanyTranslate");
                 });
 
             modelBuilder.Entity("Models.Flight", b =>
@@ -80,6 +116,21 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasIndex("DestinationId");
 
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Language");
                 });
 
             modelBuilder.Entity("Models.Order", b =>
@@ -160,6 +211,36 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.CityTranslate", b =>
+                {
+                    b.HasOne("Models.City", "City")
+                        .WithMany("CityTranslates")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Models.Company")
+                        .WithMany("CompanyTranslates")
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("Models.Language", "Language")
+                        .WithMany("CityTranslates")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Models.CompanyTranslate", b =>
+                {
+                    b.HasOne("Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Models.Language", "Language")
+                        .WithMany("CompanyTranslates")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Models.Flight", b =>
                 {
                     b.HasOne("Models.City", "Departure")
@@ -170,7 +251,7 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasOne("Models.City", "Destination")
                         .WithMany()
                         .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Models.Order", b =>

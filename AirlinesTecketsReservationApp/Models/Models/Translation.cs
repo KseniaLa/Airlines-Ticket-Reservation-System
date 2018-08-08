@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
-    public class Language : Model
+    public class Translation : Model
     {
           [Required]
-          [MaxLength(2)]
-          public string Name { get; set; }
+          public string Value { get; set; }
 
+          public Language Language { get; set; }
      }
 }

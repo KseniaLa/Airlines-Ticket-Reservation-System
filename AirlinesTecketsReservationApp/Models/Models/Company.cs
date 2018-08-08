@@ -12,6 +12,6 @@ namespace Models
           public int Stars { get; set; }
 
           public virtual ICollection<Ticket> Tickets { get; set; }
-          public virtual ICollection<CityTranslate> CompanyTranslates { get; set; }
+          public virtual ICollection<Translation> Translations { get; set; }
      }
 }

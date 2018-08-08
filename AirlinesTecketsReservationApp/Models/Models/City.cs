@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
-    public class City : Model
+     public class City : Model
     {
           [Required]
           public int Rating { get; set; }
 
-          public virtual ICollection<CityTranslate> CityTranslates { get; set; }
+          public virtual ICollection<Translation> Translations { get; set; }
      }
 }

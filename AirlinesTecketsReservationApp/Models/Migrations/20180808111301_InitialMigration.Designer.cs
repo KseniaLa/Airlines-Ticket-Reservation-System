@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirlinesTicketsReservationApp.Models.Migrations
 {
     [DbContext(typeof(AirlinesContext))]
-    [Migration("20180808103831_InitialMigration")]
+    [Migration("20180808111301_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,8 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.Property<string>("NameRu")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<int>("Rating");
 
                     b.HasKey("Id");
 
@@ -101,23 +103,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Models.PopularCity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId");
-
-                    b.Property<int>("Rating");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("PopularCities");
                 });
 
             modelBuilder.Entity("Models.Ticket", b =>
@@ -200,14 +185,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasOne("Models.User", "User")
                         .WithMany("Order")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Models.PopularCity", b =>
-                {
-                    b.HasOne("Models.City", "City")
-                        .WithMany("PopularCities")
-                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

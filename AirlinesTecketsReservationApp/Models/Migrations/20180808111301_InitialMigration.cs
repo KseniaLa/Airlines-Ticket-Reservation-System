@@ -15,7 +15,8 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NameRu = table.Column<string>(maxLength: 50, nullable: false),
-                    NameEn = table.Column<string>(maxLength: 50, nullable: false)
+                    NameEn = table.Column<string>(maxLength: 50, nullable: false),
+                    Rating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,26 +78,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     table.ForeignKey(
                         name: "FK_Flights_Cities_DestinationId",
                         column: x => x.DestinationId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PopularCities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CityId = table.Column<int>(nullable: false),
-                    Rating = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PopularCities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PopularCities_Cities_CityId",
-                        column: x => x.CityId,
                         principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -179,11 +160,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PopularCities_CityId",
-                table: "PopularCities",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_CompanyId",
                 table: "Tickets",
                 column: "CompanyId");
@@ -198,9 +174,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "PopularCities");
 
             migrationBuilder.DropTable(
                 name: "Tickets");

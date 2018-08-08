@@ -33,6 +33,8 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int>("Rating");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
@@ -99,23 +101,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Models.PopularCity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId");
-
-                    b.Property<int>("Rating");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("PopularCities");
                 });
 
             modelBuilder.Entity("Models.Ticket", b =>
@@ -198,14 +183,6 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                     b.HasOne("Models.User", "User")
                         .WithMany("Order")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Models.PopularCity", b =>
-                {
-                    b.HasOne("Models.City", "City")
-                        .WithMany("PopularCities")
-                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

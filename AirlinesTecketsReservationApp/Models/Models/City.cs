@@ -16,9 +16,11 @@ namespace Models
           [MaxLength(50)]
           public string NameEn { get; set; }
 
+          [Required]
+          public int Rating { get; set; }
+
           //public virtual ICollection<Flight> FlightsDeparture { get; set; }
           //public virtual ICollection<Flight> FlightsDestination { get; set; }
           //public virtual ICollection<Flight> Flights { get; set; }
-          public virtual ICollection<PopularCity> PopularCities { get; set; }
      }
 }

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesTicketsReservationApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace AirlinesTecketsReservationApp.Controllers
 {
@@ -14,7 +17,16 @@ namespace AirlinesTecketsReservationApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+               AirlinesContext context = new AirlinesContext();
+
+               Language lang = new Language
+               {
+                    Name = "EN"
+               };
+
+               context.Languages.Add(lang);
+               context.SaveChanges();
+               return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5

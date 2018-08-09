@@ -4,14 +4,16 @@ using AirlinesTicketsReservationApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirlinesTicketsReservationApp.Models.Migrations
 {
     [DbContext(typeof(AirlinesContext))]
-    partial class AirlinesContextModelSnapshot : ModelSnapshot
+    [Migration("20180809063334_Languages-migration")]
+    partial class Languagesmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

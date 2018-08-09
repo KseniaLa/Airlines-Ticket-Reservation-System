@@ -32,7 +32,7 @@ namespace AirlinesTecketsReservationApp
         {
                services.AddCors();
 
-               services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
               .AddJwtBearer(jwtBearerOptions =>
               {
                    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
@@ -45,7 +45,7 @@ namespace AirlinesTecketsReservationApp
                         ValidAudience = Configuration["Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SigningKey"]))
                    };
-              });
+              });*/
 
                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
                services.AddTransient<IAirlinesContext, AirlinesContext>();
@@ -64,7 +64,7 @@ namespace AirlinesTecketsReservationApp
                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
             );
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseMvc();
         }

@@ -17,5 +17,7 @@ namespace AirlinesTicketsReservationApp.Models
           DbSet<Order> Orders { get; set; }
           DbSet<Ticket> Tickets { get; set; }
           DbSet<User> Users { get; set; }
-    }
+          DbSet<Language> Languages { get; set; }
+          DbSet<Translation> Translations { get; set; }
+     }
 }

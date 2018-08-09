@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirlinesTicketsReservationApp.Models;
+using AirlinesTicketsReservationApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -13,19 +14,25 @@ namespace AirlinesTecketsReservationApp.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        IRepository<City> db;
+
+        public ValuesController()
+        {
+             db = new CityRepository();
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
                AirlinesContext context = new AirlinesContext();
-
                Language lang = new Language
                {
-                    Name = "EN"
+                    Id = 1,
+                    Name = "ru"
                };
-
-               context.Languages.Add(lang);
-               context.SaveChanges();
+               var s = context.Languages.Find(1);
+               City c = db.GetItem(1);
                return new string[] { "value1", "value2" };
         }
 

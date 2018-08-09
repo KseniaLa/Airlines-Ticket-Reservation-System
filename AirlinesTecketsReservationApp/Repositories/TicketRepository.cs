@@ -7,24 +7,18 @@ using System.Threading.Tasks;
 
 namespace AirlinesTicketsReservationApp.Repositories
 {
-     public class CityRepository : IRepository<City>
+     public class TicketRepository : IRepository<Ticket>
      {
           private AirlinesContext db;
 
-          public CityRepository()
+          public TicketRepository()
           {
                db = new AirlinesContext();
           }
 
-          public City GetCity(int id)
+          public void Add(Ticket item)
           {
-               return db.Cities.Find(id);
-          }
-
-
-          public void Add(City item)
-          {
-               db.Cities.Add(item);
+               db.Tickets.Add(item);
           }
 
           public void Delete(int id)
@@ -37,19 +31,19 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
+          public Ticket GetItem(int id)
+          {
+               return db.Tickets.Find(id);
+          }
+
           public void Save()
           {
                db.SaveChanges();
           }
 
-          public void Update(City item)
+          public void Update(Ticket item)
           {
                throw new NotImplementedException();
-          }
-
-          public City GetItem(int id)
-          {
-               return db.Cities.Find(id);
           }
      }
 }

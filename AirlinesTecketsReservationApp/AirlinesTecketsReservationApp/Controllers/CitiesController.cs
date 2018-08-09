@@ -2,45 +2,59 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesTicketsReservationApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Models;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-    [Route("api/cities")]
-    public class CitiesController : Controller
-    {
-        // GET: api/cities
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "city", "city" };
-        }
+     [Route("api/cities")]
+     public class CitiesController : ControllerBase
+     {
+          private CityRepository db;
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+          public CitiesController()
+          {
+               db = new CityRepository();
+          }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+          // GET: api/cities
+          [HttpGet]
+          public IEnumerable<string> Get()
+          {
+               return new string[] { "city", "city" };
+          }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+          // GET api/<controller>/5
+          [HttpGet("{id}")]
+          public string Get(int id)
+          {
+               City city = db.GetCityWithTranslations(id);
 
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
+               if (city != null && city.Translations != null)
+               {
+                    List<Translation> t = city.Translations.ToList();
+                    return t[0].Value;
+               }
+               return "value";
+          }
+
+          // POST api/<controller>
+          [HttpPost]
+          public void Post([FromBody]string value)
+          {
+          }
+
+          // PUT api/<controller>/5
+          [HttpPut("{id}")]
+          public void Put(int id, [FromBody]string value)
+          {
+          }
+
+          // DELETE api/<controller>/5
+          [HttpDelete("{id}")]
+          public void Delete(int id)
+          {
+          }
+     }
 }

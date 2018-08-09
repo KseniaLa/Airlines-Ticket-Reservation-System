@@ -7,23 +7,18 @@ using System.Threading.Tasks;
 
 namespace AirlinesTicketsReservationApp.Repositories
 {
-     public class LanguageRepository : IRepository<Language>
+     public class OrderRepository : IRepository<Order>
      {
           private AirlinesContext db;
 
-          public LanguageRepository()
+          public OrderRepository()
           {
                db = new AirlinesContext();
           }
 
-          public Language GetItem(int id)
+          public void Add(Order item)
           {
-               return db.Languages.Find(id);
-          }
-
-          public void Add(Language item)
-          {
-               db.Languages.Add(item);
+               db.Orders.Add(item);
           }
 
           public void Delete(int id)
@@ -36,12 +31,17 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
+          public Order GetItem(int id)
+          {
+               return db.Orders.Find(id);
+          }
+
           public void Save()
           {
                db.SaveChanges();
           }
 
-          public void Update(Language item)
+          public void Update(Order item)
           {
                throw new NotImplementedException();
           }

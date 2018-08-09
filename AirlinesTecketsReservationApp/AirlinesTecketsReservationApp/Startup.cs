@@ -64,6 +64,8 @@ namespace AirlinesTecketsReservationApp
                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
             );
 
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }

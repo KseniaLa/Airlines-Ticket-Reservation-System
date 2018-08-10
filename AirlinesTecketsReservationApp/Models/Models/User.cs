@@ -21,10 +21,7 @@ namespace Models
           public string Email { get; set; }
 
           [Required]
-          public byte[] PasswordHash { get; set; }
-
-          [Required]
-          public byte[] PasswordSalt { get; set; }
+          public string PasswordHash { get; set; }
 
           [Required]
           public bool IsAdmin { get; set; }

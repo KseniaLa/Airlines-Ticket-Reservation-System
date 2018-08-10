@@ -36,7 +36,7 @@ namespace Services
                          User user = _db.GetUserByEmail(email); // make await
                          if (user != null)
                          {
-                              if (VerifyPassword(password, password)) // replace with user.PasswordHash !
+                              if (VerifyPassword(user.PasswordHash, password)) 
                               {
                                    return user;
                               }
@@ -68,8 +68,7 @@ namespace Services
                               Name = registrationInfo.Name,
                               Surname = registrationInfo.Surname,
                               Email = registrationInfo.Email,
-                              //PasswordHash = HashPassword(registrationInfo.Password);
-                              // add password hash
+                              PasswordHash = HashPassword(registrationInfo.Password)
                          };
 
                          _db.Add(user);

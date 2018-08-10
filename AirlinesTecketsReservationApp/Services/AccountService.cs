@@ -1,4 +1,5 @@
-﻿using AirlinesTicketsReservationApp.Repositories;
+﻿using AirlinesTicketsReservationApp.Models.Models;
+using AirlinesTicketsReservationApp.Repositories;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace Services
                }
           }
 
-          public User SignUp(UserInfo registrationInfo)
+          public User SignUp(SignUpModel registrationInfo)
           {
                if (string.IsNullOrEmpty(registrationInfo.Name) || string.IsNullOrEmpty(registrationInfo.Surname)
                     || string.IsNullOrEmpty(registrationInfo.Email) || string.IsNullOrEmpty(registrationInfo.Password))

@@ -3,6 +3,7 @@ import {
   TRY_LOGIN_SUCCEEDED,
   TRY_LOGIN_FAILED,
   DISCARD_LOGIN_INFO,
+  TRY_SIGNUP,
 } from './constants';
 
 export function tryLogin(uemail, upassword) {
@@ -28,5 +29,17 @@ export function tryLoginError() {
 export function discardLogin() {
   return {
     type: DISCARD_LOGIN_INFO,
+  };
+}
+
+export function trySignUp(uname, usurname, uemail, upassword) {
+  return {
+    type: TRY_SIGNUP,
+    payload: {
+      name: uname,
+      surname: usurname,
+      email: uemail,
+      password: upassword,
+    },
   };
 }

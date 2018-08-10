@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirlinesTicketsReservationApp.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
@@ -35,11 +36,23 @@ namespace AirlinesTicketsReservationApp.Controllers
                return "value";
           }
 
-          // POST api/<controller>
-          [HttpPost]
-          public IActionResult Post([FromBody]LoginDataModel user)
+          [AllowAnonymous]
+          [HttpPost("login")]
+          public IActionResult Authenticate([FromBody]LoginDataModel user)
           {
                User usr = _accountService.TryAuthenticate(user.Email, user.Password);
+               if (usr != null)
+               {
+                    return Ok(user);
+               }
+               return BadRequest();
+          }
+
+          [AllowAnonymous]
+          [HttpPost("signup")]
+          public IActionResult Register([FromBody]SignUpModel user)
+          {
+               User usr = _accountService.SignUp(user);
                if (usr != null)
                {
                     return Ok();

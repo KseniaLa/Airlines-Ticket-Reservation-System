@@ -10,7 +10,7 @@ import Button from '../../components/basic/Button';
 import Field from '../../components/basic/TextField';
 import Title from '../../components/basic/Title';
 import ErrorMessage from '../../components/basic/ErrorMessage';
-import { tryLogin } from './actions';
+import { tryLogin, trySignUp } from './actions';
 import {
   makeSelectIsLoginStateReceived,
   makeSelectIsLoginError,
@@ -28,6 +28,7 @@ class SignInPage extends React.PureComponent {
       signUpName: '',
       signUpSurname: '',
       signUpEmail: '',
+      signUpPassword: '',
       isInputError: false,
     };
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
@@ -36,6 +37,7 @@ class SignInPage extends React.PureComponent {
     this.updateSignInEmailField = this.updateSignInEmailField.bind(this);
     this.updateSignInPasswordField = this.updateSignInPasswordField.bind(this);
     this.updateSignUpEmailField = this.updateSignUpEmailField.bind(this);
+    this.updateSignUpPasswordField = this.updateSignUpPasswordField.bind(this);
     this.updateNameField = this.updateNameField.bind(this);
     this.updateSurnameField = this.updateSurnameField.bind(this);
   }
@@ -59,11 +61,25 @@ class SignInPage extends React.PureComponent {
 
   onSignUp(e) {
     e.preventDefault();
-    const { signUpName, signUpSurname, signUpEmail } = this.state;
-    if (signUpName !== '' && signUpSurname !== '' && signUpEmail !== '') {
+    const {
+      signUpName,
+      signUpSurname,
+      signUpEmail,
+      signUpPassword,
+    } = this.state;
+    if (
+      signUpName !== '' &&
+      signUpSurname !== '' &&
+      signUpEmail !== '' &&
+      signUpPassword !== ''
+    ) {
       this.setState({ isInputError: false });
-      console.log('registered');
-      this.props.onCloseClick();
+      this.props.trySignUp(
+        signUpName,
+        signUpSurname,
+        signUpEmail,
+        signUpPassword,
+      );
     } else {
       this.setState({ isInputError: true });
     }
@@ -84,6 +100,10 @@ class SignInPage extends React.PureComponent {
 
   updateSignUpEmailField(e) {
     this.setState({ signUpEmail: e.target.value });
+  }
+
+  updateSignUpPasswordField(e) {
+    this.setState({ signUpPassword: e.target.value });
   }
 
   updateNameField(e) {
@@ -196,6 +216,17 @@ class SignInPage extends React.PureComponent {
               />
             )}
           </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.password">
+            {placeholder => (
+              <Field
+                type="password"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignUpPasswordField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
           <Button
             text={<FormattedMessage {...messages.signup} />}
             onClick={this.onSignUp}
@@ -232,6 +263,7 @@ class SignInPage extends React.PureComponent {
 SignInPage.propTypes = {
   onCloseClick: PropTypes.func,
   tryLogin: PropTypes.func,
+  trySignUp: PropTypes.func,
   isAuthorized: PropTypes.bool,
   loginStateReceived: PropTypes.bool,
   isLoginError: PropTypes.bool,
@@ -247,6 +279,10 @@ export function mapDispatchToProps(dispatch) {
   return {
     tryLogin(email, password) {
       dispatch(tryLogin(email, password));
+    },
+
+    trySignUp(name, surname, email, password) {
+      dispatch(trySignUp(name, surname, email, password));
     },
   };
 }

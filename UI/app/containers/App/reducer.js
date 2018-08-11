@@ -8,6 +8,9 @@ const initialState = fromJS({
     id: '',
     isAdmin: false,
   },
+  authorizationInfo: {
+    access_token: false,
+  },
 });
 
 const authReducer = (state = initialState, action) => {
@@ -21,6 +24,7 @@ const authReducer = (state = initialState, action) => {
       return state
         .setIn(['user', 'name'], `${action.userName} ${action.userSurname}`)
         .setIn(['user', 'isAdmin'], action.isadmin)
+        .setIn(['authorizationInfo', 'access_token'], action.access_token)
         .set('isAuthorized', true);
     default:
       return state;

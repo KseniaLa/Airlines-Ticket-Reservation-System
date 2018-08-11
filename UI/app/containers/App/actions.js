@@ -6,11 +6,12 @@ export function logout() {
   };
 }
 
-export function login(name, surname, isAdmin) {
+export function login(name, surname, isAdmin, token) {
   return {
     type: SIGN_IN,
     userName: name,
     userSurname: surname,
     isadmin: isAdmin,
+    access_token: token,
   };
 }

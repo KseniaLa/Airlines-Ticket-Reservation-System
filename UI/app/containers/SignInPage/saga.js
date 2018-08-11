@@ -1,6 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { TRY_LOGIN, TRY_SIGNUP } from './constants';
-import { tryLoginSuccess, tryLoginError } from './actions';
+import {
+  tryLoginSuccess,
+  tryLoginError,
+  trySignUpSuccess,
+  trySignUpError,
+  signUpSuccess,
+} from './actions';
 import { login } from '../App/actions';
 import { config } from '../../utils/configLoader';
 import { loginPost, signupPost } from '../../utils/requestBuilder';
@@ -14,10 +20,10 @@ function* checkLogin(action) {
       config.APIUrl + config.APIOptions.login,
       loginPost(email, password),
     );
-    console.log(responce);
     if (responce.ok) {
+      const result = yield responce.json();
       yield [
-        put(login(user.name, user.surname, user.isAdmin)),
+        put(login(user.name, user.surname, user.isAdmin, result.token)),
         put(tryLoginSuccess(true)),
       ];
     } else {
@@ -39,13 +45,13 @@ function* register(action) {
     );
     console.log(responce);
     if (responce.ok) {
-      yield [put(tryLoginSuccess(true))];
+      yield [put(trySignUpSuccess(true)), put(signUpSuccess())];
     } else {
-      yield put(tryLoginSuccess(true));
+      yield put(trySignUpSuccess(true));
     }
   } catch (e) {
     console.log(e);
-    yield put(tryLoginError());
+    yield put(trySignUpError());
   }
 }
 

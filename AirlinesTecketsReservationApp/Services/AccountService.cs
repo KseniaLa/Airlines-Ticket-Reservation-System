@@ -24,7 +24,7 @@ namespace Services
           }
 
           // should be async?
-          public User TryAuthenticate(string email, string password)
+          public async Task<User> TryAuthenticate(string email, string password)
           {
                try
                {
@@ -34,7 +34,7 @@ namespace Services
                     }
                     else
                     {
-                         User user = _db.GetUserByEmail(email); // make await
+                         User user = await _db.GetUserByEmail(email);
                          if (user != null)
                          {
                               if (VerifyPassword(user.PasswordHash, password)) 
@@ -51,7 +51,7 @@ namespace Services
                }
           }
 
-          public User SignUp(SignUpModel registrationInfo)
+          public async Task<User> SignUp(SignUpModel registrationInfo)
           {
                if (string.IsNullOrEmpty(registrationInfo.Name) || string.IsNullOrEmpty(registrationInfo.Surname)
                     || string.IsNullOrEmpty(registrationInfo.Email) || string.IsNullOrEmpty(registrationInfo.Password))
@@ -60,7 +60,7 @@ namespace Services
                }
                else
                {
-                    User searchUser = _db.GetUserByEmail(registrationInfo.Email);
+                    User searchUser = await _db.GetUserByEmail(registrationInfo.Email);
                     bool userExists = !(searchUser == null);
                     if (!userExists)
                     {

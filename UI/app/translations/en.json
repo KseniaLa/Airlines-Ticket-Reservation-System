@@ -36,6 +36,7 @@
   "app.components.SignInPage.invalidinput": "Some fields are empty",
   "app.components.SignInPage.invalidemailpassword": "Invalid e-mail or password",
   "app.components.SignInPage.autherror": "Authorization error. Try again later",
+  "app.components.SignInPage.signupsuccess": "You've successfully sign up !",
   "app.components.SearchResultsPage.add": "Add",
   "app.components.UserBasketPage.remove": "Remove",
   "app.components.UserBasketPage.undo" : "Undo",
@@ -44,6 +45,7 @@
   "app.components.SignInPage.surname": "surname",
   "app.components.SignInPage.email" : "e-mail",
   "app.components.SignInPage.password": "password",
+  "app.components.SignInPage.shortpassword": "Password must be longer than 8 characters",
   "app.components.empty.notfound": "Not found",
   "app.components.AddPage.addgroup": "add group"
 }

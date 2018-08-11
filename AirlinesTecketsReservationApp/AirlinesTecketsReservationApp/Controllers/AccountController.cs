@@ -33,9 +33,9 @@ namespace AirlinesTicketsReservationApp.Controllers
 
           [AllowAnonymous]
           [HttpPost("login")]
-          public IActionResult Authenticate([FromBody]LoginDataModel user)
+          public async Task<IActionResult> Authenticate([FromBody]LoginDataModel user)
           {
-               User usr = _accountService.TryAuthenticate(user.Email, user.Password);
+               User usr = await _accountService.TryAuthenticate(user.Email, user.Password);
                if (usr != null)
                {
                     string token = _jwtGenerator.GenerateToken(usr);
@@ -46,9 +46,10 @@ namespace AirlinesTicketsReservationApp.Controllers
 
           [AllowAnonymous]
           [HttpPost("signup")]
-          public IActionResult Register([FromBody]SignUpModel user)
+          public async Task<IActionResult> Register([FromBody]SignUpModel user)
           {
-               User usr = _accountService.SignUp(user);
+               //EmailService.SendTestEmail(user.Email);
+               User usr = await _accountService.SignUp(user);
                if (usr != null)
                {
                     return Ok();

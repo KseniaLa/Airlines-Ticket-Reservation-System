@@ -33,6 +33,7 @@
   "app.components.SignInPage.signintitle": "Авторизация",
   "app.components.SignInPage.newuser": "Я новый пользователь",
   "app.components.SignInPage.loginexists": "Уже есть логин",
+  "app.components.SignInPage.signupsuccess": "Вы успешно зарегистрировались!",
   "app.components.SearchResultsPage.add": "добавить",
   "app.components.UserBasketPage.remove": "удалить",
   "app.components.UserBasketPage.undo" : "отменить",
@@ -44,6 +45,7 @@
   "app.components.SignInPage.invalidinput": "Некоторые поля не заполнены",
   "app.components.SignInPage.invalidemailpassword": "Неверный логин или пароль",
   "app.components.SignInPage.autherror": "Ошибка авторизации. Повторите запрос позже",
+  "app.components.SignInPage.shortpassword": "Пароль должен быть длиннее 8 символов",
   "app.components.empty.notfound": "Ничего не найдено",
   "app.components.AddPage.addgroup": "добавить группу"
 }

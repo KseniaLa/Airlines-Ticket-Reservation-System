@@ -8,4 +8,17 @@ const makeSelectIsLoginStateReceived = () =>
 const makeSelectIsLoginError = () =>
   createSelector(selectloginResult, result => result.get('loginError'));
 
-export { makeSelectIsLoginStateReceived, makeSelectIsLoginError };
+const makeSelectIsRegistered = () =>
+  createSelector(selectloginResult, result => result.get('registered'));
+
+const makeSelectIsSigninStateReceived = () =>
+  createSelector(selectloginResult, result =>
+    result.get('signupStateReceived'),
+  );
+
+export {
+  makeSelectIsLoginStateReceived,
+  makeSelectIsLoginError,
+  makeSelectIsRegistered,
+  makeSelectIsSigninStateReceived,
+};

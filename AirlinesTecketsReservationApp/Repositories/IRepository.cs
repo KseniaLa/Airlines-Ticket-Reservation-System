@@ -8,7 +8,7 @@ namespace AirlinesTicketsReservationApp.Repositories
     interface IRepository<T> : IDisposable
         where T : class
     {
-          T GetItem(int id);
+          Task<T> GetItem(int id);
           void Add(T item);
           void Update(T item);
           void Delete(int id);

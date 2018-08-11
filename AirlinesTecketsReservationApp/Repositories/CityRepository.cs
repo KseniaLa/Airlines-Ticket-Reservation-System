@@ -17,9 +17,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public City GetCity(int id)
+          public Task<City> GetCity(int id)
           {
-               return db.Cities.Find(id);
+               return db.Cities.FindAsync(id);
           }
 
           public City GetCityWithTranslations(int id)
@@ -52,9 +52,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
-          public City GetItem(int id)
+          public Task<City> GetItem(int id)
           {
-               return db.Cities.Find(id);
+               return db.Cities.FindAsync(id);
           }
      }
 }

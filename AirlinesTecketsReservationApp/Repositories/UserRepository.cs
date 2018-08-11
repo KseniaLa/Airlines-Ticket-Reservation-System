@@ -1,4 +1,5 @@
 ﻿using AirlinesTicketsReservationApp.Models;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,8 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Add(User item)
           {
-               //db.Users.AddAsync(item);
-               db.Users.Add(item);
+               db.Users.AddAsync(item);
+               //db.Users.Add(item);
           }
 
           public void Delete(int id)
@@ -32,19 +33,19 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
-          public User GetItem(int id)
+          public Task<User> GetItem(int id)
           {
-               return db.Users.Find(id);
+               return db.Users.FindAsync(id);
           }
 
-          public User GetUserByEmail(string email)
+          public Task<User> GetUserByEmail(string email)
           {
-               return db.Users.Where(user => user.Email == email).FirstOrDefault();
+               return db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
           }
 
           public void Save()
           {
-               db.SaveChanges();
+               db.SaveChangesAsync();
           }
 
           public void Update(User item)

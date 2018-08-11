@@ -31,9 +31,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
-          public Order GetItem(int id)
+          public Task<Order> GetItem(int id)
           {
-               return db.Orders.Find(id);
+               return db.Orders.FindAsync(id);
           }
 
           public void Save()

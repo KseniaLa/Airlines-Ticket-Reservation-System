@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using TokenManager;
 
 namespace AirlinesTecketsReservationApp
 {
@@ -32,20 +33,21 @@ namespace AirlinesTecketsReservationApp
         {
                services.AddCors();
 
-               /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-              .AddJwtBearer(jwtBearerOptions =>
-              {
-                   jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
-                   {
-                        ValidateActor = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Issuer"],
-                        ValidAudience = Configuration["Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SigningKey"]))
-                   };
-              });*/
+               services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                         options.RequireHttpsMetadata = false;
+                         options.TokenValidationParameters = new TokenValidationParameters
+                         {
+                              ValidateIssuer = true,
+                              ValidIssuer = JwtOptions.Issuer,
+                              ValidateAudience = true,
+                              ValidAudience = JwtOptions.Audience,
+                              ValidateLifetime = true,
+                              IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
+                              ValidateIssuerSigningKey = true,
+                         };
+                    });
 
                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
                services.AddTransient<IAirlinesContext, AirlinesContext>();
@@ -64,7 +66,7 @@ namespace AirlinesTecketsReservationApp
                   options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
             );
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc();
         }

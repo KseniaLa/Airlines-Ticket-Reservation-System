@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -16,18 +15,14 @@ namespace AirlinesTicketsReservationApp.Controllers
      public class AccountController : Controller
      {
           private readonly AccountService _accountService;
+          private readonly JwtGenerator _jwtGenerator;
 
           public AccountController()
           {
                _accountService = new AccountService();
+               _jwtGenerator = new JwtGenerator();
           }
 
-          // GET: api/account
-          [HttpGet]
-          public IEnumerable<string> Get()
-          {
-               return new string[] { "user" };
-          }
 
           // GET api/<controller>/5
           [HttpGet("{id}")]
@@ -43,7 +38,8 @@ namespace AirlinesTicketsReservationApp.Controllers
                User usr = _accountService.TryAuthenticate(user.Email, user.Password);
                if (usr != null)
                {
-                    return Ok(user);
+                    string token = _jwtGenerator.GenerateToken(usr);
+                    return Ok(new { token });
                }
                return BadRequest();
           }
@@ -58,18 +54,6 @@ namespace AirlinesTicketsReservationApp.Controllers
                     return Ok();
                }
                return BadRequest();
-          }
-
-          // PUT api/<controller>/5
-          [HttpPut("{id}")]
-          public void Put(int id, [FromBody]string value)
-          {
-          }
-
-          // DELETE api/<controller>/5
-          [HttpDelete("{id}")]
-          public void Delete(int id)
-          {
           }
      }
 }

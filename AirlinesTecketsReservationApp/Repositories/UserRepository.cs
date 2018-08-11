@@ -18,6 +18,7 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Add(User item)
           {
+               //db.Users.AddAsync(item);
                db.Users.Add(item);
           }
 

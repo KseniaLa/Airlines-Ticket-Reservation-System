@@ -2,7 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { TRY_LOGIN, TRY_SIGNUP } from './constants';
 import { tryLoginSuccess, tryLoginError } from './actions';
 import { login } from '../App/actions';
-
+import { config } from '../../utils/configLoader';
+import { loginPost, signupPost } from '../../utils/requestBuilder';
 import { user } from './user.json';
 
 function* checkLogin(action) {
@@ -10,18 +11,8 @@ function* checkLogin(action) {
     const { email, password } = action.payload;
     const responce = yield call(
       fetch,
-      'http://localhost:57730/api/account/login',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      },
+      config.APIUrl + config.APIOptions.login,
+      loginPost(email, password),
     );
     console.log(responce);
     if (responce.ok) {
@@ -43,20 +34,8 @@ function* register(action) {
     const { name, surname, email, password } = action.payload;
     const responce = yield call(
       fetch,
-      'http://localhost:57730/api/account/signup',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          surname,
-          email,
-          password,
-        }),
-      },
+      config.APIUrl + config.APIOptions.signup,
+      signupPost(name, surname, email, password),
     );
     console.log(responce);
     if (responce.ok) {

@@ -15,13 +15,10 @@ namespace Models
           public int DestinationId { get; set; }
 
           [Required]
-          public DateTime Date { get; set; }
+          public DateTime DateTime { get; set; }
 
-          [Required]
-          public TimeSpan Time { get; set; }
-
-          public virtual City Departure { get; set; }
-          public virtual City Destination { get; set; }
+          public /*virtual*/ City Departure { get; set; }
+          public /*virtual*/ City Destination { get; set; }
           public virtual ICollection<Ticket> Tickets { get; set; } 
      }
 }

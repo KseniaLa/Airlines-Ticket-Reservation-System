@@ -4,14 +4,16 @@ using AirlinesTicketsReservationApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirlinesTicketsReservationApp.Models.Migrations
 {
     [DbContext(typeof(AirlinesContext))]
-    partial class AirlinesContextModelSnapshot : ModelSnapshot
+    [Migration("20180812083519_time0firld-removed")]
+    partial class time0firldremoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,7 +205,7 @@ namespace AirlinesTicketsReservationApp.Models.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Models.User", "User")
-                        .WithMany("Orders")
+                        .WithMany("Order")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

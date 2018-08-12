@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { RESULT_TICKETS_REQUESTED, ADD_TICKET } from './constants';
 import {
   getTicketsSuccess,
@@ -6,14 +6,20 @@ import {
   addTicketSuccess,
   addTicketError,
 } from './actions';
-
+import { config } from '../../utils/configLoader';
+import { searchPost } from '../../utils/requestBuilder';
 import { tickets } from './result.json';
 import { notickets } from './emptyresult.json';
 
 function* fetchTickets(action) {
   try {
-    let result;
-    if (action.payload === 'no') {
+    const { from, to, date, flightClass } = action.payload;
+    let result = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.resultTickets + 'en',
+      searchPost(from, to, date, flightClass),
+    );
+    if (action.payload.from === 'no') {
       result = notickets;
     } else {
       result = tickets;

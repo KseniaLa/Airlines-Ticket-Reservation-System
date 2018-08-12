@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AirlinesTicketsReservationApp.Models.Models;
+using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -23,23 +25,15 @@ namespace AirlinesTicketsReservationApp.Controllers
                _jwtGenerator = new JwtGenerator();
           }
 
-
-          // GET api/<controller>/5
-          [HttpGet("{id}")]
-          public string Get(int id)
-          {
-               return "value";
-          }
-
           [AllowAnonymous]
           [HttpPost("login")]
-          public async Task<IActionResult> Authenticate([FromBody]LoginDataModel user)
+          public async Task<IActionResult> Authenticate([FromBody]LoginModel user)
           {
                User usr = await _accountService.TryAuthenticate(user.Email, user.Password);
                if (usr != null)
                {
                     string token = _jwtGenerator.GenerateToken(usr);
-                    return Ok(new { token });
+                    return Ok(new { token, name = usr.Name, surname = usr.Surname, isAdmin = usr.IsAdmin });
                }
                return BadRequest();
           }

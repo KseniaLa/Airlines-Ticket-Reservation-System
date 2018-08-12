@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 
-namespace AirlinesTicketsReservationApp.Models.Models
+namespace AirlinesTicketsReservationApp.Models.Models.SupportingModels
 {
-    public class LoginDataModel
-    {
+     public class LoginModel
+     {
           public string Email { get; set; }
           public string Password { get; set; }
-    }
+     }
 }

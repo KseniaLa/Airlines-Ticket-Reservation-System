@@ -43,6 +43,11 @@ namespace AirlinesTicketsReservationApp.Repositories
                return db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
           }
 
+          public Task<User> GetUserWithOrders(string email)
+          {
+               return db.Users.Where(c => c.Email == email).Include("Orders.Ticket.Flight").FirstOrDefaultAsync();
+          }
+
           public void Save()
           {
                db.SaveChangesAsync();

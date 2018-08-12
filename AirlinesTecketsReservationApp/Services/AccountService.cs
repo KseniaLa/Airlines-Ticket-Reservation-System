@@ -1,4 +1,5 @@
 ﻿using AirlinesTicketsReservationApp.Models.Models;
+using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using AirlinesTicketsReservationApp.Repositories;
 using Models;
 using System;

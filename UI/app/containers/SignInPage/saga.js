@@ -10,7 +10,6 @@ import {
 import { login } from '../App/actions';
 import { config } from '../../utils/configLoader';
 import { loginPost, signupPost } from '../../utils/requestBuilder';
-import { user } from './user.json';
 
 function* checkLogin(action) {
   try {
@@ -22,8 +21,9 @@ function* checkLogin(action) {
     );
     if (responce.ok) {
       const result = yield responce.json();
+      localStorage.setItem('token', result.token);
       yield [
-        put(login(user.name, user.surname, user.isAdmin, result.token)),
+        put(login(result.name, result.surname, result.isAdmin, result.token)),
         put(tryLoginSuccess(true)),
       ];
     } else {

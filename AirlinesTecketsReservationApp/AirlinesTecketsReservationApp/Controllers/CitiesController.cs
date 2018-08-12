@@ -11,50 +11,18 @@ namespace AirlinesTicketsReservationApp.Controllers
      [Route("api/cities")]
      public class CitiesController : ControllerBase
      {
-          private CityRepository db;
+          private CityRepository _db;
 
           public CitiesController()
           {
-               db = new CityRepository();
+               _db = new CityRepository();
           }
 
-          // GET: api/cities
-          [HttpGet]
-          public IEnumerable<string> Get()
+          // GET api/cities/5
+          [HttpGet("{lang}")]
+          public string Get(string lang)
           {
-               return new string[] { "city", "city" };
-          }
-
-          // GET api/<controller>/5
-          [HttpGet("{id}")]
-          public string Get(int id)
-          {
-               City city = db.GetCityWithTranslations(id);
-
-               if (city != null && city.Translations != null)
-               {
-                    List<Translation> t = city.Translations.ToList();
-                    return t[0].Value;
-               }
                return "value";
-          }
-
-          // POST api/<controller>
-          [HttpPost]
-          public void Post([FromBody]string value)
-          {
-          }
-
-          // PUT api/<controller>/5
-          [HttpPut("{id}")]
-          public void Put(int id, [FromBody]string value)
-          {
-          }
-
-          // DELETE api/<controller>/5
-          [HttpDelete("{id}")]
-          public void Delete(int id)
-          {
           }
      }
 }

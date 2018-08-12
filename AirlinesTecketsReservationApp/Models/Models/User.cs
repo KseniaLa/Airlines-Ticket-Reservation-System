@@ -26,6 +26,6 @@ namespace Models
           [Required]
           public bool IsAdmin { get; set; }
 
-          public virtual ICollection<Order> Order { get; set; }
+          public virtual ICollection<Order> Orders { get; set; }
      }
 }

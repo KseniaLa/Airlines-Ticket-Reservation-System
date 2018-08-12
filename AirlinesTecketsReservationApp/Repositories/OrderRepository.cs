@@ -18,7 +18,7 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Add(Order item)
           {
-               db.Orders.Add(item);
+               db.Orders.AddAsync(item);
           }
 
           public void Delete(int id)
@@ -38,7 +38,7 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Save()
           {
-               db.SaveChanges();
+               db.SaveChangesAsync();
           }
 
           public void Update(Order item)

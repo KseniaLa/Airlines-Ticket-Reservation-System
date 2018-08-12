@@ -5,20 +5,35 @@ import './style.scss';
 class Select extends React.PureComponent {
   createOptions = () => {
     const list = [];
-    const { items } = this.props;
+    const { items, values } = this.props;
     items.forEach((element, index) => {
-      list.push(<option key={index}>{element}</option>);
+      list.push(
+        <option key={index} value={values[index]}>
+          {element}
+        </option>,
+      );
     });
     return list;
   };
 
   render() {
-    return <select className="select">{this.createOptions()}</select>;
+    return (
+      <select
+        className="select"
+        value={this.props.value}
+        onChange={this.props.onChange}
+      >
+        {this.createOptions()}
+      </select>
+    );
   }
 }
 
 Select.propTypes = {
   items: PropTypes.array,
+  value: PropTypes.string,
+  values: PropTypes.array,
+  onChange: PropTypes.func,
 };
 
 export default Select;

@@ -10,7 +10,7 @@ namespace TokenManager
      {
           public const string Issuer = "AirlinesServer";
           public const string Audience = "http://localhost:3000";
-          public const int Lifetime = 1;
+          public const int Lifetime = 30;
           private static readonly string _key = Convert.ToBase64String((new HMACSHA256()).Key);
 
           public static SymmetricSecurityKey GetSymmetricSecurityKey()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,35 +13,15 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/tickets")]
     public class TicketsController : Controller
     {
-        // GET: api/tickets
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [AllowAnonymous]
+        [HttpPost("search/{lang}")]
+        public IActionResult FindTickets([FromBody]Search search, string lang)
         {
-            return new string[] { "value1", "value2" };
+            return Ok();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void AddTickets([FromBody]string value)
         {
         }
     }

@@ -17,7 +17,7 @@ namespace Models
           [Required]
           public int Count { get; set; }
 
-          public Ticket Ticket { get; set; }
-          public User User { get; set; }
+          public virtual Ticket Ticket { get; set; }
+          public virtual User User { get; set; }
      }
 }

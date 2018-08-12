@@ -17,8 +17,8 @@ namespace Models
           [Required]
           public DateTime DateTime { get; set; }
 
-          public /*virtual*/ City Departure { get; set; }
-          public /*virtual*/ City Destination { get; set; }
+          public virtual City Departure { get; set; }
+          public virtual City Destination { get; set; }
           public virtual ICollection<Ticket> Tickets { get; set; } 
      }
 }

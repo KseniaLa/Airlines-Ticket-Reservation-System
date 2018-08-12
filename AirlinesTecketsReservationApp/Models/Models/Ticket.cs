@@ -23,8 +23,8 @@ namespace Models
           [Required]
           public int Count { get; set; }
           
-          public Company Company { get; set; }
-          public Flight Flight { get; set; }
+          public virtual Company Company { get; set; }
+          public virtual Flight Flight { get; set; }
           public virtual ICollection<Order> Order { get; set; }
      }
 }

@@ -1,4 +1,5 @@
-﻿using AirlinesTicketsReservationApp.Repositories;
+﻿using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
+using AirlinesTicketsReservationApp.Repositories;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,29 @@ namespace Services
                _dbOrder = new OrderRepository();
           }
 
-          public async Task<List<Order>> GetUserOrders(string email)
+          public async Task<List<TicketModel>> GetUserOrders(string email, string language)
           {
-               User user = await _db.GetUserWithOrders(email);
+               User user = await _db.GetUserByEmail(email);
                List<Order> orders = user.Orders.ToList();
-               return orders;
+               List<TicketModel> tickets = new List<TicketModel>();
+               foreach (Order order in orders)
+               {
+                    tickets.Add(new TicketModel
+                    {
+                         From = order.Ticket.Flight.Departure.Translations
+                              .Where(t => t.Language.Name == language).FirstOrDefault().Value,
+                         To = order.Ticket.Flight.Destination.Translations
+                              .Where(t => t.Language.Name == language).FirstOrDefault().Value,
+                         Company = order.Ticket.Company.Translations
+                              .Where(t => t.Language.Name == language).FirstOrDefault().Value,
+                         Date = order.Ticket.Flight.DateTime,
+                         Category = order.Ticket.Category,
+                         Price = order.Ticket.Price,
+                         TotalCount = order.Ticket.Count,
+                         BookedCount = order.Count
+                    });
+               }
+               return tickets;
           }
      }
 }

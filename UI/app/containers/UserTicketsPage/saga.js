@@ -4,15 +4,19 @@ import { config } from '../../utils/configLoader';
 import { authGet } from '../../utils/requestBuilder';
 import { getUserTicketsSuccess, getUserTicketsError } from './actions';
 
-function* fetchUserTickets() {
+function* fetchUserTickets(action) {
   try {
     const responce = yield call(
       fetch,
-      config.APIUrl + config.APIOptions.getUserTickets,
+      config.APIUrl + config.APIOptions.getUserTickets + action.payload,
       authGet(localStorage.getItem('token')),
     );
-    console.log(responce);
-    yield put(getUserTicketsSuccess(responce));
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getUserTicketsSuccess(result.orders));
+    } else {
+      yield put(getUserTicketsError());
+    }
   } catch (e) {
     yield put(getUserTicketsError());
   }

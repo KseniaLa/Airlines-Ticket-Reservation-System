@@ -10,19 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-    [Route("api/tickets")]
-    public class TicketsController : Controller
-    {
-        [AllowAnonymous]
-        [HttpPost("search/{lang}")]
-        public IActionResult FindTickets([FromBody]Search search, string lang)
-        {
-            return Ok();
-        }
+     [Route("api/tickets")]
+     public class TicketsController : Controller
+     {
+          [AllowAnonymous]
+          [HttpPost("search/{lang}")]
+          public IActionResult FindTickets([FromBody]Search search, string lang)
+          {
+               return Ok();
+          }
 
-        [HttpPost]
-        public void AddTickets([FromBody]string value)
-        {
-        }
-    }
+          [Authorize(Roles = "Administrator")]
+          [HttpPost]
+          public void AddTickets([FromBody]string value)
+          {
+          }
+     }
 }

@@ -11,6 +11,6 @@ namespace Models
           [Required]
           public string Value { get; set; }
 
-          public Language Language { get; set; }
+          public virtual Language Language { get; set; }
      }
 }

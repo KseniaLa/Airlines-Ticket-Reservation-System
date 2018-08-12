@@ -6,7 +6,7 @@ const CONFIG = {
   APIOptions: {
     login: 'account/login',
     signup: 'account/signup',
-    getUserTickets: 'orders/userorders',
+    getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',
   },
 };

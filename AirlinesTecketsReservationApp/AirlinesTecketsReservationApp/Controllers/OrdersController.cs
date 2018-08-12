@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -21,12 +22,12 @@ namespace AirlinesTicketsReservationApp.Controllers
           }
 
           [Authorize]
-          [HttpGet("userorders")]
-          public async Task<IActionResult> GetUserOrders(int id)
+          [HttpGet("userorders/{language}")]
+          public async Task<IActionResult> GetUserOrders(string language)
           {
                string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-               List<Order> orders = await _orderService.GetUserOrders(email);
-               return Ok(new { count = orders[0].Count});
+               List<TicketModel> orders = await _orderService.GetUserOrders(email, language);
+               return Ok(new { orders });
           }
      }
 }

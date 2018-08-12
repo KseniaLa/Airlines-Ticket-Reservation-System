@@ -46,7 +46,7 @@ class Ticket extends React.PureComponent {
             {<FormattedMessage {...messages.price} />}: {this.props.price} BYN
           </div>
           <div className="ticket__category">
-            <h3>business</h3>
+            <h3>{this.props.category}</h3>
           </div>
           <div className="ticket__count">
             <div>{<FormattedMessage {...messages.count} />}</div>
@@ -70,6 +70,7 @@ Ticket.propTypes = {
   info: PropTypes.object,
   title: PropTypes.string,
   company: PropTypes.string,
+  category: PropTypes.string,
   description: PropTypes.string,
   actualCount: PropTypes.number,
   time: PropTypes.string,

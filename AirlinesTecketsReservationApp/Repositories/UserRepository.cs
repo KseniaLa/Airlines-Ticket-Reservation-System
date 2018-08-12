@@ -43,9 +43,19 @@ namespace AirlinesTicketsReservationApp.Repositories
                return db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
           }
 
-          public Task<User> GetUserWithOrders(string email)
+          public async Task<User> GetUserWithOrders(string email)
           {
-               return db.Users.Where(c => c.Email == email).Include("Orders.Ticket.Flight").FirstOrDefaultAsync();
+               User user = await db.Users.Where(c => c.Email == email).FirstOrDefaultAsync();
+               List<Order> list = user.Orders.ToList();
+               return user;
+               /*return db.Users.Where(c => c.Email == email).Include(u => u.Orders)
+                    .ThenInclude(o => o.Ticket)
+                    .ThenInclude(t => t.Company)
+                    .ThenInclude(c => c.Translations)
+                    .Include(u => u.Orders)
+                    .ThenInclude(o => o.Ticket)
+                    .ThenInclude(t => t.Flight)
+                    .FirstOrDefaultAsync();*/
           }
 
           public void Save()

@@ -13,22 +13,24 @@ import messages from './messages';
 
 class UserTicketsPage extends React.Component {
   componentDidMount() {
-    this.props.getTickets();
+    this.props.getTickets(this.props.language);
   }
 
   getData() {
     const list = [];
     const { tickets } = this.props;
-    tickets.forEach(element => {
-      const ticket = element[this.props.language];
+    tickets.forEach(ticket => {
+      const date = new Date(ticket.date);
       list.push(
         <Ticket
           key={ticket.id}
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
-          time={ticket.time}
+          category={ticket.category}
+          time={`${date.getHours()} : ${date.getMinutes()}`}
           price={ticket.price}
-          count={ticket.count}
+          count={ticket.totalCount}
+          actualCount={ticket.bookedCount}
           action={<FormattedMessage {...messages.undo} />}
         />,
       );
@@ -54,8 +56,8 @@ UserTicketsPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getTickets() {
-      dispatch(getUserTickets());
+    getTickets(lang) {
+      dispatch(getUserTickets(lang));
     },
   };
 }

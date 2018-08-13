@@ -1,10 +1,23 @@
-export function loginPost(email, password) {
+function getJsonTypePost() {
   return {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+  };
+}
+
+export function getPostMethod(bodyContent) {
+  return {
+    ...getJsonTypePost(),
+    body: JSON.stringify(bodyContent),
+  };
+}
+
+export function loginPost(email, password) {
+  return {
+    ...getJsonTypePost(),
     body: JSON.stringify({
       email,
       password,
@@ -14,11 +27,7 @@ export function loginPost(email, password) {
 
 export function signupPost(name, surname, email, password) {
   return {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    ...getJsonTypePost(),
     body: JSON.stringify({
       name,
       surname,
@@ -39,11 +48,7 @@ export function authGet(token) {
 
 export function searchPost(from, to, date, flightClass) {
   return {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    ...getJsonTypePost(),
     body: JSON.stringify({
       from,
       to,

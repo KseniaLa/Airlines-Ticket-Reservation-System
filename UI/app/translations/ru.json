@@ -15,6 +15,7 @@
   "app.components.HomePage.toptitle": "Популярные направления",
   "app.components.NotFoundPage.header": "Страница не найдена",
   "app.components.Ticket.count": "Количество",
+  "app.components.Ticket.date": "Дата",
   "app.components.Ticket.price": "Цена",
   "app.components.Ticket.time": "Время",
   "app.components.UserBasketPage.submit": "Подтвердить заказ",

@@ -29,7 +29,7 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Add(City item)
           {
-               db.Cities.Add(item);
+               db.Cities.AddAsync(item);
           }
 
           public void Delete(int id)

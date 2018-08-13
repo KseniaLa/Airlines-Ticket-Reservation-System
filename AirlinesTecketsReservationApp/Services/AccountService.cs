@@ -24,7 +24,6 @@ namespace Services
                _db = new UserRepository();
           }
 
-          // should be async?
           public async Task<User> TryAuthenticate(string email, string password)
           {
                try

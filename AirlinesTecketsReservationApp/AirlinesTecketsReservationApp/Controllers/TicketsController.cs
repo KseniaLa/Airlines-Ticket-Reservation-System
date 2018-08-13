@@ -4,26 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using Microsoft.AspNetCore.Authorization;
+using AirlinesTicketsReservationApp.Repositories;
+using Models;
+using Services;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-     [Route("api/tickets")]
-     public class TicketsController : Controller
-     {
-          [AllowAnonymous]
-          [HttpPost("search/{lang}")]
-          public IActionResult FindTickets([FromBody]Search search, string lang)
-          {
-               return Ok();
-          }
+    [Route("api/tickets")]
+    public class TicketsController : Controller
+    {
+        private TicketService _ticketService;
+        public TicketsController()
+        {
+            _ticketService = new TicketService();
+        }
 
-          [Authorize(Roles = "Administrator")]
-          [HttpPost]
-          public void AddTickets([FromBody]string value)
-          {
-          }
-     }
+
+        [AllowAnonymous]
+        [HttpPost("search/{lang}")]
+        public async Task<IActionResult> FindTickets([FromBody]Search search, string lang)
+        {
+            List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
+            return Ok(new { tickets });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public void AddTickets([FromBody]string value)
+        {
+        }
+    }
 }

@@ -27,10 +27,13 @@ class UserTicketsPage extends React.Component {
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
           category={ticket.category}
+          date={`${date.getDate()}.${date.getMonth() +
+            1}.${date.getFullYear()}`}
           time={`${date.getHours()} : ${date.getMinutes()}`}
           price={ticket.price}
           count={ticket.totalCount}
           actualCount={ticket.bookedCount}
+          showCount={false}
           action={<FormattedMessage {...messages.undo} />}
         />,
       );

@@ -36,7 +36,9 @@ class Ticket extends React.PureComponent {
         <div>
           <div className="ticket__title">{this.props.title}</div>
           <div className="ticket__company">{this.props.company}</div>
-          <div className="ticket__description">{this.props.description}</div>
+          <div className="ticket__date">
+            {<FormattedMessage {...messages.date} />}: {this.props.date}
+          </div>
           <div className="ticket__time">
             {<FormattedMessage {...messages.time} />}: {this.props.time}
           </div>
@@ -55,7 +57,9 @@ class Ticket extends React.PureComponent {
               onChange={this.updateCount}
               value={this.props.actualCount}
             />
-            <h1 className="actual-count-block">{this.props.count}</h1>
+            {this.props.showCount && (
+              <h1 className="actual-count-block">{this.props.count}</h1>
+            )}
           </div>
           <div className="ticket__add-button-area">
             <Button text={this.props.action} onClick={this.onButtonClick} />
@@ -73,6 +77,8 @@ Ticket.propTypes = {
   category: PropTypes.string,
   description: PropTypes.string,
   actualCount: PropTypes.number,
+  showCount: PropTypes.bool,
+  date: PropTypes.string,
   time: PropTypes.string,
   price: PropTypes.string,
   count: PropTypes.string,

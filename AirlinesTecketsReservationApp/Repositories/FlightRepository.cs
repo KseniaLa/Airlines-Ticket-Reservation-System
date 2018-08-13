@@ -18,7 +18,7 @@ namespace AirlinesTicketsReservationApp.Repositories
 
           public void Add(Flight item)
           {
-               db.Flights.Add(item);
+               db.Flights.AddAsync(item);
           }
 
           public void Delete(int id)

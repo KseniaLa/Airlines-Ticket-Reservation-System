@@ -8,23 +8,21 @@ import {
 } from './actions';
 import { config } from '../../utils/configLoader';
 import { searchPost } from '../../utils/requestBuilder';
-import { tickets } from './result.json';
-import { notickets } from './emptyresult.json';
 
 function* fetchTickets(action) {
   try {
     const { from, to, date, flightClass } = action.payload;
-    let result = yield call(
+    const responce = yield call(
       fetch,
-      config.APIUrl + config.APIOptions.resultTickets + 'en',
+      config.APIUrl + config.APIOptions.resultTickets + action.language,
       searchPost(from, to, date, flightClass),
     );
-    if (action.payload.from === 'no') {
-      result = notickets;
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getTicketsSuccess(result.tickets));
     } else {
-      result = tickets;
+      yield put(getTicketsError());
     }
-    yield put(getTicketsSuccess(result));
   } catch (e) {
     yield put(getTicketsError());
   }

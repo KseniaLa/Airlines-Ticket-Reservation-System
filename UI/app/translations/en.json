@@ -15,6 +15,7 @@
   "app.components.HomePage.toptitle": "Popular directions",
   "app.components.NotFoundPage.header": "Page not found",
   "app.components.Ticket.count": "Count",
+  "app.components.Ticket.date": "Date",
   "app.components.Ticket.price": "Price",
   "app.components.Ticket.time": "Time",
   "app.components.UserBasketPage.submit": "Submit",

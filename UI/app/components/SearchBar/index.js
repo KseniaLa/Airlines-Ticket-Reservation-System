@@ -41,7 +41,7 @@ class SearchBar extends React.Component {
     if (this.state.from !== '' && this.state.to !== '') {
       this.setState({ isInputError: false });
       const { from, to, flightClass, startDate } = this.state;
-      this.props.onSearch(from, to, startDate._d, flightClass);
+      this.props.onSearch(from, to, startDate._d, flightClass, 'ru');
       this.props.history.push('/results');
     } else {
       this.setState({ isInputError: true });
@@ -124,6 +124,7 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   onSearch: PropTypes.func,
   history: PropTypes.object,
+  language: PropTypes.string,
 };
 
 export default withRouter(SearchBar);

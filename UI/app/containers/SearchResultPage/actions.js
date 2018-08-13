@@ -8,10 +8,11 @@ import {
   ADD_TICKET,
 } from './constants';
 
-export function searchForTickets(from, to, date, flightClass) {
+export function searchForTickets(from, to, date, flightClass, lang) {
   return {
     type: RESULT_TICKETS_REQUESTED,
     payload: { from, to, date, flightClass },
+    language: lang,
   };
 }
 

@@ -26,8 +26,15 @@ namespace AirlinesTicketsReservationApp.Controllers
         [HttpPost("search/{lang}")]
         public async Task<IActionResult> FindTickets([FromBody]Search search, string lang)
         {
-            List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
-            return Ok(new { tickets });
+            try
+            {
+                List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
+                return Ok(new { tickets });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [Authorize(Roles = "Administrator")]

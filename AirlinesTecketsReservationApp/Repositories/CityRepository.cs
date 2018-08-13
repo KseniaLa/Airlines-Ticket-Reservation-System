@@ -8,53 +8,61 @@ using System.Threading.Tasks;
 
 namespace AirlinesTicketsReservationApp.Repositories
 {
-     public class CityRepository : IRepository<City>
-     {
-          private AirlinesContext db;
+    public class CityRepository : IRepository<City>
+    {
+        private AirlinesContext db;
 
-          public CityRepository()
-          {
-               db = new AirlinesContext();
-          }
+        public CityRepository()
+        {
+            db = new AirlinesContext();
+        }
 
-          public Task<City> GetCity(int id)
-          {
-               return db.Cities.FindAsync(id);
-          }
+        public Task<City> GetCity(int id)
+        {
+            return db.Cities.FindAsync(id);
+        }
 
-          public City GetCityWithTranslations(int id)
-          {
-               return db.Cities.Where(c => c.Id == id).Include(c => c.Translations).FirstOrDefault();
-          }
+        public Task<City> GetCityWithTranslations(int id)
+        {
+            return db.Cities.Where(c => c.Id == id).Include(c => c.Translations).FirstOrDefaultAsync();
+        }
 
-          public void Add(City item)
-          {
-               db.Cities.AddAsync(item);
-          }
+        public Task<List<City>> GetTopCitiesByRating(int topCount)
+        {
+            var cities = (from c in db.Cities
+                          orderby c.Rating descending
+                          select c).Take(topCount).ToListAsync();
+            return cities;
+        }
 
-          public void Delete(int id)
-          {
-               throw new NotImplementedException();
-          }
+        public void Add(City item)
+        {
+            db.Cities.AddAsync(item);
+        }
 
-          public void Dispose()
-          {
-               throw new NotImplementedException();
-          }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-          public void Save()
-          {
-               db.SaveChanges();
-          }
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
-          public void Update(City item)
-          {
-               throw new NotImplementedException();
-          }
+        public void Save()
+        {
+            db.SaveChanges();
+        }
 
-          public Task<City> GetItem(int id)
-          {
-               return db.Cities.FindAsync(id);
-          }
-     }
+        public void Update(City item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<City> GetItem(int id)
+        {
+            return db.Cities.FindAsync(id);
+        }
+    }
 }

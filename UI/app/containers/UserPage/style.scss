@@ -12,7 +12,7 @@
   padding: 10px;
   max-width: 1000px;
 
-  .user-card__name {
+  &__name {
     display: block;
     color: $page_color;
     font-size: 2.0rem;
@@ -20,7 +20,7 @@
     margin: 0px;
   }
 
-  .user-card__navbar {
+  &__navbar {
     @include flex_element(row);
     justify-content: space-between;
 
@@ -30,7 +30,7 @@
     }
   }
 
-  .user-card__tickets-area {
+  &__tickets-area {
     @include flex_element(column);
     background-color: #ffffff;
     border-radius: 10px;

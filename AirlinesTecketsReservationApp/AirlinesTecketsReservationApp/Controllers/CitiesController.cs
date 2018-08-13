@@ -33,6 +33,7 @@ namespace AirlinesTicketsReservationApp.Controllers
                 {
                     cities.Add(new CityModel
                     {
+                        Id = city.Id,
                         Url = "unknown",
                         Name = city.Translations.Where(t => t.Language.Name == lang).FirstOrDefault().Value
                     });

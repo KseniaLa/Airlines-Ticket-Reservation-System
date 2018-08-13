@@ -34,7 +34,7 @@
     }
   }
 
-  .search-bar__button {
+  &__button {
     align-self: center;
     @include media("<=small-laptop"){
       margin: 5px;

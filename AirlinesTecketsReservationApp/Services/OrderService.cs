@@ -29,6 +29,7 @@ namespace Services
                {
                     tickets.Add(new TicketModel
                     {
+                         Id = order.Id,
                          From = order.Ticket.Flight.Departure.Translations
                               .Where(t => t.Language.Name == language).FirstOrDefault().Value,
                          To = order.Ticket.Flight.Destination.Translations

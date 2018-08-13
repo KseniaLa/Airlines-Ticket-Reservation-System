@@ -27,10 +27,10 @@ class HomePage extends React.PureComponent {
     for (let i = 0; i < cities.length - 1; i += 2) {
       list.push(
         <div key={cities[i].id}>
-          <div className="imageste-box__item">
+          <div className="imageset-box__item">
             <TextImageBlock image={cityImage2} text={cities[i].name} />
           </div>
-          <div className="imageste-box__item">
+          <div className="imageset-box__item">
             <TextImageBlock image={cityImage2} text={cities[i + 1].name} />
           </div>
         </div>,
@@ -58,7 +58,7 @@ class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  cities: PropTypes.object,
+  cities: PropTypes.array,
   getCities: PropTypes.func,
   onSearch: PropTypes.func,
 };

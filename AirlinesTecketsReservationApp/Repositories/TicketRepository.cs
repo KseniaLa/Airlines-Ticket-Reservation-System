@@ -38,10 +38,9 @@ namespace AirlinesTicketsReservationApp.Repositories
             return await db.Tickets.FindAsync(id);
         }
 
-        public async Task<List<Ticket>> SearchForTickets(Search search, string lang)
+        public async Task<IEnumerable<Ticket>> GetAll()
         {
-            return await db.Tickets.Where(t => t.Category == search.FlightClass)
-                .Where(t => t.Flight.DateTime.Date == search.Date.Date).ToListAsync();
+            return await db.Tickets.ToListAsync();
         }
 
         public async Task Save()

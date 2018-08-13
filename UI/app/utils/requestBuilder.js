@@ -1,3 +1,5 @@
+// create universal methods!!!
+
 function getJsonTypePost() {
   return {
     method: 'POST',
@@ -43,6 +45,12 @@ export function authGet(token) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+  };
+}
+
+export function emptyGet() {
+  return {
+    method: 'GET',
   };
 }
 

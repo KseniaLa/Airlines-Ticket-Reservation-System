@@ -18,21 +18,20 @@ import { searchForCities } from './actions';
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
-    this.props.getCities();
+    this.props.getCities(this.props.language);
   }
 
   getData() {
     const list = [];
     const { cities } = this.props;
-    const langCities = cities[this.props.language];
-    for (let i = 0; i < langCities.length - 1; i += 2) {
+    for (let i = 0; i < cities.length - 1; i += 2) {
       list.push(
-        <div key={langCities[i].id}>
+        <div key={cities[i].id}>
           <div className="imageste-box__item">
-            <TextImageBlock image={cityImage2} text={langCities[i].name} />
+            <TextImageBlock image={cityImage2} text={cities[i].name} />
           </div>
           <div className="imageste-box__item">
-            <TextImageBlock image={cityImage2} text={langCities[i + 1].name} />
+            <TextImageBlock image={cityImage2} text={cities[i + 1].name} />
           </div>
         </div>,
       );
@@ -66,8 +65,8 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getCities() {
-      dispatch(searchForCities());
+    getCities(language) {
+      dispatch(searchForCities(language));
     },
   };
 }

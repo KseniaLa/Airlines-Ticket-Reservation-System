@@ -8,6 +8,7 @@ const CONFIG = {
     signup: 'account/signup',
     getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',
+    popularCities: 'cities/',
   },
 };
 

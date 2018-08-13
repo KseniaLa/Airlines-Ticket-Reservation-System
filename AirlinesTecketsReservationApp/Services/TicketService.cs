@@ -20,9 +20,9 @@ namespace Services
 
         public async Task<List<TicketModel>> GetSearchTickets(Search search, string language)
         {
-            List<Ticket> tic =  await _db.SearchForTickets(search, language);
+            List<Ticket> rawTickets =  await _db.SearchForTickets(search, language);
             List<TicketModel> tickets = new List<TicketModel>();
-            foreach (Ticket ticket in tic)
+            foreach (Ticket ticket in rawTickets)
             {
                 tickets.Add(new TicketModel
                 {

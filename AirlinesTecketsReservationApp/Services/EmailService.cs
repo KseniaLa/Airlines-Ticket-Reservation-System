@@ -21,7 +21,7 @@ namespace Services
 
             MailMessage message = new MailMessage(from, to)
             {
-                Subject = "Test email from Airlines",
+                Subject = "Test message from Airlines",
                 Body = "You've signed up to Airlines site!",
                 IsBodyHtml = false
             };

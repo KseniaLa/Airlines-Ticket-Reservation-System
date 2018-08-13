@@ -45,7 +45,7 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
-                EmailService.SendTestEmail(user.Email);
+                EmailService.SendTestEmail(user.Email); //not working
             }
             catch (SmtpFailedRecipientsException)
             {

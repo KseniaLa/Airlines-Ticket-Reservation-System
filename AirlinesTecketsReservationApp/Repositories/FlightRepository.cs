@@ -16,9 +16,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public void Add(Flight item)
+          public async void Add(Flight item)
           {
-               db.Flights.AddAsync(item);
+               await db.Flights.AddAsync(item);
           }
 
           public void Delete(int id)
@@ -31,14 +31,14 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
-          public Task<Flight> GetItem(int id)
+          public async Task<Flight> GetItem(int id)
           {
-               return db.Flights.FindAsync(id);
+               return await db.Flights.FindAsync(id);
           }
 
-          public void Save()
+          public async void Save()
           {
-               db.SaveChanges();
+               await db.SaveChangesAsync();
           }
 
           public void Update(Flight item)

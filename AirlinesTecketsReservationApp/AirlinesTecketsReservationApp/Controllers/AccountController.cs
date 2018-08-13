@@ -45,6 +45,7 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
+                // replace with MailKit / sendgrid?
                 EmailService.SendTestEmail(user.Email); //not working
             }
             catch (SmtpFailedRecipientsException)

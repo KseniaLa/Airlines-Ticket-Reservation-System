@@ -17,7 +17,10 @@ class ImageSearch extends React.PureComponent {
           <h1>
             <FormattedMessage {...messages.searchtitle} />
           </h1>
-          <SearchBar onSearch={this.props.onSearch} />
+          <SearchBar
+            onSearch={this.props.onSearch}
+            language={this.props.language}
+          />
         </div>
       </section>
     );
@@ -27,6 +30,7 @@ class ImageSearch extends React.PureComponent {
 ImageSearch.propTypes = {
   image: PropTypes.string,
   onSearch: PropTypes.func,
+  language: PropTypes.string,
 };
 
 export default ImageSearch;

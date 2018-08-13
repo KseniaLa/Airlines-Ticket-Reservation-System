@@ -17,14 +17,14 @@ namespace AirlinesTicketsReservationApp.Repositories
             db = new AirlinesContext();
         }
 
-        public Task<City> GetCity(int id)
+        public async Task<City> GetCity(int id)
         {
-            return db.Cities.FindAsync(id);
+            return await db.Cities.FindAsync(id);
         }
 
-        public Task<City> GetCityWithTranslations(int id)
+        public async Task<City> GetCityWithTranslations(int id)
         {
-            return db.Cities.Where(c => c.Id == id).Include(c => c.Translations).FirstOrDefaultAsync();
+            return await db.Cities.Where(c => c.Id == id).Include(c => c.Translations).FirstOrDefaultAsync();
         }
 
         public Task<List<City>> GetTopCitiesByRating(int topCount)
@@ -35,9 +35,9 @@ namespace AirlinesTicketsReservationApp.Repositories
             return cities;
         }
 
-        public void Add(City item)
+        public async void Add(City item)
         {
-            db.Cities.AddAsync(item);
+            await db.Cities.AddAsync(item);
         }
 
         public void Delete(int id)
@@ -50,9 +50,9 @@ namespace AirlinesTicketsReservationApp.Repositories
             throw new NotImplementedException();
         }
 
-        public void Save()
+        public async void Save()
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         public void Update(City item)
@@ -60,9 +60,9 @@ namespace AirlinesTicketsReservationApp.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<City> GetItem(int id)
+        public async Task<City> GetItem(int id)
         {
-            return db.Cities.FindAsync(id);
+            return await db.Cities.FindAsync(id);
         }
     }
 }

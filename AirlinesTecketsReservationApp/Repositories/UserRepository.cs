@@ -17,10 +17,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public void Add(User item)
+          public async void Add(User item)
           {
-               db.Users.AddAsync(item);
-               //db.Users.Add(item);
+               await db.Users.AddAsync(item);
           }
 
           public void Delete(int id)
@@ -33,34 +32,19 @@ namespace AirlinesTicketsReservationApp.Repositories
                throw new NotImplementedException();
           }
 
-          public Task<User> GetItem(int id)
+          public async Task<User> GetItem(int id)
           {
-               return db.Users.FindAsync(id);
+               return await db.Users.FindAsync(id);
           }
 
-          public Task<User> GetUserByEmail(string email)
+          public async Task<User> GetUserByEmail(string email)
           {
-               return db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
+               return await db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
           }
 
-          public async Task<User> GetUserWithOrders(string email)
+          public async void Save()
           {
-               User user = await db.Users.Where(c => c.Email == email).FirstOrDefaultAsync();
-               List<Order> list = user.Orders.ToList();
-               return user;
-               /*return db.Users.Where(c => c.Email == email).Include(u => u.Orders)
-                    .ThenInclude(o => o.Ticket)
-                    .ThenInclude(t => t.Company)
-                    .ThenInclude(c => c.Translations)
-                    .Include(u => u.Orders)
-                    .ThenInclude(o => o.Ticket)
-                    .ThenInclude(t => t.Flight)
-                    .FirstOrDefaultAsync();*/
-          }
-
-          public void Save()
-          {
-               db.SaveChangesAsync();
+               await db.SaveChangesAsync();
           }
 
           public void Update(User item)

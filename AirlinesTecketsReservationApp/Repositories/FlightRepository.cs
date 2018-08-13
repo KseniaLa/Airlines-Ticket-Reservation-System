@@ -16,7 +16,7 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public async void Add(Flight item)
+          public async Task Add(Flight item)
           {
                await db.Flights.AddAsync(item);
           }
@@ -36,7 +36,7 @@ namespace AirlinesTicketsReservationApp.Repositories
                return await db.Flights.FindAsync(id);
           }
 
-          public async void Save()
+          public async Task Save()
           {
                await db.SaveChangesAsync();
           }

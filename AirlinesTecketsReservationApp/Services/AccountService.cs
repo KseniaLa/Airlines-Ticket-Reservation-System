@@ -72,8 +72,8 @@ namespace Services
                               PasswordHash = HashPassword(registrationInfo.Password)
                          };
 
-                         _db.Add(user);
-                         _db.Save();
+                         await _db.Add(user);
+                         await _db.Save();
 
                          return user;
                     }

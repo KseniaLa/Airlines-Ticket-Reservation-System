@@ -16,9 +16,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public void Add(Order item)
+          public async Task Add(Order item)
           {
-               db.Orders.AddAsync(item);
+               await db.Orders.AddAsync(item);
           }
 
           public void Delete(int id)
@@ -36,9 +36,9 @@ namespace AirlinesTicketsReservationApp.Repositories
                return db.Orders.FindAsync(id);
           }
 
-          public void Save()
+          public async Task Save()
           {
-               db.SaveChangesAsync();
+               await db.SaveChangesAsync();
           }
 
           public void Update(Order item)

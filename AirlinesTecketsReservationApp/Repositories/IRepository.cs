@@ -9,9 +9,9 @@ namespace AirlinesTicketsReservationApp.Repositories
         where T : class
     {
           Task<T> GetItem(int id);
-          void Add(T item);
+          Task Add(T item);
           void Update(T item);
           void Delete(int id);
-          void Save();
+          Task Save();
      }
 }

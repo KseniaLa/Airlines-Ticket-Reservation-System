@@ -17,7 +17,7 @@ namespace AirlinesTicketsReservationApp.Repositories
                db = new AirlinesContext();
           }
 
-          public async void Add(User item)
+          public async Task Add(User item)
           {
                await db.Users.AddAsync(item);
           }
@@ -42,7 +42,7 @@ namespace AirlinesTicketsReservationApp.Repositories
                return await db.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
           }
 
-          public async void Save()
+          public async Task Save()
           {
                await db.SaveChangesAsync();
           }

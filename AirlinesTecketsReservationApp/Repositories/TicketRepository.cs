@@ -18,7 +18,7 @@ namespace AirlinesTicketsReservationApp.Repositories
             db = new AirlinesContext();
         }
 
-        public async void Add(Ticket item)
+        public async Task Add(Ticket item)
         {
             await db.Tickets.AddAsync(item);
         }
@@ -44,7 +44,7 @@ namespace AirlinesTicketsReservationApp.Repositories
                 .Where(t => t.Flight.DateTime.Date == search.Date.Date).ToListAsync();
         }
 
-        public async void Save()
+        public async Task Save()
         {
             await db.SaveChangesAsync();
         }

@@ -35,7 +35,7 @@ namespace AirlinesTicketsReservationApp.Repositories
             return cities;
         }
 
-        public async void Add(City item)
+        public async Task Add(City item)
         {
             await db.Cities.AddAsync(item);
         }
@@ -50,7 +50,7 @@ namespace AirlinesTicketsReservationApp.Repositories
             throw new NotImplementedException();
         }
 
-        public async void Save()
+        public async Task Save()
         {
             await db.SaveChangesAsync();
         }

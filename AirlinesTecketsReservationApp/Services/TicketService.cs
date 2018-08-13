@@ -25,8 +25,8 @@ namespace Services
                List<Ticket> foundTickets = (from t in rawTickets
                                             where t.Category == search.FlightClass
                                             where t.Flight.DateTime.Date == search.Date.Date
-                                            where t.Flight.Departure.Translations.Any(tr => tr.Value == search.From)
-                                            where t.Flight.Destination.Translations.Any(tr => tr.Value == search.To)
+                                            where t.Flight.Departure.Translations.Any(tr => tr.Value.ToLower() == search.From.ToLower())
+                                            where t.Flight.Destination.Translations.Any(tr => tr.Value.ToLower() == search.To.ToLower())
                                             select t).ToList();
                List<TicketModel> tickets = new List<TicketModel>();
                foreach (Ticket ticket in foundTickets)

@@ -1,6 +1,7 @@
 ﻿using AirlinesTicketsReservationApp.Models.Models;
 using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using AirlinesTicketsReservationApp.Repositories;
+using Microsoft.Extensions.Configuration;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,22 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class AccountService
-    {
+     public class AccountService
+     {
+          private IConfiguration Configuration;
           private UserRepository _db;
-          private const int _iterationsCount = 10000;
-          private const int _saltSize = 16;
-          private const int _hashedPassSize = 49;
+          private readonly int _iterationsCount;
+          private readonly int _saltSize;
+          private readonly int _hashedPassSize;
 
           public AccountService()
           {
+               Configuration = new ConfigurationBuilder()
+                                                        .SetBasePath(Directory.GetCurrentDirectory())
+                                                        .AddJsonFile("appsettings.json").Build();
+               _iterationsCount = int.Parse(Configuration["PasswordHashing:IterationsCount"]);
+               _saltSize = int.Parse(Configuration["PasswordHashing:SaltSize"]);
+               _hashedPassSize = int.Parse(Configuration["PasswordHashing:HashedPasswordSize"]);
                _db = new UserRepository();
           }
 
@@ -37,7 +45,7 @@ namespace Services
                          User user = await _db.GetUserByEmail(email);
                          if (user != null)
                          {
-                              if (VerifyPassword(user.PasswordHash, password)) 
+                              if (VerifyPassword(user.PasswordHash, password))
                               {
                                    return user;
                               }
@@ -101,7 +109,7 @@ namespace Services
 
           private bool VerifyPassword(string hashedPassword, string password)
           {
-               
+
                if (string.IsNullOrEmpty(hashedPassword) || string.IsNullOrEmpty(password))
                {
                     return false;

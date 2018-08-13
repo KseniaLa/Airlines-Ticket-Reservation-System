@@ -27,33 +27,34 @@
     margin: 0px;
     padding-left: 5px;
     font-weight: bold;
+    text-transform: uppercase;
   }
-  
+
   &__company {
     background-color: #d9eecd;
     margin: 0;
     padding: 5px;
   }
-  
+
   &__price {
     padding-left: 10px;
     align-items: baseline;
   }
-  
+
   &__date {
     padding-left: 5px;
     background-color: #e8f0ba;
   }
-  
+
   &__category {
     padding-left: 10px;
   }
-  
+
   &__time {
     padding-left: 5px;
     background-color: #e4bfae;
   }
-  
+
   .ticket-field {
     width: 60px;
     padding: 5px;
@@ -62,36 +63,36 @@
     outline: none;
     background-color: #ffffff;
   }
-  
+
   &__count {
     @include flex_element(row);
     align-items: center;
     padding-left: 10px;
-  
+
     div {
       display: table;
     }
   }
-  
+
   .actual-count-block {
     display: inline-block;
     margin: 0;
     padding: 0;
-  
+
     &::before {
       content: '/ ';
     }
   }
-  
+
   &__add-button-area {
     padding-left: 15px;
     text-align: right;
-  
+
     button {
       padding: 10px;
       margin: 10px;
     }
   }
-  
+
 }
 

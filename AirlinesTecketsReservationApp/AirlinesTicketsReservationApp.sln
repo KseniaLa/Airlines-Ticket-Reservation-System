@@ -5,13 +5,15 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesTicketsReservationApp", "AirlinesTecketsReservationApp\AirlinesTicketsReservationApp.csproj", "{792C86F0-CE14-4C75-8C17-F83D4C7ED40F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{23396524-FDCE-4874-ADAD-EF8DDD4EEDC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesTicketsReservationApp.Models", "Models\AirlinesTicketsReservationApp.Models.csproj", "{23396524-FDCE-4874-ADAD-EF8DDD4EEDC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{82645551-FD34-43D5-956C-846E69E9AE28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesTicketsReservationApp.Services", "Services\AirlinesTicketsReservationApp.Services.csproj", "{82645551-FD34-43D5-956C-846E69E9AE28}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{F2201B6E-B55C-4860-9109-E6AC6E0B79FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenManager", "TokenManager\TokenManager.csproj", "{DDA83BFA-FEAC-43AE-B589-7E034A22804B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesTicketsReservationApp.TokenManager", "TokenManager\AirlinesTicketsReservationApp.TokenManager.csproj", "{DDA83BFA-FEAC-43AE-B589-7E034A22804B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlinesTicketsReservationApp.DataAccess", "AirlinesTicketsReservationApp.DataAccess\AirlinesTicketsReservationApp.DataAccess.csproj", "{54094B39-D095-4482-AC86-D000FCFC139B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DDA83BFA-FEAC-43AE-B589-7E034A22804B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDA83BFA-FEAC-43AE-B589-7E034A22804B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDA83BFA-FEAC-43AE-B589-7E034A22804B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54094B39-D095-4482-AC86-D000FCFC139B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54094B39-D095-4482-AC86-D000FCFC139B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54094B39-D095-4482-AC86-D000FCFC139B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54094B39-D095-4482-AC86-D000FCFC139B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

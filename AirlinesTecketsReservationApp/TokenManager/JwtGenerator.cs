@@ -20,7 +20,7 @@ namespace TokenManager
                return new Claim[]
                {
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.IsAdmin ? "Administrator" : "User")
+                    new Claim(ClaimTypes.Role, user.IsAdmin ? Roles.Administrator : Roles.User)
                };
           }
 

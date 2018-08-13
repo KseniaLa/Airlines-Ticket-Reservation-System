@@ -1,16 +1,21 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace TokenManager
 {
-     public class JwtOptions
+     public static class JwtOptions
      {
-          public const string Issuer = "AirlinesServer";
-          public const string Audience = "http://localhost:3000";
-          public const int Lifetime = 30;
+          private static readonly IConfiguration Configuration = new ConfigurationBuilder()
+                                                        .SetBasePath(Directory.GetCurrentDirectory())
+                                                        .AddJsonFile("appsettings.json").Build();
+          public static readonly string Issuer = Configuration["ServerName"];
+          public static readonly string Audience = Configuration["Audience"];
+          public static readonly int Lifetime = int.Parse(Configuration["JWTLifetime"]);
           private static readonly string _key = Convert.ToBase64String((new HMACSHA256()).Key);
 
           public static SymmetricSecurityKey GetSymmetricSecurityKey()

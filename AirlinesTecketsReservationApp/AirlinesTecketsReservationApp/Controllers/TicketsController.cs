@@ -8,7 +8,7 @@ using AirlinesTicketsReservationApp.Repositories;
 using Models;
 using Services;
 using Microsoft.AspNetCore.Mvc;
-
+using TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -37,7 +37,7 @@ namespace AirlinesTicketsReservationApp.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         public void AddTickets([FromBody]string value)
         {

@@ -16,7 +16,8 @@ class Ticket extends React.PureComponent {
 
   onButtonClick() {
     if (this.state.count !== 0) {
-      this.props.onClick(this.props.info, this.state.count);
+      alert(this.props.id);
+      this.props.onClick(this.props.id, this.state.count);
       if (this.props.hideOnClick) {
         this.setState({ isVisible: false });
       }
@@ -71,6 +72,7 @@ class Ticket extends React.PureComponent {
 }
 
 Ticket.propTypes = {
+  id: PropTypes.number,
   info: PropTypes.object,
   title: PropTypes.string,
   company: PropTypes.string,

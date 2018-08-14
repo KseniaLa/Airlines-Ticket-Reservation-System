@@ -37,6 +37,7 @@ class SearchResultPage extends React.PureComponent {
       list.push(
         <Ticket
           key={ticket.id}
+          id={ticket.id}
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
           category={ticket.category}
@@ -47,6 +48,7 @@ class SearchResultPage extends React.PureComponent {
           count={ticket.totalCount}
           showCount
           action={<FormattedMessage {...messages.add} />}
+          onClick={this.addTicketToCart}
         />,
       );
     });

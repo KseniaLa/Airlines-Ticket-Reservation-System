@@ -4,13 +4,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Net.Mail;
-using AirlinesTicketsReservationApp.Models.Models;
-using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models;
-using Services;
-using TokenManager;
+using AirlinesApp.Services;
+using AirlinesApp.DataAccess.Models.Entities;
+using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -41,7 +40,7 @@ namespace AirlinesTicketsReservationApp.Controllers
 
         [AllowAnonymous]
         [HttpPost("signup")]
-        public async Task<IActionResult> Register([FromBody]SignUpModel user)
+        public async Task<IActionResult> Register([FromBody]SignupModel user)
         {
             try
             {

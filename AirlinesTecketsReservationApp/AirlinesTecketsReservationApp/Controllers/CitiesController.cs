@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using AirlinesTicketsReservationApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
-using Models;
+using AirlinesApp.Services;
+using AirlinesApp.DataAccess.Models.SupportingModels;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
-        private CityRepository _db;
+        private CityService _cityService;
 
         public CitiesController()
         {
-            _db = new CityRepository();
+            _cityService = new CityService();
         }
 
         // GET api/cities/ru
@@ -27,17 +26,7 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
-                List<City> rawCities = await _db.GetTopCitiesByRating(6);
-                List<CityModel> cities = new List<CityModel>();
-                foreach (City city in rawCities)
-                {
-                    cities.Add(new CityModel
-                    {
-                        Id = city.Id,
-                        Url = "unknown",
-                        Name = city.Translations.Where(t => t.Language.Name == lang).FirstOrDefault().Value
-                    });
-                }
+                List<CityModel> cities = await _cityService.GetTopCities(6, lang);
                 return Ok(new { cities });
             }
             catch

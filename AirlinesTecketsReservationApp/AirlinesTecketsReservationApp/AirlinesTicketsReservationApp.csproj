@@ -21,10 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\AirlinesTicketsReservationApp.Models.csproj" />
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\Services\AirlinesTicketsReservationApp.Services.csproj" />
-    <ProjectReference Include="..\TokenManager\AirlinesTicketsReservationApp.TokenManager.csproj" />
+    <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
+    <ProjectReference Include="..\AirlinesApp.Services\AirlinesApp.Services.csproj" />
+    <ProjectReference Include="..\AirlinesApp.TokenManager\AirlinesApp.TokenManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

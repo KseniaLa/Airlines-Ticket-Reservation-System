@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
+using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.Services;
+using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authorization;
-using AirlinesTicketsReservationApp.Repositories;
-using Models;
-using Services;
 using Microsoft.AspNetCore.Mvc;
-using TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -24,7 +22,7 @@ namespace AirlinesTicketsReservationApp.Controllers
 
         [AllowAnonymous]
         [HttpPost("search/{lang}")]
-        public async Task<IActionResult> FindTickets([FromBody]Search search, string lang)
+        public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang)
         {
             try
             {

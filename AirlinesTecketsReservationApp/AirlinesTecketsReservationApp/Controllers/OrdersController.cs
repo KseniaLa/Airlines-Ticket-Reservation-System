@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AirlinesTicketsReservationApp.Models.Models.SupportingModels;
+using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models;
-using Services;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {

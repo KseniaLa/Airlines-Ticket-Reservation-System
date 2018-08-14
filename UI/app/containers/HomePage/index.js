@@ -18,21 +18,20 @@ import { searchForCities } from './actions';
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
-    this.props.getCities();
+    this.props.getCities(this.props.language);
   }
 
   getData() {
     const list = [];
     const { cities } = this.props;
-    const langCities = cities[this.props.language];
-    for (let i = 0; i < langCities.length - 1; i += 2) {
+    for (let i = 0; i < cities.length - 1; i += 2) {
       list.push(
-        <div key={langCities[i].id}>
-          <div className="imageste-box__item">
-            <TextImageBlock image={cityImage2} text={langCities[i].name} />
+        <div key={cities[i].id}>
+          <div className="imageset-box__item">
+            <TextImageBlock image={cityImage2} text={cities[i].name} />
           </div>
-          <div className="imageste-box__item">
-            <TextImageBlock image={cityImage2} text={langCities[i + 1].name} />
+          <div className="imageset-box__item">
+            <TextImageBlock image={cityImage2} text={cities[i + 1].name} />
           </div>
         </div>,
       );
@@ -44,7 +43,11 @@ class HomePage extends React.PureComponent {
     const popularCities = this.props.dataReady ? this.getData() : null;
     return (
       <section className="container-flex">
-        <ImageSearch image={mainImage} onSearch={this.props.onSearch} />
+        <ImageSearch
+          image={mainImage}
+          onSearch={this.props.onSearch}
+          language={this.props.language}
+        />
         <div className="content-flex-column">
           <h1>
             <FormattedMessage {...messages.toptitle} />
@@ -59,15 +62,15 @@ class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  cities: PropTypes.object,
+  cities: PropTypes.array,
   getCities: PropTypes.func,
   onSearch: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getCities() {
-      dispatch(searchForCities());
+    getCities(language) {
+      dispatch(searchForCities(language));
     },
   };
 }

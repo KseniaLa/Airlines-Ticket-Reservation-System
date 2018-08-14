@@ -10,11 +10,11 @@
   justify-content: center;
 
 
-  .main-image-block__image {
+  &__image {
     object-fit: cover;
   }
 
-  .main-image-block__overlay {
+  &__overlay {
     position: absolute;
     z-index: 10;
     top: 30%;

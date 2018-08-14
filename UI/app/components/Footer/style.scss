@@ -5,7 +5,7 @@
   flex: 0 0 auto;
   background-color: $page_color;
 
-  .footer__content {
+  &__content {
     justify-content: space-between;
     align-items: center;
     padding: 30px 10px;
@@ -15,7 +15,7 @@
     }
   }
 
-  .footer__social {
+  &__social {
     @include flex_element(row);
 
     button {

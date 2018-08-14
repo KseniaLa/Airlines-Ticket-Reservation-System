@@ -10,7 +10,7 @@
     position: static;
   }
 
-  .header__content {
+  &__content {
     justify-content: space-between;
     padding: 10px;
     box-sizing: border-box;
@@ -21,7 +21,7 @@
     }
   }
 
-  .header__options {
+  &__options {
     @include flex_element(row);
     justify-content: space-around;
 
@@ -30,7 +30,7 @@
     }
   }
 
-  .header__options button {
+  &__options button {
     margin: 5px;
     padding: 10px;
     height: 43px;

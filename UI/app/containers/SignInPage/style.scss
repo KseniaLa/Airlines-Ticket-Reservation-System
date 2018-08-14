@@ -54,7 +54,7 @@
 .sign-page {
   @include flex_element(column);
 
-  .sign-page__form {
+  &__form {
     @include flex_element(column);
     align-items: center;
     justify-content: center;
@@ -86,7 +86,7 @@
 
   }
 
-  .sign-page__title {
+  &__title {
     color: $page_color;
     font-size: 2.5rem;
   }

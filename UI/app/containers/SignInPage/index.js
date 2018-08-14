@@ -10,10 +10,18 @@ import Button from '../../components/basic/Button';
 import Field from '../../components/basic/TextField';
 import Title from '../../components/basic/Title';
 import ErrorMessage from '../../components/basic/ErrorMessage';
-import { tryLogin } from './actions';
+import SuccessMessage from '../../components/basic/SuccessMessage';
+import {
+  tryLogin,
+  trySignUp,
+  discardRegistered,
+  discardLogin,
+} from './actions';
 import {
   makeSelectIsLoginStateReceived,
   makeSelectIsLoginError,
+  makeSelectIsRegistered,
+  makeSelectIsSigninStateReceived,
 } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import './style.scss';
@@ -28,7 +36,10 @@ class SignInPage extends React.PureComponent {
       signUpName: '',
       signUpSurname: '',
       signUpEmail: '',
-      isInputError: false,
+      signUpPassword: '',
+      isSignInInputError: false,
+      isSignUpInputError: false,
+      shortPassword: false,
     };
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
@@ -36,6 +47,7 @@ class SignInPage extends React.PureComponent {
     this.updateSignInEmailField = this.updateSignInEmailField.bind(this);
     this.updateSignInPasswordField = this.updateSignInPasswordField.bind(this);
     this.updateSignUpEmailField = this.updateSignUpEmailField.bind(this);
+    this.updateSignUpPasswordField = this.updateSignUpPasswordField.bind(this);
     this.updateNameField = this.updateNameField.bind(this);
     this.updateSurnameField = this.updateSurnameField.bind(this);
   }
@@ -50,28 +62,58 @@ class SignInPage extends React.PureComponent {
     e.preventDefault();
     const { signInEmail, signInPassword } = this.state;
     if (signInEmail !== '' && signInPassword !== '') {
-      this.setState({ isInputError: false });
+      this.setState({ isSignInInputError: false });
       this.props.tryLogin(signInEmail, signInPassword);
     } else {
-      this.setState({ isInputError: true });
+      this.setState({ isSignInInputError: true });
     }
   }
 
   onSignUp(e) {
+    const minPassLength = 8;
     e.preventDefault();
-    const { signUpName, signUpSurname, signUpEmail } = this.state;
-    if (signUpName !== '' && signUpSurname !== '' && signUpEmail !== '') {
-      this.setState({ isInputError: false });
-      console.log('registered');
-      this.props.onCloseClick();
+    const {
+      signUpName,
+      signUpSurname,
+      signUpEmail,
+      signUpPassword,
+    } = this.state;
+    if (
+      signUpName !== '' &&
+      signUpSurname !== '' &&
+      signUpEmail !== '' &&
+      signUpPassword !== ''
+    ) {
+      this.setState({ isSignUpInputError: false });
+      if (signUpPassword.length <= minPassLength) {
+        this.setState({ shortPassword: true });
+        return;
+      }
+      this.setState({ shortPassword: false });
+      this.props.trySignUp(
+        signUpName,
+        signUpSurname,
+        signUpEmail,
+        signUpPassword,
+      );
     } else {
-      this.setState({ isInputError: true });
+      this.setState({ isSignUpInputError: true });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.discardRegisteredState();
+    this.props.discardLoginState();
   }
 
   handleChangeModeClick() {
     const sign = this.state.signIn;
     this.setState({ signIn: !sign });
+    this.props.discardRegisteredState();
+    this.props.discardLoginState();
+    this.setState({ isSignInInputError: false });
+    this.setState({ isSignUpInputError: false });
+    this.setState({ shortPassword: false });
   }
 
   updateSignInEmailField(e) {
@@ -84,6 +126,10 @@ class SignInPage extends React.PureComponent {
 
   updateSignUpEmailField(e) {
     this.setState({ signUpEmail: e.target.value });
+  }
+
+  updateSignUpPasswordField(e) {
+    this.setState({ signUpPassword: e.target.value });
   }
 
   updateNameField(e) {
@@ -105,7 +151,7 @@ class SignInPage extends React.PureComponent {
             className="sign-page__title"
             text={<FormattedMessage {...messages.signintitle} />}
           />
-          {this.state.isInputError && (
+          {this.state.isSignInInputError && (
             <ErrorMessage
               text={<FormattedMessage {...messages.invalidinput} />}
             />
@@ -163,6 +209,21 @@ class SignInPage extends React.PureComponent {
             className="sign-page__title"
             text={<FormattedMessage {...messages.signuptitle} />}
           />
+          {this.props.isRegistered && (
+            <SuccessMessage
+              text={<FormattedMessage {...messages.signupsuccess} />}
+            />
+          )}
+          {this.state.isSignUpInputError && (
+            <ErrorMessage
+              text={<FormattedMessage {...messages.invalidinput} />}
+            />
+          )}
+          {this.state.shortPassword && (
+            <ErrorMessage
+              text={<FormattedMessage {...messages.shortpassword} />}
+            />
+          )}
           <FormattedMessage id="app.components.SignInPage.name">
             {placeholder => (
               <Field
@@ -192,6 +253,17 @@ class SignInPage extends React.PureComponent {
                 hint={placeholder}
                 name=""
                 onUpdate={this.updateSignUpEmailField}
+                isError={this.state.isInputError}
+              />
+            )}
+          </FormattedMessage>
+          <FormattedMessage id="app.components.SignInPage.password">
+            {placeholder => (
+              <Field
+                type="password"
+                hint={placeholder}
+                name=""
+                onUpdate={this.updateSignUpPasswordField}
                 isError={this.state.isInputError}
               />
             )}
@@ -232,21 +304,40 @@ class SignInPage extends React.PureComponent {
 SignInPage.propTypes = {
   onCloseClick: PropTypes.func,
   tryLogin: PropTypes.func,
+  trySignUp: PropTypes.func,
+  discardRegisteredState: PropTypes.func,
+  discardLoginState: PropTypes.func,
   isAuthorized: PropTypes.bool,
   loginStateReceived: PropTypes.bool,
   isLoginError: PropTypes.bool,
+  isRegistered: PropTypes.bool,
+  signinStateReceived: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   isAuthorized: makeSelectIsAuthorized(),
   loginStateReceived: makeSelectIsLoginStateReceived(),
   isLoginError: makeSelectIsLoginError(),
+  isRegistered: makeSelectIsRegistered(),
+  signinStateReceived: makeSelectIsSigninStateReceived(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     tryLogin(email, password) {
       dispatch(tryLogin(email, password));
+    },
+
+    trySignUp(name, surname, email, password) {
+      dispatch(trySignUp(name, surname, email, password));
+    },
+
+    discardRegisteredState() {
+      dispatch(discardRegistered());
+    },
+
+    discardLoginState() {
+      dispatch(discardLogin());
     },
   };
 }

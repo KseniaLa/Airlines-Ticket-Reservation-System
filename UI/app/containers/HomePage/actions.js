@@ -4,9 +4,10 @@ import {
   CITIES_FETCH_FAILED,
 } from './constants';
 
-export function searchForCities() {
+export function searchForCities(language) {
   return {
     type: RESULT_CITIES_REQUESTED,
+    payload: language,
   };
 }
 

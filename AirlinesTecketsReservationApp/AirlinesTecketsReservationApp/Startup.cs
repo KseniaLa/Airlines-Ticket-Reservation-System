@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AirlinesTicketsReservationApp.Models;
+﻿using AirlinesApp.DataAccess;
+using AirlinesApp.TokenManager;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Models;
+using Microsoft.IdentityModel.Tokens;
 
-namespace AirlinesTecketsReservationApp
+namespace AirlinesTicketsReservationApp
 {
     public class Startup
     {
@@ -28,6 +24,23 @@ namespace AirlinesTecketsReservationApp
         public void ConfigureServices(IServiceCollection services)
         {
                services.AddCors();
+
+               services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                         options.RequireHttpsMetadata = false;
+                         options.TokenValidationParameters = new TokenValidationParameters
+                         {
+                              ValidateIssuer = true,
+                              ValidIssuer = JwtOptions.Issuer,
+                              ValidateAudience = true,
+                              ValidAudience = JwtOptions.Audience,
+                              ValidateLifetime = true,
+                              IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
+                              ValidateIssuerSigningKey = true,
+                         };
+                    });
+
                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
                services.AddTransient<IAirlinesContext, AirlinesContext>();
                services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -41,9 +54,11 @@ namespace AirlinesTecketsReservationApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(
-               options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+               app.UseCors(
+                  options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
             );
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

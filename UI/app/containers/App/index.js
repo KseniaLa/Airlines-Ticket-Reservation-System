@@ -119,9 +119,9 @@ export function mapDispatchToProps(dispatch) {
       dispatch(discardLogin());
     },
 
-    getTickets(search) {
+    getTickets(from, to, date, flightClass, lang) {
       dispatch(discardDataReady());
-      dispatch(searchForTickets(search));
+      dispatch(searchForTickets(from, to, date, flightClass, lang));
     },
   };
 }

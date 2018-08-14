@@ -4,10 +4,10 @@ import {
   USER_TICKETS_FETCH_FAILED,
 } from './constants';
 
-export function getUserTickets() {
+export function getUserTickets(lang) {
   return {
     type: USER_TICKETS_REQUESTED,
-    // here should be some extra data (USER ID)
+    payload: lang,
   };
 }
 

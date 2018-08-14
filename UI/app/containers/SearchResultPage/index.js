@@ -32,20 +32,23 @@ class SearchResultPage extends React.PureComponent {
   getData() {
     const list = [];
     const { tickets } = this.props;
-    tickets.forEach(element => {
-      const ticket = element[this.props.language];
+    tickets.forEach(ticket => {
+      const date = new Date(ticket.date);
       list.push(
         <Ticket
-          info={element}
           key={ticket.id}
+          id={ticket.id}
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
-          time={ticket.time}
+          category={ticket.category}
+          date={`${date.getDate()}.${date.getMonth() +
+            1}.${date.getFullYear()}`}
+          time={`${date.getHours()} : ${date.getMinutes()}`}
           price={ticket.price}
-          count={ticket.count}
+          count={ticket.totalCount}
+          showCount
           action={<FormattedMessage {...messages.add} />}
           onClick={this.addTicketToCart}
-          hideOnClick={false}
         />,
       );
     });
@@ -60,7 +63,10 @@ class SearchResultPage extends React.PureComponent {
     return (
       <section className="container-flex">
         <div className="search">
-          <SearchBar onSearch={this.props.onSearch} />
+          <SearchBar
+            onSearch={this.props.onSearch}
+            language={this.props.language}
+          />
         </div>
         <section className="content-flex ticket-area">
           <div className="button-set">

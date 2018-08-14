@@ -1,46 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using AirlinesApp.Services;
+using AirlinesApp.DataAccess.Models.SupportingModels;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
     [Route("api/cities")]
-    public class CitiesController : Controller
+    public class CitiesController : ControllerBase
     {
-        // GET: api/cities
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly CityService _cityService;
+
+        public CitiesController()
         {
-            return new string[] { "city", "city" };
+            _cityService = new CityService();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/cities/ru
+        [AllowAnonymous]
+        [HttpGet("{lang}")]
+        public async Task<IActionResult> Get(string lang)
         {
-            return "value";
-        }
+            try
+            {
+                List<CityModel> cities = await _cityService.GetTopCities(6, lang);
+                return Ok(new { cities });
+            }
+            catch
+            {
+                return BadRequest();
+            }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

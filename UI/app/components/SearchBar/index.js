@@ -21,11 +21,13 @@ class SearchBar extends React.Component {
       isInputError: false,
       from: '',
       to: '',
+      flightClass: 'business',
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.updateToField = this.updateToField.bind(this);
+    this.onSelectValueChange = this.onSelectValueChange.bind(this);
   }
 
   handleChange(date) {
@@ -38,7 +40,14 @@ class SearchBar extends React.Component {
     e.preventDefault();
     if (this.state.from !== '' && this.state.to !== '') {
       this.setState({ isInputError: false });
-      this.props.onSearch(this.state.from);
+      const { from, to, flightClass, startDate } = this.state;
+      this.props.onSearch(
+        from,
+        to,
+        startDate._d,
+        flightClass,
+        this.props.language,
+      );
       this.props.history.push('/results');
     } else {
       this.setState({ isInputError: true });
@@ -51,6 +60,10 @@ class SearchBar extends React.Component {
 
   updateToField(e) {
     this.setState({ to: e.target.value });
+  }
+
+  onSelectValueChange(e) {
+    this.setState({ flightClass: e.target.value });
   }
 
   render() {
@@ -100,6 +113,9 @@ class SearchBar extends React.Component {
                   {ticketclass => ticketclass}
                 </FormattedMessage>,
               ]}
+              value={this.state.class}
+              values={['business', 'first', 'budget']}
+              onChange={this.onSelectValueChange}
             />
           </div>
           <div className="search-bar__button">
@@ -114,6 +130,7 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   onSearch: PropTypes.func,
   history: PropTypes.object,
+  language: PropTypes.string,
 };
 
 export default withRouter(SearchBar);

@@ -1,46 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using System.Net.Mail;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using AirlinesApp.Services;
+using AirlinesApp.DataAccess.Models.Entities;
+using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
     [Route("api/account")]
     public class AccountController : Controller
     {
-        // GET: api/account
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly AccountService _accountService;
+        private readonly JwtGenerator _jwtGenerator;
+
+        public AccountController()
         {
-            return new string[] { "user" };
+            _accountService = new AccountService();
+            _jwtGenerator = new JwtGenerator();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody]LoginModel user)
         {
-            return "value";
+            User usr = await _accountService.TryAuthenticate(user.Email, user.Password);
+            if (usr != null)
+            {
+                string token = _jwtGenerator.GenerateToken(usr);
+                return Ok(new { token, name = usr.Name, surname = usr.Surname, isAdmin = usr.IsAdmin });
+            }
+            return BadRequest();
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [AllowAnonymous]
+        [HttpPost("signup")]
+        public async Task<IActionResult> Register([FromBody]SignupModel user)
         {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                // replace with MailKit / sendgrid?
+                EmailService.SendTestEmail(user.Email); //not working
+            }
+            catch (SmtpFailedRecipientsException)
+            {
+                return BadRequest();
+            }
+            User usr = await _accountService.SignUp(user);
+            if (usr != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

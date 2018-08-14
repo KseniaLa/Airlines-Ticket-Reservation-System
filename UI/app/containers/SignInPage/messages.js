@@ -53,4 +53,12 @@ export default defineMessages({
     id: 'app.components.SignInPage.autherror',
     defaultMessage: 'Ошибка авторизации. Повторите запрос позже',
   },
+  signupsuccess: {
+    id: 'app.components.SignInPage.signupsuccess',
+    defaultMessage: 'Вы успешно зарегистрировались!',
+  },
+  shortpassword: {
+    id: 'app.components.SignInPage.shortpassword',
+    defaultMessage: 'Пароль должен быть длиннее 8 символов',
+  },
 });

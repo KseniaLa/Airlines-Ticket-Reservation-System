@@ -1,13 +1,22 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { RESULT_CITIES_REQUESTED } from './constants';
 import { getCitiesSuccess, getCitiesError } from './actions';
+import { config } from '../../utils/configLoader';
+import { emptyGet } from '../../utils/requestBuilder';
 
-import { cities } from './popular.json';
-
-function* fetchCities() {
+function* fetchCities(action) {
   try {
-    const result = cities; // yield call(fetch, 'http://localhost:57730/api/values');
-    yield put(getCitiesSuccess(result));
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.popularCities + action.payload,
+      emptyGet(),
+    );
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getCitiesSuccess(result.cities));
+    } else {
+      yield put(getCitiesError());
+    }
   } catch (e) {
     yield put(getCitiesError());
   }

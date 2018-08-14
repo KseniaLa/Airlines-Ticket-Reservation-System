@@ -1,45 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.Services;
+using AirlinesApp.TokenManager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
     [Route("api/tickets")]
     public class TicketsController : Controller
     {
-        // GET: api/tickets
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly TicketService _ticketService;
+        public TicketsController()
         {
-            return new string[] { "value1", "value2" };
+            _ticketService = new TicketService();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [AllowAnonymous]
+        [HttpPost("search/{lang}")]
+        public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang)
         {
-            return "value";
+            try
+            {
+                List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
+                return Ok(new { tickets });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
-        // POST api/<controller>
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void AddTickets([FromBody]string value)
         {
         }
     }

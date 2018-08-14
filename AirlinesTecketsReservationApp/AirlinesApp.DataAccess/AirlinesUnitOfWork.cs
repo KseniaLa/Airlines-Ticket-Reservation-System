@@ -1,15 +1,13 @@
 ﻿using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlinesApp.DataAccess
 {
     public class AirlinesUnitOfWork
     {
-        private AirlinesContext _db = new AirlinesContext();
+        private readonly AirlinesContext _db = new AirlinesContext();
         private BaseRepository<User> _userRepository;
         private BaseRepository<City> _cityRepository;
         private BaseRepository<Flight> _flightRepository;
@@ -82,17 +80,17 @@ namespace AirlinesApp.DataAccess
              await _db.SaveChangesAsync();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         public virtual void Dispose(bool disposing)
         {
-             if (!this.disposed)
+             if (!_disposed)
              {
                   if (disposing)
                   {
                        _db.Dispose();
                   }
-                  this.disposed = true;
+                _disposed = true;
              }
         }
 

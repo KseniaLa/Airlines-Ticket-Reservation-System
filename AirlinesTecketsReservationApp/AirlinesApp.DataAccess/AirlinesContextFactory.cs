@@ -2,13 +2,10 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AirlinesApp.DataAccess
 {
     public class AirlinesContextFactory : IDesignTimeDbContextFactory<AirlinesContext>
-
     {
         public AirlinesContext CreateDbContext(string[] args)
         {

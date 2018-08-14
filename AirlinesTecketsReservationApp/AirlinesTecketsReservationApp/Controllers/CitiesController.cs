@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +10,7 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
-        private CityService _cityService;
+        private readonly CityService _cityService;
 
         public CitiesController()
         {

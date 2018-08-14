@@ -1,8 +1,5 @@
 ﻿using AirlinesApp.DataAccess.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AirlinesApp.DataAccess
 {

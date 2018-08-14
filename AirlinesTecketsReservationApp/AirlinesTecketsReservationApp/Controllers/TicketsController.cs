@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Services;
@@ -13,7 +11,7 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/tickets")]
     public class TicketsController : Controller
     {
-        private TicketService _ticketService;
+        private readonly TicketService _ticketService;
         public TicketsController()
         {
             _ticketService = new TicketService();

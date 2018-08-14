@@ -1,27 +1,17 @@
-﻿using AirlinesApp.DataAccess;
-using AirlinesApp.DataAccess.Models.Entities;
+﻿using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlinesApp.Services
 {
-    public class OrderService
+    public class OrderService : BaseService
     {
-        private readonly AirlinesUnitOfWork _db;
-
-        public OrderService()
-        {
-            _db = new AirlinesUnitOfWork();
-        }
-
         public async Task<List<TicketModel>> GetUserOrders(string email, string language)
         {
-            User user = await _db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
+            User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
             List<Order> orders = user.Orders.ToList();
             List<TicketModel> tickets = new List<TicketModel>();
             foreach (Order order in orders)
@@ -29,12 +19,12 @@ namespace AirlinesApp.Services
                 tickets.Add(new TicketModel
                 {
                     Id = order.Id,
-                    From = order.Ticket.Flight.Departure.Translations
-                          .Where(t => t.Language.Name == language).FirstOrDefault().Value,
-                    To = order.Ticket.Flight.Destination.Translations
-                          .Where(t => t.Language.Name == language).FirstOrDefault().Value,
-                    Company = order.Ticket.Company.Translations
-                          .Where(t => t.Language.Name == language).FirstOrDefault().Value,
+                    From = order.Ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)
+                        ?.Value,
+                    To = order.Ticket.Flight.Destination.Translations.FirstOrDefault(t => t.Language.Name == language)
+                        ?.Value,
+                    Company = order.Ticket.Company.Translations.FirstOrDefault(t => t.Language.Name == language)
+                        ?.Value,
                     Date = order.Ticket.Flight.DateTime,
                     Category = order.Ticket.Category,
                     Price = order.Ticket.Price,

@@ -1,34 +1,28 @@
-﻿using AirlinesApp.DataAccess;
-using AirlinesApp.DataAccess.Models.Entities;
+﻿using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlinesApp.Services
 {
-    public class AccountService
+    public class AccountService : BaseService
     {
-        private IConfiguration Configuration;
-        private AirlinesUnitOfWork _db;
         private readonly int _iterationsCount;
         private readonly int _saltSize;
         private readonly int _hashedPassSize;
 
         public AccountService()
         {
-            Configuration = new ConfigurationBuilder()
-                                                     .SetBasePath(Directory.GetCurrentDirectory())
-                                                     .AddJsonFile("appsettings.json").Build();
-            _iterationsCount = int.Parse(Configuration["PasswordHashing:IterationsCount"]);
-            _saltSize = int.Parse(Configuration["PasswordHashing:SaltSize"]);
-            _hashedPassSize = int.Parse(Configuration["PasswordHashing:HashedPasswordSize"]);
-            _db = new AirlinesUnitOfWork();
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json").Build();
+            _iterationsCount = int.Parse(configuration["PasswordHashing:IterationsCount"]);
+            _saltSize = int.Parse(configuration["PasswordHashing:SaltSize"]);
+            _hashedPassSize = int.Parse(configuration["PasswordHashing:HashedPasswordSize"]);
         }
 
         public async Task<User> TryAuthenticate(string email, string password)
@@ -39,20 +33,11 @@ namespace AirlinesApp.Services
                 {
                     return null;
                 }
-                else
-                {
-                    User user = await _db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
-                    if (user != null)
-                    {
-                        if (VerifyPassword(user.PasswordHash, password))
-                        {
-                            return user;
-                        }
-                    }
-                    return null;
-                }
+                var user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
+                if (user == null) return null;
+                return VerifyPassword(user.PasswordHash, password) ? user : null;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -65,30 +50,26 @@ namespace AirlinesApp.Services
             {
                 return null;
             }
-            else
+
+            User searchUser = await Db.Users.FindBy(u => u.Email == registrationInfo.Email).FirstOrDefaultAsync();
+            bool userExists = searchUser != null;
+            if (!userExists)
             {
-                User searchUser = await _db.Users.FindBy(u => u.Email == registrationInfo.Email).FirstOrDefaultAsync();
-                bool userExists = !(searchUser == null);
-                if (!userExists)
+                User user = new User
                 {
-                    User user = new User
-                    {
-                        Name = registrationInfo.Name,
-                        Surname = registrationInfo.Surname,
-                        Email = registrationInfo.Email,
-                        PasswordHash = HashPassword(registrationInfo.Password)
-                    };
+                    Name = registrationInfo.Name,
+                    Surname = registrationInfo.Surname,
+                    Email = registrationInfo.Email,
+                    PasswordHash = HashPassword(registrationInfo.Password)
+                };
 
-                    await _db.Users.Add(user);
-                    await _db.Save();
+                await Db.Users.Add(user);
+                await Db.Save();
 
-                    return user;
-                }
-                else
-                {
-                    return null;
-                }
+                return user;
             }
+
+            return null;
         }
 
         private string HashPassword(string password)

@@ -1,21 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AirlinesApp.DataAccess.Repositories
 {
     public class BaseRepository<T> where T : class
     {
-        private AirlinesContext _db;
-        private DbSet<T> _dbSet;
+        private readonly DbSet<T> _dbSet;
 
         public BaseRepository(AirlinesContext context)
         {
-            _db = context;
-            _dbSet = _db.Set<T>();
+            _dbSet = context.Set<T>();
         }
 
         public async Task Add(T item)

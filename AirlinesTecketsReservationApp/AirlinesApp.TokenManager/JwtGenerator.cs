@@ -4,20 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace AirlinesApp.TokenManager
 {
     public class JwtGenerator
     {
-        public JwtGenerator()
-        {
-
-        }
-
         private IEnumerable<Claim> CreateClaims(User user)
         {
-            return new Claim[]
+            return new[]
             {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, user.IsAdmin ? Roles.Administrator : Roles.User)
@@ -29,8 +23,8 @@ namespace AirlinesApp.TokenManager
             var currentTime = DateTime.UtcNow;
 
             var jwt = new JwtSecurityToken(
-                 issuer: JwtOptions.Issuer,
-                 audience: JwtOptions.Audience,
+                 JwtOptions.Issuer,
+                 JwtOptions.Audience,
                  notBefore: currentTime,
                  claims: CreateClaims(user),
                  expires: currentTime.Add(TimeSpan.FromMinutes(JwtOptions.Lifetime)),

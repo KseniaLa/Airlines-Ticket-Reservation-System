@@ -65,3 +65,11 @@ export function searchPost(from, to, date, flightClass) {
     }),
   };
 }
+
+export function getTicketsPost(ticketsArr) {
+  return {
+    ...getJsonTypePost(),
+    body:
+      ticketsArr === null ? JSON.stringify('[]') : JSON.stringify(ticketsArr),
+  };
+}

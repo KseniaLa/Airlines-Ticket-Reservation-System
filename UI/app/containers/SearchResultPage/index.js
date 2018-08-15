@@ -26,7 +26,7 @@ class SearchResultPage extends React.PureComponent {
       this.props.onNotAuth();
       return;
     }
-    this.props.addTicketToCart([ticket, +count]);
+    this.props.addTicketToCart({ ticket, count: +count });
   }
 
   getData() {

@@ -5,6 +5,8 @@ using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -12,11 +14,13 @@ namespace AirlinesTicketsReservationApp.Controllers
     public class OrdersController : Controller
     {
         private readonly OrderService _orderService;
+         private readonly TicketService _ticketService;
         
 
         public OrdersController()
         {
             _orderService = new OrderService();
+             _ticketService = new TicketService();
         }
 
         [Authorize]
@@ -35,5 +39,21 @@ namespace AirlinesTicketsReservationApp.Controllers
             }
 
         }
-    }
+
+         [HttpPost("cart/{lang}")]
+         public async Task<IActionResult> GetCartTickets([FromBody] string cart, string lang)
+         {
+              try
+              {
+                   List<CartItemModel> cartItems = JsonConvert.DeserializeObject<List<CartItemModel>>(cart);
+                   List<TicketModel> tickets = await _ticketService.GetTicketsList(cartItems, lang);
+                   return Ok(new { tickets });
+              }
+              catch
+              {
+                   return BadRequest();
+              }
+
+         }
+     }
 }

@@ -16,7 +16,7 @@ import messages from './messages';
 
 class UserBasketPage extends React.Component {
   componentDidMount() {
-    this.props.getTickets();
+    this.props.getTickets(this.props.language);
   }
 
   onButtonClick() {}
@@ -24,40 +24,39 @@ class UserBasketPage extends React.Component {
   getData() {
     const list = [];
     const { tickets } = this.props;
-    if (!tickets) {
-      return <EmptyResult />;
-    }
-    tickets.forEach(element => {
-      const ticket = element[0][this.props.language];
+    tickets.forEach(ticket => {
+      const date = new Date(ticket.date);
       list.push(
         <Ticket
           key={ticket.id}
-          title={`${ticket.from}-${ticket.to}`}
+          title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
-          time={ticket.time}
+          category={ticket.category}
+          date={`${date.getDate()}.${date.getMonth() +
+            1}.${date.getFullYear()}`}
+          time={`${date.getHours()} : ${date.getMinutes()}`}
           price={ticket.price}
-          count={ticket.count}
-          actualCount={+element[1]}
+          count={ticket.totalCount}
+          actualCount={ticket.bookedCount}
+          showCount
           action={<FormattedMessage {...messages.remove} />}
-          onClick={this.onButtonClick}
-          hideOnClick
         />,
       );
     });
     if (list.length === 0) {
       return <EmptyResult />;
     }
-    return list;
+    return (
+      <div className="basket-container__tickets-area">
+        <Button text={<FormattedMessage {...messages.submit} />} />
+        {list}
+      </div>
+    );
   }
 
   render() {
     const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
-    return (
-      <section className="basket-container">
-        <Button text={<FormattedMessage {...messages.submit} />} />
-        {bookedTickets}
-      </section>
-    );
+    return <section className="basket-container">{bookedTickets}</section>;
   }
 }
 
@@ -76,8 +75,8 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getTickets() {
-      dispatch(getCartTickets());
+    getTickets(language) {
+      dispatch(getCartTickets(language));
     },
   };
 }

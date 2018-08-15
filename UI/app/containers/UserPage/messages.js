@@ -9,4 +9,8 @@ export default defineMessages({
     id: 'app.components.UserPage.basket',
     defaultMessage: 'Корзина',
   },
+  date: {
+    id: 'app.components.UserPage.date',
+    defaultMessage: 'Дата',
+  },
 });

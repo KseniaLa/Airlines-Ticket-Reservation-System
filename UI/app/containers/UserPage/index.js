@@ -46,7 +46,21 @@ class UserPage extends React.PureComponent {
   }
 
   render() {
-    const history = this.props.dataReady ? this.getUserHistory() : <Spinner />;
+    const history = this.props.dataReady ? (
+      <table className="ip-table">
+        <tbody>
+          <tr>
+            <th>IP</th>
+            <th>
+              <FormattedMessage {...messages.date} />
+            </th>
+          </tr>
+          {this.getUserHistory()}
+        </tbody>
+      </table>
+    ) : (
+      <Spinner />
+    );
     return (
       <div className="container-flex">
         <section className="user-card">
@@ -68,13 +82,7 @@ class UserPage extends React.PureComponent {
               <Route exact path="/user/tickets" component={UserTicketsPage} />
               <Route exact path="/user/basket" component={UserBasketPage} />
             </Switch>
-            <table className="ip-table">
-              <tr>
-                <th>IP</th>
-                <th>Date</th>
-              </tr>
-              {history}
-            </table>
+            {history}
           </div>
         </section>
       </div>

@@ -7,22 +7,26 @@
   width: 100%;
   padding: 10px;
 
-  & > button {
-    position: sticky;
-    z-index: 9999999999;
-    top: 60px;
-    align-self: flex-end;
-    max-width: 200px;
-    margin-right: 10px;
-    padding: 10px;
-    background-color: #008000;
-    @include media("<=phone"){
-      top: 10px;
-    }
+  &__tickets-area {
+    @include flex_element(column);
 
-    &:hover {
-      background-color: #024602;
-      color: #ffffff;
+    & > button {
+      position: sticky;
+      z-index: 9999999999;
+      top: 60px;
+      align-self: flex-end;
+      max-width: 200px;
+      margin-right: 10px;
+      padding: 10px;
+      background-color: #008000;
+      @include media("<=phone"){
+        top: 10px;
+      }
+
+      &:hover {
+        background-color: #024602;
+        color: #ffffff;
+      }
     }
   }
 }

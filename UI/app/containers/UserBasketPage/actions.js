@@ -4,9 +4,10 @@ import {
   TICKETS_FETCH_FAILED,
 } from './constants';
 
-export function getCartTickets() {
+export function getCartTickets(lang) {
   return {
     type: TICKETS_REQUESTED,
+    payload: lang,
   };
 }
 

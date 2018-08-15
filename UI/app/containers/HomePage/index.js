@@ -8,6 +8,7 @@ import messages from './messages';
 
 import './style.scss';
 import mainImage from '../../images/plane.png';
+import Spinner from '../../components/basic/Spinner';
 import cityImage2 from '../../images/saintp.jpg';
 import ImageSearch from '../../components/ImageSearch';
 import TextImageBlock from '../../components/TextImageBlock';
@@ -40,7 +41,7 @@ class HomePage extends React.PureComponent {
   }
 
   render() {
-    const popularCities = this.props.dataReady ? this.getData() : null;
+    const popularCities = this.props.dataReady ? this.getData() : <Spinner />;
     return (
       <section className="container-flex">
         <ImageSearch

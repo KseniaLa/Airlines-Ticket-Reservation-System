@@ -20,6 +20,7 @@
   "app.components.Ticket.time": "Time",
   "app.components.UserBasketPage.submit": "Submit",
   "app.components.UserPage.basket": "Cart",
+  "app.components.UserPage.date": "Date",
   "app.components.UserPage.tickets": "My tickets",
   "app.components.header.enter": "Sign in",
   "app.components.SearchBar.search": "Search for tickets",

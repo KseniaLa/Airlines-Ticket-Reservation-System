@@ -10,6 +10,7 @@ const CONFIG = {
     resultTickets: 'tickets/search/',
     popularCities: 'cities/',
     userHistory: 'account/iphistory',
+    userCart: 'orders/cart/',
   },
 };
 

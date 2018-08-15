@@ -13,5 +13,6 @@ namespace AirlinesApp.DataAccess
         DbSet<User> Users { get; set; }
         DbSet<Language> Languages { get; set; }
         DbSet<Translation> Translations { get; set; }
+        DbSet<IpAddress> IpAddresses { get; set; }
     }
 }

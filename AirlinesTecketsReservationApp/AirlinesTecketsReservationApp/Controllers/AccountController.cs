@@ -6,6 +6,7 @@ using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.TokenManager;
+using Microsoft.AspNetCore.Http;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -14,11 +15,13 @@ namespace AirlinesTicketsReservationApp.Controllers
     {
         private readonly AccountService _accountService;
         private readonly JwtGenerator _jwtGenerator;
+        private IHttpContextAccessor _accessor;
 
-        public AccountController()
+        public AccountController(IHttpContextAccessor accessor)
         {
             _accountService = new AccountService();
             _jwtGenerator = new JwtGenerator();
+            _accessor = accessor;
         }
 
         [AllowAnonymous]
@@ -28,6 +31,7 @@ namespace AirlinesTicketsReservationApp.Controllers
             User usr = await _accountService.TryAuthenticate(user.Email, user.Password);
             if (usr != null)
             {
+                var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
                 string token = _jwtGenerator.GenerateToken(usr);
                 return Ok(new { token, name = usr.Name, surname = usr.Surname, isAdmin = usr.IsAdmin });
             }

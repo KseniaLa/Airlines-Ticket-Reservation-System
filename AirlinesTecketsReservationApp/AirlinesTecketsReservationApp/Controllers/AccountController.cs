@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
@@ -60,6 +63,23 @@ namespace AirlinesTicketsReservationApp.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        [Authorize]
+        [HttpGet("iphistory")]
+        public async Task<IActionResult> GetUserIpHistory()
+        {
+            try
+            {
+                string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                User user = await _accountService.GetUserByEmail(email);
+                List<IpAddressModel> addresses = await _ipService.GetUserIpAddressLatest(user.Id, 10);
+                return Ok(new { addresses });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

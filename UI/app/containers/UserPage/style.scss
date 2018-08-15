@@ -1,4 +1,5 @@
 @import '../../common';
+@import '../../include-media';
 
 .user-card {
   flex-direction: column;
@@ -11,6 +12,7 @@
   border-radius: 10px;
   padding: 10px;
   max-width: 1000px;
+  font-size: 1.6rem;
 
   &__name {
     display: block;
@@ -35,6 +37,29 @@
     background-color: #ffffff;
     border-radius: 10px;
     margin-top: 10px;
+  }
+
+  .ip-table {
+    align-self: center;
+    width: 60%;
+    margin: 10px;
+    border: 1px solid $page_color;
+    @include media("<=tablet"){
+      width: 100%;
+    }
+
+    td {
+      border: 1px solid  #dbdad8;
+      text-align: center;
+    }
+
+    th {
+      border: 1px solid  #dbdad8;
+      background-color: $page_color;
+      color: #ffffff;
+    }
+
+    tr:nth-child(even) {background-color: #f0dbed;}
   }
 }
 

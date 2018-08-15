@@ -9,6 +9,7 @@ const CONFIG = {
     getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',
     popularCities: 'cities/',
+    userHistory: 'account/iphistory',
   },
 };
 

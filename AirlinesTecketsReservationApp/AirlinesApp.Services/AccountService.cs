@@ -72,6 +72,13 @@ namespace AirlinesApp.Services
             return null;
         }
 
+        public async Task<User> GetUserByEmail(string email)
+        {
+            User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
+            return user;
+        }
+
+
         private string HashPassword(string password)
         {
             byte[] salt;

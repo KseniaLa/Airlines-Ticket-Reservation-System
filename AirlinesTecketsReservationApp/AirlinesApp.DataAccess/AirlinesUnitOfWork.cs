@@ -14,6 +14,7 @@ namespace AirlinesApp.DataAccess
         private BaseRepository<Ticket> _ticketRepository;
         private BaseRepository<Translation> _translationRepository;
         private BaseRepository<Order> _orderRepository;
+        private BaseRepository<IpAddress> _ipAddressRepository;
 
         public BaseRepository<User> Users
         {
@@ -72,6 +73,16 @@ namespace AirlinesApp.DataAccess
                 if (_orderRepository == null)
                     _orderRepository = new BaseRepository<Order>(_db);
                 return _orderRepository;
+            }
+        }
+
+        public BaseRepository<IpAddress> IpAddresses
+        {
+            get
+            {
+                if (_ipAddressRepository == null)
+                    _ipAddressRepository = new BaseRepository<IpAddress>(_db);
+                return _ipAddressRepository;
             }
         }
 

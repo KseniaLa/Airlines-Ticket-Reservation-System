@@ -47,7 +47,7 @@ namespace AirlinesApp.DataAccess.Repositories
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            _dbSet.Update(item);
         }
     }
 }

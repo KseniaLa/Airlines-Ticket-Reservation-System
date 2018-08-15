@@ -26,5 +26,14 @@ namespace AirlinesApp.Services
             }
             return cities;
         }
+
+        public async Task UpdateCityRating(string cityName)
+        {
+            City city = await Db.Cities.FindBy(c => c.Translations.Any(t => t.Value == cityName)).FirstOrDefaultAsync();
+            if (city == null) return;
+            city.Rating++;
+            Db.Cities.Update(city);
+            await Db.Save();
+        }
     }
 }

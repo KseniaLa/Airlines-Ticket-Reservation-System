@@ -12,9 +12,11 @@ namespace AirlinesTicketsReservationApp.Controllers
     public class TicketsController : Controller
     {
         private readonly TicketService _ticketService;
+        private readonly CityService _cityService;
         public TicketsController()
         {
             _ticketService = new TicketService();
+            _cityService = new CityService();
         }
 
 
@@ -24,6 +26,7 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
+                await _cityService.UpdateCityRating(search.To);
                 List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
                 return Ok(new { tickets });
             }

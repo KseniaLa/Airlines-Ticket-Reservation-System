@@ -15,13 +15,20 @@ class Ticket extends React.PureComponent {
   }
 
   onButtonClick() {
+    if (!this.props.checkInput) {
+      this.props.onClick(this.props.id, this.state.count);
+      if (this.props.hideOnClick) {
+        this.setState({ isVisible: false });
+      }
+      return;
+    }
     if (this.state.count !== 0 && this.state.count <= this.props.count) {
       this.props.onClick(this.props.id, this.state.count);
       if (this.props.hideOnClick) {
         this.setState({ isVisible: false });
       }
     } else {
-      alert('invalid count'); // replace with tate change
+      alert('invalid count'); // replace with state change
     }
   }
 
@@ -81,6 +88,7 @@ Ticket.propTypes = {
   description: PropTypes.string,
   actualCount: PropTypes.number,
   showCount: PropTypes.bool,
+  checkInput: PropTypes.bool,
   date: PropTypes.string,
   time: PropTypes.string,
   price: PropTypes.number,

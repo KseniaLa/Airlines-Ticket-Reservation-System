@@ -3,6 +3,7 @@ import {
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
   DELETE_TICKET,
+  TICKET_DELETED,
   ORDER_REQUESTED,
   ORDER_SUCCEEDED,
   ORDER_FAILED,
@@ -33,6 +34,13 @@ export function deleteTicketFromCart(ticketId) {
   return {
     type: DELETE_TICKET,
     payload: ticketId,
+  };
+}
+
+export function setDeleteState(isSuccess) {
+  return {
+    type: TICKET_DELETED,
+    payload: isSuccess,
   };
 }
 

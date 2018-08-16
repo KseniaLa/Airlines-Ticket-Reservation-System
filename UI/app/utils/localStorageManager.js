@@ -20,7 +20,6 @@ export function deleteTicket(key, ticketId) {
   if (localStorage.getItem(key) === null) {
     return true;
   }
-  alert(ticketId);
   const currElement = JSON.parse(localStorage.getItem(key));
   const newTicketArray = currElement.filter(
     element => element.ticket !== ticketId,

@@ -27,7 +27,7 @@ class SearchResultPage extends React.PureComponent {
 
   componentDidUpdate() {
     if (this.props.addError) {
-      alert("add error");
+      alert('add error');
     }
   }
 
@@ -57,6 +57,7 @@ class SearchResultPage extends React.PureComponent {
           price={ticket.price}
           count={ticket.totalCount}
           showCount
+          checkInput
           action={<FormattedMessage {...messages.add} />}
           onClick={this.addTicketToCart}
         />,

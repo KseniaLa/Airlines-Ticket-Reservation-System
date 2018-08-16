@@ -13,11 +13,13 @@ import {
   makeOrder,
   discardOrderSucceeded,
   deleteTicketFromCart,
+  setDeleteState,
 } from './actions';
 import {
   makeSelectIsDataReceived,
   makeSelectTickets,
   makeSelectCartSubmitted,
+  makeSelectDeletionOccured,
 } from './selectors';
 import './style.scss';
 
@@ -36,6 +38,12 @@ class UserBasketPage extends React.Component {
 
   componentWillUnmount() {
     this.props.hideSuccessBar();
+  }
+
+  componentDidUpdate() {
+    if (this.props.deletionOccured) {
+      setTimeout(this.props.discardDeletionOccured, 2000);
+    }
   }
 
   onButtonClick() {
@@ -65,6 +73,7 @@ class UserBasketPage extends React.Component {
           count={ticket.totalCount}
           actualCount={ticket.bookedCount}
           showCount
+          checkInput={false}
           action={<FormattedMessage {...messages.remove} />}
           onClick={this.onCancelButtonClick}
         />,
@@ -89,7 +98,12 @@ class UserBasketPage extends React.Component {
       return <section className="basket-container">ok</section>;
     }
     const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
-    return <section className="basket-container">{bookedTickets}</section>;
+    return (
+      <section className="basket-container">
+        {this.props.deletionOccured && <h3>deleted</h3>}
+        {bookedTickets}
+      </section>
+    );
   }
 }
 
@@ -98,10 +112,12 @@ UserBasketPage.propTypes = {
   tickets: PropTypes.array,
   dataReady: PropTypes.bool,
   cartSubmitted: PropTypes.bool,
+  deletionOccured: PropTypes.bool,
   getTickets: PropTypes.func,
   makeUserOrder: PropTypes.func,
   hideSuccessBar: PropTypes.func,
   deleteTicket: PropTypes.func,
+  discardDeletionOccured: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -109,6 +125,7 @@ const mapStateToProps = createStructuredSelector({
   tickets: makeSelectTickets(),
   dataReady: makeSelectIsDataReceived(),
   cartSubmitted: makeSelectCartSubmitted(),
+  deletionOccured: makeSelectDeletionOccured(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -127,6 +144,10 @@ export function mapDispatchToProps(dispatch) {
 
     deleteTicket(ticketId) {
       dispatch(deleteTicketFromCart(ticketId));
+    },
+
+    discardDeletionOccured() {
+      dispatch(setDeleteState(false));
     },
   };
 }

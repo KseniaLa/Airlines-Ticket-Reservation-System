@@ -5,6 +5,7 @@ import {
   getTicketsError,
   makeOrderSuccess,
   makeOrderError,
+  setDeleteState,
 } from './actions';
 import { config } from '../../utils/configLoader';
 import { getTicketsPost } from '../../utils/requestBuilder';
@@ -55,9 +56,9 @@ function* sendOrder() {
 function* deleteFromCart(action) {
   try {
     deleteTicket('cartTickets', action.payload);
-    yield 'hello';
+    yield put(setDeleteState(true));
   } catch (e) {
-    yield 'hello';
+    yield setDeleteState(false);
   }
 }
 

@@ -13,4 +13,14 @@ const makeSelectCartSubmitted = () =>
     searchState.get('cartSubmitted'),
   );
 
-export { makeSelectIsDataReceived, makeSelectTickets, makeSelectCartSubmitted };
+const makeSelectDeletionOccured = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('deletionOccured'),
+  );
+
+export {
+  makeSelectIsDataReceived,
+  makeSelectTickets,
+  makeSelectCartSubmitted,
+  makeSelectDeletionOccured,
+};

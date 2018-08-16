@@ -19,6 +19,7 @@
   "app.components.Ticket.price": "Price",
   "app.components.Ticket.time": "Time",
   "app.components.UserBasketPage.submit": "Submit",
+  "app.components.UserBasketPage.success": "Tickets reserved",
   "app.components.UserPage.basket": "Cart",
   "app.components.UserPage.date": "Date",
   "app.components.UserPage.tickets": "My tickets",

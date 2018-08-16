@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../components/basic/Button';
+import SuccessMessage from '../../components/basic/SuccessMessage';
 import Spinner from '../../components/basic/Spinner';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
@@ -30,10 +31,15 @@ class UserBasketPage extends React.Component {
     super(props);
     this.onButtonClick = this.onButtonClick.bind(this);
     this.onCancelButtonClick = this.onCancelButtonClick.bind(this);
+    this.fetchTickets = this.fetchTickets.bind(this);
   }
 
   componentDidMount() {
-    this.props.getTickets(this.props.language);
+    this.fetchTickets(this.props.language);
+  }
+
+  fetchTickets(language) {
+    this.props.getTickets(language);
   }
 
   componentWillUnmount() {
@@ -42,7 +48,8 @@ class UserBasketPage extends React.Component {
 
   componentDidUpdate() {
     if (this.props.deletionOccured) {
-      setTimeout(this.props.discardDeletionOccured, 2000);
+      this.fetchTickets(this.props.language);
+      this.props.discardDeletionOccured();
     }
   }
 
@@ -95,7 +102,11 @@ class UserBasketPage extends React.Component {
 
   render() {
     if (this.props.cartSubmitted) {
-      return <section className="basket-container">ok</section>;
+      return (
+        <section className="basket-container">
+          <SuccessMessage text={<FormattedMessage {...messages.success} />} />
+        </section>
+      );
     }
     const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
     return (

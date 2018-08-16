@@ -9,4 +9,8 @@ export default defineMessages({
     id: 'app.components.UserBasketPage.remove',
     defaultMessage: 'Удалить',
   },
+  success: {
+    id: 'app.components.UserBasketPage.success',
+    defaultMessage: 'Билеты забронированы',
+  },
 });

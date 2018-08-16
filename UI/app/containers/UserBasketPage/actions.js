@@ -2,6 +2,10 @@ import {
   TICKETS_REQUESTED,
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
+  ORDER_REQUESTED,
+  ORDER_SUCCEEDED,
+  ORDER_FAILED,
+  DISCARD_ORDER_SUCCEEDED,
 } from './constants';
 
 export function getCartTickets(lang) {
@@ -21,5 +25,30 @@ export function getTicketsSuccess(result) {
 export function getTicketsError() {
   return {
     type: TICKETS_FETCH_FAILED,
+  };
+}
+
+export function makeOrder() {
+  return {
+    type: ORDER_REQUESTED,
+  };
+}
+
+export function makeOrderSuccess(result) {
+  return {
+    type: ORDER_SUCCEEDED,
+    payload: result,
+  };
+}
+
+export function makeOrderError() {
+  return {
+    type: ORDER_FAILED,
+  };
+}
+
+export function discardOrderSucceeded() {
+  return {
+    type: DISCARD_ORDER_SUCCEEDED,
   };
 }

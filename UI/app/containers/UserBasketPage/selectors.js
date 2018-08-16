@@ -8,4 +8,9 @@ const makeSelectIsDataReceived = () =>
 const makeSelectTickets = () =>
   createSelector(selectCartResult, searchState => searchState.get('data'));
 
-export { makeSelectIsDataReceived, makeSelectTickets };
+const makeSelectCartSubmitted = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('cartSubmitted'),
+  );
+
+export { makeSelectIsDataReceived, makeSelectTickets, makeSelectCartSubmitted };

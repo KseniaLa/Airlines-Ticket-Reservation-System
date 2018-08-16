@@ -11,6 +11,7 @@ const CONFIG = {
     popularCities: 'cities/',
     userHistory: 'account/iphistory',
     userCart: 'orders/cart/',
+    userOrder: 'orders/cart/submit',
   },
 };
 

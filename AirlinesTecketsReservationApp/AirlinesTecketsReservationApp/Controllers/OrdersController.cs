@@ -14,13 +14,11 @@ namespace AirlinesTicketsReservationApp.Controllers
     public class OrdersController : Controller
     {
         private readonly OrderService _orderService;
-         private readonly TicketService _ticketService;
-        
+
 
         public OrdersController()
         {
             _orderService = new OrderService();
-             _ticketService = new TicketService();
         }
 
         [Authorize]
@@ -40,20 +38,38 @@ namespace AirlinesTicketsReservationApp.Controllers
 
         }
 
-         [HttpPost("cart/{lang}")]
-         public async Task<IActionResult> GetCartTickets([FromBody] string cart, string lang)
-         {
-              try
-              {
-                   List<CartItemModel> cartItems = JsonConvert.DeserializeObject<List<CartItemModel>>(cart);
-                   List<TicketModel> tickets = await _ticketService.GetTicketsList(cartItems, lang);
-                   return Ok(new { tickets });
-              }
-              catch
-              {
-                   return BadRequest();
-              }
+        [Authorize]
+        [HttpPost("cart/{lang}")]
+        public async Task<IActionResult> GetCartTickets([FromBody] string cart, string lang)
+        {
+            try
+            {
+                List<CartItemModel> cartItems = JsonConvert.DeserializeObject<List<CartItemModel>>(cart);
+                List<TicketModel> tickets = await _orderService.GetTicketsList(cartItems, lang);
+                return Ok(new { tickets });
+            }
+            catch
+            {
+                return BadRequest();
+            }
 
-         }
-     }
+        }
+
+        [Authorize]
+        [HttpPost("cart/submit")]
+        public async Task<IActionResult> BookTickets([FromBody] string cart)
+        {
+            try
+            {
+                string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                List<CartItemModel> cartItems = JsonConvert.DeserializeObject<List<CartItemModel>>(cart);
+                await _orderService.AddOrders(email, cartItems);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+    }
 }

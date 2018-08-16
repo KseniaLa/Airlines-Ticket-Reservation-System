@@ -8,18 +8,33 @@ import Spinner from '../../components/basic/Spinner';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { getCartTickets } from './actions';
-import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
+import { getCartTickets, makeOrder, discardOrderSucceeded } from './actions';
+import {
+  makeSelectIsDataReceived,
+  makeSelectTickets,
+  makeSelectCartSubmitted,
+} from './selectors';
 import './style.scss';
 
 import messages from './messages';
 
 class UserBasketPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onButtonClick = this.onButtonClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.getTickets(this.props.language);
   }
 
-  onButtonClick() {}
+  componentWillUnmount() {
+    this.props.hideSuccessBar();
+  }
+
+  onButtonClick() {
+    this.props.makeUserOrder();
+  }
 
   getData() {
     const list = [];
@@ -48,13 +63,19 @@ class UserBasketPage extends React.Component {
     }
     return (
       <div className="basket-container__tickets-area">
-        <Button text={<FormattedMessage {...messages.submit} />} />
+        <Button
+          onClick={this.onButtonClick}
+          text={<FormattedMessage {...messages.submit} />}
+        />
         {list}
       </div>
     );
   }
 
   render() {
+    if (this.props.cartSubmitted) {
+      return <section className="basket-container">ok</section>;
+    }
     const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
     return <section className="basket-container">{bookedTickets}</section>;
   }
@@ -64,19 +85,31 @@ UserBasketPage.propTypes = {
   language: PropTypes.string,
   tickets: PropTypes.array,
   dataReady: PropTypes.bool,
+  cartSubmitted: PropTypes.bool,
   getTickets: PropTypes.func,
+  makeUserOrder: PropTypes.func,
+  hideSuccessBar: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
   tickets: makeSelectTickets(),
   dataReady: makeSelectIsDataReceived(),
+  cartSubmitted: makeSelectCartSubmitted(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     getTickets(language) {
       dispatch(getCartTickets(language));
+    },
+
+    makeUserOrder() {
+      dispatch(makeOrder());
+    },
+
+    hideSuccessBar() {
+      dispatch(discardOrderSucceeded());
     },
   };
 }

@@ -66,9 +66,14 @@ export function searchPost(from, to, date, flightClass) {
   };
 }
 
-export function getTicketsPost(ticketsArr) {
+export function getTicketsPost(ticketsArr, token) {
   return {
-    ...getJsonTypePost(),
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
     body:
       ticketsArr === null ? JSON.stringify('[]') : JSON.stringify(ticketsArr),
   };

@@ -6,6 +6,8 @@ export const TICKETS_FETCH_SUCCEEDED =
 export const TICKETS_FETCH_FAILED =
   'airlines/UserBasketPage/TICKETS_FETCH_FAILED';
 
+export const DELETE_TICKET = 'airlines/UserBasketPage/DELETE_TICKET';
+
 export const ORDER_REQUESTED = 'airlines/UserBasketPage/ORDER_REQUESTED';
 
 export const ORDER_SUCCEEDED = 'airlines/UserBasketPage/ORDER_SUCCEDED';

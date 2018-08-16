@@ -2,6 +2,7 @@ import {
   TICKETS_REQUESTED,
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
+  DELETE_TICKET,
   ORDER_REQUESTED,
   ORDER_SUCCEEDED,
   ORDER_FAILED,
@@ -25,6 +26,13 @@ export function getTicketsSuccess(result) {
 export function getTicketsError() {
   return {
     type: TICKETS_FETCH_FAILED,
+  };
+}
+
+export function deleteTicketFromCart(ticketId) {
+  return {
+    type: DELETE_TICKET,
+    payload: ticketId,
   };
 }
 

@@ -15,12 +15,13 @@ class Ticket extends React.PureComponent {
   }
 
   onButtonClick() {
-    if (this.state.count !== 0) {
-      alert(this.props.id);
+    if (this.state.count !== 0 && this.state.count <= this.props.count) {
       this.props.onClick(this.props.id, this.state.count);
       if (this.props.hideOnClick) {
         this.setState({ isVisible: false });
       }
+    } else {
+      alert('invalid count'); // replace with tate change
     }
   }
 

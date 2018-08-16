@@ -10,7 +10,11 @@ import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { searchForTickets, discardDataReady, addTicket } from './actions';
-import { makeSelectIsDataReceived, makeSelectTickets } from './selectors';
+import {
+  makeSelectIsDataReceived,
+  makeSelectTickets,
+  makeSelectIsTicketAddError,
+} from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
 import './style.scss';
@@ -19,6 +23,12 @@ class SearchResultPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.addTicketToCart = this.addTicketToCart.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.addError) {
+      alert("add error");
+    }
   }
 
   addTicketToCart(ticket, count) {
@@ -93,6 +103,7 @@ SearchResultPage.propTypes = {
   isAuthorized: PropTypes.bool,
   language: PropTypes.string,
   dataReady: PropTypes.bool,
+  addError: PropTypes.bool,
   tickets: PropTypes.array,
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
@@ -118,6 +129,7 @@ const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
   tickets: makeSelectTickets(),
   dataReady: makeSelectIsDataReceived(),
+  addError: makeSelectIsTicketAddError(),
 });
 
 export default connect(

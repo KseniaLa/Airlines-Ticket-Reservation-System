@@ -8,7 +8,12 @@ import Spinner from '../../components/basic/Spinner';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { getCartTickets, makeOrder, discardOrderSucceeded } from './actions';
+import {
+  getCartTickets,
+  makeOrder,
+  discardOrderSucceeded,
+  deleteTicketFromCart,
+} from './actions';
 import {
   makeSelectIsDataReceived,
   makeSelectTickets,
@@ -22,6 +27,7 @@ class UserBasketPage extends React.Component {
   constructor(props) {
     super(props);
     this.onButtonClick = this.onButtonClick.bind(this);
+    this.onCancelButtonClick = this.onCancelButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +42,10 @@ class UserBasketPage extends React.Component {
     this.props.makeUserOrder();
   }
 
+  onCancelButtonClick(ticketId) {
+    this.props.deleteTicket(ticketId);
+  }
+
   getData() {
     const list = [];
     const { tickets } = this.props;
@@ -44,6 +54,7 @@ class UserBasketPage extends React.Component {
       list.push(
         <Ticket
           key={ticket.id}
+          id={ticket.id}
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
           category={ticket.category}
@@ -55,6 +66,7 @@ class UserBasketPage extends React.Component {
           actualCount={ticket.bookedCount}
           showCount
           action={<FormattedMessage {...messages.remove} />}
+          onClick={this.onCancelButtonClick}
         />,
       );
     });
@@ -89,6 +101,7 @@ UserBasketPage.propTypes = {
   getTickets: PropTypes.func,
   makeUserOrder: PropTypes.func,
   hideSuccessBar: PropTypes.func,
+  deleteTicket: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -110,6 +123,10 @@ export function mapDispatchToProps(dispatch) {
 
     hideSuccessBar() {
       dispatch(discardOrderSucceeded());
+    },
+
+    deleteTicket(ticketId) {
+      dispatch(deleteTicketFromCart(ticketId));
     },
   };
 }

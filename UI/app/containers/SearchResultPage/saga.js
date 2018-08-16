@@ -8,6 +8,7 @@ import {
 } from './actions';
 import { config } from '../../utils/configLoader';
 import { searchPost } from '../../utils/requestBuilder';
+import { addTicket } from '../../utils/localStorageManager';
 
 function* fetchTickets(action) {
   try {
@@ -30,15 +31,11 @@ function* fetchTickets(action) {
 
 function* addTicketToStorage(action) {
   try {
-    if (localStorage.getItem('cartTickets') === null) {
-      localStorage.setItem('cartTickets', JSON.stringify([action.payload]));
+    if (addTicket('cartTickets', action.payload)) {
+      yield put(addTicketSuccess());
     } else {
-      const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
-      currTickets.push = [].push;
-      currTickets.push(action.payload);
-      localStorage.setItem('cartTickets', JSON.stringify(currTickets));
+      yield put(addTicketError());
     }
-    yield put(addTicketSuccess());
   } catch (e) {
     yield put(addTicketError());
   }

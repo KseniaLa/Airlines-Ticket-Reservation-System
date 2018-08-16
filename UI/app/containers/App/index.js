@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import Popup from 'react-popup';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
@@ -28,6 +29,14 @@ import './style.scss';
 
 ReactModal.setAppElement('#app');
 
+Popup.registerPlugin('pop', function on(content) {
+  this.create({
+    title: 'error',
+    content,
+    className: 'error-popup',
+  });
+});
+
 class App extends React.Component {
   constructor() {
     super();
@@ -50,6 +59,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <div className="content">
+          <Popup className="error-popup" />
           <Header
             language={this.props.language}
             isAuthorized={this.props.isAuthorized}

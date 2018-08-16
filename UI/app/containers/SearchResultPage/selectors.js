@@ -15,8 +15,14 @@ const makeSelectIsTicketAddError = () =>
     searchState.get('ticketAddError'),
   );
 
+const makeSelectIsTicketAdded = () =>
+  createSelector(selectSearchResult, searchState =>
+    searchState.get('ticketAdded'),
+  );
+
 export {
   makeSelectIsDataReceived,
   makeSelectTickets,
   makeSelectIsTicketAddError,
+  makeSelectIsTicketAdded,
 };

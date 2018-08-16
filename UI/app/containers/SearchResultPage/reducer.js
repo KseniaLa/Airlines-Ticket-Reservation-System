@@ -12,6 +12,7 @@ const initialState = fromJS({
   dataReceived: false,
   data: null,
   ticketAddError: false,
+  ticketAdded: false,
 });
 
 const searchReducer = (state = initialState, action) => {
@@ -25,9 +26,9 @@ const searchReducer = (state = initialState, action) => {
     case ADD_TICKET:
       return state.set('ticketAddError', false);
     case ADD_SUCCEEDED:
-      return state.set('ticketAddError', false);
+      return state.set('ticketAddError', false).set('ticketAdded', true);
     case ADD_FAILED:
-      return state.set('ticketAddError', true);
+      return state.set('ticketAddError', true).set('ticketAdded', false);
     default:
       return state;
   }

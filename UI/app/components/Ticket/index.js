@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Popup from 'react-popup';
 import { FormattedMessage } from 'react-intl';
 import Button from '../basic/Button';
 import './style.scss';
@@ -28,7 +29,11 @@ class Ticket extends React.PureComponent {
         this.setState({ isVisible: false });
       }
     } else {
-      alert('invalid count'); // replace with state change
+      Popup.alert(
+        <FormattedMessage id="app.components.Ticket.invalidcount">
+          {error => error}
+        </FormattedMessage>,
+      );
     }
   }
 

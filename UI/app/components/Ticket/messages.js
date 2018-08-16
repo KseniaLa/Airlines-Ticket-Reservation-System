@@ -17,4 +17,8 @@ export default defineMessages({
     id: 'app.components.Ticket.count',
     defaultMessage: 'Количество',
   },
+  invalidcount: {
+    id: 'app.components.Ticket.invalidcount',
+    defaultMessage: 'Некорректное количество билетов',
+  },
 });

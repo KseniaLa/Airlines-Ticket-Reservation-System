@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Popup from 'react-popup';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,6 +15,7 @@ import {
   makeSelectIsDataReceived,
   makeSelectTickets,
   makeSelectIsTicketAddError,
+  makeSelectIsTicketAdded,
 } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
@@ -27,7 +29,17 @@ class SearchResultPage extends React.PureComponent {
 
   componentDidUpdate() {
     if (this.props.addError) {
-      alert('add error');
+      Popup.plugins().pop(
+        <FormattedMessage id="app.components.SearchResultsPage.adderror">
+          {placeholder => placeholder}
+        </FormattedMessage>,
+      );
+    } else if (this.props.ticketAdded) {
+      Popup.alert(
+        <FormattedMessage id="app.components.SearchResultsPage.addsuccess">
+          {placeholder => placeholder}
+        </FormattedMessage>,
+      );
     }
   }
 
@@ -105,6 +117,7 @@ SearchResultPage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
   addError: PropTypes.bool,
+  ticketAdded: PropTypes.bool,
   tickets: PropTypes.array,
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
@@ -131,6 +144,7 @@ const mapStateToProps = createStructuredSelector({
   tickets: makeSelectTickets(),
   dataReady: makeSelectIsDataReceived(),
   addError: makeSelectIsTicketAddError(),
+  ticketAdded: makeSelectIsTicketAdded(),
 });
 
 export default connect(

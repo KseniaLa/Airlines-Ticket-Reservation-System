@@ -34,7 +34,7 @@ class UserTicketsPage extends React.Component {
 
   componentDidUpdate() {
     if (this.props.cancelled) {
-      Popup.alert(
+      Popup.plugins().successPopup(
         <FormattedMessage id="app.components.UserTicketsPage.cancelled">
           {placeholder => placeholder}
         </FormattedMessage>,
@@ -42,7 +42,7 @@ class UserTicketsPage extends React.Component {
       this.props.discardCancel();
       this.fetchOrders(this.props.language);
     } else if (this.props.cancelError) {
-      Popup.alert(
+      Popup.plugins().errorPopup(
         <FormattedMessage id="app.components.UserTicketsPage.cancelerror">
           {placeholder => placeholder}
         </FormattedMessage>,

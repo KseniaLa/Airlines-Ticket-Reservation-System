@@ -29,11 +29,27 @@ import './style.scss';
 
 ReactModal.setAppElement('#app');
 
-Popup.registerPlugin('pop', function on(content) {
+Popup.registerPlugin('errorPopup', function on(content) {
   this.create({
-    title: 'error',
+    title: (
+      <div className="error">
+        <i className="fa fa-times" />
+      </div>
+    ),
     content,
-    className: 'error-popup',
+    className: 'error',
+  });
+});
+
+Popup.registerPlugin('successPopup', function on(content) {
+  this.create({
+    title: (
+      <div className="success">
+        <i className="fa fa-check" />
+      </div>
+    ),
+    content,
+    className: 'success',
   });
 });
 
@@ -59,7 +75,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <div className="content">
-          <Popup className="error-popup" />
+          <Popup wildClasses className="popup" />
           <Header
             language={this.props.language}
             isAuthorized={this.props.isAuthorized}

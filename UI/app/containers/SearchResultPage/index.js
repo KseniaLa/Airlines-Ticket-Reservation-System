@@ -34,14 +34,14 @@ class SearchResultPage extends React.PureComponent {
 
   componentDidUpdate() {
     if (this.props.addError) {
-      Popup.plugins().pop(
+      Popup.plugins().errorPopup(
         <FormattedMessage id="app.components.SearchResultsPage.adderror">
           {placeholder => placeholder}
         </FormattedMessage>,
       );
       this.props.discardAdd();
     } else if (this.props.ticketAdded) {
-      Popup.alert(
+      Popup.plugins().successPopup(
         <FormattedMessage id="app.components.SearchResultsPage.addsuccess">
           {placeholder => placeholder}
         </FormattedMessage>,

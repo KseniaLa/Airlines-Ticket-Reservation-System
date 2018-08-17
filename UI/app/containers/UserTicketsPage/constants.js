@@ -6,3 +6,5 @@ export const USER_TICKETS_FETCH_SUCCEEDED =
 
 export const USER_TICKETS_FETCH_FAILED =
   'airlines/UserTicketsPage/USER_TICKETS_FETCH_FAILED';
+
+export const CANCEL_REQUESTED = 'airlines/UserTicketsPage/CANCEL_REQUESTED';

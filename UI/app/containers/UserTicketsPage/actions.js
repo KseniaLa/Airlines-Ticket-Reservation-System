@@ -2,6 +2,7 @@ import {
   USER_TICKETS_REQUESTED,
   USER_TICKETS_FETCH_SUCCEEDED,
   USER_TICKETS_FETCH_FAILED,
+  CANCEL_REQUESTED,
 } from './constants';
 
 export function getUserTickets(lang) {
@@ -21,5 +22,12 @@ export function getUserTicketsSuccess(result) {
 export function getUserTicketsError() {
   return {
     type: USER_TICKETS_FETCH_FAILED,
+  };
+}
+
+export function cancelUserTicket(ticketId) {
+  return {
+    type: CANCEL_REQUESTED,
+    payload: ticketId,
   };
 }

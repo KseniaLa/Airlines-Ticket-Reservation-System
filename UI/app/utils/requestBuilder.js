@@ -78,3 +78,15 @@ export function getTicketsPost(ticketsArr, token) {
       ticketsArr === null ? JSON.stringify('[]') : JSON.stringify(ticketsArr),
   };
 }
+
+export function cancelTicketPost(ticketId, token) {
+  return {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: ticketId,
+  };
+}

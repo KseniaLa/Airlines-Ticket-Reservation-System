@@ -12,6 +12,7 @@ const CONFIG = {
     userHistory: 'account/iphistory',
     userCart: 'orders/cart/',
     userOrder: 'orders/cart/submit',
+    ticketCancellation: 'orders/userorders/cancel',
   },
 };
 

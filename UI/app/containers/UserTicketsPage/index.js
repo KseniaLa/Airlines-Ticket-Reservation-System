@@ -7,13 +7,21 @@ import Spinner from '../../components/basic/Spinner';
 import Ticket from '../../components/Ticket';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { getUserTickets } from './actions';
+import { getUserTickets, cancelUserTicket } from './actions';
 import { makeSelectIsDataReceived, makeSelectUserTickets } from './selectors';
 import messages from './messages';
 
 class UserTicketsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onCancelClick = this.onCancelClick.bind(this);
+  }
   componentDidMount() {
     this.props.getTickets(this.props.language);
+  }
+
+  onCancelClick(ticketId) {
+    this.props.cancelTicket(ticketId);
   }
 
   getData() {
@@ -24,6 +32,7 @@ class UserTicketsPage extends React.Component {
       list.push(
         <Ticket
           key={ticket.id}
+          id={ticket.id}
           title={`${ticket.from} - ${ticket.to}`}
           company={ticket.company}
           category={ticket.category}
@@ -35,6 +44,7 @@ class UserTicketsPage extends React.Component {
           actualCount={ticket.bookedCount}
           showCount={false}
           action={<FormattedMessage {...messages.undo} />}
+          onClick={this.onCancelClick}
         />,
       );
     });
@@ -55,12 +65,17 @@ UserTicketsPage.propTypes = {
   dataReady: PropTypes.bool,
   tickets: PropTypes.array,
   getTickets: PropTypes.func,
+  cancelTicket: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     getTickets(lang) {
       dispatch(getUserTickets(lang));
+    },
+
+    cancelTicket(ticketId) {
+      dispatch(cancelUserTicket(ticketId));
     },
   };
 }

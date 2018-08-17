@@ -14,11 +14,13 @@ namespace AirlinesTicketsReservationApp.Controllers
     public class OrdersController : Controller
     {
         private readonly OrderService _orderService;
+        private readonly TicketService _ticketService;
 
 
         public OrdersController()
         {
             _orderService = new OrderService();
+            _ticketService = new TicketService();
         }
 
         [Authorize]
@@ -64,6 +66,22 @@ namespace AirlinesTicketsReservationApp.Controllers
                 string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
                 List<CartItemModel> cartItems = JsonConvert.DeserializeObject<List<CartItemModel>>(cart);
                 await _orderService.AddOrders(email, cartItems);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [Authorize]
+        [HttpPost("userorders/cancel")]
+        public async Task<IActionResult> CancelTicket([FromBody] int id)
+        {
+            try
+            {
+                string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                await _orderService.CancelOrder(email, id);
                 return Ok();
             }
             catch

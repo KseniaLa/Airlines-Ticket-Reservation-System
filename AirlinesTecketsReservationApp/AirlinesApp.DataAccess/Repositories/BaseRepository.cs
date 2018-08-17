@@ -21,7 +21,7 @@ namespace AirlinesApp.DataAccess.Repositories
 
         public IQueryable<T> GetAll()
         {
-            return _dbSet; 
+            return _dbSet;
         }
 
         public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
@@ -32,7 +32,11 @@ namespace AirlinesApp.DataAccess.Repositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            T item = _dbSet.Find(id);
+            if (item != null)
+            {
+                _dbSet.Remove(item);
+            }
         }
 
         public void Dispose()

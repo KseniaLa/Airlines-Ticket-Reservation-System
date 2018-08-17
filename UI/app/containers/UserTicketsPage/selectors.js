@@ -10,4 +10,19 @@ const makeSelectIsDataReceived = () =>
 const makeSelectUserTickets = () =>
   createSelector(selectUserTickets, searchState => searchState.get('data'));
 
-export { makeSelectIsDataReceived, makeSelectUserTickets };
+const makeSelectCancelled = () =>
+  createSelector(selectUserTickets, searchState =>
+    searchState.get('cancelled'),
+  );
+
+const makeSelectIsCancelError = () =>
+  createSelector(selectUserTickets, searchState =>
+    searchState.get('cancelError'),
+  );
+
+export {
+  makeSelectIsDataReceived,
+  makeSelectUserTickets,
+  makeSelectCancelled,
+  makeSelectIsCancelError,
+};

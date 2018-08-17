@@ -6,6 +6,7 @@ import {
   ADD_SUCCEEDED,
   ADD_FAILED,
   ADD_TICKET,
+  DISCARD_ADD_STATE,
 } from './constants';
 
 const initialState = fromJS({
@@ -29,6 +30,8 @@ const searchReducer = (state = initialState, action) => {
       return state.set('ticketAddError', false).set('ticketAdded', true);
     case ADD_FAILED:
       return state.set('ticketAddError', true).set('ticketAdded', false);
+    case DISCARD_ADD_STATE:
+      return state.set('ticketAddError', false).set('ticketAdded', false);
     default:
       return state;
   }

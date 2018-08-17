@@ -46,6 +46,8 @@
   "app.components.SearchResultsPage.addsuccess": "Ticket added to your cart!",
   "app.components.UserBasketPage.remove": "Remove",
   "app.components.UserBasketPage.undo" : "Undo",
+  "app.components.UserTicketsPage.cancelled": "Ticket cancelled",
+  "app.components.UserTicketsPage.cancelerror": "Unable to cancel the ticket. Error occured",
   "app.components.header.logout": "sign out",
   "app.components.SignInPage.name": "name",
   "app.components.SignInPage.surname": "surname",

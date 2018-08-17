@@ -2,7 +2,12 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { USER_TICKETS_REQUESTED, CANCEL_REQUESTED } from './constants';
 import { config } from '../../utils/configLoader';
 import { authGet, cancelTicketPost } from '../../utils/requestBuilder';
-import { getUserTicketsSuccess, getUserTicketsError } from './actions';
+import {
+  getUserTicketsSuccess,
+  getUserTicketsError,
+  cancelTicketSuccess,
+  cancelTicketError,
+} from './actions';
 
 function* fetchUserTickets(action) {
   try {
@@ -30,13 +35,12 @@ function* cancelTicket(action) {
       cancelTicketPost(action.payload, localStorage.getItem('token')),
     );
     if (responce.ok) {
-      const result = yield responce.json();
-      yield put(getUserTicketsSuccess(result.orders));
+      yield put(cancelTicketSuccess());
     } else {
-      yield put(getUserTicketsError());
+      yield put(cancelTicketError());
     }
   } catch (e) {
-    yield put(getUserTicketsError());
+    yield put(cancelTicketError());
   }
 }
 

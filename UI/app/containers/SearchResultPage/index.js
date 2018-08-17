@@ -10,7 +10,12 @@ import Ticket from '../../components/Ticket';
 import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
-import { searchForTickets, discardDataReady, addTicket } from './actions';
+import {
+  searchForTickets,
+  discardDataReady,
+  addTicket,
+  discardAddState,
+} from './actions';
 import {
   makeSelectIsDataReceived,
   makeSelectTickets,
@@ -34,12 +39,14 @@ class SearchResultPage extends React.PureComponent {
           {placeholder => placeholder}
         </FormattedMessage>,
       );
+      this.props.discardAdd();
     } else if (this.props.ticketAdded) {
       Popup.alert(
         <FormattedMessage id="app.components.SearchResultsPage.addsuccess">
           {placeholder => placeholder}
         </FormattedMessage>,
       );
+      this.props.discardAdd();
     }
   }
 
@@ -123,6 +130,7 @@ SearchResultPage.propTypes = {
   onNotAuth: PropTypes.func,
   onSearch: PropTypes.func,
   addTicketToCart: PropTypes.func,
+  discardAdd: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -134,6 +142,10 @@ export function mapDispatchToProps(dispatch) {
 
     addTicketToCart(ticket) {
       dispatch(addTicket(ticket));
+    },
+
+    discardAdd() {
+      dispatch(discardAddState());
     },
   };
 }

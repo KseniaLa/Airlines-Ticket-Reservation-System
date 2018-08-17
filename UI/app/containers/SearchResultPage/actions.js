@@ -6,6 +6,7 @@ import {
   ADD_SUCCEEDED,
   ADD_FAILED,
   ADD_TICKET,
+  DISCARD_ADD_STATE,
 } from './constants';
 
 export function searchForTickets(from, to, date, flightClass, lang) {
@@ -51,5 +52,11 @@ export function addTicketSuccess() {
 export function addTicketError() {
   return {
     type: ADD_FAILED,
+  };
+}
+
+export function discardAddState() {
+  return {
+    type: DISCARD_ADD_STATE,
   };
 }

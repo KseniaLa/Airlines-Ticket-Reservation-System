@@ -3,7 +3,7 @@ import {
   TICKETS_FETCH_SUCCEEDED,
   TICKETS_FETCH_FAILED,
   ORDER_SUCCEEDED,
-  DISCARD_ORDER_SUCCEEDED,
+  DISCARD_STATE,
   TICKET_DELETED,
 } from './constants';
 
@@ -22,8 +22,12 @@ const cartReducer = (state = initialState, action) => {
       return state.set('dataReceived', false);
     case ORDER_SUCCEEDED:
       return state.set('cartSubmitted', true);
-    case DISCARD_ORDER_SUCCEEDED:
-      return state.set('cartSubmitted', false);
+    case DISCARD_STATE:
+      return state
+        .set('dataReceived', false)
+        .set('data', null)
+        .set('cartSubmitted', false)
+        .set('deletionOccured', false);
     case TICKET_DELETED:
       return state.set('deletionOccured', action.payload);
     default:

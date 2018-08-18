@@ -12,6 +12,7 @@ import {
   getUserTickets,
   cancelUserTicket,
   discardCancelState,
+  discardState,
 } from './actions';
 import {
   makeSelectIsDataReceived,
@@ -30,6 +31,10 @@ class UserTicketsPage extends React.Component {
 
   componentDidMount() {
     this.fetchOrders(this.props.language);
+  }
+
+  componentWillUnmount() {
+    this.props.discardAll();
   }
 
   componentDidUpdate() {
@@ -104,6 +109,7 @@ UserTicketsPage.propTypes = {
   getTickets: PropTypes.func,
   cancelTicket: PropTypes.func,
   discardCancel: PropTypes.func,
+  discardAll: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -118,6 +124,10 @@ export function mapDispatchToProps(dispatch) {
 
     discardCancel() {
       dispatch(discardCancelState());
+    },
+
+    discardAll() {
+      dispatch(discardState());
     },
   };
 }

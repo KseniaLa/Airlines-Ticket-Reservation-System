@@ -17,3 +17,5 @@ export const CANCEL_TICKET_FAILED =
 
 export const DISCARD_CANCEL_STATE =
   'airlines/UserTicketsPage/DISCARD_CANCEL_STATE';
+
+export const DISCARD_STATE = 'airlines/UserTicketsPage/DISCARD_STATE';

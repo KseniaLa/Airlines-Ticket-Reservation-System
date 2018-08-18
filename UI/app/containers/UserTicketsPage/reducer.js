@@ -5,6 +5,7 @@ import {
   CANCEL_TICKET_SUCCEEDED,
   CANCEL_TICKET_FAILED,
   DISCARD_CANCEL_STATE,
+  DISCARD_STATE,
 } from './constants';
 
 const initialState = fromJS({
@@ -26,6 +27,12 @@ const userTicketsReducer = (state = initialState, action) => {
       return state.set('cancelled', false).set('cancelError', true);
     case DISCARD_CANCEL_STATE:
       return state.set('cancelled', false).set('cancelError', false);
+    case DISCARD_STATE:
+      return state
+        .set('dataReceived', false)
+        .set('data', null)
+        .set('cancelled', false)
+        .set('cancelError', false);
     default:
       return state;
   }

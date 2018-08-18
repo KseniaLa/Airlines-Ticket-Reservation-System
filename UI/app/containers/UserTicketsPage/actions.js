@@ -6,6 +6,7 @@ import {
   CANCEL_TICKET_SUCCEEDED,
   CANCEL_TICKET_FAILED,
   DISCARD_CANCEL_STATE,
+  DISCARD_STATE,
 } from './constants';
 
 export function getUserTickets(lang) {
@@ -50,5 +51,11 @@ export function cancelTicketError() {
 export function discardCancelState() {
   return {
     type: DISCARD_CANCEL_STATE,
+  };
+}
+
+export function discardState() {
+  return {
+    type: DISCARD_STATE,
   };
 }

@@ -75,6 +75,7 @@ class SearchResultPage extends React.PureComponent {
           time={`${date.getHours()} : ${date.getMinutes()}`}
           price={ticket.price}
           count={ticket.totalCount}
+          actualCount={0}
           showCount
           checkInput
           action={<FormattedMessage {...messages.add} />}

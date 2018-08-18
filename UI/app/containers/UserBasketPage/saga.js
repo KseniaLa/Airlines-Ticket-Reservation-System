@@ -1,5 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { TICKETS_REQUESTED, ORDER_REQUESTED, DELETE_TICKET } from './constants';
+import {
+  TICKETS_REQUESTED,
+  ORDER_REQUESTED,
+  DELETE_TICKET,
+  UPDATE_TICKET,
+} from './constants';
 import {
   getTicketsSuccess,
   getTicketsError,
@@ -9,7 +14,7 @@ import {
 } from './actions';
 import { config } from '../../utils/configLoader';
 import { getTicketsPost } from '../../utils/requestBuilder';
-import { deleteTicket } from '../../utils/localStorageManager';
+import { deleteTicket, updateTicket } from '../../utils/localStorageManager';
 
 function* fetchTickets(action) {
   try {
@@ -62,8 +67,18 @@ function* deleteFromCart(action) {
   }
 }
 
+function* updateCount(action) {
+  try {
+    updateTicket('cartTickets', action.payload.ticket, action.payload.count);
+    yield 'ok';
+  } catch (e) {
+    yield 'error';
+  }
+}
+
 export function* cartSaga() {
   yield takeEvery(TICKETS_REQUESTED, fetchTickets);
   yield takeEvery(ORDER_REQUESTED, sendOrder);
   yield takeEvery(DELETE_TICKET, deleteFromCart);
+  yield takeEvery(UPDATE_TICKET, updateCount);
 }

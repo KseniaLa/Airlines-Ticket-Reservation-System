@@ -10,7 +10,10 @@ import messages from './messages';
 class Ticket extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { isVisible: true, count: 0 };
+    this.state = {
+      isVisible: true,
+      count: this.props.actualCount > 0 ? this.props.actualCount : '',
+    };
     this.onButtonClick = this.onButtonClick.bind(this);
     this.updateCount = this.updateCount.bind(this);
   }
@@ -23,7 +26,7 @@ class Ticket extends React.PureComponent {
       }
       return;
     }
-    if (this.state.count !== 0 && this.state.count <= this.props.count) {
+    if (this.state.count > 0 && this.state.count <= this.props.count) {
       this.props.onClick(this.props.id, this.state.count);
       if (this.props.hideOnClick) {
         this.setState({ isVisible: false });
@@ -39,6 +42,15 @@ class Ticket extends React.PureComponent {
 
   updateCount(e) {
     this.setState({ count: e.target.value });
+    if (this.props.updateCount) {
+      if (
+        e.target.value !== '' &&
+        e.target.value > 0 &&
+        e.target.value < this.props.count
+      ) {
+        this.props.onUpdate(this.props.id, +e.target.value);
+      }
+    }
   }
 
   render() {
@@ -69,7 +81,7 @@ class Ticket extends React.PureComponent {
             <input
               className="ticket-field"
               onChange={this.updateCount}
-              value={this.props.actualCount}
+              value={this.state.count}
             />
             {this.props.showCount && (
               <h1 className="actual-count-block">{this.props.count}</h1>
@@ -94,6 +106,7 @@ Ticket.propTypes = {
   actualCount: PropTypes.number,
   showCount: PropTypes.bool,
   checkInput: PropTypes.bool,
+  updateCount: PropTypes.bool,
   date: PropTypes.string,
   time: PropTypes.string,
   price: PropTypes.number,
@@ -101,6 +114,7 @@ Ticket.propTypes = {
   action: PropTypes.object,
   hideOnClick: PropTypes.bool,
   onClick: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 
 export default Ticket;

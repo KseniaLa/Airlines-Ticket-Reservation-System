@@ -12,9 +12,10 @@ import { makeSelectLocale } from '../LanguageProvider/selectors';
 import {
   getCartTickets,
   makeOrder,
-  discardOrderSucceeded,
+  discardState,
   deleteTicketFromCart,
   setDeleteState,
+  updateTicketCount,
 } from './actions';
 import {
   makeSelectIsDataReceived,
@@ -32,6 +33,7 @@ class UserBasketPage extends React.Component {
     this.onButtonClick = this.onButtonClick.bind(this);
     this.onCancelButtonClick = this.onCancelButtonClick.bind(this);
     this.fetchTickets = this.fetchTickets.bind(this);
+    this.onCountUpdate = this.onCountUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +45,7 @@ class UserBasketPage extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.hideSuccessBar();
+    this.props.discardAll();
   }
 
   componentDidUpdate() {
@@ -59,6 +61,10 @@ class UserBasketPage extends React.Component {
 
   onCancelButtonClick(ticketId) {
     this.props.deleteTicket(ticketId);
+  }
+
+  onCountUpdate(id, count) {
+    this.props.updateCount(id, count);
   }
 
   getData() {
@@ -83,6 +89,8 @@ class UserBasketPage extends React.Component {
           checkInput={false}
           action={<FormattedMessage {...messages.remove} />}
           onClick={this.onCancelButtonClick}
+          onUpdate={this.onCountUpdate}
+          updateCount
         />,
       );
     });
@@ -109,12 +117,7 @@ class UserBasketPage extends React.Component {
       );
     }
     const bookedTickets = this.props.dataReady ? this.getData() : <Spinner />;
-    return (
-      <section className="basket-container">
-        {this.props.deletionOccured && <h3>deleted</h3>}
-        {bookedTickets}
-      </section>
-    );
+    return <section className="basket-container">{bookedTickets}</section>;
   }
 }
 
@@ -126,9 +129,10 @@ UserBasketPage.propTypes = {
   deletionOccured: PropTypes.bool,
   getTickets: PropTypes.func,
   makeUserOrder: PropTypes.func,
-  hideSuccessBar: PropTypes.func,
+  discardAll: PropTypes.func,
   deleteTicket: PropTypes.func,
   discardDeletionOccured: PropTypes.func,
+  updateCount: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -149,8 +153,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(makeOrder());
     },
 
-    hideSuccessBar() {
-      dispatch(discardOrderSucceeded());
+    discardAll() {
+      dispatch(discardState());
     },
 
     deleteTicket(ticketId) {
@@ -159,6 +163,10 @@ export function mapDispatchToProps(dispatch) {
 
     discardDeletionOccured() {
       dispatch(setDeleteState(false));
+    },
+
+    updateCount(id, count) {
+      dispatch(updateTicketCount(id, count));
     },
   };
 }

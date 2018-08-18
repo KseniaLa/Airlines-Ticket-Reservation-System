@@ -27,3 +27,17 @@ export function deleteTicket(key, ticketId) {
   localStorage.setItem(key, JSON.stringify(newTicketArray));
   return true;
 }
+
+export function updateTicket(key, ticketId, ticketCount) {
+  if (localStorage.getItem(key) === null) {
+    return;
+  }
+  const currElement = JSON.parse(localStorage.getItem(key));
+  for (let i = 0; i < currElement.length; i++) {
+    if (currElement[i].ticket === ticketId) {
+      currElement[i].count = ticketCount;
+      break;
+    }
+  }
+  localStorage.setItem(key, JSON.stringify(currElement));
+}

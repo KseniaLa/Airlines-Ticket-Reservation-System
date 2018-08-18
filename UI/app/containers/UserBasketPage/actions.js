@@ -9,6 +9,7 @@ import {
   ORDER_FAILED,
   DISCARD_STATE,
   UPDATE_TICKET,
+  DISCARD_ORDER,
 } from './constants';
 
 export function getCartTickets(lang) {
@@ -74,5 +75,11 @@ export function updateTicketCount(id, count) {
   return {
     type: UPDATE_TICKET,
     payload: { ticket: id, count },
+  };
+}
+
+export function discardOrderState() {
+  return {
+    type: DISCARD_ORDER,
   };
 }

@@ -43,6 +43,7 @@
   "app.components.UserBasketPage.remove": "удалить",
   "app.components.UserBasketPage.undo" : "отменить",
   "app.components.UserBasketPage.success": "Билеты забронированы",
+  "app.components.UserBasketPage.bookingerror": "Ошибка бронирования билетов",
   "app.components.UserTicketsPage.cancelled": "Билет отменен",
   "app.components.UserTicketsPage.cancelerror": "Ошибка отмены билета",
   "app.components.header.logout": "выйти",

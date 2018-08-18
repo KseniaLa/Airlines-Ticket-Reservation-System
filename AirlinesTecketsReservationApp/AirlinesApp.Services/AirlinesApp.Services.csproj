@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
+    <ProjectReference Include="..\AirlinesApp.Exceptions\AirlinesApp.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>

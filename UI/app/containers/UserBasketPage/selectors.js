@@ -13,6 +13,11 @@ const makeSelectCartSubmitted = () =>
     searchState.get('cartSubmitted'),
   );
 
+const makeSelectOrderError = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('orderError'),
+  );
+
 const makeSelectDeletionOccured = () =>
   createSelector(selectCartResult, searchState =>
     searchState.get('deletionOccured'),
@@ -22,5 +27,6 @@ export {
   makeSelectIsDataReceived,
   makeSelectTickets,
   makeSelectCartSubmitted,
+  makeSelectOrderError,
   makeSelectDeletionOccured,
 };

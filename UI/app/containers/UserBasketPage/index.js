@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import Popup from 'react-popup';
 import PropTypes from 'prop-types';
 import Button from '../../components/basic/Button';
 import SuccessMessage from '../../components/basic/SuccessMessage';
@@ -16,12 +17,14 @@ import {
   deleteTicketFromCart,
   setDeleteState,
   updateTicketCount,
+  discardOrderState,
 } from './actions';
 import {
   makeSelectIsDataReceived,
   makeSelectTickets,
   makeSelectCartSubmitted,
   makeSelectDeletionOccured,
+  makeSelectOrderError,
 } from './selectors';
 import './style.scss';
 
@@ -52,6 +55,14 @@ class UserBasketPage extends React.Component {
     if (this.props.deletionOccured) {
       this.fetchTickets(this.props.language);
       this.props.discardDeletionOccured();
+    }
+    if (this.props.orderError) {
+      Popup.plugins().errorPopup(
+        <FormattedMessage id="app.components.UserBasketPage.bookingerror">
+          {placeholder => placeholder}
+        </FormattedMessage>,
+      );
+      this.props.discardOrder();
     }
   }
 
@@ -127,12 +138,14 @@ UserBasketPage.propTypes = {
   dataReady: PropTypes.bool,
   cartSubmitted: PropTypes.bool,
   deletionOccured: PropTypes.bool,
+  orderError: PropTypes.bool,
   getTickets: PropTypes.func,
   makeUserOrder: PropTypes.func,
   discardAll: PropTypes.func,
   deleteTicket: PropTypes.func,
   discardDeletionOccured: PropTypes.func,
   updateCount: PropTypes.func,
+  discardOrder: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -141,6 +154,7 @@ const mapStateToProps = createStructuredSelector({
   dataReady: makeSelectIsDataReceived(),
   cartSubmitted: makeSelectCartSubmitted(),
   deletionOccured: makeSelectDeletionOccured(),
+  orderError: makeSelectOrderError(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -167,6 +181,10 @@ export function mapDispatchToProps(dispatch) {
 
     updateCount(id, count) {
       dispatch(updateTicketCount(id, count));
+    },
+
+    discardOrder() {
+      dispatch(discardOrderState());
     },
   };
 }

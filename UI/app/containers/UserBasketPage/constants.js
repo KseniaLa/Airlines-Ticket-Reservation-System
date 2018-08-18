@@ -19,3 +19,5 @@ export const ORDER_FAILED = 'airlines/UserBasketPage/ORDER_FAILED';
 export const DISCARD_STATE = 'airlines/UserBasketPage/DISCARD_STATE';
 
 export const UPDATE_TICKET = 'airlines/UserBasketPage/UPDATE_TICKET';
+
+export const DISCARD_ORDER = 'airlines/UserBasketPage/DISCARD_ORDER';

@@ -13,4 +13,8 @@ export default defineMessages({
     id: 'app.components.UserBasketPage.success',
     defaultMessage: 'Билеты забронированы',
   },
+  bookingerror: {
+    id: 'app.components.UserBasketPage.bookingerror',
+    defaultMessage: 'Ошибка бронирования билетов',
+  },
 });

@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import Button from '../../components/basic/Button';
 import TextField from '../../components/basic/TextField';
 import Select from '../../components/basic/Select';
 import './style.scss';
@@ -12,14 +13,20 @@ class AddTicketForm extends React.PureComponent {
     super(props);
     this.state = {
       startDate: moment(),
+      flightClass: 'business',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.onSelectValueChange = this.onSelectValueChange.bind(this);
   }
 
   handleChange(date) {
     this.setState({
       startDate: date,
     });
+  }
+
+  onSelectValueChange(e) {
+    this.setState({ flightClass: e.target.value });
   }
 
   render() {
@@ -37,6 +44,7 @@ class AddTicketForm extends React.PureComponent {
           <TextField type="time" />
           <DatePicker
             selected={this.state.startDate}
+            showTimeSelect
             onChange={this.handleChange}
             className="datepicker"
           />
@@ -54,6 +62,9 @@ class AddTicketForm extends React.PureComponent {
                 {ticketclass => ticketclass}
               </FormattedMessage>,
             ]}
+            value={this.state.class}
+            values={['business', 'first', 'budget']}
+            onChange={this.onSelectValueChange}
           />
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => <TextField type="text" hint={placeholder} />}
@@ -64,6 +75,7 @@ class AddTicketForm extends React.PureComponent {
             {placeholder => <TextField type="number" hint={placeholder} />}
           </FormattedMessage>
         </div>
+        <Button text="submit" />
       </div>
     );
   }

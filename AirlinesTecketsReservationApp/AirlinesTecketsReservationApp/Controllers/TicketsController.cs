@@ -37,9 +37,11 @@ namespace AirlinesTicketsReservationApp.Controllers
         }
 
         [Authorize(Roles = Roles.Administrator)]
-        [HttpPost]
-        public void AddTickets([FromBody]string value)
+        [HttpPut("add")]
+        public async Task<IActionResult> AddTickets([FromBody]TicketModel ticket)
         {
+             await _ticketService.AddTicket(ticket);
+             return Ok();
         }
     }
 }

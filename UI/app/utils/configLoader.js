@@ -13,6 +13,7 @@ const CONFIG = {
     userCart: 'orders/cart/',
     userOrder: 'orders/cart/submit',
     ticketCancellation: 'orders/userorders/cancel',
+    addTickets: 'tickets/add',
   },
 };
 

@@ -10,6 +10,7 @@
   "app.components.AddPage.fromfield": "from",
   "app.components.AddPage.title": "Add tickets",
   "app.components.AddPage.tofield": "to",
+  "app.components.AddPage.price": "price",
   "app.components.HomePage.search": "",
   "app.components.HomePage.searchtitle": "Search",
   "app.components.HomePage.toptitle": "Popular directions",

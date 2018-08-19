@@ -16,6 +16,7 @@ import { userTicketsSaga } from './containers/UserTicketsPage/saga';
 import { tryLoginSaga, trySignUpSaga } from './containers/SignInPage/saga';
 import { cartSaga } from './containers/UserBasketPage/saga';
 import { historySaga } from './containers/UserPage/saga';
+import { addSaga } from './containers/AddPage/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -54,6 +55,7 @@ export default function configureStore(initialState = {}, history) {
   sagaMiddleware.run(trySignUpSaga);
   sagaMiddleware.run(cartSaga);
   sagaMiddleware.run(historySaga);
+  sagaMiddleware.run(addSaga);
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry

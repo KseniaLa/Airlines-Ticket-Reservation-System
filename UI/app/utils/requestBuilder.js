@@ -90,3 +90,15 @@ export function cancelTicketPost(ticketId, token) {
     body: ticketId,
   };
 }
+
+export function authPut(ticket, token) {
+  return {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(ticket),
+  };
+}

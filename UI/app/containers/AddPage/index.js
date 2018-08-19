@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import Popup from 'react-popup';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,12 +17,18 @@ import {
   getAllCities,
   discardState,
   getAllCompanies,
+  addCity,
+  addCompany,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
   makeSelectCities,
   makeSelectIsCompaniesDataReceived,
   makeSelectCompanies,
+  makeSelectTicketAdded,
+  makeSelectTicketAddError,
+  makeSelectLocationAdded,
+  makeSelectLocationAddError,
 } from './selectors';
 
 import messages from './messages';
@@ -31,17 +38,46 @@ class AddPage extends React.Component {
     super(props);
     this.addTicket = this.addTicket.bind(this);
     this.getCitiesList = this.getCitiesList.bind(this);
+    this.addCity = this.addCity.bind(this);
+    this.addCompany = this.addCompany.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
     if (this.props.isAuthorized && this.props.isAdmin) {
-      this.props.getCities(this.props.language);
-      this.props.getCompanies(this.props.language);
+      this.getData();
     }
   }
 
   componentWillUnmount() {
     this.props.discardAll();
+  }
+
+  componentDidUpdate() {
+    if (this.props.locationAdded) {
+      Popup.plugins().successPopup('location added');
+      this.props.discardAll();
+      this.getData();
+    } else if (this.props.locationAddError) {
+      Popup.plugins().errorPopup('location error');
+      this.props.discardAll();
+      this.getData();
+    }
+
+    if (this.props.ticketAdded) {
+      Popup.plugins().successPopup('ticket added');
+      this.props.discardAll();
+      this.getData();
+    } else if (this.props.ticketAddError) {
+      Popup.plugins().errorPopup('ticket error');
+      this.props.discardAll();
+      this.getData();
+    }
+  }
+
+  getData() {
+    this.props.getCities(this.props.language);
+    this.props.getCompanies(this.props.language);
   }
 
   addTicket(from, to, date, company, flightClass, price, count) {
@@ -58,7 +94,13 @@ class AddPage extends React.Component {
     });
   }
 
-  addCity(translations) {}
+  addCity(translations) {
+    this.props.addNewCity(translations);
+  }
+
+  addCompany(translations) {
+    this.props.addNewCompany(translations);
+  }
 
   getCitiesList() {
     const list = [];
@@ -80,7 +122,11 @@ class AddPage extends React.Component {
 
   render() {
     if (!this.props.isAuthorized || !this.props.isAdmin) {
-      return <div>forbidden</div>;
+      return (
+        <div className="container-flex">
+          <h1>forbidden</h1>
+        </div>
+      );
     }
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
@@ -103,12 +149,11 @@ class AddPage extends React.Component {
             <div className="list-container__list">{companies}</div>
           </div>
           <div className="form-container">
-            <AddLocationForm />
-            <AddLocationForm />
+            <AddLocationForm onSubmit={this.addCity} />
+            <AddLocationForm onSubmit={this.addCompany} />
           </div>
           <Button text={<FormattedMessage {...messages.addgroup} />} />
           <AddTicketForm onTicketSubmit={this.addTicket} />
-          <AddTicketForm />
         </div>
       </div>
     );
@@ -119,6 +164,10 @@ AddPage.propTypes = {
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  ticketAdded: PropTypes.bool,
+  ticketAddError: PropTypes.bool,
+  locationAdded: PropTypes.bool,
+  locationAddError: PropTypes.bool,
   citiesReceived: PropTypes.bool,
   cities: PropTypes.array,
   companiesReceived: PropTypes.bool,
@@ -126,6 +175,8 @@ AddPage.propTypes = {
   addTicketGroup: PropTypes.func,
   getCities: PropTypes.func,
   getCompanies: PropTypes.func,
+  addNewCity: PropTypes.func,
+  addNewCompany: PropTypes.func,
   discardAll: PropTypes.func,
 };
 
@@ -146,6 +197,14 @@ export function mapDispatchToProps(dispatch) {
     getCompanies(language) {
       dispatch(getAllCompanies(language));
     },
+
+    addNewCity(translations) {
+      dispatch(addCity(translations));
+    },
+
+    addNewCompany(translations) {
+      dispatch(addCompany(translations));
+    },
   };
 }
 
@@ -157,6 +216,10 @@ const mapStateToProps = createStructuredSelector({
   cities: makeSelectCities(),
   companiesReceived: makeSelectIsCompaniesDataReceived(),
   companies: makeSelectCompanies(),
+  ticketAdded: makeSelectTicketAdded(),
+  ticketAddError: makeSelectTicketAddError(),
+  locationAdded: makeSelectLocationAdded(),
+  locationAddError: makeSelectLocationAddError(),
 });
 
 export default connect(

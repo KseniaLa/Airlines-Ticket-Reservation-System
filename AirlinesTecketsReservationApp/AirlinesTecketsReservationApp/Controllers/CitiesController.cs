@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.TokenManager;
+using Newtonsoft.Json;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -28,7 +30,7 @@ namespace AirlinesTicketsReservationApp.Controllers
                 List<CityModel> cities = await _cityService.GetTopCities(6, lang);
                 return Ok(new { cities });
             }
-            catch
+            catch(Exception e)
             {
                 return BadRequest();
             }
@@ -43,6 +45,23 @@ namespace AirlinesTicketsReservationApp.Controllers
               {
                    List<string> cities = await _cityService.GetCities(lang);
                    return Ok(new { cities = cities.ToArray() });
+              }
+              catch
+              {
+                   return BadRequest();
+              }
+
+         }
+
+         [Authorize(Roles = Roles.Administrator)]
+         [HttpPut("add")]
+         public async Task<IActionResult> AddCity([FromBody] string city)
+         {
+              try
+              {
+                   List<TranslationModel> cityTranslations = JsonConvert.DeserializeObject<List<TranslationModel>>(city);
+                   await _cityService.AddCity(cityTranslations);
+                   return Ok();
               }
               catch
               {

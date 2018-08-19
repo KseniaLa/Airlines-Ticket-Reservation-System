@@ -91,7 +91,7 @@ export function cancelTicketPost(ticketId, token) {
   };
 }
 
-export function authPut(ticket, token) {
+export function authPut(content, token) {
   return {
     method: 'PUT',
     headers: {
@@ -99,6 +99,18 @@ export function authPut(ticket, token) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(ticket),
+    body: JSON.stringify(content),
+  };
+}
+
+export function authPutString(content, token) {
+  return {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(JSON.stringify(content)),
   };
 }

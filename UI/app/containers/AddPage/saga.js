@@ -3,6 +3,8 @@ import {
   TICKETS_ADD_REQUESTED,
   CITIES_REQUESTED,
   COMPANIES_REQUESTED,
+  CITY_ADD_REQUESTED,
+  COMPANY_ADD_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -11,9 +13,11 @@ import {
   getAllCitiesError,
   getAllCompaniesSuccess,
   getAllCompaniesError,
+  addLocationSuccess,
+  addLocationError,
 } from './actions';
 import { config } from '../../utils/configLoader';
-import { authPut, authGet } from '../../utils/requestBuilder';
+import { authPut, authGet, authPutString } from '../../utils/requestBuilder';
 
 function* addTickets(action) {
   try {
@@ -68,8 +72,38 @@ function* getCompanies(action) {
   }
 }
 
+function* addLocation(action) {
+  try {
+    let urlOption;
+    switch (action.type) {
+      case CITY_ADD_REQUESTED:
+        urlOption = config.APIOptions.addCity;
+        break;
+      case COMPANY_ADD_REQUESTED:
+        urlOption = config.APIOptions.addCompany;
+        break;
+      default:
+        urlOption = '';
+    }
+    const responce = yield call(
+      fetch,
+      config.APIUrl + urlOption,
+      authPutString(action.payload, localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(addLocationSuccess());
+    } else {
+      yield put(addLocationError());
+    }
+  } catch (e) {
+    yield put(addLocationError());
+  }
+}
+
 export function* addSaga() {
   yield takeEvery(TICKETS_ADD_REQUESTED, addTickets);
   yield takeEvery(CITIES_REQUESTED, getCities);
   yield takeEvery(COMPANIES_REQUESTED, getCompanies);
+  yield takeEvery(CITY_ADD_REQUESTED, addLocation);
+  yield takeEvery(COMPANY_ADD_REQUESTED, addLocation);
 }

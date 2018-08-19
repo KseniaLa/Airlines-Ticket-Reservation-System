@@ -26,6 +26,10 @@ class AddLocationForm extends React.Component {
     e.preventDefault();
     if (this.state.nameRu !== '' && this.state.nameEn !== '') {
       this.setState({ isInputError: false });
+      this.props.onSubmit([
+        { language: 'ru', value: this.state.nameRu },
+        { language: 'en', value: this.state.nameEn },
+      ]);
     } else {
       this.setState({ isInputError: true });
     }
@@ -64,7 +68,7 @@ class AddLocationForm extends React.Component {
 }
 
 AddLocationForm.propTypes = {
-  onAddClick: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 export default AddLocationForm;

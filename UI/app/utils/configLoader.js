@@ -16,6 +16,8 @@ const CONFIG = {
     userOrder: 'orders/cart/submit',
     ticketCancellation: 'orders/userorders/cancel',
     addTickets: 'tickets/add',
+    addCity: 'cities/add',
+    addCompany: 'companies/add',
   },
 };
 

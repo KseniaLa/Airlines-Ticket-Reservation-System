@@ -8,6 +8,10 @@ import {
   COMPANIES_REQUESTED,
   COMPANIES_SUCCESS,
   COMPANIES_ERROR,
+  CITY_ADD_REQUESTED,
+  COMPANY_ADD_REQUESTED,
+  LOCATION_ADD_SUCCEEDED,
+  LOCATION_ADD_FAILED,
   DISCARD_STATE,
 } from './constants';
 
@@ -67,6 +71,32 @@ export function getAllCompaniesSuccess(companies) {
 export function getAllCompaniesError() {
   return {
     type: COMPANIES_ERROR,
+  };
+}
+
+export function addCity(translations) {
+  return {
+    type: CITY_ADD_REQUESTED,
+    payload: translations,
+  };
+}
+
+export function addCompany(translations) {
+  return {
+    type: COMPANY_ADD_REQUESTED,
+    payload: translations,
+  };
+}
+
+export function addLocationSuccess() {
+  return {
+    type: LOCATION_ADD_SUCCEEDED,
+  };
+}
+
+export function addLocationError() {
+  return {
+    type: LOCATION_ADD_FAILED,
   };
 }
 

@@ -49,7 +49,11 @@ class UserPage extends React.PureComponent {
 
   render() {
     if (!this.props.isAuthorized) {
-      return <div>forbidden</div>;
+      return (
+        <div className="container-flex">
+          <h1>forbidden</h1>
+        </div>
+      );
     }
     const history = this.props.dataReady ? (
       <table className="ip-table">

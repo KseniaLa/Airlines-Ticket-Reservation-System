@@ -16,4 +16,12 @@ export const COMPANIES_SUCCESS = 'airlines/AddPage/COMPANIES_SUCCESS';
 
 export const COMPANIES_ERROR = 'airlines/AddPage/COMPANIES_ERROR';
 
+export const CITY_ADD_REQUESTED = 'airlines/AddPage/CITY_ADD_REQUESTED';
+
+export const COMPANY_ADD_REQUESTED = 'airlines/AddPage/COMPANY_ADD_REQUESTED';
+
+export const LOCATION_ADD_SUCCEEDED = 'airlines/AddPage/LOCATION_ADD_SUCCEDED';
+
+export const LOCATION_ADD_FAILED = 'airlines/AddPage/LOCATION_ADD_FAILED';
+
 export const DISCARD_STATE = 'airlines/AddPage/DISCARD_STATE';

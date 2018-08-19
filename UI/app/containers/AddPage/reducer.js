@@ -2,6 +2,8 @@ import { fromJS } from 'immutable';
 import {
   TICKETS_ADD_SUCCEEDED,
   TICKETS_ADD_FAILED,
+  LOCATION_ADD_SUCCEEDED,
+  LOCATION_ADD_FAILED,
   CITIES_SUCCESS,
   CITIES_ERROR,
   COMPANIES_SUCCESS,
@@ -12,6 +14,8 @@ import {
 const initialState = fromJS({
   ticketAddError: false,
   ticketAdded: false,
+  locationAddError: false,
+  locationAdded: false,
   citiesReceived: false,
   cities: null,
   companiesReceived: false,
@@ -34,6 +38,10 @@ const addReducer = (state = initialState, action) => {
         .set('companies', action.payload);
     case COMPANIES_ERROR:
       return state.set('companiesReceived', false).set('companies', null);
+    case LOCATION_ADD_SUCCEEDED:
+      return state.set('locationAdded', true).set('locationAddError', false);
+    case LOCATION_ADD_FAILED:
+      return state.set('locationAdded', false).set('locationAddError', true);
     case DISCARD_STATE:
       return initialState;
     default:

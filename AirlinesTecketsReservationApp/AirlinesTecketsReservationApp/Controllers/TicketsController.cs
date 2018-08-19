@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.Exceptions;
 using AirlinesApp.Services;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authorization;
@@ -40,8 +41,20 @@ namespace AirlinesTicketsReservationApp.Controllers
         [HttpPut("add")]
         public async Task<IActionResult> AddTickets([FromBody]TicketModel ticket)
         {
-             await _ticketService.AddTicket(ticket);
-             return Ok();
+             try
+             {
+                  await _ticketService.AddTicket(ticket);
+                  return Ok();
+             }
+             catch (LocationException)
+             {
+                  return BadRequest();
+             }
+             catch
+             {
+                  return BadRequest();
+             }
+             
         }
     }
 }

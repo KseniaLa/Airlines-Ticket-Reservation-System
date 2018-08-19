@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.TokenManager;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -17,10 +18,10 @@ namespace AirlinesTicketsReservationApp.Controllers
             _cityService = new CityService();
         }
 
-        // GET api/cities/ru
+        // GET api/cities/popular/ru
         [AllowAnonymous]
-        [HttpGet("{lang}")]
-        public async Task<IActionResult> Get(string lang)
+        [HttpGet("popular/{lang}")]
+        public async Task<IActionResult> GetPopularCities(string lang)
         {
             try
             {
@@ -33,5 +34,21 @@ namespace AirlinesTicketsReservationApp.Controllers
             }
 
         }
-    }
+
+         [Authorize(Roles = Roles.Administrator)]
+         [HttpGet("{lang}")]
+         public async Task<IActionResult> GetAllCities(string lang)
+         {
+              try
+              {
+                   List<string> cities = await _cityService.GetCities(lang);
+                   return Ok(new { cities = cities.ToArray() });
+              }
+              catch
+              {
+                   return BadRequest();
+              }
+
+         }
+     }
 }

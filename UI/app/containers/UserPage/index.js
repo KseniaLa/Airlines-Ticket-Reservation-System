@@ -9,7 +9,7 @@ import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import UserBasketPage from '../UserBasketPage';
 import UserTicketsPage from '../UserTicketsPage';
-import { makeSelectUserName } from '../App/selectors';
+import { makeSelectUserName, makeSelectIsAuthorized } from '../App/selectors';
 import {
   makeSelectIsIpDataReceived,
   makeSelectUserIpHistory,
@@ -25,7 +25,9 @@ class UserPage extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.getHistory();
+    if (this.props.isAuthorized) {
+      this.props.getHistory();
+    }
   }
 
   getUserHistory() {
@@ -46,6 +48,9 @@ class UserPage extends React.PureComponent {
   }
 
   render() {
+    if (!this.props.isAuthorized) {
+      return <div>forbidden</div>;
+    }
     const history = this.props.dataReady ? (
       <table className="ip-table">
         <tbody>
@@ -92,6 +97,7 @@ class UserPage extends React.PureComponent {
 
 UserPage.propTypes = {
   userName: PropTypes.string,
+  isAuthorized: PropTypes.bool,
   history: PropTypes.array,
   dataReady: PropTypes.bool,
   getHistory: PropTypes.func,
@@ -107,6 +113,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   userName: makeSelectUserName(),
+  isAuthorized: makeSelectIsAuthorized(),
   history: makeSelectUserIpHistory(),
   dataReady: makeSelectIsIpDataReceived(),
 });

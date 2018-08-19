@@ -9,7 +9,18 @@ namespace AirlinesApp.Services
 {
     public class CityService : BaseService
     {
-        public async Task<List<CityModel>> GetTopCities(int topCount, string language)
+         public async Task<List<string>> GetCities(string language)
+         {
+              List<City> cities = await Db.Cities.GetAll().ToListAsync();
+              List<string> cityNames = new List<string>();
+              foreach (City city in cities)
+              {
+                   cityNames.Add(city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value);
+              }
+              return cityNames;
+         }
+
+          public async Task<List<CityModel>> GetTopCities(int topCount, string language)
         {
             List<City> rawCities = await (from c in Db.Cities.GetAll()
                                           orderby c.Rating descending

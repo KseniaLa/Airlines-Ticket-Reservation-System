@@ -55,3 +55,19 @@
     }
   }
 }
+
+.form-container {
+  @include flex_element(row);
+  @include media("<=large-phone"){
+    @include flex_element(column);
+    width: 100%;
+  }
+
+  & > div {
+    width: 50%;
+    margin: 10px;
+    @include media("<=phone"){
+      width: 100%;
+    }
+  }
+}

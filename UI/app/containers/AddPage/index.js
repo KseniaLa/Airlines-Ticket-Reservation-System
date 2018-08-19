@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../../components/basic/Button';
 import Spinner from '../../components/basic/Spinner';
 import AddTicketForm from '../../components/AddTicketForm';
+import AddLocationForm from '../../components/AddLocationForm';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
 import './style.scss';
@@ -57,6 +58,8 @@ class AddPage extends React.Component {
     });
   }
 
+  addCity(translations) {}
+
   getCitiesList() {
     const list = [];
     const { cities } = this.props;
@@ -98,6 +101,10 @@ class AddPage extends React.Component {
           <div className="list-container">
             <div className="list-container__list">{cities}</div>
             <div className="list-container__list">{companies}</div>
+          </div>
+          <div className="form-container">
+            <AddLocationForm />
+            <AddLocationForm />
           </div>
           <Button text={<FormattedMessage {...messages.addgroup} />} />
           <AddTicketForm onTicketSubmit={this.addTicket} />

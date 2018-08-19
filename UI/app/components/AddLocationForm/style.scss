@@ -1,0 +1,14 @@
+@import '../../common';
+@import '../../include-media';
+
+.add-location {
+  @include flex_element(column);
+  padding: 10px;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #d6dada;
+
+  & > div {
+    margin: 5px;
+  }
+}

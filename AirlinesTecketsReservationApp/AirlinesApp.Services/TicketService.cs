@@ -66,10 +66,16 @@ namespace AirlinesApp.Services
                {
                     throw new LocationException("Departure and destination cities are equal");
                }
+              DateTime dateTime = new DateTime(ticket.Date.Year, ticket.Date.Month, ticket.Date.Day, ticket.Date.Hour, ticket.Date.Minute, 0, DateTimeKind.Local);
+              Flight flight = new Flight
+              {
+                  DateTime = dateTime,
+                  DepartureId = fromCity.Id,
+                  DestinationId = toCity.Id
+              };
+            //int flightId = await AddFlight(fromCity, toCity, ticket.Date);
 
-               int flightId = await AddFlight(fromCity, toCity, ticket.Date);
-
-               Ticket testTicket = await Db.Tickets
+            /*Ticket testTicket = await Db.Tickets
                     .FindBy(t => t.FlightId == flightId && t.CompanyId == company.Id && t.Category == ticket.Category)
                     .FirstOrDefaultAsync();
                if (testTicket != null)
@@ -79,17 +85,24 @@ namespace AirlinesApp.Services
                     Db.Tickets.Update(testTicket);
                     await Db.Save();
                     return;
-               }
+               }*/
                Ticket ticketItem = new Ticket
                {
-                    FlightId = flightId,
+                    Flight = flight,
                     CompanyId = company.Id,
                     Category = ticket.Category,
                     Price = ticket.Price,
                     Count = ticket.TotalCount
                };
-               await Db.Tickets.Add(ticketItem);
-               await Db.Save();
+              try
+              {
+                  await Db.Tickets.Add(ticketItem);
+                  await Db.Save();
+              }
+              catch (Exception e)
+              {
+                  int i = 5;
+              }
           }
 
           private async Task<int> AddFlight(City from, City to, DateTime date)

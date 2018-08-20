@@ -36,5 +36,14 @@ namespace AirlinesApp.DataAccess
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Flight>()
+                .HasIndex(f => new {f.DepartureId, f.DestinationId, f.DateTime}).IsUnique();
+
+            modelBuilder.Entity<Ticket>()
+                .HasIndex(t => new { t.FlightId, t.CompanyId, t.Category }).IsUnique();
+        }
     }
 }

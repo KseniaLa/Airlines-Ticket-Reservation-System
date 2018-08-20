@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Http;
 
@@ -16,14 +17,14 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/account")]
     public class AccountController : Controller
     {
-        private readonly AccountService _accountService;
+        private readonly IAccountService _accountService;
         private readonly IpService _ipService;
         private readonly JwtGenerator _jwtGenerator;
         private readonly IHttpContextAccessor _accessor;
 
-        public AccountController(IHttpContextAccessor accessor)
+        public AccountController(IHttpContextAccessor accessor, IAccountService accountService)
         {
-            _accountService = new AccountService();
+            _accountService = accountService;
             _ipService = new IpService();
             _jwtGenerator = new JwtGenerator();
             _accessor = accessor;
@@ -51,7 +52,7 @@ namespace AirlinesTicketsReservationApp.Controllers
             try
             {
                 // replace with MailKit / sendgrid?
-                EmailService.SendTestEmail(user.Email); //not working
+                //EmailService.SendTestEmail(user.Email); //not working
             }
             catch (SmtpFailedRecipientsException)
             {

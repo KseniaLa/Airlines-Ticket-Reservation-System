@@ -6,10 +6,11 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class AccountService : BaseService
+    public class AccountService : BaseService, IAccountService
     {
         private readonly int _iterationsCount;
         private readonly int _saltSize;

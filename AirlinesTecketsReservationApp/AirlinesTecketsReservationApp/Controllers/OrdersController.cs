@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services;
+using AirlinesApp.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -13,12 +14,12 @@ namespace AirlinesTicketsReservationApp.Controllers
      [Route("api/orders")]
      public class OrdersController : Controller
      {
-          private readonly OrderService _orderService;
+          private readonly IOrderService _orderService;
 
 
-          public OrdersController()
+          public OrdersController(IOrderService orderService)
           {
-               _orderService = new OrderService();
+               _orderService = orderService;
           }
 
           [Authorize]

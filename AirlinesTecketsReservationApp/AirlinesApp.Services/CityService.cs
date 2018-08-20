@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirlinesApp.Exceptions;
+using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CityService : BaseService
+    public class CityService : BaseService, ICityService
     {
         public async Task AddCity(List<TranslationModel> translations)
         {

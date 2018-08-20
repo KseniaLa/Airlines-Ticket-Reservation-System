@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services;
+using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,11 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/companies")]
     public class CompaniesController : Controller
     {
-        private readonly CompanyService _companyService;
+        private readonly ICompanyService _companyService;
 
-        public CompaniesController()
+        public CompaniesController(ICompanyService companyService)
         {
-            _companyService = new CompanyService();
+            _companyService = companyService;
         }
 
         [Authorize(Roles = Roles.Administrator)]

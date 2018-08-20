@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
+using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Newtonsoft.Json;
 
@@ -14,11 +15,11 @@ namespace AirlinesTicketsReservationApp.Controllers
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
-        private readonly CityService _cityService;
+        private readonly ICityService _cityService;
 
-        public CitiesController()
+        public CitiesController(ICityService cityService)
         {
-            _cityService = new CityService();
+            _cityService = cityService;
         }
 
         // GET api/cities/popular/ru

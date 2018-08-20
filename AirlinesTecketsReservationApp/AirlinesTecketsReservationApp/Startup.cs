@@ -1,4 +1,6 @@
 ﻿using AirlinesApp.DataAccess;
+using AirlinesApp.Services;
+using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -24,28 +26,34 @@ namespace AirlinesTicketsReservationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-               services.AddCors();
+            services.AddCors();
 
-               services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                         options.RequireHttpsMetadata = false;
-                         options.TokenValidationParameters = new TokenValidationParameters
-                         {
-                              ValidateIssuer = true,
-                              ValidIssuer = JwtOptions.Issuer,
-                              ValidateAudience = true,
-                              ValidAudience = JwtOptions.Audience,
-                              ValidateLifetime = true,
-                              IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
-                              ValidateIssuerSigningKey = true,
-                         };
-                    });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                 .AddJwtBearer(options =>
+                 {
+                     options.RequireHttpsMetadata = false;
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidateIssuer = true,
+                         ValidIssuer = JwtOptions.Issuer,
+                         ValidateAudience = true,
+                         ValidAudience = JwtOptions.Audience,
+                         ValidateLifetime = true,
+                         IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
+                         ValidateIssuerSigningKey = true,
+                     };
+                 });
 
-               services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-               services.AddTransient<IAirlinesContext, AirlinesContext>();
-               services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IAirlinesContext, AirlinesContext>();
+            services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IIpService, IpService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,9 +64,9 @@ namespace AirlinesTicketsReservationApp
                 app.UseDeveloperExceptionPage();
             }
 
-               app.UseCors(
-                  options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
-            );
+            app.UseCors(
+               options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
+         );
 
             app.UseAuthentication();
 

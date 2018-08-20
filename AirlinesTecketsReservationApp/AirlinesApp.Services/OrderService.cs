@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-     public class OrderService : BaseService
+     public class OrderService : BaseService, IOrderService
      {
           public async Task<List<TicketModel>> GetUserOrders(string email, string language)
           {

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
+using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CompanyService : BaseService
+    public class CompanyService : BaseService, ICompanyService
     {
         public async Task AddCompany(List<TranslationModel> translations)
         {

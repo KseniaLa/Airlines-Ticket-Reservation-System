@@ -114,7 +114,7 @@ namespace AirlinesApp.DataAccess
                await _db.SaveChangesAsync();
           }
 
-          private bool _disposed = false;
+          private bool _disposed;
 
           public virtual void Dispose(bool disposing)
           {

@@ -44,7 +44,7 @@ class SearchBar extends React.Component {
       this.props.onSearch(
         from,
         to,
-        startDate._d,
+        startDate,
         flightClass,
         this.props.language,
       );

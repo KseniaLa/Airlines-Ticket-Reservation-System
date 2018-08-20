@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../basic/Button';
 import TextField from '../basic/TextField';
 import Select from '../basic/Select';
+import ErrorMessage from '../basic/ErrorMessage';
 import './style.scss';
 import messages from './messages';
 
@@ -21,6 +22,7 @@ class AddTicketForm extends React.PureComponent {
       count: '',
       price: '',
       company: '',
+      isInputError: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSelectValueChange = this.onSelectValueChange.bind(this);
@@ -78,9 +80,12 @@ class AddTicketForm extends React.PureComponent {
       to !== '' &&
       count !== '' &&
       price !== '' &&
+      count > 0 &&
+      price > 0 &&
       company !== '' &&
       startDate !== null
     ) {
+      this.setState({ isInputError: false });
       this.props.onTicketSubmit(
         from,
         to,
@@ -90,12 +95,19 @@ class AddTicketForm extends React.PureComponent {
         price,
         count,
       );
+    } else {
+      this.setState({ isInputError: true });
     }
   }
 
   render() {
     return (
       <form className="info-area" onSubmit={this.addTicket}>
+        {this.state.isInputError && (
+          <ErrorMessage
+            text={<FormattedMessage {...messages.invalidinput} />}
+          />
+        )}
         <div>
           <FormattedMessage id="app.components.AddPage.fromfield">
             {placeholder => (

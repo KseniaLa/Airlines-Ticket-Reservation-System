@@ -41,4 +41,8 @@ export default defineMessages({
     id: 'app.components.AddPage.add',
     defaultMessage: 'Добавить',
   },
+  invalidinput: {
+    id: 'app.components.AddPage.invalidinput',
+    defaultMessage: 'Некорректные значения полей',
+  },
 });

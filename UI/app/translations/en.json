@@ -11,6 +11,7 @@
   "app.components.AddPage.title": "Add tickets",
   "app.components.AddPage.tofield": "to",
   "app.components.AddPage.price": "price",
+  "app.components.AddPage.invalidinput": "Invalid input values",
   "app.components.AddLocation.add": "Add",
   "app.components.AddLocation.invalidinput": "Some fields are empty",
   "app.components.HomePage.search": "",

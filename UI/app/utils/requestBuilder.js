@@ -48,6 +48,15 @@ export function authGet(token) {
   };
 }
 
+export function authPost(token) {
+  return {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 export function emptyGet() {
   return {
     method: 'GET',

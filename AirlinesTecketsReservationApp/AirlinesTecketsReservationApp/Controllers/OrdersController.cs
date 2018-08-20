@@ -7,7 +7,6 @@ using AirlinesApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
@@ -15,13 +14,11 @@ namespace AirlinesTicketsReservationApp.Controllers
      public class OrdersController : Controller
      {
           private readonly OrderService _orderService;
-          private readonly TicketService _ticketService;
 
 
           public OrdersController()
           {
                _orderService = new OrderService();
-               _ticketService = new TicketService();
           }
 
           [Authorize]

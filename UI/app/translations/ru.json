@@ -11,6 +11,7 @@
   "app.components.AddPage.title": "Добавление билетов",
   "app.components.AddPage.tofield": "куда",
   "app.components.AddPage.price": "цена",
+  "app.components.AddPage.invalidinput": "Некорректные значения полей",
   "app.components.AddLocation.add": "Добавить",
   "app.components.AddLocation.invalidinput": "Некоторые поля не заполнены",
   "app.components.HomePage.search": "Популярные направления",

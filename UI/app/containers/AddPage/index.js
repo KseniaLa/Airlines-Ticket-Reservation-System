@@ -14,6 +14,7 @@ import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
 import './style.scss';
 import {
   addTicket,
+  addFlight,
   getAllCities,
   discardState,
   getAllCompanies,
@@ -32,6 +33,8 @@ import {
   makeSelectLocationAddError,
   makeSelectIsFlightsDataReceived,
   makeSelectFlights,
+  makeSelectFlightAdded,
+  makeSelectFlightAddError,
 } from './selectors';
 
 import messages from './messages';
@@ -40,6 +43,7 @@ class AddPage extends React.Component {
   constructor(props) {
     super(props);
     this.addTicket = this.addTicket.bind(this);
+    this.addFlight = this.addFlight.bind(this);
     this.getCitiesList = this.getCitiesList.bind(this);
     this.getFlightsList = this.getFlightsList.bind(this);
     this.addCity = this.addCity.bind(this);
@@ -77,6 +81,16 @@ class AddPage extends React.Component {
       this.props.discardAll();
       this.getData();
     }
+
+    if (this.props.flightAdded) {
+      Popup.plugins().successPopup('flight added');
+      this.props.discardAll();
+      this.getData();
+    } else if (this.props.flightAddError) {
+      Popup.plugins().errorPopup('flight error');
+      this.props.discardAll();
+      this.getData();
+    }
   }
 
   getData() {
@@ -92,6 +106,15 @@ class AddPage extends React.Component {
       category: flightClass,
       price,
       count,
+    });
+  }
+
+  addFlight(from, to, date) {
+    this.props.addNewFlight({
+      id: 0,
+      from,
+      to,
+      date,
     });
   }
 
@@ -167,7 +190,7 @@ class AddPage extends React.Component {
             <AddLocationForm onSubmit={this.addCity} />
             <AddLocationForm onSubmit={this.addCompany} />
           </div>
-          <AddFlightForm onFlightSubmit={this.addTicket} />
+          <AddFlightForm onFlightSubmit={this.addFlight} />
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}
@@ -185,6 +208,8 @@ AddPage.propTypes = {
   isAdmin: PropTypes.bool,
   ticketAdded: PropTypes.bool,
   ticketAddError: PropTypes.bool,
+  flightAdded: PropTypes.bool,
+  flightAddError: PropTypes.bool,
   locationAdded: PropTypes.bool,
   locationAddError: PropTypes.bool,
   citiesReceived: PropTypes.bool,
@@ -194,6 +219,7 @@ AddPage.propTypes = {
   companiesReceived: PropTypes.bool,
   companies: PropTypes.array,
   addTicketGroup: PropTypes.func,
+  addNewFlight: PropTypes.func,
   getCities: PropTypes.func,
   getCompanies: PropTypes.func,
   addNewCity: PropTypes.func,
@@ -206,6 +232,10 @@ export function mapDispatchToProps(dispatch) {
   return {
     addTicketGroup(ticket) {
       dispatch(addTicket(ticket));
+    },
+
+    addNewFlight(flight) {
+      dispatch(addFlight(flight));
     },
 
     getCities(language) {
@@ -244,6 +274,8 @@ const mapStateToProps = createStructuredSelector({
   companies: makeSelectCompanies(),
   ticketAdded: makeSelectTicketAdded(),
   ticketAddError: makeSelectTicketAddError(),
+  flightAdded: makeSelectFlightAdded(),
+  flightAddError: makeSelectFlightAddError(),
   locationAdded: makeSelectLocationAdded(),
   locationAddError: makeSelectLocationAddError(),
   flightsReceived: makeSelectIsFlightsDataReceived(),

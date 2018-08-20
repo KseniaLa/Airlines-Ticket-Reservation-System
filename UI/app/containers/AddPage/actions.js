@@ -2,6 +2,9 @@ import {
   TICKETS_ADD_REQUESTED,
   TICKETS_ADD_SUCCEEDED,
   TICKETS_ADD_FAILED,
+  FLIGHT_ADD_REQUESTED,
+  FLIGHT_ADD_SUCCEEDED,
+  FLIGHT_ADD_FAILED,
   FLIGHTS_REQUESTED,
   FLIGHTS_SUCCEEDED,
   FLIGHTS_FAILED,
@@ -34,6 +37,25 @@ export function addTicketSuccess() {
 export function addTicketError() {
   return {
     type: TICKETS_ADD_FAILED,
+  };
+}
+
+export function addFlight(flight) {
+  return {
+    type: FLIGHT_ADD_REQUESTED,
+    payload: flight,
+  };
+}
+
+export function addFlightSuccess() {
+  return {
+    type: FLIGHT_ADD_SUCCEEDED,
+  };
+}
+
+export function addFlightError() {
+  return {
+    type: FLIGHT_ADD_FAILED,
   };
 }
 

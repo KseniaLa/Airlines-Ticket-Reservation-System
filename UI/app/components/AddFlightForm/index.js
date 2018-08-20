@@ -22,7 +22,7 @@ class AddFlightForm extends React.PureComponent {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.updateToField = this.updateToField.bind(this);
-    this.addTicket = this.addTicket.bind(this);
+    this.addFlight = this.addFlight.bind(this);
   }
 
   handleDateChange(date) {
@@ -39,7 +39,7 @@ class AddFlightForm extends React.PureComponent {
     this.setState({ to: e.target.value });
   }
 
-  addTicket(e) {
+  addFlight(e) {
     e.preventDefault();
     const { from, to, startDate } = this.state;
     if (from && to && startDate) {
@@ -52,7 +52,7 @@ class AddFlightForm extends React.PureComponent {
 
   render() {
     return (
-      <form className="info-area" onSubmit={this.addTicket}>
+      <form className="info-area" onSubmit={this.addFlight}>
         {this.state.isInputError && (
           <ErrorMessage
             text={<FormattedMessage {...messages.invalidinput} />}

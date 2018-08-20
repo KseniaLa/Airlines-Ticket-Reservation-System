@@ -20,6 +20,7 @@ class Select extends React.PureComponent {
     return (
       <select
         className="select"
+        size="1"
         value={this.props.value}
         onChange={this.props.onChange}
       >

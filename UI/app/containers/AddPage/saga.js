@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   TICKETS_ADD_REQUESTED,
+  FLIGHT_ADD_REQUESTED,
   CITIES_REQUESTED,
   COMPANIES_REQUESTED,
   CITY_ADD_REQUESTED,
@@ -10,6 +11,8 @@ import {
 import {
   addTicketSuccess,
   addTicketError,
+  addFlightSuccess,
+  addFlightError,
   getAllCitiesSuccess,
   getAllCitiesError,
   getAllCompaniesSuccess,
@@ -36,6 +39,23 @@ function* addTickets(action) {
     }
   } catch (e) {
     yield put(addTicketError());
+  }
+}
+
+function* addFlight(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.addFlight,
+      authPut(action.payload, localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(addFlightSuccess());
+    } else {
+      yield put(addFlightError());
+    }
+  } catch (e) {
+    yield put(addFlightError());
   }
 }
 
@@ -123,6 +143,7 @@ function* addLocation(action) {
 
 export function* addSaga() {
   yield takeEvery(TICKETS_ADD_REQUESTED, addTickets);
+  yield takeEvery(FLIGHT_ADD_REQUESTED, addFlight);
   yield takeEvery(CITIES_REQUESTED, getCities);
   yield takeEvery(COMPANIES_REQUESTED, getCompanies);
   yield takeEvery(CITY_ADD_REQUESTED, addLocation);

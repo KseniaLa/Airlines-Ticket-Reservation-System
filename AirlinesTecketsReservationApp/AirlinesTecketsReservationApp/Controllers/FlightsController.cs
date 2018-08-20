@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
@@ -47,7 +48,11 @@ namespace AirlinesTicketsReservationApp.Controllers
           {
                try
                {
-                    await _flightService.AddFlight(flight);
+                    Flight fl = await _flightService.AddFlight(flight);
+                    if (fl == null)
+                    {
+                         return BadRequest();
+                    }
                     return Ok();
                }
                catch (LocationException)

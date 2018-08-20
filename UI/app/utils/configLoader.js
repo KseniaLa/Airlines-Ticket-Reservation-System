@@ -12,6 +12,7 @@ const CONFIG = {
     cities: 'cities/',
     companies: 'companies/',
     flights: 'flights/',
+    addFlight: 'flights/add',
     popularCities: 'cities/popular/',
     userHistory: 'account/iphistory',
     userCart: 'orders/cart/',

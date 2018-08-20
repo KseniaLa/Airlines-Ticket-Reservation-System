@@ -46,6 +46,16 @@ const makeSelectTicketAddError = () =>
     searchState.get('ticketAddError'),
   );
 
+const makeSelectFlightAdded = () =>
+  createSelector(selectAddResult, searchState =>
+    searchState.get('flightAdded'),
+  );
+
+const makeSelectFlightAddError = () =>
+  createSelector(selectAddResult, searchState =>
+    searchState.get('flightAddError'),
+  );
+
 export {
   makeSelectIsCitiesDataReceived,
   makeSelectCities,
@@ -53,6 +63,8 @@ export {
   makeSelectCompanies,
   makeSelectTicketAdded,
   makeSelectTicketAddError,
+  makeSelectFlightAdded,
+  makeSelectFlightAddError,
   makeSelectLocationAdded,
   makeSelectLocationAddError,
   makeSelectIsFlightsDataReceived,

@@ -2,6 +2,8 @@ import { fromJS } from 'immutable';
 import {
   TICKETS_ADD_SUCCEEDED,
   TICKETS_ADD_FAILED,
+  FLIGHT_ADD_SUCCEEDED,
+  FLIGHT_ADD_FAILED,
   LOCATION_ADD_SUCCEEDED,
   LOCATION_ADD_FAILED,
   CITIES_SUCCESS,
@@ -16,6 +18,8 @@ import {
 const initialState = fromJS({
   ticketAddError: false,
   ticketAdded: false,
+  flightAddError: false,
+  flightAdded: false,
   locationAddError: false,
   locationAdded: false,
   citiesReceived: false,
@@ -32,6 +36,10 @@ const addReducer = (state = initialState, action) => {
       return state.set('ticketAdded', true).set('ticketAddError', false);
     case TICKETS_ADD_FAILED:
       return state.set('ticketAdded', false).set('ticketAddError', true);
+    case FLIGHT_ADD_SUCCEEDED:
+      return state.set('flightAdded', true).set('flightAddError', false);
+    case FLIGHT_ADD_FAILED:
+      return state.set('flightAdded', false).set('flightAddError', true);
     case CITIES_SUCCESS:
       return state.set('citiesReceived', true).set('cities', action.payload);
     case CITIES_ERROR:

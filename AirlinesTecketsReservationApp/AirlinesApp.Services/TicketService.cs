@@ -54,6 +54,7 @@ namespace AirlinesApp.Services
                Company company = await Db.Companies
                     .FindBy(c => c.Translations.Any(tr => tr.Value.ToLower() == ticket.Company.ToLower()))
                     .FirstOrDefaultAsync();
+
                if (fromCity == null || toCity == null)
                {
                     throw new LocationException("City not found");
@@ -66,7 +67,9 @@ namespace AirlinesApp.Services
                {
                     throw new LocationException("Departure and destination cities are equal");
                }
+
                int flightId = await AddFlight(fromCity, toCity, ticket.Date);
+
                Ticket testTicket = await Db.Tickets
                     .FindBy(t => t.FlightId == flightId && t.CompanyId == company.Id && t.Category == ticket.Category)
                     .FirstOrDefaultAsync();

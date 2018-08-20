@@ -15,11 +15,15 @@ import TextImageBlock from '../../components/TextImageBlock';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 import { makeSelectIsDataReceived, makeSelectCities } from './selectors';
-import { searchForCities } from './actions';
+import { searchForCities, resetCities } from './actions';
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
     this.props.getCities(this.props.language);
+  }
+
+  componentWillUnmount() {
+    this.props.discardCities();
   }
 
   getData() {
@@ -66,12 +70,17 @@ HomePage.propTypes = {
   cities: PropTypes.array,
   getCities: PropTypes.func,
   onSearch: PropTypes.func,
+  discardCities: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     getCities(language) {
       dispatch(searchForCities(language));
+    },
+
+    discardCities() {
+      dispatch(resetCities());
     },
   };
 }

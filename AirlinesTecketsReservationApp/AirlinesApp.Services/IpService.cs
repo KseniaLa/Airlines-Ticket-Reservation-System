@@ -31,10 +31,10 @@ namespace AirlinesApp.Services
 
         public async Task<List<IpAddressModel>> GetUserIpAddressLatest(int userId, int count)
         {
-            List<IpAddress> addresses = await (from a in Db.IpAddresses.GetAll()
-                                               where a.UserId == userId
-                                               orderby a.Date descending
-                                               select a).Take(count).ToListAsync();
+            List<IpAddress> addresses = await Db.IpAddresses.GetAll()
+                .Where(ipAddress => ipAddress.UserId == userId).OrderByDescending(ipAddress => ipAddress.Date)
+                .Take(count).ToListAsync();
+            
             List<IpAddressModel> addr = new List<IpAddressModel>();
             foreach (IpAddress a in addresses)
             {

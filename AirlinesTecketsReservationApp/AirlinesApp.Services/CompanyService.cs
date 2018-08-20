@@ -1,4 +1,5 @@
-﻿using AirlinesApp.DataAccess.Models.Entities;
+﻿using System;
+using AirlinesApp.DataAccess.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,10 @@ namespace AirlinesApp.Services
         public async Task AddCompany(List<TranslationModel> translations)
         {
 
-            List<string> companyNames = new List<string>();
-            foreach (TranslationModel t in translations)
-            {
-                companyNames.Add(t.Value.ToLower());
-            }
+            List<string> companyNames = translations.Select(t => t.Value).ToList();
 
             List<Translation> testTranslations =
-                 await Db.Translations.FindBy(t => companyNames.Contains(t.Value.ToLower())).ToListAsync();
+                 await Db.Translations.FindBy(t => companyNames.Contains(t.Value, StringComparer.InvariantCultureIgnoreCase)).ToListAsync();
             if (testTranslations.Count != 0)
             {
                 throw new LocationException("Location translation already exists");
@@ -56,12 +53,8 @@ namespace AirlinesApp.Services
 
         public async Task<List<string>> GetCompanies(string language)
         {
-            List<Company> companies = await Db.Companies.GetAll().ToListAsync();
-            List<string> companyNames = new List<string>();
-            foreach (Company company in companies)
-            {
-                companyNames.Add(company.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value);
-            }
+            List<string> companyNames = await Db.Companies.GetAll()
+                .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value).ToListAsync();
             return companyNames;
         }
     }

@@ -1,4 +1,5 @@
-﻿using AirlinesApp.DataAccess.Models.Entities;
+﻿using System;
+using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -13,14 +14,10 @@ namespace AirlinesApp.Services
     {
         public async Task AddCity(List<TranslationModel> translations)
         {
-            List<string> cityNames = new List<string>();
-            foreach (TranslationModel t in translations)
-            {
-                cityNames.Add(t.Value.ToLower());
-            }
+            List<string> cityNames = translations.Select(t => t.Value).ToList();
 
             List<Translation> testTranslations =
-                 await Db.Translations.FindBy(t => cityNames.Contains(t.Value.ToLower())).ToListAsync();
+                 await Db.Translations.FindBy(t => cityNames.Contains(t.Value, StringComparer.InvariantCultureIgnoreCase)).ToListAsync();
             if (testTranslations.Count != 0)
             {
                 throw new LocationException("Location translation already exists");
@@ -56,20 +53,17 @@ namespace AirlinesApp.Services
 
         public async Task<List<string>> GetCities(string language)
         {
-            List<City> cities = await Db.Cities.GetAll().ToListAsync();
-            List<string> cityNames = new List<string>();
-            foreach (City city in cities)
-            {
-                cityNames.Add(city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value);
-            }
+            List<string> cityNames = await Db.Cities.GetAll()
+                .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value).ToListAsync();
             return cityNames;
         }
 
         public async Task<List<CityModel>> GetTopCities(int topCount, string language)
         {
-            List<City> rawCities = await (from c in Db.Cities.GetAll()
-                                          orderby c.Rating descending
-                                          select c).Take(topCount).ToListAsync();
+            List<City> rawCities = await Db.Cities.GetAll()
+                .OrderByDescending(city => city.Rating)
+                .Take(topCount).ToListAsync();
+            
             List<CityModel> cities = new List<CityModel>();
             foreach (City city in rawCities)
             {

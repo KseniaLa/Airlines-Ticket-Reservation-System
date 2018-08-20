@@ -14,14 +14,12 @@ namespace AirlinesApp.Services
      {
           public async Task<List<TicketModel>> GetSearchTickets(SearchModel search, string language)
           {
-               IQueryable<Ticket> rawTickets = Db.Tickets.GetAll();
-               List<Ticket> foundTickets = await (from t in rawTickets
-                                                  where t.Category == search.FlightClass
-                                                  where t.Flight.DateTime.Date == search.Date.Date
-                                                  where t.Flight.Departure.Translations.Any(tr => tr.Value.ToLower() == search.From.ToLower())
-                                                  where t.Flight.Destination.Translations.Any(tr => tr.Value.ToLower() == search.To.ToLower())
-                                                  where t.Count > 0
-                                                  select t).ToListAsync();
+               List<Ticket> foundTickets = await Db.Tickets.GetAll().Where(t =>
+                   t.Category == search.FlightClass
+                   && t.Flight.DateTime.Date == search.Date.Date
+                   && t.Flight.Departure.Translations.Any(tr => tr.Value.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
+                   && t.Flight.Destination.Translations.Any(tr => tr.Value.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
+                   && t.Count > 0).ToListAsync();
                List<TicketModel> tickets = new List<TicketModel>();
                foreach (Ticket ticket in foundTickets)
                {
@@ -47,13 +45,13 @@ namespace AirlinesApp.Services
           public async Task AddTicket(TicketModel ticket)
           {
                City fromCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.ToLower() == ticket.From.ToLower()))
+                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.From, StringComparison.InvariantCultureIgnoreCase)))
                     .FirstOrDefaultAsync();
                City toCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.ToLower() == ticket.To.ToLower()))
+                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.To, StringComparison.InvariantCultureIgnoreCase)))
                     .FirstOrDefaultAsync();
                Company company = await Db.Companies
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.ToLower() == ticket.Company.ToLower()))
+                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.Company, StringComparison.InvariantCultureIgnoreCase)))
                     .FirstOrDefaultAsync();
 
                if (fromCity == null || toCity == null)

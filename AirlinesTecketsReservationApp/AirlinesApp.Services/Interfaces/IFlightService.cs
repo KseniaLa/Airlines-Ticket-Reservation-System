@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 
 namespace AirlinesApp.Services.Interfaces
 {
-    public interface ITicketService
+    public interface IFlightService
     {
-        Task<List<TicketModel>> GetSearchTickets(SearchModel search, string language);
+         Task<List<FlightModel>> GetFlights(string language);
 
-        Task AddTicket(AddTicketModel ticket);
+         Task<Flight> AddFlight(FlightModel flight);
     }
 }

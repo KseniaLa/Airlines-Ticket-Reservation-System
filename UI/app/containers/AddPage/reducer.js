@@ -8,6 +8,8 @@ import {
   CITIES_ERROR,
   COMPANIES_SUCCESS,
   COMPANIES_ERROR,
+  FLIGHTS_SUCCEEDED,
+  FLIGHTS_FAILED,
   DISCARD_STATE,
 } from './constants';
 
@@ -20,6 +22,8 @@ const initialState = fromJS({
   cities: null,
   companiesReceived: false,
   companies: null,
+  flightsReceived: false,
+  flights: null,
 });
 
 const addReducer = (state = initialState, action) => {
@@ -32,6 +36,10 @@ const addReducer = (state = initialState, action) => {
       return state.set('citiesReceived', true).set('cities', action.payload);
     case CITIES_ERROR:
       return state.set('citiesReceived', false).set('cities', null);
+    case FLIGHTS_SUCCEEDED:
+      return state.set('flightsReceived', true).set('flights', action.payload);
+    case FLIGHTS_FAILED:
+      return state.set('flightsReceived', false).set('flights', null);
     case COMPANIES_SUCCESS:
       return state
         .set('companiesReceived', true)

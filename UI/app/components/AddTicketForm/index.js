@@ -1,8 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../basic/Button';
 import TextField from '../basic/TextField';
@@ -15,41 +13,27 @@ class AddTicketForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment(),
       flightClass: 'business',
-      from: '',
-      to: '',
+      flight: '', // !
       count: '',
       price: '',
       company: '',
       isInputError: false,
     };
-    this.handleChange = this.handleChange.bind(this);
     this.onSelectValueChange = this.onSelectValueChange.bind(this);
-    this.updateFromField = this.updateFromField.bind(this);
-    this.updateToField = this.updateToField.bind(this);
+    this.onSelectFlightChange = this.onSelectFlightChange.bind(this);
     this.updateCountField = this.updateCountField.bind(this);
     this.updatePriceField = this.updatePriceField.bind(this);
     this.updateCompanyField = this.updateCompanyField.bind(this);
     this.addTicket = this.addTicket.bind(this);
   }
 
-  handleChange(date) {
-    this.setState({
-      startDate: date,
-    });
-  }
-
   onSelectValueChange(e) {
     this.setState({ flightClass: e.target.value });
   }
 
-  updateFromField(e) {
-    this.setState({ from: e.target.value });
-  }
-
-  updateToField(e) {
-    this.setState({ to: e.target.value });
+  onSelectFlightChange(e) {
+    this.setState({ flight: e.target.value });
   }
 
   updateCountField(e) {
@@ -66,35 +50,10 @@ class AddTicketForm extends React.PureComponent {
 
   addTicket(e) {
     e.preventDefault();
-    const {
-      from,
-      to,
-      count,
-      price,
-      company,
-      flightClass,
-      startDate,
-    } = this.state;
-    if (
-      from !== '' &&
-      to !== '' &&
-      count !== '' &&
-      price !== '' &&
-      count > 0 &&
-      price > 0 &&
-      company !== '' &&
-      startDate !== null
-    ) {
+    const { flight, count, price, company, flightClass } = this.state;
+    if (flight && count && price && count > 0 && price > 0 && company) {
       this.setState({ isInputError: false });
-      this.props.onTicketSubmit(
-        from,
-        to,
-        startDate,
-        company,
-        flightClass,
-        price,
-        count,
-      );
+      this.props.onTicketSubmit(flight, company, flightClass, price, count);
     } else {
       this.setState({ isInputError: true });
     }
@@ -108,27 +67,13 @@ class AddTicketForm extends React.PureComponent {
             text={<FormattedMessage {...messages.invalidinput} />}
           />
         )}
-        <div>
-          <FormattedMessage id="app.components.AddPage.fromfield">
-            {placeholder => (
-              <TextField
-                type="text"
-                hint={placeholder}
-                onUpdate={this.updateFromField}
-              />
-            )}
-          </FormattedMessage>
-          <FormattedMessage id="app.components.AddPage.tofield">
-            {placeholder => (
-              <TextField
-                type="text"
-                hint={placeholder}
-                onUpdate={this.updateToField}
-              />
-            )}
-          </FormattedMessage>
-        </div>
         <div className="date-time">
+          <Select
+            items={this.props.flights}
+            value={this.state.class}
+            values={this.props.values}
+            onChange={this.onSelectFlightChange}
+          />
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => (
               <TextField
@@ -138,12 +83,6 @@ class AddTicketForm extends React.PureComponent {
               />
             )}
           </FormattedMessage>
-          <DatePicker
-            selected={this.state.startDate}
-            showTimeSelect
-            onChange={this.handleChange}
-            className="datepicker"
-          />
         </div>
         <div>
           <Select
@@ -191,6 +130,8 @@ class AddTicketForm extends React.PureComponent {
 }
 
 AddTicketForm.propTypes = {
+  flights: PropTypes.array,
+  values: PropTypes.array,
   onTicketSubmit: PropTypes.func,
 };
 

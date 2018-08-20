@@ -2,6 +2,9 @@ import {
   TICKETS_ADD_REQUESTED,
   TICKETS_ADD_SUCCEEDED,
   TICKETS_ADD_FAILED,
+  FLIGHTS_REQUESTED,
+  FLIGHTS_SUCCEEDED,
+  FLIGHTS_FAILED,
   CITIES_REQUESTED,
   CITIES_SUCCESS,
   CITIES_ERROR,
@@ -51,6 +54,26 @@ export function getAllCitiesSuccess(cities) {
 export function getAllCitiesError() {
   return {
     type: CITIES_ERROR,
+  };
+}
+
+export function getAllFlights(language) {
+  return {
+    type: FLIGHTS_REQUESTED,
+    payload: language,
+  };
+}
+
+export function getAllFlightsSuccess(flights) {
+  return {
+    type: FLIGHTS_SUCCEEDED,
+    payload: flights,
+  };
+}
+
+export function getAllFlightsError() {
+  return {
+    type: FLIGHTS_FAILED,
   };
 }
 

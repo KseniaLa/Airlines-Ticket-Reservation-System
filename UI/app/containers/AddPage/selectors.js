@@ -18,6 +18,14 @@ const makeSelectIsCompaniesDataReceived = () =>
 const makeSelectCompanies = () =>
   createSelector(selectAddResult, searchState => searchState.get('companies'));
 
+const makeSelectIsFlightsDataReceived = () =>
+  createSelector(selectAddResult, searchResult =>
+    searchResult.get('flightsReceived'),
+  );
+
+const makeSelectFlights = () =>
+  createSelector(selectAddResult, searchState => searchState.get('flights'));
+
 const makeSelectLocationAdded = () =>
   createSelector(selectAddResult, searchState =>
     searchState.get('locationAdded'),
@@ -47,4 +55,6 @@ export {
   makeSelectTicketAddError,
   makeSelectLocationAdded,
   makeSelectLocationAddError,
+  makeSelectIsFlightsDataReceived,
+  makeSelectFlights,
 };

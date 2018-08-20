@@ -4,6 +4,12 @@ export const TICKETS_ADD_SUCCEEDED = 'airlines/AddPage/TICKETS_ADD_SUCCEDED';
 
 export const TICKETS_ADD_FAILED = 'airlines/AddPage/TICKETS_ADD_FAILED';
 
+export const FLIGHTS_REQUESTED = 'airlines/AddPage/FLIGHTS_REQUESTED';
+
+export const FLIGHTS_SUCCEEDED = 'airlines/AddPage/FLIGHTS_SUCCEDED';
+
+export const FLIGHTS_FAILED = 'airlines/AddPage/FLIGHTS_FAILED';
+
 export const CITIES_REQUESTED = 'airlines/AddPage/CITIES_REQUESTED';
 
 export const CITIES_SUCCESS = 'airlines/AddPage/CITIES_SUCCESS';

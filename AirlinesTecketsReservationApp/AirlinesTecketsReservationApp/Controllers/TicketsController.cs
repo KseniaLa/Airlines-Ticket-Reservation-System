@@ -42,7 +42,7 @@ namespace AirlinesTicketsReservationApp.Controllers
 
         [Authorize(Roles = Roles.Administrator)]
         [HttpPut("add")]
-        public async Task<IActionResult> AddTickets([FromBody]TicketModel ticket)
+        public async Task<IActionResult> AddTickets([FromBody]AddTicketModel ticket)
         {
              try
              {

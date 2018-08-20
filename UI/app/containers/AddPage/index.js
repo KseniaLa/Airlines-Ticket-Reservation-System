@@ -5,10 +5,10 @@ import Popup from 'react-popup';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from '../../components/basic/Button';
 import Spinner from '../../components/basic/Spinner';
 import AddTicketForm from '../../components/AddTicketForm';
 import AddLocationForm from '../../components/AddLocationForm';
+import AddFlightForm from '../../components/AddFlightForm';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
 import './style.scss';
@@ -19,6 +19,7 @@ import {
   getAllCompanies,
   addCity,
   addCompany,
+  getAllFlights,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -29,6 +30,8 @@ import {
   makeSelectTicketAddError,
   makeSelectLocationAdded,
   makeSelectLocationAddError,
+  makeSelectIsFlightsDataReceived,
+  makeSelectFlights,
 } from './selectors';
 
 import messages from './messages';
@@ -38,6 +41,7 @@ class AddPage extends React.Component {
     super(props);
     this.addTicket = this.addTicket.bind(this);
     this.getCitiesList = this.getCitiesList.bind(this);
+    this.getFlightsList = this.getFlightsList.bind(this);
     this.addCity = this.addCity.bind(this);
     this.addCompany = this.addCompany.bind(this);
     this.getData = this.getData.bind(this);
@@ -78,19 +82,16 @@ class AddPage extends React.Component {
   getData() {
     this.props.getCities(this.props.language);
     this.props.getCompanies(this.props.language);
+    this.props.getFlights(this.props.language);
   }
 
-  addTicket(from, to, date, company, flightClass, price, count) {
+  addTicket(flightId, company, flightClass, price, count) {
     this.props.addTicketGroup({
-      id: 0,
-      from,
-      to,
-      date,
+      flightId,
       company,
       category: flightClass,
       price,
-      totalCount: count,
-      bookedCount: 0,
+      count,
     });
   }
 
@@ -120,6 +121,17 @@ class AddPage extends React.Component {
     return list;
   }
 
+  getFlightsList() {
+    const nameList = [];
+    const valueList = [];
+    const { flights } = this.props;
+    flights.forEach(element => {
+      nameList.push(`${element.from} - ${element.to}  ${element.date}`);
+      valueList.push(element.id);
+    });
+    return { names: nameList, values: valueList };
+  }
+
   render() {
     if (!this.props.isAuthorized || !this.props.isAdmin) {
       return (
@@ -128,6 +140,9 @@ class AddPage extends React.Component {
         </div>
       );
     }
+    const flights = this.props.flightsReceived
+      ? this.getFlightsList()
+      : { names: [], values: [] };
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
     ) : (
@@ -152,8 +167,12 @@ class AddPage extends React.Component {
             <AddLocationForm onSubmit={this.addCity} />
             <AddLocationForm onSubmit={this.addCompany} />
           </div>
-          <Button text={<FormattedMessage {...messages.addgroup} />} />
-          <AddTicketForm onTicketSubmit={this.addTicket} />
+          <AddFlightForm onFlightSubmit={this.addTicket} />
+          <AddTicketForm
+            onTicketSubmit={this.addTicket}
+            flights={flights.names}
+            values={flights.values}
+          />
         </div>
       </div>
     );
@@ -169,6 +188,8 @@ AddPage.propTypes = {
   locationAdded: PropTypes.bool,
   locationAddError: PropTypes.bool,
   citiesReceived: PropTypes.bool,
+  flightsReceived: PropTypes.bool,
+  flights: PropTypes.array,
   cities: PropTypes.array,
   companiesReceived: PropTypes.bool,
   companies: PropTypes.array,
@@ -177,6 +198,7 @@ AddPage.propTypes = {
   getCompanies: PropTypes.func,
   addNewCity: PropTypes.func,
   addNewCompany: PropTypes.func,
+  getFlights: PropTypes.func,
   discardAll: PropTypes.func,
 };
 
@@ -205,6 +227,10 @@ export function mapDispatchToProps(dispatch) {
     addNewCompany(translations) {
       dispatch(addCompany(translations));
     },
+
+    getFlights(language) {
+      dispatch(getAllFlights(language));
+    },
   };
 }
 
@@ -220,6 +246,8 @@ const mapStateToProps = createStructuredSelector({
   ticketAddError: makeSelectTicketAddError(),
   locationAdded: makeSelectLocationAdded(),
   locationAddError: makeSelectLocationAddError(),
+  flightsReceived: makeSelectIsFlightsDataReceived(),
+  flights: makeSelectFlights(),
 });
 
 export default connect(

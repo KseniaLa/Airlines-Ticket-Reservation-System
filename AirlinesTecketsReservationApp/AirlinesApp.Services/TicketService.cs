@@ -42,88 +42,42 @@ namespace AirlinesApp.Services
           }
 
 
-          public async Task AddTicket(TicketModel ticket)
+          public async Task AddTicket(AddTicketModel ticket)
           {
-               City fromCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.From, StringComparison.InvariantCultureIgnoreCase)))
-                    .FirstOrDefaultAsync();
-               City toCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.To, StringComparison.InvariantCultureIgnoreCase)))
-                    .FirstOrDefaultAsync();
                Company company = await Db.Companies
                     .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.Company, StringComparison.InvariantCultureIgnoreCase)))
                     .FirstOrDefaultAsync();
+               Flight testFlight = await Db.Flights
+                    .FindBy(fl => fl.Id == ticket.FlightId)
+                    .FirstOrDefaultAsync();
 
-               if (fromCity == null || toCity == null)
+               if (company == null || testFlight == null)
                {
-                    throw new LocationException("City not found");
+                    throw new LocationException("Ticket attribute not found");
                }
-               if (company == null)
-               {
-                    throw new LocationException("Company not found");
-               }
-               if (fromCity.Equals(toCity))
-               {
-                    throw new LocationException("Departure and destination cities are equal");
-               }
-              DateTime dateTime = new DateTime(ticket.Date.Year, ticket.Date.Month, ticket.Date.Day, ticket.Date.Hour, ticket.Date.Minute, 0, DateTimeKind.Local);
-              Flight flight = new Flight
-              {
-                  DateTime = dateTime,
-                  DepartureId = fromCity.Id,
-                  DestinationId = toCity.Id
-              };
-            //int flightId = await AddFlight(fromCity, toCity, ticket.Date);
 
-            /*Ticket testTicket = await Db.Tickets
-                    .FindBy(t => t.FlightId == flightId && t.CompanyId == company.Id && t.Category == ticket.Category)
+
+               Ticket testTicket = await Db.Tickets
+                    .FindBy(t => t.FlightId == ticket.FlightId && t.CompanyId == company.Id && t.Category == ticket.Category)
                     .FirstOrDefaultAsync();
                if (testTicket != null)
                {
-                    testTicket.Count = ticket.TotalCount;
+                    testTicket.Count = ticket.Count;
                     testTicket.Price = ticket.Price;
                     Db.Tickets.Update(testTicket);
                     await Db.Save();
                     return;
-               }*/
+               }
                Ticket ticketItem = new Ticket
                {
-                    Flight = flight,
+                    FlightId = ticket.FlightId,
                     CompanyId = company.Id,
                     Category = ticket.Category,
                     Price = ticket.Price,
-                    Count = ticket.TotalCount
+                    Count = ticket.Count
                };
-              try
-              {
-                  await Db.Tickets.Add(ticketItem);
-                  await Db.Save();
-              }
-              catch (Exception e)
-              {
-                  int i = 5;
-              }
-          }
-
-          private async Task<int> AddFlight(City from, City to, DateTime date)
-          {
-               DateTime dateTime = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, DateTimeKind.Local);
-               Flight testFlight = await Db.Flights
-                                   .FindBy(fl => fl.DepartureId == from.Id && fl.DestinationId == to.Id && fl.DateTime == dateTime)
-                                   .FirstOrDefaultAsync();
-               if (testFlight != null)
-               {
-                    return testFlight.Id;
-               }
-               Flight flight = new Flight
-               {
-                    DateTime = dateTime,
-                    DepartureId = from.Id,
-                    DestinationId = to.Id
-               };
-               await Db.Flights.Add(flight);
+               await Db.Tickets.Add(ticketItem);
                await Db.Save();
-               return flight.Id;
           }
      }
 }

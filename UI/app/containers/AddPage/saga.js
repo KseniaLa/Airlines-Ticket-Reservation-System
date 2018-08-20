@@ -5,6 +5,7 @@ import {
   COMPANIES_REQUESTED,
   CITY_ADD_REQUESTED,
   COMPANY_ADD_REQUESTED,
+  FLIGHTS_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -13,6 +14,8 @@ import {
   getAllCitiesError,
   getAllCompaniesSuccess,
   getAllCompaniesError,
+  getAllFlightsSuccess,
+  getAllFlightsError,
   addLocationSuccess,
   addLocationError,
 } from './actions';
@@ -72,6 +75,24 @@ function* getCompanies(action) {
   }
 }
 
+function* getFlights(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.flights + action.payload,
+      authGet(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getAllFlightsSuccess(result.flights));
+    } else {
+      yield put(getAllFlightsError());
+    }
+  } catch (e) {
+    yield put(getAllFlightsError());
+  }
+}
+
 function* addLocation(action) {
   try {
     let urlOption;
@@ -106,4 +127,5 @@ export function* addSaga() {
   yield takeEvery(COMPANIES_REQUESTED, getCompanies);
   yield takeEvery(CITY_ADD_REQUESTED, addLocation);
   yield takeEvery(COMPANY_ADD_REQUESTED, addLocation);
+  yield takeEvery(FLIGHTS_REQUESTED, getFlights);
 }

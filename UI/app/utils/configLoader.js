@@ -11,6 +11,7 @@ const CONFIG = {
     resultTickets: 'tickets/search/',
     cities: 'cities/',
     companies: 'companies/',
+    flights: 'flights/',
     popularCities: 'cities/popular/',
     userHistory: 'account/iphistory',
     userCart: 'orders/cart/',

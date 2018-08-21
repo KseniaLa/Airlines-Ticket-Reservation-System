@@ -17,10 +17,7 @@ import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
 import { logout, setSearch } from './actions';
-import {
-  searchForTickets,
-  discardDataReady,
-} from '../SearchResultPage/actions';
+import { discardDataReady } from '../SearchResultPage/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { discardLogin } from '../SignInPage/actions';

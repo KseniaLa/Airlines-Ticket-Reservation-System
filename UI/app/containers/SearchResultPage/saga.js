@@ -15,12 +15,14 @@ function* fetchTickets(action) {
     const { from, to, date, flightClass } = action.payload;
     const responce = yield call(
       fetch,
-      config.APIUrl + config.APIOptions.resultTickets + action.language,
+      `${config.APIUrl + config.APIOptions.resultTickets + action.language}/${
+        action.itemCount
+      }/${action.pageNum}`,
       searchPost(from, to, date, flightClass),
     );
     if (responce.ok) {
       const result = yield responce.json();
-      yield put(getTicketsSuccess(result.tickets));
+      yield put(getTicketsSuccess(result.tickets, result.count));
     } else {
       yield put(getTicketsError());
     }

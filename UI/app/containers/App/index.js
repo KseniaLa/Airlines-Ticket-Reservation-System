@@ -16,7 +16,7 @@ import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
-import { logout } from './actions';
+import { logout, setSearch } from './actions';
 import {
   searchForTickets,
   discardDataReady,
@@ -145,9 +145,10 @@ export function mapDispatchToProps(dispatch) {
       dispatch(discardLogin());
     },
 
-    getTickets(from, to, date, flightClass, lang) {
+    getTickets(from, to, date, flightClass) {
       dispatch(discardDataReady());
-      dispatch(searchForTickets(from, to, date, flightClass, lang));
+      dispatch(setSearch(from, to, date, flightClass));
+      // dispatch(searchForTickets(from, to, date, flightClass, lang));
     },
   };
 }

@@ -41,6 +41,17 @@ namespace AirlinesApp.Services
                return tickets;
           }
 
+         public List<TicketModel> GetPageItems(List<TicketModel> itemSet, int count, int page)
+         {
+             int start = count * (page - 1);
+             if (start > itemSet.Count - 1)
+             {
+                 return itemSet;
+             }
+
+             return itemSet.Skip(start).Take(count).ToList();
+         }
+
 
           public async Task AddTicket(AddTicketModel ticket)
           {

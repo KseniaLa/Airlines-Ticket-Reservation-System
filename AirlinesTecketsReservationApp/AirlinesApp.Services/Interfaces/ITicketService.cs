@@ -11,5 +11,7 @@ namespace AirlinesApp.Services.Interfaces
         Task<List<TicketModel>> GetSearchTickets(SearchModel search, string language);
 
         Task AddTicket(AddTicketModel ticket);
+
+        List<TicketModel> GetPageItems(List<TicketModel> itemSet, int count, int page);
     }
 }

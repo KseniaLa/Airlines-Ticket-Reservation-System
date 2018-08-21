@@ -12,6 +12,7 @@ import {
 const initialState = fromJS({
   dataReceived: false,
   data: null,
+  count: 0,
   ticketAddError: false,
   ticketAdded: false,
 });
@@ -19,7 +20,10 @@ const initialState = fromJS({
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case TICKETS_FETCH_SUCCEEDED:
-      return state.set('dataReceived', true).set('data', action.payload);
+      return state
+        .set('dataReceived', true)
+        .set('data', action.payload.tickets)
+        .set('count', action.payload.count);
     case TICKETS_FETCH_FAILED:
       return state.set('dataReceived', false);
     case DISCARD_DATA_READY:

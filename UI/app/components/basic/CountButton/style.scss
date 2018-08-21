@@ -1,0 +1,27 @@
+@import '../../../common';
+
+.count-button {
+    background-color: $button_color;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.6rem;
+    transition: 300ms;
+    white-space: nowrap;
+    outline: none;
+  
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  
+    &:hover {
+        border: none;
+        border-radius: 5px;
+        background-color: #ffffff;
+        color: #530969;
+        font-weight: bold;
+        cursor: pointer;
+    }
+  }
+  

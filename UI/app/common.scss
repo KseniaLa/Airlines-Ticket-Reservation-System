@@ -7,3 +7,32 @@ $page_base_color:  #f0f0f0;
   display: flex;
   flex-direction: $direction;
 }
+
+$pagination-padding-y:              .5rem !default;
+$pagination-padding-x:              .75rem !default;
+$pagination-padding-y-sm:           .25rem !default;
+$pagination-padding-x-sm:           .5rem !default;
+$pagination-padding-y-lg:           .75rem !default;
+$pagination-padding-x-lg:           1.5rem !default;
+$pagination-line-height:            1.25 !default;
+
+$pagination-color:                  red !default;
+$pagination-bg:                     white !default;
+$pagination-border-width:           2 !default;
+$pagination-border-color:           red !default;
+
+$pagination-focus-box-shadow:       3 !default;
+$pagination-focus-outline:          0 !default;
+
+$pagination-hover-color:            red !default;
+$pagination-hover-bg:               green !default;
+$pagination-hover-border-color:     gray !default;
+
+$pagination-active-color:           blue !default;
+$pagination-active-bg:              red !default;
+$pagination-active-border-color:    yellow !default;
+
+$pagination-disabled-color:         gray !default;
+$pagination-disabled-bg:            white !default;
+$pagination-disabled-border-color:  gray !default;
+

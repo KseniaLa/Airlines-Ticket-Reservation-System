@@ -11,7 +11,21 @@
 .error-field {
   padding: 10px;
   border-radius: 5px;
-  background-color: #ec9c9c;
+  background-color: #dfa39f;
+  margin: 15px;
+  width: 80%;
+  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.2);
+  font-size: 1.6rem;
+  outline: none;
+}
+
+.contrast-field {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #dfdbdf;
+  margin: 15px;
+  width: 80%;
+  box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.2);
   font-size: 1.6rem;
   outline: none;
 }

@@ -51,10 +51,10 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
-                // replace with MailKit / sendgrid?
-                await EmailService.SendTestEmail(user.Email); //not working
+                EmailSender email = new EmailSender();
+                await email.Execute();
             }
-            catch (SmtpFailedRecipientsException)
+            catch
             {
                 return BadRequest();
             }

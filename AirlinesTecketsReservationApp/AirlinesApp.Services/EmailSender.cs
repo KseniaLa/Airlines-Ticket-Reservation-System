@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -9,40 +11,27 @@ using SendGrid.Helpers.Mail;
 
 namespace AirlinesApp.Services
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender
     {
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        public EmailSender()
         {
-            Options = optionsAccessor.Value;
+            
         }
 
-        public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task Execute()
         {
-            return Execute(Options.SendGridKey, subject, message, email);
-        }
-
-        public Task Execute(string apiKey, string subject, string message, string email)
-        {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("Joe@contoso.com", "Joe Smith"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
-
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.TrackingSettings = new TrackingSettings
-            {
-                ClickTracking = new ClickTracking { Enable = false }
-            };
-
-            return client.SendEmailAsync(msg);
-        }
+             var apiKey = "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";
+             var client = new SendGridClient(apiKey);
+             var msg = new SendGridMessage()
+             {
+                  From = new EmailAddress("ksenia.lashch@gmail.com", "Team"),
+                  Subject = "Sending with SendGrid is Fun",
+                  PlainTextContent = "and easy to do anywhere, even with C#",
+                  HtmlContent = "<strong>and easy to do anywhere, even with C#</strong>"
+             };
+             msg.AddTo(new EmailAddress("ksenia.lashch@gmail.com", "Test User"));
+             var response = await client.SendEmailAsync(msg);
+          }
     }
 }

@@ -88,6 +88,7 @@ class SearchResultPage extends React.PureComponent {
 
   handleItemCountChange(itemsCount) {
     this.setState({ displayCount: itemsCount });
+    this.setState({ activePage: 1 });
     this.fetchTickets(itemsCount, 1);
   }
 

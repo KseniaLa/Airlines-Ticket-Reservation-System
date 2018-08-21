@@ -50,6 +50,12 @@ class SignInPage extends React.PureComponent {
     this.updateSignUpPasswordField = this.updateSignUpPasswordField.bind(this);
     this.updateNameField = this.updateNameField.bind(this);
     this.updateSurnameField = this.updateSurnameField.bind(this);
+
+    this.email = React.createRef();
+    this.password = React.createRef();
+
+    this.emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    this.minPassLength = 8;
   }
 
   componentDidUpdate() {
@@ -61,7 +67,7 @@ class SignInPage extends React.PureComponent {
   onSignIn(e) {
     e.preventDefault();
     const { signInEmail, signInPassword } = this.state;
-    if (signInEmail !== '' && signInPassword !== '') {
+    if (signInEmail && signInPassword) {
       this.setState({ isSignInInputError: false });
       this.props.tryLogin(signInEmail, signInPassword);
     } else {
@@ -70,7 +76,6 @@ class SignInPage extends React.PureComponent {
   }
 
   onSignUp(e) {
-    const minPassLength = 8;
     e.preventDefault();
     const {
       signUpName,
@@ -79,13 +84,13 @@ class SignInPage extends React.PureComponent {
       signUpPassword,
     } = this.state;
     if (
-      signUpName !== '' &&
-      signUpSurname !== '' &&
-      signUpEmail !== '' &&
-      signUpPassword !== ''
+      signUpName &&
+      signUpSurname &&
+      this.emailRegex.test(signUpEmail) &&
+      signUpPassword.length >= this.minPassLength
     ) {
       this.setState({ isSignUpInputError: false });
-      if (signUpPassword.length <= minPassLength) {
+      if (signUpPassword.length < this.minPassLength) {
         this.setState({ shortPassword: true });
         return;
       }
@@ -126,10 +131,24 @@ class SignInPage extends React.PureComponent {
 
   updateSignUpEmailField(e) {
     this.setState({ signUpEmail: e.target.value });
+    if (e.target.value && !this.emailRegex.test(e.target.value)) {
+      this.email.current.classList = '';
+      this.email.current.classList.add('error-field');
+    } else {
+      this.email.current.classList = '';
+      this.email.current.classList.add('contrast-field');
+    }
   }
 
   updateSignUpPasswordField(e) {
     this.setState({ signUpPassword: e.target.value });
+    if (e.target.value && e.target.value.length < this.minPassLength) {
+      this.password.current.classList = '';
+      this.password.current.classList.add('error-field');
+    } else {
+      this.password.current.classList = '';
+      this.password.current.classList.add('contrast-field');
+    }
   }
 
   updateNameField(e) {
@@ -167,25 +186,24 @@ class SignInPage extends React.PureComponent {
           <FormattedMessage id="app.components.SignInPage.email">
             {placeholder => (
               <Field
+                className="contrast-field"
                 type="text"
                 hint={placeholder}
-                name=""
                 onUpdate={this.updateSignInEmailField}
-                isError
               />
             )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.password">
             {placeholder => (
               <Field
+                className="contrast-field"
                 type="password"
                 hint={placeholder}
-                name=""
                 onUpdate={this.updateSignInPasswordField}
-                isError={this.state.isInputError}
               />
             )}
           </FormattedMessage>
+
           <Button
             text={<FormattedMessage {...messages.signin} />}
             onClick={this.onSignIn}
@@ -226,45 +244,41 @@ class SignInPage extends React.PureComponent {
           )}
           <FormattedMessage id="app.components.SignInPage.name">
             {placeholder => (
-              <Field
-                type="text"
-                hint={placeholder}
-                name=""
-                onUpdate={this.updateNameField}
-                isError={this.state.isInputError}
+              <input
+                className="contrast-field"
+                placeholder={placeholder}
+                onChange={this.updateNameField}
               />
             )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.surname">
             {placeholder => (
-              <Field
-                type="text"
-                hint={placeholder}
-                name=""
-                onUpdate={this.updateSurnameField}
-                isError={this.state.isInputError}
+              <input
+                className="contrast-field"
+                placeholder={placeholder}
+                onChange={this.updateSurnameField}
               />
             )}
           </FormattedMessage>
           <FormattedMessage id="app.components.SignInPage.email">
             {placeholder => (
-              <Field
-                type="text"
-                hint={placeholder}
-                name=""
-                onUpdate={this.updateSignUpEmailField}
-                isError={this.state.isInputError}
+              <input
+                className="contrast-field"
+                placeholder={placeholder}
+                ref={this.email}
+                onChange={this.updateSignUpEmailField}
               />
             )}
           </FormattedMessage>
+
           <FormattedMessage id="app.components.SignInPage.password">
             {placeholder => (
-              <Field
+              <input
+                className="contrast-field"
                 type="password"
-                hint={placeholder}
-                name=""
-                onUpdate={this.updateSignUpPasswordField}
-                isError={this.state.isInputError}
+                ref={this.password}
+                placeholder={placeholder}
+                onChange={this.updateSignUpPasswordField}
               />
             )}
           </FormattedMessage>
@@ -273,6 +287,7 @@ class SignInPage extends React.PureComponent {
             onClick={this.onSignUp}
           />
         </form>
+
         <div className="change-mode">
           <h6>{<FormattedMessage {...messages.loginexists} />}</h6>
           <Button

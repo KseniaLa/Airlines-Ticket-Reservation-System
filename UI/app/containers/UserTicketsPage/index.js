@@ -105,7 +105,7 @@ UserTicketsPage.propTypes = {
   dataReady: PropTypes.bool,
   cancelled: PropTypes.bool,
   cancelError: PropTypes.bool,
-  tickets: PropTypes.array,
+  tickets: PropTypes.any,
   getTickets: PropTypes.func,
   cancelTicket: PropTypes.func,
   discardCancel: PropTypes.func,

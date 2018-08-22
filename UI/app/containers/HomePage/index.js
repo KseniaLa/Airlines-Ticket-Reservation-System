@@ -67,7 +67,7 @@ class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  cities: PropTypes.array,
+  cities: PropTypes.any,
   getCities: PropTypes.func,
   onSearch: PropTypes.func,
   discardCities: PropTypes.func,

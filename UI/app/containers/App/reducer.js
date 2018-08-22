@@ -3,7 +3,6 @@ import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE } from './constants';
 
 const initialState = fromJS({
   isAuthorized: false,
-  restore: false,
   user: {
     name: 'Unknown',
     id: '',
@@ -41,7 +40,7 @@ const authReducer = (state = initialState, action) => {
         .setIn(['search', 'date'], action.date)
         .setIn(['search', 'flightClass'], action.flightClass);
     case RESTORE:
-      return state.set('isAuthorized', false).set('restore', true);
+      return state.set('isAuthorized', false);
     default:
       return state;
   }

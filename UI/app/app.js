@@ -45,6 +45,7 @@ const MOUNT_NODE = document.getElementById('app');
 
 store.subscribe(() => {
   saveState(store.getState());
+  // saveState({global: store.getState().get('global')});
 });
 
 const render = messages => {

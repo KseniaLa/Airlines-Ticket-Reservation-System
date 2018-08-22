@@ -102,7 +102,7 @@ class UserPage extends React.PureComponent {
 UserPage.propTypes = {
   userName: PropTypes.string,
   isAuthorized: PropTypes.bool,
-  history: PropTypes.array,
+  history: PropTypes.any,
   dataReady: PropTypes.bool,
   getHistory: PropTypes.func,
 };

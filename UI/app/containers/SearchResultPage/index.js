@@ -184,7 +184,7 @@ SearchResultPage.propTypes = {
   dataReady: PropTypes.bool,
   addError: PropTypes.bool,
   ticketAdded: PropTypes.bool,
-  tickets: PropTypes.array,
+  tickets: PropTypes.any,
   getTickets: PropTypes.func,
   onNotAuth: PropTypes.func,
   onSearch: PropTypes.func,

@@ -1,4 +1,4 @@
-import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE, } from './constants';
+import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE } from './constants';
 
 export function logout() {
   return {

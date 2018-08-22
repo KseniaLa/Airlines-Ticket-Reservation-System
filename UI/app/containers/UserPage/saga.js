@@ -21,7 +21,6 @@ function* fetchIpHistory() {
       yield put(getUserIpHistoryError());
     }
   } catch (e) {
-    console.log(e);
     yield put(getUserIpHistoryError());
   }
 }

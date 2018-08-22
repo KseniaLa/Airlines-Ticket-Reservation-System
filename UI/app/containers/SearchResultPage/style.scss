@@ -83,6 +83,13 @@ $border-radius-sm: 2px;
   }
 }
 
+.show-count {
+  button {
+    margin-left: 5px;
+    padding: 5px;
+  }
+}
+
 .ticket-area {
   @include flex_element(column);
 }

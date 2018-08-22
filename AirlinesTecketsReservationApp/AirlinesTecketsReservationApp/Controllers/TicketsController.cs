@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services;
@@ -31,9 +32,11 @@ namespace AirlinesTicketsReservationApp.Controllers
             try
             {
                 await _cityService.UpdateCityRating(search.To);
-                List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
-                List<TicketModel> pageTickets = _ticketService.GetPageItems(tickets, count, page);
-                return Ok(new { tickets = pageTickets, count = tickets.Count });
+                //List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
+                //List<TicketModel> pageTickets = _ticketService.GetPageItems(tickets, count, page);
+                List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
+                List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
+                return Ok(new { tickets = pageTickets, count = rawTickets.Count });
             }
             catch
             {

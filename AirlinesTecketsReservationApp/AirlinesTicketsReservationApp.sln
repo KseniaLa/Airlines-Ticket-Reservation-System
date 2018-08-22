@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesApp.Services", "Air
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesApp.TokenManager", "AirlinesApp.TokenManager\AirlinesApp.TokenManager.csproj", "{0B6BFD6D-2F78-4FA6-AF55-5255EC91D33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlinesApp.Exceptions", "AirlinesApp.Exceptions\AirlinesApp.Exceptions.csproj", "{392A37A3-94E5-4FF3-BE54-3ED3215473AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesApp.Exceptions", "AirlinesApp.Exceptions\AirlinesApp.Exceptions.csproj", "{392A37A3-94E5-4FF3-BE54-3ED3215473AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlinesApp.DI", "AirlinesApp.DI\AirlinesApp.DI.csproj", "{E337812E-A19A-41B2-9F08-BC25BF382D3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{392A37A3-94E5-4FF3-BE54-3ED3215473AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392A37A3-94E5-4FF3-BE54-3ED3215473AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392A37A3-94E5-4FF3-BE54-3ED3215473AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E337812E-A19A-41B2-9F08-BC25BF382D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E337812E-A19A-41B2-9F08-BC25BF382D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E337812E-A19A-41B2-9F08-BC25BF382D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E337812E-A19A-41B2-9F08-BC25BF382D3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

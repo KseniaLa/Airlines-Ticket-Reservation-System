@@ -15,7 +15,7 @@ class CountButton extends React.PureComponent {
   render() {
     return (
       <button className="count-button" onClick={this.handleClick}>
-        {this.props.count}
+        {this.props.text}
       </button>
     );
   }
@@ -24,6 +24,7 @@ class CountButton extends React.PureComponent {
 CountButton.propTypes = {
   count: PropTypes.number,
   onClick: PropTypes.func,
+  text: PropTypes.any,
 };
 
 export default CountButton;

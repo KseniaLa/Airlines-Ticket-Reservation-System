@@ -142,10 +142,27 @@ class SearchResultPage extends React.PureComponent {
           />
         </div>
         <section className="content-flex ticket-area">
-          <div className="">
-            <CountButton count={2} onClick={this.handleItemCountChange} />
-            <CountButton count={3} onClick={this.handleItemCountChange} />
-            <CountButton count={5} onClick={this.handleItemCountChange} />
+          <div className="show-count">
+            <CountButton
+              count={2}
+              text="2"
+              onClick={this.handleItemCountChange}
+            />
+            <CountButton
+              count={3}
+              text="3"
+              onClick={this.handleItemCountChange}
+            />
+            <CountButton
+              count={5}
+              text="5"
+              onClick={this.handleItemCountChange}
+            />
+            <CountButton
+              count={this.props.count}
+              text={<FormattedMessage {...messages.all} />}
+              onClick={this.handleItemCountChange}
+            />
           </div>
           <Pagination
             activePage={this.state.activePage}

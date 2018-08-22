@@ -5,6 +5,10 @@ export default defineMessages({
     id: 'app.components.SearchResultsPage.add',
     defaultMessage: 'Добавить',
   },
+  all: {
+    id: 'app.components.SearchResultsPage.all',
+    defaultMessage: 'Все',
+  },
   adderror: {
     id: 'app.components.SearchResultsPage.adderror',
     defaultMessage: 'Данный билет уже есть в корзине',

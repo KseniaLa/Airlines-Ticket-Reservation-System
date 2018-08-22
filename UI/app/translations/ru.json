@@ -42,6 +42,7 @@
   "app.components.SignInPage.loginexists": "Уже есть логин",
   "app.components.SignInPage.signupsuccess": "Вы успешно зарегистрировались!",
   "app.components.SearchResultsPage.add": "добавить",
+  "app.components.SearchResultsPage.all": "Все",
   "app.components.SearchResultsPage.adderror": "Данный билет уже есть в корзине",
   "app.components.SearchResultsPage.addsuccess": "Билет добавлен в корзину!",
   "app.components.UserBasketPage.remove": "удалить",

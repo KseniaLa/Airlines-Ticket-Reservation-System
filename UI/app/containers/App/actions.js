@@ -1,4 +1,4 @@
-import { LOGOUT, SIGN_IN, SET_SEARCH } from './constants';
+import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE, } from './constants';
 
 export function logout() {
   return {
@@ -23,5 +23,11 @@ export function setSearch(from, to, date, flightClass) {
     to,
     date,
     flightClass,
+  };
+}
+
+export function restoreAuth() {
+  return {
+    type: RESTORE,
   };
 }

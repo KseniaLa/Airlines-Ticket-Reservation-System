@@ -4,6 +4,7 @@ import { LOGOUT } from './constants';
 function* logout() {
   try {
     localStorage.removeItem('token');
+    localStorage.removeItem('cartTickets');
     yield 'ok';
   } catch (e) {
     console.log(e);

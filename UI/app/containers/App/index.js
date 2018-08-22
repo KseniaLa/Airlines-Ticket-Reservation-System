@@ -15,7 +15,11 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
-import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
+import {
+  makeSelectIsAuthorized,
+  makeSelectIsAdmin,
+  makeSelectRestore,
+} from './selectors';
 import { logout, setSearch } from './actions';
 import { discardDataReady } from '../SearchResultPage/actions';
 import { changeLocale } from '../LanguageProvider/actions';
@@ -58,6 +62,12 @@ class App extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.restore) {
+      this.handleOpenModal();
+    }
   }
 
   handleOpenModal() {
@@ -125,6 +135,7 @@ App.propTypes = {
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  restore: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -154,6 +165,7 @@ const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
   isAuthorized: makeSelectIsAuthorized(),
   isAdmin: makeSelectIsAdmin(),
+  restore: makeSelectRestore(),
 });
 
 export default connect(

@@ -11,3 +11,4 @@
 export const LOGOUT = 'airlines/App/LOGOUT';
 export const SIGN_IN = 'airlines/App/SIGN_IN';
 export const SET_SEARCH = 'airlines/App/SET_SERCH';
+export const RESTORE = 'airlines/App/RESTORE';

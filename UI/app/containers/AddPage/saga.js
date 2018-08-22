@@ -22,6 +22,7 @@ import {
   addLocationSuccess,
   addLocationError,
 } from './actions';
+import { restoreAuth } from '../App/actions';
 import { config } from '../../utils/configLoader';
 import { authPut, authGet, authPutString } from '../../utils/requestBuilder';
 
@@ -34,6 +35,8 @@ function* addTickets(action) {
     );
     if (responce.ok) {
       yield put(addTicketSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(addTicketError());
     }
@@ -51,6 +54,8 @@ function* addFlight(action) {
     );
     if (responce.ok) {
       yield put(addFlightSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(addFlightError());
     }
@@ -69,6 +74,8 @@ function* getCities(action) {
     if (responce.ok) {
       const result = yield responce.json();
       yield put(getAllCitiesSuccess(result.cities));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(getAllCitiesError());
     }
@@ -87,6 +94,8 @@ function* getCompanies(action) {
     if (responce.ok) {
       const result = yield responce.json();
       yield put(getAllCompaniesSuccess(result.companies));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(getAllCompaniesError());
     }
@@ -105,6 +114,8 @@ function* getFlights(action) {
     if (responce.ok) {
       const result = yield responce.json();
       yield put(getAllFlightsSuccess(result.flights));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(getAllFlightsError());
     }
@@ -133,6 +144,8 @@ function* addLocation(action) {
     );
     if (responce.ok) {
       yield put(addLocationSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(addLocationError());
     }

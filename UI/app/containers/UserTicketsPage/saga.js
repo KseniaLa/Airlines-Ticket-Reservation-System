@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { USER_TICKETS_REQUESTED, CANCEL_REQUESTED } from './constants';
 import { config } from '../../utils/configLoader';
+import { restoreAuth } from '../App/actions';
 import { authGet, cancelTicketPost } from '../../utils/requestBuilder';
 import {
   getUserTicketsSuccess,
@@ -19,6 +20,8 @@ function* fetchUserTickets(action) {
     if (responce.ok) {
       const result = yield responce.json();
       yield put(getUserTicketsSuccess(result.orders));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(getUserTicketsError());
     }
@@ -36,6 +39,8 @@ function* cancelTicket(action) {
     );
     if (responce.ok) {
       yield put(cancelTicketSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
     } else {
       yield put(cancelTicketError());
     }

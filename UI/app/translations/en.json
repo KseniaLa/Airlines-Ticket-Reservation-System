@@ -46,6 +46,7 @@
   "app.components.SignInPage.autherror": "Authorization error. Try again later",
   "app.components.SignInPage.signupsuccess": "You've successfully sign up !",
   "app.components.SearchResultsPage.add": "Add",
+  "app.components.SearchResultsPage.all": "All",
   "app.components.SearchResultsPage.adderror": "This ticket already exists in the cart",
   "app.components.SearchResultsPage.addsuccess": "Ticket added to your cart!",
   "app.components.UserBasketPage.remove": "Remove",

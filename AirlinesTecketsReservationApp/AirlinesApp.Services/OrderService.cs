@@ -5,12 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class OrderService : BaseService, IOrderService
+    public class OrderService : BaseService, IOrderService, ITransientService
     {
+        public OrderService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public async Task<List<TicketModel>> GetUserOrders(string email, string language)
         {
             User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();

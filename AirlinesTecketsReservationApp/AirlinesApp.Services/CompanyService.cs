@@ -4,14 +4,20 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CompanyService : BaseService, ICompanyService
+    public class CompanyService : BaseService, ICompanyService, ITransientService
     {
+        public CompanyService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public async Task AddCompany(List<TranslationModel> translations)
         {
 

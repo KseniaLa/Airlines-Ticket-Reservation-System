@@ -6,17 +6,18 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class AccountService : BaseService, IAccountService
+    public class AccountService : BaseService, IAccountService, ITransientService
     {
         private readonly int _iterationsCount;
         private readonly int _saltSize;
         private readonly int _hashedPassSize;
 
-        public AccountService()
+        public AccountService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
@@ -12,9 +13,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirlinesApp.Services
 {
-     public class FlightService : BaseService, IFlightService
-     {
-          public async Task<List<FlightModel>> GetFlights(string language)
+     public class FlightService : BaseService, IFlightService, ITransientService
+    {
+         public FlightService(IUnitOfWork unitOfWork) : base(unitOfWork)
+         {
+
+         }
+
+        public async Task<List<FlightModel>> GetFlights(string language)
           {
                List<Flight> rawFlights = await Db.Flights.GetAll().ToListAsync();
 

@@ -5,13 +5,19 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CityService : BaseService, ICityService
+    public class CityService : BaseService, ICityService, ITransientService
     {
+        public CityService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public async Task AddCity(List<TranslationModel> translations)
         {
             List<string> cityNames = translations.Select(t => t.Value).ToList();

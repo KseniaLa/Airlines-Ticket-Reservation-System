@@ -1,4 +1,7 @@
-﻿using AirlinesApp.DataAccess;
+﻿using System;
+using System.Collections.Generic;
+using AirlinesApp.DataAccess;
+using AirlinesApp.DataAccess.Repositories;
 using AirlinesApp.Services;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
@@ -44,17 +47,24 @@ namespace AirlinesTicketsReservationApp
                          };
                     });
 
-               services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-               services.AddTransient<IAirlinesContext, AirlinesContext>();
-               services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-               services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-               services.AddScoped<IAccountService, AccountService>();
-               services.AddScoped<ICityService, CityService>();
-               services.AddScoped<ICompanyService, CompanyService>();
-               services.AddScoped<ITicketService, TicketService>();
-               services.AddScoped<IOrderService, OrderService>();
-               services.AddScoped<IIpService, IpService>();
-               services.AddScoped<IFlightService, FlightService>();
+            services.AddTransient<IAirlinesContext, AirlinesContext>();
+            services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+              services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+              services.AddTransient<IUnitOfWork, AirlinesUnitOfWork>();
+
+              services.Scan(scan => scan
+                  .FromAssembliesOf(new List<Type> { typeof(IAccountService), typeof(AccountService) })
+                  .AddClasses(classes => classes.AssignableTo<ITransientService>())
+                  .AsImplementedInterfaces()
+                  .WithTransientLifetime()
+              );
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+               
+
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

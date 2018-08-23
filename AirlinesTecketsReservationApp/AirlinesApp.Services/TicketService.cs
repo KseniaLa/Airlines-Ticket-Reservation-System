@@ -5,13 +5,19 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class TicketService : BaseService, ITicketService
+    public class TicketService : BaseService, ITicketService, ITransientService
     {
+        public TicketService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public async Task<List<TicketModel>> GetSearchTickets(SearchModel search, string language)
         {
             List<Ticket> foundTickets = await Db.Tickets.GetAll().Where(t =>

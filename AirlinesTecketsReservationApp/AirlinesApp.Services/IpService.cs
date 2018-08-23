@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlinesApp.DataAccess;
 using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Services.Interfaces;
@@ -9,8 +10,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirlinesApp.Services
 {
-    public class IpService : BaseService, IIpService
+    public class IpService : BaseService, IIpService, ITransientService
     {
+        public IpService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+
+        }
+
         public async Task AddUserIpAddress(int userId, string ip)
         {
             IpAddress ipAddress = new IpAddress

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AirlinesApp.DataAccess.Repositories
 {
-    public class BaseRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
 
-        public BaseRepository(AirlinesContext context)
+        public GenericRepository(AirlinesContext context)
         {
             _dbSet = context.Set<T>();
         }

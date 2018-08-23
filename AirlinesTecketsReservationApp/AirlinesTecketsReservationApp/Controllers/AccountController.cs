@@ -18,14 +18,14 @@ namespace AirlinesTicketsReservationApp.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        private readonly IpService _ipService;
+        private readonly IIpService _ipService;
         private readonly JwtGenerator _jwtGenerator;
         private readonly IHttpContextAccessor _accessor;
 
-        public AccountController(IHttpContextAccessor accessor, IAccountService accountService)
+        public AccountController(IHttpContextAccessor accessor, IAccountService accountService, IIpService ipService)
         {
             _accountService = accountService;
-            _ipService = new IpService();
+            _ipService = ipService;
             _jwtGenerator = new JwtGenerator();
             _accessor = accessor;
         }

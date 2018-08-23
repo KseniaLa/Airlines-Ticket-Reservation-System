@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import Spinner from '../../components/basic/Spinner';
+import ErrorMessage from '../../components/basic/ErrorMessage';
 import AddTicketForm from '../../components/AddTicketForm';
 import AddLocationForm from '../../components/AddLocationForm';
 import AddFlightForm from '../../components/AddFlightForm';
@@ -174,7 +175,9 @@ class AddPage extends React.Component {
     if (!this.props.isAuthorized || !this.props.isAdmin) {
       return (
         <div className="container-flex">
-          <h1>forbidden</h1>
+          <div className="error-message-container">
+            <ErrorMessage text={<FormattedMessage {...messages.forbidden} />} />
+          </div>
         </div>
       );
     }

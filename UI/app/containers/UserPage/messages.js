@@ -13,4 +13,8 @@ export default defineMessages({
     id: 'app.components.UserPage.date',
     defaultMessage: 'Дата',
   },
+  forbidden: {
+    id: 'app.components.UserPage.forbidden',
+    defaultMessage: 'Доступ закрыт, пройдите авторизацию',
+  },
 });

@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Button from '../../components/basic/Button';
+import ErrorMessage from '../../components/basic/ErrorMessage';
 import Spinner from '../../components/basic/Spinner';
 import EmptyResult from '../../components/EmptyResult';
 import UserBasketPage from '../UserBasketPage';
@@ -51,7 +52,9 @@ class UserPage extends React.PureComponent {
     if (!this.props.isAuthorized) {
       return (
         <div className="container-flex">
-          <h1>forbidden</h1>
+          <div className="error-message-container">
+            <ErrorMessage text={<FormattedMessage {...messages.forbidden} />} />
+          </div>
         </div>
       );
     }

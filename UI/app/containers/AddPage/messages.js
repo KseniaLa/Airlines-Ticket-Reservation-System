@@ -9,4 +9,8 @@ export default defineMessages({
     id: 'app.components.AddPage.addgroup',
     defaultMessage: 'Добавить группу',
   },
+  forbidden: {
+    id: 'app.components.AddPage.forbidden',
+    defaultMessage: 'Доступ закрыт, авторизуйтесь как администратор',
+  },
 });

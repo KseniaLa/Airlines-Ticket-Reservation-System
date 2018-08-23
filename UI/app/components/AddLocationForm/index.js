@@ -100,6 +100,10 @@ class AddLocationForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    if (!this.state.data.length) {
+      this.addField();
+      return;
+    }
     if (this.fieldsNotEmpty(this.state.data) && this.state.inputOccured) {
       this.setState({ isInputError: false });
       this.props.onSubmit(this.state.data);

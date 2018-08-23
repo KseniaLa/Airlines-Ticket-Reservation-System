@@ -11,4 +11,17 @@
   & > div {
     margin: 5px;
   }
+
+  input {
+    margin-right: 10px;
+  }
+
+  select {
+    height: 100%;
+    padding: 10px;
+
+    option {
+      height: 100%;
+    }
+  }
 }

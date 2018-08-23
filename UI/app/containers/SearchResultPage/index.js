@@ -32,6 +32,7 @@ import {
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
 import './style.scss';
+import Button from '../../components/basic/Button';
 
 class SearchResultPage extends React.PureComponent {
   constructor(props) {
@@ -164,6 +165,7 @@ class SearchResultPage extends React.PureComponent {
               onClick={this.handleItemCountChange}
             />
           </div>
+          <div className="page-controllers">
           <Pagination
             activePage={this.state.activePage}
             itemsCountPerPage={this.state.displayCount}
@@ -171,8 +173,12 @@ class SearchResultPage extends React.PureComponent {
             pageRangeDisplayed={5}
             onChange={this.handlePageChange}
           />
+          <Button text="show all available" />
+          </div>
           {content}
+          <Button text="more" />
         </section>
+        
       </section>
     );
   }

@@ -84,14 +84,33 @@ $border-radius-sm: 2px;
 }
 
 .show-count {
+  margin: 10px;
+
   button {
-    margin-left: 5px;
+    margin-right: 5px;
     padding: 5px;
+  }
+}
+
+.page-controllers {
+  @include flex_element(row);
+
+  button {
+    margin: 10px;
+    background-color: #a52a2a;
   }
 }
 
 .ticket-area {
   @include flex_element(column);
+
+  & > button {
+    align-self: center;
+    padding: 10px;
+    margin: 10px;
+    max-width: 200px;
+    background-color: #a52a2a;
+  }
 }
 
 .button-set {
@@ -124,6 +143,8 @@ $border-radius-sm: 2px;
   display: flex;
   @include list-unstyled();
   @include border-radius();
+  border-radius: 10px;
+  margin: 10px;
 
   li {
     padding: 5px 10px;

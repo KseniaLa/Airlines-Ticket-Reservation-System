@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirlinesApp.Services
 {
-    public class IpService : BaseService, IIpService, ITransientService
+    public class IpService : BaseService, IIpService, IScopedService
     {
         public IpService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

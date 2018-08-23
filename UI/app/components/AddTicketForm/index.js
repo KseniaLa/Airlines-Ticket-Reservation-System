@@ -73,6 +73,8 @@ class AddTicketForm extends React.PureComponent {
             value={this.state.class}
             values={this.props.values}
             onChange={this.onSelectFlightChange}
+            notSelected
+            placeholder="Choose flight"
           />
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => (

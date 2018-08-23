@@ -12,6 +12,8 @@ import {
   COMPANIES_ERROR,
   FLIGHTS_SUCCEEDED,
   FLIGHTS_FAILED,
+  LANGUAGES_SUCCESS,
+  LANGUAGES_ERROR,
   DISCARD_STATE,
 } from './constants';
 
@@ -28,6 +30,8 @@ const initialState = fromJS({
   companies: null,
   flightsReceived: false,
   flights: null,
+  languagesReceived: false,
+  languages: null,
 });
 
 const addReducer = (state = initialState, action) => {
@@ -58,6 +62,12 @@ const addReducer = (state = initialState, action) => {
       return state.set('locationAdded', true).set('locationAddError', false);
     case LOCATION_ADD_FAILED:
       return state.set('locationAdded', false).set('locationAddError', true);
+    case LANGUAGES_SUCCESS:
+      return state
+        .set('languagesReceived', true)
+        .set('languages', action.payload);
+    case LANGUAGES_ERROR:
+      return state.set('languagesReceived', false).set('languages', null);
     case DISCARD_STATE:
       return initialState;
     default:

@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AirlinesApp.Services
 {
-     public class FlightService : BaseService, IFlightService, ITransientService
+     public class FlightService : BaseService, IFlightService, IScopedService
     {
          public FlightService(IUnitOfWork unitOfWork) : base(unitOfWork)
          {

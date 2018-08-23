@@ -110,6 +110,7 @@ class SearchBar extends React.Component {
               value={this.state.class}
               values={['business', 'first', 'budget']}
               onChange={this.onSelectValueChange}
+              notSelected={false}
             />
           </div>
           <div className="search-bar__button">

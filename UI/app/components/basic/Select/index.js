@@ -24,6 +24,9 @@ class Select extends React.PureComponent {
         value={this.props.value}
         onChange={this.props.onChange}
       >
+        {this.props.notSelected && (
+          <option value="">{this.props.placeholder}</option>
+        )}
         {this.createOptions()}
       </select>
     );
@@ -34,6 +37,8 @@ Select.propTypes = {
   items: PropTypes.array,
   value: PropTypes.string,
   values: PropTypes.array,
+  notSelected: PropTypes.bool,
+  placeholder: PropTypes.any,
   onChange: PropTypes.func,
 };
 

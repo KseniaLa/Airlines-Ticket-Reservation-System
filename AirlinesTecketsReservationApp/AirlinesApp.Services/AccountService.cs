@@ -11,7 +11,7 @@ using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class AccountService : BaseService, IAccountService, ITransientService
+    public class AccountService : BaseService, IAccountService, IScopedService
     {
         private readonly int _iterationsCount;
         private readonly int _saltSize;

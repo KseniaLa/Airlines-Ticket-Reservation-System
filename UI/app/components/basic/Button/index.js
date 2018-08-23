@@ -13,7 +13,7 @@ class Button extends React.PureComponent {
 }
 
 Button.propTypes = {
-  text: PropTypes.object,
+  text: PropTypes.any,
   onClick: PropTypes.func,
 };
 

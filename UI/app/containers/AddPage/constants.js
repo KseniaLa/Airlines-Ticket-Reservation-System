@@ -36,4 +36,10 @@ export const LOCATION_ADD_SUCCEEDED = 'airlines/AddPage/LOCATION_ADD_SUCCEDED';
 
 export const LOCATION_ADD_FAILED = 'airlines/AddPage/LOCATION_ADD_FAILED';
 
+export const LANGUAGES_REQUESTED = 'airlines/AddPage/LANGUAGES_REQUESTED';
+
+export const LANGUAGES_SUCCESS = 'airlines/AddPage/LANGUAGES_SUCCESS';
+
+export const LANGUAGES_ERROR = 'airlines/AddPage/LANGUAGES_ERROR';
+
 export const DISCARD_STATE = 'airlines/AddPage/DISCARD_STATE';

@@ -10,7 +10,7 @@ using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class OrderService : BaseService, IOrderService, ITransientService
+    public class OrderService : BaseService, IOrderService, IScopedService
     {
         public OrderService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

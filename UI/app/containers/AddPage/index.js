@@ -21,6 +21,7 @@ import {
   addCity,
   addCompany,
   getAllFlights,
+  getLanguages,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -35,6 +36,8 @@ import {
   makeSelectFlights,
   makeSelectFlightAdded,
   makeSelectFlightAddError,
+  makeSelectIsLanguagesDataReceived,
+  makeSelectLanguages,
 } from './selectors';
 
 import messages from './messages';
@@ -97,6 +100,7 @@ class AddPage extends React.Component {
     this.props.getCities(this.props.language);
     this.props.getCompanies(this.props.language);
     this.props.getFlights(this.props.language);
+    this.props.getAvailableLanguages();
   }
 
   addTicket(flightId, company, flightClass, price, count) {
@@ -155,6 +159,17 @@ class AddPage extends React.Component {
     return { names: nameList, values: valueList };
   }
 
+  getLangList() {
+    const nameList = [];
+    const valueList = [];
+    const { languages } = this.props;
+    languages.forEach(element => {
+      nameList.push(element);
+      valueList.push(element);
+    });
+    return { names: nameList, values: valueList };
+  }
+
   render() {
     if (!this.props.isAuthorized || !this.props.isAdmin) {
       return (
@@ -165,6 +180,9 @@ class AddPage extends React.Component {
     }
     const flights = this.props.flightsReceived
       ? this.getFlightsList()
+      : { names: [], values: [] };
+    const languages = this.props.langReceived
+      ? this.getLangList()
       : { names: [], values: [] };
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
@@ -187,8 +205,16 @@ class AddPage extends React.Component {
             <div className="list-container__list">{companies}</div>
           </div>
           <div className="form-container">
-            <AddLocationForm onSubmit={this.addCity} />
-            <AddLocationForm onSubmit={this.addCompany} />
+            <AddLocationForm
+              onSubmit={this.addCity}
+              lang={languages.names}
+              values={languages.values}
+            />
+            <AddLocationForm
+              onSubmit={this.addCompany}
+              lang={languages.names}
+              values={languages.values}
+            />
           </div>
           <AddFlightForm onFlightSubmit={this.addFlight} />
           <AddTicketForm
@@ -218,6 +244,8 @@ AddPage.propTypes = {
   cities: PropTypes.any,
   companiesReceived: PropTypes.bool,
   companies: PropTypes.any,
+  langReceived: PropTypes.bool,
+  languages: PropTypes.any,
   addTicketGroup: PropTypes.func,
   addNewFlight: PropTypes.func,
   getCities: PropTypes.func,
@@ -226,6 +254,7 @@ AddPage.propTypes = {
   addNewCompany: PropTypes.func,
   getFlights: PropTypes.func,
   discardAll: PropTypes.func,
+  getAvailableLanguages: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -261,6 +290,10 @@ export function mapDispatchToProps(dispatch) {
     getFlights(language) {
       dispatch(getAllFlights(language));
     },
+
+    getAvailableLanguages() {
+      dispatch(getLanguages());
+    },
   };
 }
 
@@ -280,6 +313,8 @@ const mapStateToProps = createStructuredSelector({
   locationAddError: makeSelectLocationAddError(),
   flightsReceived: makeSelectIsFlightsDataReceived(),
   flights: makeSelectFlights(),
+  langReceived: makeSelectIsLanguagesDataReceived(),
+  languages: makeSelectLanguages(),
 });
 
 export default connect(

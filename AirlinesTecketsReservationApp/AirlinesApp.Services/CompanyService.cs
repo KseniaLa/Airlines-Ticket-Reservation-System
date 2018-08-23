@@ -11,7 +11,7 @@ using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CompanyService : BaseService, ICompanyService, ITransientService
+    public class CompanyService : BaseService, ICompanyService, IScopedService
     {
         public CompanyService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

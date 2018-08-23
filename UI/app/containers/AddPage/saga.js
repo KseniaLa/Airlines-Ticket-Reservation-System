@@ -7,6 +7,7 @@ import {
   CITY_ADD_REQUESTED,
   COMPANY_ADD_REQUESTED,
   FLIGHTS_REQUESTED,
+  LANGUAGES_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -21,6 +22,8 @@ import {
   getAllFlightsError,
   addLocationSuccess,
   addLocationError,
+  getLanguagesSuccess,
+  getLanguagesError,
 } from './actions';
 import { restoreAuth } from '../App/actions';
 import { config } from '../../utils/configLoader';
@@ -124,6 +127,26 @@ function* getFlights(action) {
   }
 }
 
+function* getLanguages() {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.getLanguages,
+      authGet(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getLanguagesSuccess(result.languages));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield put(getLanguagesError());
+    }
+  } catch (e) {
+    yield put(getLanguagesError());
+  }
+}
+
 function* addLocation(action) {
   try {
     let urlOption;
@@ -162,4 +185,5 @@ export function* addSaga() {
   yield takeEvery(CITY_ADD_REQUESTED, addLocation);
   yield takeEvery(COMPANY_ADD_REQUESTED, addLocation);
   yield takeEvery(FLIGHTS_REQUESTED, getFlights);
+  yield takeEvery(LANGUAGES_REQUESTED, getLanguages);
 }

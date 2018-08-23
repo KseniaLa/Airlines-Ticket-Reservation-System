@@ -19,6 +19,9 @@ import {
   LOCATION_ADD_SUCCEEDED,
   LOCATION_ADD_FAILED,
   DISCARD_STATE,
+  LANGUAGES_REQUESTED,
+  LANGUAGES_SUCCESS,
+  LANGUAGES_ERROR,
 } from './constants';
 
 export function addTicket(ticket) {
@@ -142,6 +145,25 @@ export function addLocationSuccess() {
 export function addLocationError() {
   return {
     type: LOCATION_ADD_FAILED,
+  };
+}
+
+export function getLanguages() {
+  return {
+    type: LANGUAGES_REQUESTED,
+  };
+}
+
+export function getLanguagesSuccess(cities) {
+  return {
+    type: LANGUAGES_SUCCESS,
+    payload: cities,
+  };
+}
+
+export function getLanguagesError() {
+  return {
+    type: LANGUAGES_ERROR,
   };
 }
 

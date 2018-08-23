@@ -11,7 +11,7 @@ using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
 {
-    public class CityService : BaseService, ICityService, ITransientService
+    public class CityService : BaseService, ICityService, IScopedService
     {
         public CityService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

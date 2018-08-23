@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AirlinesApp.Services.Interfaces
 {
-    public interface ITransientService
+    public interface IScopedService
     {
     }
 }

@@ -49,10 +49,6 @@ namespace AirlinesTicketsReservationApp.Controllers
                try
                {
                     Flight fl = await _flightService.AddFlight(flight);
-                    if (fl == null)
-                    {
-                         return BadRequest();
-                    }
                     return Ok();
                }
                catch (LocationException)

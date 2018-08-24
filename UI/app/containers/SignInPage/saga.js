@@ -3,7 +3,7 @@ import { TRY_LOGIN, TRY_SIGNUP } from './constants';
 import {
   tryLoginSuccess,
   tryLoginError,
-  trySignUpSuccess,
+  // trySignUpSuccess,
   trySignUpError,
   signUpSuccess,
 } from './actions';
@@ -43,14 +43,12 @@ function* register(action) {
       config.APIUrl + config.APIOptions.signup,
       signupPost(name, surname, email, password),
     );
-    console.log(responce);
     if (responce.ok) {
-      yield [put(trySignUpSuccess(true)), put(signUpSuccess())];
+      yield put(signUpSuccess());
     } else {
-      yield put(trySignUpSuccess(true));
+      yield put(trySignUpError());
     }
   } catch (e) {
-    console.log(e);
     yield put(trySignUpError());
   }
 }

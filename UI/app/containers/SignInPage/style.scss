@@ -101,3 +101,19 @@
   font-size: 1.6rem;
   outline: none;
 }
+
+.form-disabler {
+  @include flex_element(column);
+  align-items: center;
+  position: fixed;
+  overflow: auto;
+  z-index: 9999999;
+  padding-top: 200px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transition: opacity 500ms;
+  opacity: 1;
+}

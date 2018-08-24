@@ -11,6 +11,9 @@ const makeSelectIsLoginError = () =>
 const makeSelectIsRegistered = () =>
   createSelector(selectloginResult, result => result.get('registered'));
 
+const makeSelectSignUpError = () =>
+  createSelector(selectloginResult, result => result.get('signupError'));
+
 const makeSelectIsSigninStateReceived = () =>
   createSelector(selectloginResult, result =>
     result.get('signupStateReceived'),
@@ -21,4 +24,5 @@ export {
   makeSelectIsLoginError,
   makeSelectIsRegistered,
   makeSelectIsSigninStateReceived,
+  makeSelectSignUpError,
 };

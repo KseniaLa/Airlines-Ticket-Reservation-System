@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import Popup from 'react-popup';
 import 'font-awesome/css/font-awesome.min.css';
 import { createStructuredSelector } from 'reselect';
 import messages from './messages';
@@ -9,6 +10,7 @@ import messages from './messages';
 import Button from '../../components/basic/Button';
 import Field from '../../components/basic/TextField';
 import Title from '../../components/basic/Title';
+import Spinner from '../../components/basic/Spinner';
 import ErrorMessage from '../../components/basic/ErrorMessage';
 import SuccessMessage from '../../components/basic/SuccessMessage';
 import {
@@ -21,7 +23,8 @@ import {
   makeSelectIsLoginStateReceived,
   makeSelectIsLoginError,
   makeSelectIsRegistered,
-  makeSelectIsSigninStateReceived,
+  // makeSelectIsSigninStateReceived,
+  makeSelectSignUpError,
 } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import './style.scss';
@@ -39,7 +42,9 @@ class SignInPage extends React.PureComponent {
       signUpPassword: '',
       isSignInInputError: false,
       isSignUpInputError: false,
-      shortPassword: false,
+      passwordError: false,
+      emailError: false,
+      process: false,
     };
     this.handleChangeModeClick = this.handleChangeModeClick.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
@@ -50,6 +55,7 @@ class SignInPage extends React.PureComponent {
     this.updateSignUpPasswordField = this.updateSignUpPasswordField.bind(this);
     this.updateNameField = this.updateNameField.bind(this);
     this.updateSurnameField = this.updateSurnameField.bind(this);
+    this.setIsSpinnerShown = this.setIsSpinnerShown.bind(this);
 
     this.email = React.createRef();
     this.password = React.createRef();
@@ -60,8 +66,27 @@ class SignInPage extends React.PureComponent {
 
   componentDidUpdate() {
     if (this.props.loginStateReceived && this.props.isAuthorized) {
+      this.setIsSpinnerShown(false);
       this.props.onCloseClick();
     }
+    if (this.props.loginStateReceived) {
+      this.setIsSpinnerShown(false);
+    }
+    if (this.props.isRegistered) {
+      this.props.onCloseClick();
+      Popup.plugins().successPopup(
+        <FormattedMessage id="app.components.SignInPage.signupsuccess">
+          {placeholder => placeholder}
+        </FormattedMessage>,
+      );
+    }
+    if (this.props.signupError) {
+      this.setIsSpinnerShown(false);
+    }
+  }
+
+  setIsSpinnerShown(state) {
+    this.setState({ process: state });
   }
 
   onSignIn(e) {
@@ -69,6 +94,7 @@ class SignInPage extends React.PureComponent {
     const { signInEmail, signInPassword } = this.state;
     if (signInEmail && signInPassword) {
       this.setState({ isSignInInputError: false });
+      this.setIsSpinnerShown(true);
       this.props.tryLogin(signInEmail, signInPassword);
     } else {
       this.setState({ isSignInInputError: true });
@@ -90,11 +116,7 @@ class SignInPage extends React.PureComponent {
       signUpPassword.length >= this.minPassLength
     ) {
       this.setState({ isSignUpInputError: false });
-      if (signUpPassword.length < this.minPassLength) {
-        this.setState({ shortPassword: true });
-        return;
-      }
-      this.setState({ shortPassword: false });
+      this.setIsSpinnerShown(true);
       this.props.trySignUp(
         signUpName,
         signUpSurname,
@@ -116,9 +138,20 @@ class SignInPage extends React.PureComponent {
     this.setState({ signIn: !sign });
     this.props.discardRegisteredState();
     this.props.discardLoginState();
-    this.setState({ isSignInInputError: false });
-    this.setState({ isSignUpInputError: false });
-    this.setState({ shortPassword: false });
+    this.setState({
+      signInEmail: '',
+      signInPassword: '',
+      signUpName: '',
+      signUpSurname: '',
+      signUpEmail: '',
+      signUpPassword: '',
+      isSignInInputError: false,
+      isSignUpInputError: false,
+      passwordError: false,
+      emailError: false,
+      process: false,
+    });
+    // this.setState({ isSignUpInputError: false });
   }
 
   updateSignInEmailField(e) {
@@ -134,9 +167,11 @@ class SignInPage extends React.PureComponent {
     if (e.target.value && !this.emailRegex.test(e.target.value)) {
       this.email.current.classList = '';
       this.email.current.classList.add('error-field');
+      this.setState({ emailError: true });
     } else {
       this.email.current.classList = '';
       this.email.current.classList.add('contrast-field');
+      this.setState({ emailError: false });
     }
   }
 
@@ -145,9 +180,11 @@ class SignInPage extends React.PureComponent {
     if (e.target.value && e.target.value.length < this.minPassLength) {
       this.password.current.classList = '';
       this.password.current.classList.add('error-field');
+      this.setState({ passwordError: true });
     } else {
       this.password.current.classList = '';
       this.password.current.classList.add('contrast-field');
+      this.setState({ passwordError: false });
     }
   }
 
@@ -174,6 +211,11 @@ class SignInPage extends React.PureComponent {
             <ErrorMessage
               text={<FormattedMessage {...messages.invalidinput} />}
             />
+          )}
+          {this.state.process && (
+            <div className="form-disabler">
+              <Spinner />
+            </div>
           )}
           {isLoginPasswordInvalid && (
             <ErrorMessage
@@ -232,15 +274,20 @@ class SignInPage extends React.PureComponent {
               text={<FormattedMessage {...messages.signupsuccess} />}
             />
           )}
+          {this.props.signupError && (
+            <ErrorMessage
+              text={<FormattedMessage {...messages.userexists} />}
+            />
+          )}
           {this.state.isSignUpInputError && (
             <ErrorMessage
               text={<FormattedMessage {...messages.invalidinput} />}
             />
           )}
-          {this.state.shortPassword && (
-            <ErrorMessage
-              text={<FormattedMessage {...messages.shortpassword} />}
-            />
+          {this.state.process && (
+            <div className="form-disabler">
+              <Spinner />
+            </div>
           )}
           <FormattedMessage id="app.components.SignInPage.name">
             {placeholder => (
@@ -260,6 +307,11 @@ class SignInPage extends React.PureComponent {
               />
             )}
           </FormattedMessage>
+          {this.state.emailError && (
+            <ErrorMessage
+              text={<FormattedMessage {...messages.invalidemail} />}
+            />
+          )}
           <FormattedMessage id="app.components.SignInPage.email">
             {placeholder => (
               <input
@@ -270,7 +322,11 @@ class SignInPage extends React.PureComponent {
               />
             )}
           </FormattedMessage>
-
+          {this.state.passwordError && (
+            <ErrorMessage
+              text={<FormattedMessage {...messages.invalidpass} />}
+            />
+          )}
           <FormattedMessage id="app.components.SignInPage.password">
             {placeholder => (
               <input
@@ -327,6 +383,7 @@ SignInPage.propTypes = {
   isLoginError: PropTypes.bool,
   isRegistered: PropTypes.bool,
   signinStateReceived: PropTypes.bool,
+  signupError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -334,7 +391,8 @@ const mapStateToProps = createStructuredSelector({
   loginStateReceived: makeSelectIsLoginStateReceived(),
   isLoginError: makeSelectIsLoginError(),
   isRegistered: makeSelectIsRegistered(),
-  signinStateReceived: makeSelectIsSigninStateReceived(),
+  // signinStateReceived: makeSelectIsSigninStateReceived(),
+  signupError: makeSelectSignUpError(),
 });
 
 export function mapDispatchToProps(dispatch) {

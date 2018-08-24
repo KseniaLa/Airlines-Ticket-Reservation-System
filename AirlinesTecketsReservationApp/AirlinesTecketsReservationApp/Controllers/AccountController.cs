@@ -19,14 +19,12 @@ namespace AirlinesTicketsReservationApp.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IIpService _ipService;
-        private readonly JwtGenerator _jwtGenerator;
         private readonly IHttpContextAccessor _accessor;
 
         public AccountController(IHttpContextAccessor accessor, IAccountService accountService, IIpService ipService)
         {
             _accountService = accountService;
             _ipService = ipService;
-            _jwtGenerator = new JwtGenerator();
             _accessor = accessor;
         }
 
@@ -39,7 +37,7 @@ namespace AirlinesTicketsReservationApp.Controllers
             {
                 var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
                 await _ipService.AddUserIpAddress(usr.Id, ip);
-                string token = _jwtGenerator.GenerateToken(usr);
+                string token = JwtGenerator.GenerateToken(usr);
                 return Ok(new { token, name = usr.Name, surname = usr.Surname, isAdmin = usr.IsAdmin });
             }
             return BadRequest();

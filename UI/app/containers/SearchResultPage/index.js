@@ -166,19 +166,17 @@ class SearchResultPage extends React.PureComponent {
             />
           </div>
           <div className="page-controllers">
-          <Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={this.state.displayCount}
-            totalItemsCount={this.props.count}
-            pageRangeDisplayed={5}
-            onChange={this.handlePageChange}
-          />
-          <Button text="show all available" />
+            <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={this.state.displayCount}
+              totalItemsCount={this.props.count}
+              pageRangeDisplayed={5}
+              onChange={this.handlePageChange}
+            />
+            <Button text="show all available" />
           </div>
           {content}
-          <Button text="more" />
         </section>
-        
       </section>
     );
   }

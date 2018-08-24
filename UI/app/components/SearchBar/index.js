@@ -93,6 +93,7 @@ class SearchBar extends React.Component {
             <DatePicker
               selected={this.state.startDate}
               onChange={this.handleChange}
+              locale="ru"
               className="field datepic"
             />
             <Select

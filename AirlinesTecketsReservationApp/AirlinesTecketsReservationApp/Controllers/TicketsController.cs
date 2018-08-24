@@ -32,8 +32,6 @@ namespace AirlinesTicketsReservationApp.Controllers
             try
             {
                 await _cityService.UpdateCityRating(search.To);
-                //List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
-                //List<TicketModel> pageTickets = _ticketService.GetPageItems(tickets, count, page);
                 List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
                 List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
                 return Ok(new { tickets = pageTickets, count = rawTickets.Count });

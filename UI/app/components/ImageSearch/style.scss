@@ -8,6 +8,7 @@
   align-self: center;
   align-content: center;
   justify-content: center;
+  text-align: center;
 
 
   &__image {
@@ -19,6 +20,7 @@
     z-index: 10;
     top: 30%;
     left: 50%;
+    will-change: none;
     transform: translate(-50%, -50%);
     border-radius: 5px;
     background-color: rgba($color: #000000, $alpha: 0.7);

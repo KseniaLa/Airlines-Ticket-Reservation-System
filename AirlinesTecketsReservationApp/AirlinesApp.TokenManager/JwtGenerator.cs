@@ -7,9 +7,9 @@ using System.Security.Claims;
 
 namespace AirlinesApp.TokenManager
 {
-    public class JwtGenerator
+    public static class JwtGenerator
     {
-        private IEnumerable<Claim> CreateClaims(User user)
+        private static IEnumerable<Claim> CreateClaims(User user)
         {
             return new[]
             {
@@ -18,7 +18,7 @@ namespace AirlinesApp.TokenManager
             };
         }
 
-        public string GenerateToken(User user)
+        public static string GenerateToken(User user)
         {
             var currentTime = DateTime.UtcNow;
 

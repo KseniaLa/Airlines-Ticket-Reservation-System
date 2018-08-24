@@ -49,8 +49,8 @@ namespace AirlinesTicketsReservationApp.Controllers
         {
             try
             {
-                EmailSender email = new EmailSender();
-                await email.Execute();
+                //EmailSender email = new EmailSender();
+                //await email.Execute();
             }
             catch
             {

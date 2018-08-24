@@ -30,7 +30,6 @@ function* checkLogin(action) {
       yield put(tryLoginSuccess(true));
     }
   } catch (e) {
-    console.log(e);
     yield put(tryLoginError());
   }
 }

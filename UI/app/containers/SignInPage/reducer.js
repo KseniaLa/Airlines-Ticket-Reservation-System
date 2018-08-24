@@ -32,7 +32,8 @@ const loginReducer = (state = initialState, action) => {
     case USER_REGISTERED:
       return state.set('registered', true);
     case DISCARD_USER_REGISTERED:
-      return state.set('registered', false).set('signupError', false);
+      return initialState;
+      //return state.set('registered', false).set('signupError', false);
     default:
       return state;
   }

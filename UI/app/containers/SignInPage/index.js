@@ -83,6 +83,9 @@ class SignInPage extends React.PureComponent {
     if (this.props.signupError) {
       this.setIsSpinnerShown(false);
     }
+    if (this.props.isLoginError) {
+      this.setIsSpinnerShown(false);
+    }
   }
 
   setIsSpinnerShown(state) {

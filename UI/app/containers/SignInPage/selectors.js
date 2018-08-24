@@ -14,15 +14,15 @@ const makeSelectIsRegistered = () =>
 const makeSelectSignUpError = () =>
   createSelector(selectloginResult, result => result.get('signupError'));
 
-const makeSelectIsSigninStateReceived = () =>
-  createSelector(selectloginResult, result =>
-    result.get('signupStateReceived'),
-  );
+// const makeSelectIsSigninStateReceived = () =>
+//   createSelector(selectloginResult, result =>
+//     result.get('signupStateReceived'),
+//   );
 
 export {
   makeSelectIsLoginStateReceived,
   makeSelectIsLoginError,
   makeSelectIsRegistered,
-  makeSelectIsSigninStateReceived,
+  // makeSelectIsSigninStateReceived,
   makeSelectSignUpError,
 };

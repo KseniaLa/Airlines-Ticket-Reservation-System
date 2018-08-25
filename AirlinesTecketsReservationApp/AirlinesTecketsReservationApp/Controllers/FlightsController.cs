@@ -29,15 +29,8 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpGet("{lang}")]
           public async Task<IActionResult> Get(string lang)
           {
-               try
-               {
-                    List<FlightModel> flights = await _flightService.GetFlights(lang);
-                    return Ok(new { flights });
-               }
-               catch (Exception)
-               {
-                    return BadRequest();
-               }
+               List<FlightModel> flights = await _flightService.GetFlights(lang);
+               return Ok(new { flights });
           }
 
 
@@ -46,19 +39,8 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpPut("add")]
           public async Task<IActionResult> AddFlight([FromBody]FlightModel flight)
           {
-               try
-               {
-                    Flight fl = await _flightService.AddFlight(flight);
-                    return Ok();
-               }
-               catch (LocationException)
-               {
-                    return BadRequest();
-               }
-               catch
-               {
-                    return BadRequest();
-               }
+               Flight fl = await _flightService.AddFlight(flight);
+               return Ok();
           }
 
      }

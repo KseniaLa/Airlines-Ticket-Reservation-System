@@ -10,29 +10,22 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-    [Route("api/languages")]
-    public class LanguagesComtroller : Controller
-    {
-        private readonly ILanguageService _languageService;
+     [Route("api/languages")]
+     public class LanguagesComtroller : Controller
+     {
+          private readonly ILanguageService _languageService;
 
-        public LanguagesComtroller(ILanguageService languageService)
-        {
-            _languageService = languageService;
-        }
+          public LanguagesComtroller(ILanguageService languageService)
+          {
+               _languageService = languageService;
+          }
 
-        [Authorize(Roles = Roles.Administrator)]
-        [HttpGet]
-        public async Task<IActionResult> GetLanguages()
-        {
-            try
-            {
-                List<string> languages = await _languageService.GetLanguages();
-                return Ok(new {languages});
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }  
-    }
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpGet]
+          public async Task<IActionResult> GetLanguages()
+          {
+               List<string> languages = await _languageService.GetLanguages();
+               return Ok(new { languages });
+          }
+     }
 }

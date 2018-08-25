@@ -11,55 +11,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-    [Route("api/tickets")]
-    public class TicketsController : Controller
-    {
-        private readonly ITicketService _ticketService;
-        private readonly ICityService _cityService;
+     [Route("api/tickets")]
+     public class TicketsController : Controller
+     {
+          private readonly ITicketService _ticketService;
+          private readonly ICityService _cityService;
 
 
-        public TicketsController(ICityService cityService, ITicketService ticketService)
-        {
-            _ticketService = ticketService;
-            _cityService = cityService;
-        }
+          public TicketsController(ICityService cityService, ITicketService ticketService)
+          {
+               _ticketService = ticketService;
+               _cityService = cityService;
+          }
 
 
-        [AllowAnonymous]
-        [HttpPost("search/{lang}/{count}/{page}")]
-        public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang, int count, int page)
-        {
-            try
-            {
-                await _cityService.UpdateCityRating(search.To);
-                List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
-                List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
-                return Ok(new { tickets = pageTickets, count = rawTickets.Count });
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
+          [AllowAnonymous]
+          [HttpPost("search/{lang}/{count}/{page}")]
+          public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang, int count, int page)
+          {
+               await _cityService.UpdateCityRating(search.To);
+               List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
+               List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
+               return Ok(new { tickets = pageTickets, count = rawTickets.Count });
+          }
 
-        [Authorize(Roles = Roles.Administrator)]
-        [HttpPut("add")]
-        public async Task<IActionResult> AddTickets([FromBody]AddTicketModel ticket)
-        {
-             try
-             {
-                  await _ticketService.AddTicket(ticket);
-                  return Ok();
-             }
-             catch (LocationException)
-             {
-                  return BadRequest();
-             }
-             catch
-             {
-                  return BadRequest();
-             }
-             
-        }
-    }
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpPut("add")]
+          public async Task<IActionResult> AddTickets([FromBody]AddTicketModel ticket)
+          {
+               await _ticketService.AddTicket(ticket);
+               return Ok();
+          }
+     }
 }

@@ -22,6 +22,7 @@ const CONFIG = {
     addTickets: 'tickets/add',
     addCity: 'cities/add',
     addCompany: 'companies/add',
+    addLanguage: 'languages/add',
   },
   locale_ru: {
     months: 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'.split(

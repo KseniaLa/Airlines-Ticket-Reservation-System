@@ -1,0 +1,24 @@
+@import '../../common';
+@import '../../include-media';
+
+.add-language {
+  @include flex_element(row);
+  width: 48%;
+  padding: 10px;
+  margin: 10px;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #d6dada;
+  @include media("<=phone"){
+    width: 100%;
+    margin: 5px;
+  }
+
+  button {
+    padding: 10px;
+  }
+
+  input {
+    margin-right: 10px;
+  }
+}

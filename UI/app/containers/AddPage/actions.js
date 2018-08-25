@@ -18,6 +18,9 @@ import {
   COMPANY_ADD_REQUESTED,
   LOCATION_ADD_SUCCEEDED,
   LOCATION_ADD_FAILED,
+  LANGUAGE_ADD_REQUESTED,
+  LANGUAGE_ADD_SUCCEEDED,
+  LANGUAGE_ADD_FAILED,
   DISCARD_STATE,
   LANGUAGES_REQUESTED,
   LANGUAGES_SUCCESS,
@@ -145,6 +148,25 @@ export function addLocationSuccess() {
 export function addLocationError() {
   return {
     type: LOCATION_ADD_FAILED,
+  };
+}
+
+export function addLanguage(language) {
+  return {
+    type: LANGUAGE_ADD_REQUESTED,
+    payload: language,
+  };
+}
+
+export function addLanguageSuccess() {
+  return {
+    type: LANGUAGE_ADD_SUCCEEDED,
+  };
+}
+
+export function addLanguageError() {
+  return {
+    type: LANGUAGE_ADD_FAILED,
   };
 }
 

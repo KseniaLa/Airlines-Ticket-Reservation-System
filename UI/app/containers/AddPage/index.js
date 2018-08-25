@@ -9,6 +9,7 @@ import Spinner from '../../components/basic/Spinner';
 import ErrorMessage from '../../components/basic/ErrorMessage';
 import AddTicketForm from '../../components/AddTicketForm';
 import AddLocationForm from '../../components/AddLocationForm';
+import AddLanguageForm from '../../components/AddLanguageForm';
 import AddFlightForm from '../../components/AddFlightForm';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { makeSelectIsAuthorized, makeSelectIsAdmin } from '../App/selectors';
@@ -23,6 +24,7 @@ import {
   addCompany,
   getAllFlights,
   getLanguages,
+  addLanguage,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -39,6 +41,8 @@ import {
   makeSelectFlightAddError,
   makeSelectIsLanguagesDataReceived,
   makeSelectLanguages,
+  makeSelectLanguageAdded,
+  makeSelectLanguageAddError,
 } from './selectors';
 
 import messages from './messages';
@@ -52,6 +56,7 @@ class AddPage extends React.Component {
     this.getFlightsList = this.getFlightsList.bind(this);
     this.addCity = this.addCity.bind(this);
     this.addCompany = this.addCompany.bind(this);
+    this.addLanguage = this.addLanguage.bind(this);
     this.getData = this.getData.bind(this);
   }
 
@@ -95,6 +100,16 @@ class AddPage extends React.Component {
       this.props.discardAll();
       this.getData();
     }
+
+    if (this.props.languageAdded) {
+      Popup.plugins().successPopup('lang added');
+      this.props.discardAll();
+      this.getData();
+    } else if (this.props.languageAddError) {
+      Popup.plugins().errorPopup('lang error');
+      this.props.discardAll();
+      this.getData();
+    }
   }
 
   getData() {
@@ -129,6 +144,10 @@ class AddPage extends React.Component {
 
   addCompany(translations) {
     this.props.addNewCompany(translations);
+  }
+
+  addLanguage(language) {
+    this.props.addNewLanguage(language);
   }
 
   getCitiesList() {
@@ -203,6 +222,7 @@ class AddPage extends React.Component {
           <h3>
             <FormattedMessage {...messages.title} />
           </h3>
+          <AddLanguageForm onSubmit={this.addLanguage} />
           <div className="list-container">
             <div className="list-container__list">{cities}</div>
             <div className="list-container__list">{companies}</div>
@@ -240,6 +260,8 @@ AddPage.propTypes = {
   isAdmin: PropTypes.bool,
   ticketAdded: PropTypes.bool,
   ticketAddError: PropTypes.bool,
+  languageAdded: PropTypes.bool,
+  languageAddError: PropTypes.bool,
   flightAdded: PropTypes.bool,
   flightAddError: PropTypes.bool,
   locationAdded: PropTypes.bool,
@@ -261,6 +283,7 @@ AddPage.propTypes = {
   getFlights: PropTypes.func,
   discardAll: PropTypes.func,
   getAvailableLanguages: PropTypes.func,
+  addNewLanguage: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -293,6 +316,10 @@ export function mapDispatchToProps(dispatch) {
       dispatch(addCompany(translations));
     },
 
+    addNewLanguage(language) {
+      dispatch(addLanguage(language));
+    },
+
     getFlights(language) {
       dispatch(getAllFlights(language));
     },
@@ -321,6 +348,8 @@ const mapStateToProps = createStructuredSelector({
   flights: makeSelectFlights(),
   langReceived: makeSelectIsLanguagesDataReceived(),
   languages: makeSelectLanguages(),
+  languageAdded: makeSelectLanguageAdded(),
+  languageAddError: makeSelectLanguageAddError(),
 });
 
 export default connect(

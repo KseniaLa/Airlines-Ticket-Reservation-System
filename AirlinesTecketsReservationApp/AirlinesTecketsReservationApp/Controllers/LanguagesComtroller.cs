@@ -27,5 +27,13 @@ namespace AirlinesTicketsReservationApp.Controllers
                List<string> languages = await _languageService.GetLanguages();
                return Ok(new { languages });
           }
+
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpPut("add")]
+          public async Task<IActionResult> AddLanguage([FromBody]string language)
+          {
+               await _languageService.AddLanguage(language);
+               return Ok();
+          }
      }
 }

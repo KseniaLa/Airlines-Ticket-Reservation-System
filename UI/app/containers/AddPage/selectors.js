@@ -64,6 +64,16 @@ const makeSelectFlightAddError = () =>
     searchState.get('flightAddError'),
   );
 
+const makeSelectLanguageAdded = () =>
+  createSelector(selectAddResult, searchState =>
+    searchState.get('languageAdded'),
+  );
+
+const makeSelectLanguageAddError = () =>
+  createSelector(selectAddResult, searchState =>
+    searchState.get('languageAddError'),
+  );
+
 export {
   makeSelectIsCitiesDataReceived,
   makeSelectCities,
@@ -79,4 +89,6 @@ export {
   makeSelectFlights,
   makeSelectIsLanguagesDataReceived,
   makeSelectLanguages,
+  makeSelectLanguageAdded,
+  makeSelectLanguageAddError,
 };

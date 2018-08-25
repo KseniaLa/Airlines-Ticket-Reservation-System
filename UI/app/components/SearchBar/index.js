@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import 'moment/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../basic/Button';
 import TextField from '../basic/TextField';
 import Select from '../basic/Select';
 import ErrorMessage from '../basic/ErrorMessage';
+import { config } from '../../utils/configLoader';
 
 import localMessages from './messages';
 import './style.scss';
+
+moment.locale('ru', config.locale_ru);
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -61,6 +65,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    moment.locale(this.props.language);
     return (
       <div>
         {this.state.isInputError && (
@@ -93,8 +98,8 @@ class SearchBar extends React.Component {
             <DatePicker
               selected={this.state.startDate}
               onChange={this.handleChange}
-              locale="ru"
               className="field datepic"
+              timeFormat="HH:mm"
             />
             <Select
               items={[

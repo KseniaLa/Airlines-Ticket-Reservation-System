@@ -3,12 +3,16 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import 'moment/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
+import { config } from '../../utils/configLoader';
 import Button from '../basic/Button';
 import TextField from '../basic/TextField';
 import ErrorMessage from '../basic/ErrorMessage';
 import './style.scss';
 import messages from './messages';
+
+moment.locale('ru', config.locale_ru);
 
 class AddFlightForm extends React.PureComponent {
   constructor(props) {
@@ -51,6 +55,7 @@ class AddFlightForm extends React.PureComponent {
   }
 
   render() {
+    moment.locale(this.props.language);
     return (
       <form className="info-area" onSubmit={this.addFlight}>
         {this.state.isInputError && (
@@ -84,6 +89,10 @@ class AddFlightForm extends React.PureComponent {
             showTimeSelect
             onChange={this.handleDateChange}
             className="datepicker"
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="LLL"
+            timeCaption="time"
           />
           <Button text={<FormattedMessage {...messages.add} />} />
         </div>
@@ -93,6 +102,7 @@ class AddFlightForm extends React.PureComponent {
 }
 
 AddFlightForm.propTypes = {
+  language: PropTypes.string,
   onFlightSubmit: PropTypes.func,
 };
 

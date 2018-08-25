@@ -219,7 +219,10 @@ class AddPage extends React.Component {
               values={languages.values}
             />
           </div>
-          <AddFlightForm onFlightSubmit={this.addFlight} />
+          <AddFlightForm
+            onFlightSubmit={this.addFlight}
+            language={this.props.language}
+          />
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}

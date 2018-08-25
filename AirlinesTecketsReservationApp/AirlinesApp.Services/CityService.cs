@@ -25,6 +25,10 @@ namespace AirlinesApp.Services
 
           public async Task AddCity(List<TranslationModel> translations)
           {
+               if (translations.Count == 0)
+               {
+                    throw new LocationException("Translations should be provided");
+               }
                List<string> cityNames = translations.Select(t => t.Value).ToList();
 
                List<Translation> testTranslations =
@@ -38,6 +42,7 @@ namespace AirlinesApp.Services
                {
                     Rating = 0,
                     Url = "no",
+                    Default = translations[0].Value
                };
                await Db.Cities.Add(city);
                foreach (TranslationModel translation in translations)
@@ -66,7 +71,7 @@ namespace AirlinesApp.Services
           {
 
                List<string> cityNames = await Db.Cities.GetAll()
-                   .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value).ToListAsync();
+                   .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
                return cityNames;
 
                //List<string> cities;
@@ -95,7 +100,7 @@ namespace AirlinesApp.Services
                     {
                          Id = city.Id,
                          Url = "unknown",
-                         Name = city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value
+                         Name = city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? city.Default
                     });
                }
                return cities;

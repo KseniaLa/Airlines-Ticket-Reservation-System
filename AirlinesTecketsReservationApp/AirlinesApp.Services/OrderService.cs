@@ -54,11 +54,11 @@ namespace AirlinesApp.Services
                 tickets.Add(new TicketModel
                 {
                     Id = ticket.Id,
-                    From = ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value,
+                    From = ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? ticket.Flight.Departure.Default,
                     To = ticket.Flight.Destination.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? ticket.Flight.Destination.Default,
                     Company = ticket.Company.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? ticket.Company.Default,
                     Date = ticket.Flight.DateTime,
                     Category = ticket.Category,
                     Price = ticket.Price,

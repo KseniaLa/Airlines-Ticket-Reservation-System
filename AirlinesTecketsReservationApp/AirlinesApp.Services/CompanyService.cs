@@ -20,8 +20,11 @@ namespace AirlinesApp.Services
 
         public async Task AddCompany(List<TranslationModel> translations)
         {
-
-            List<string> companyNames = translations.Select(t => t.Value).ToList();
+             if (translations.Count == 0)
+             {
+                  throw new LocationException("Translations should be provided");
+             }
+               List<string> companyNames = translations.Select(t => t.Value).ToList();
 
             List<Translation> testTranslations =
                  await Db.Translations.FindBy(t => companyNames.Contains(t.Value, StringComparer.InvariantCultureIgnoreCase)).ToListAsync();
@@ -33,6 +36,7 @@ namespace AirlinesApp.Services
             Company company = new Company
             {
                 Stars = 0,
+                 Default = translations[0].Value
             };
             await Db.Companies.Add(company);
             foreach (TranslationModel translation in translations)
@@ -60,7 +64,7 @@ namespace AirlinesApp.Services
         public async Task<List<string>> GetCompanies(string language)
         {
             List<string> companyNames = await Db.Companies.GetAll()
-                .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value).ToListAsync();
+                .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
             return companyNames;
         }
     }

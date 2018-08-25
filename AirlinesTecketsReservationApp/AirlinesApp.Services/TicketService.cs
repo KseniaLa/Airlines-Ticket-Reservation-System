@@ -23,8 +23,10 @@ namespace AirlinesApp.Services
             List<Ticket> foundTickets = await Db.Tickets.GetAll().Where(t =>
                 t.Category == search.FlightClass
                 && t.Flight.DateTime.Date == search.Date.Date
-                && t.Flight.Departure.Translations.Any(tr => tr.Value.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
-                && t.Flight.Destination.Translations.Any(tr => tr.Value.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
+                && (t.Flight.Departure.Translations.Any(tr => tr.Value.Equals(search.From, StringComparison.InvariantCultureIgnoreCase)) 
+                    || t.Flight.Departure.Default.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
+                && (t.Flight.Destination.Translations.Any(tr => tr.Value.Equals(search.To, StringComparison.InvariantCultureIgnoreCase)) 
+                    || t.Flight.Destination.Default.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
                 && t.Count > 0).ToListAsync();
             
             return GetTicketModel(foundTickets, language);
@@ -32,13 +34,15 @@ namespace AirlinesApp.Services
 
         public async Task<List<Ticket>> GetRawTickets(SearchModel search)
         {
-            List<Ticket> foundTickets = await Db.Tickets.GetAll().Where(t =>
-                t.Category == search.FlightClass
-                && t.Flight.DateTime.Date == search.Date.Date
-                && t.Flight.Departure.Translations.Any(tr => tr.Value.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
-                && t.Flight.Destination.Translations.Any(tr => tr.Value.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
-                && t.Count > 0).ToListAsync();
-            return foundTickets;
+             List<Ticket> foundTickets = await Db.Tickets.GetAll().Where(t =>
+                  t.Category == search.FlightClass
+                  && t.Flight.DateTime.Date == search.Date.Date
+                  && (t.Flight.Departure.Translations.Any(tr => tr.Value.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
+                      || t.Flight.Departure.Default.Equals(search.From, StringComparison.InvariantCultureIgnoreCase))
+                  && (t.Flight.Destination.Translations.Any(tr => tr.Value.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
+                      || t.Flight.Destination.Default.Equals(search.To, StringComparison.InvariantCultureIgnoreCase))
+                  && t.Count > 0).ToListAsync();
+               return foundTickets;
         }
 
         public List<TicketModel> GetPageItems(List<TicketModel> itemSet, int count, int page)
@@ -72,11 +76,11 @@ namespace AirlinesApp.Services
                 tickets.Add(new TicketModel
                 {
                     Id = ticket.Id,
-                    From = ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value,
+                    From = ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? ticket.Flight.Departure.Default,
                     To = ticket.Flight.Destination.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? ticket.Flight.Destination.Default,
                     Company = ticket.Company.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? ticket.Company.Default,
                     Date = ticket.Flight.DateTime,
                     Category = ticket.Category,
                     Price = ticket.Price,

@@ -125,6 +125,7 @@ class AddLocationForm extends React.Component {
   render() {
     return (
       <div>
+        <h6>add city/company</h6>
         <Button text="+" onClick={this.onAddBtnClick} />
         <Button text="-" onClick={this.onDeleteBtnClick} />
         <form className="add-location" onSubmit={this.onSubmit}>

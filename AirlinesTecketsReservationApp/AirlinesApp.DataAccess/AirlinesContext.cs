@@ -29,10 +29,11 @@ namespace AirlinesApp.DataAccess
           protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
           {
                //if (optionsBuilder.IsConfigured) return;
-               IConfigurationRoot configuration = new ConfigurationBuilder()
-                   .SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("appsettings.json")
-                   .Build();
+               //IConfigurationRoot configuration = new ConfigurationBuilder()
+               //    .SetBasePath(Directory.GetCurrentDirectory())
+               //    .AddJsonFile("appsettings.json")
+               //    .Build();
+               IConfigurationRoot configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
                var connectionString = configuration.GetConnectionString("DefaultConnection");
                optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
           }

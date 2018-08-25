@@ -13,6 +13,8 @@
   "app.components.AddPage.price": "цена",
   "app.components.AddPage.forbidden" : "Доступ закрыт, авторизуйтесь как администратор",
   "app.components.AddPage.invalidinput": "Некорректные значения полей",
+  "app.components.AddPage.added": "Добавлено",
+  "app.components.AddPage.adderror": "Ошибка добавления",
   "app.components.AddLocation.add": "Добавить",
   "app.components.AddLocation.invalidinput": "Некоторые поля не заполнены",
   "app.components.HomePage.search": "Популярные направления",

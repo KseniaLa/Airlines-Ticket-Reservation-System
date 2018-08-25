@@ -47,8 +47,7 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpPost("signup")]
           public async Task<IActionResult> Register([FromBody]SignupModel user)
           {
-               //EmailSender email = new EmailSender();
-               //await email.Execute();
+               await EmailService.SendTestEmail(user.Email);
                User usr = await _accountService.SignUp(user);
                if (usr != null)
                {

@@ -15,6 +15,8 @@
   "app.components.AddLocation.add": "Add",
   "app.components.AddPage.forbidden" : "Access denied, login as administrator",
   "app.components.AddLocation.invalidinput": "Some fields are empty",
+  "app.components.AddPage.added": "Added successfully!",
+  "app.components.AddPage.adderror": "Adding error occured",
   "app.components.HomePage.search": "",
   "app.components.HomePage.searchtitle": "Search",
   "app.components.HomePage.toptitle": "Popular directions",

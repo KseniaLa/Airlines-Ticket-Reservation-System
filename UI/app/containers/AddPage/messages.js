@@ -13,4 +13,12 @@ export default defineMessages({
     id: 'app.components.AddPage.forbidden',
     defaultMessage: 'Доступ закрыт, авторизуйтесь как администратор',
   },
+  added: {
+    id: 'app.components.AddPage.added',
+    defaultMessage: 'Добавлено',
+  },
+  adderror: {
+    id: 'app.components.AddPage.adderror',
+    defaultMessage: 'Ошибка добавления',
+  },
 });

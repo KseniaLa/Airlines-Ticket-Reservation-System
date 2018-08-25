@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirlinesApp.DataAccess.Models\AirlinesApp.DataAccess.Models.csproj" />
+    <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

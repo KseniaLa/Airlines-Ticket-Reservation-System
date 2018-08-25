@@ -70,43 +70,59 @@ class AddPage extends React.Component {
     this.props.discardAll();
   }
 
+  getSuccessMsg() {
+    Popup.plugins().successPopup(
+      <FormattedMessage id="app.components.AddPage.added">
+        {msg => msg}
+      </FormattedMessage>,
+    );
+  }
+
+  getErrorMsg() {
+    Popup.plugins().errorPopup(
+      <FormattedMessage id="app.components.AddPage.adderror">
+        {msg => msg}
+      </FormattedMessage>,
+    );
+  }
+
   componentDidUpdate() {
     if (this.props.locationAdded) {
-      Popup.plugins().successPopup('location added');
+      this.getSuccessMsg();
       this.props.discardAll();
       this.getData();
     } else if (this.props.locationAddError) {
-      Popup.plugins().errorPopup('location error');
+      this.getErrorMsg();
       this.props.discardAll();
       this.getData();
     }
 
     if (this.props.ticketAdded) {
-      Popup.plugins().successPopup('ticket added');
+      this.getSuccessMsg();
       this.props.discardAll();
       this.getData();
     } else if (this.props.ticketAddError) {
-      Popup.plugins().errorPopup('ticket error');
+      this.getErrorMsg();
       this.props.discardAll();
       this.getData();
     }
 
     if (this.props.flightAdded) {
-      Popup.plugins().successPopup('flight added');
+      this.getSuccessMsg();
       this.props.discardAll();
       this.getData();
     } else if (this.props.flightAddError) {
-      Popup.plugins().errorPopup('flight error');
+      this.getErrorMsg();
       this.props.discardAll();
       this.getData();
     }
 
     if (this.props.languageAdded) {
-      Popup.plugins().successPopup('lang added');
+      this.getSuccessMsg();
       this.props.discardAll();
       this.getData();
     } else if (this.props.languageAddError) {
-      Popup.plugins().errorPopup('lang error');
+      this.getErrorMsg();
       this.props.discardAll();
       this.getData();
     }
@@ -222,6 +238,7 @@ class AddPage extends React.Component {
           <h3>
             <FormattedMessage {...messages.title} />
           </h3>
+          <h6>add language</h6>
           <AddLanguageForm onSubmit={this.addLanguage} />
           <div className="list-container">
             <div className="list-container__list">{cities}</div>
@@ -239,10 +256,12 @@ class AddPage extends React.Component {
               values={languages.values}
             />
           </div>
+          <h6>add flight</h6>
           <AddFlightForm
             onFlightSubmit={this.addFlight}
             language={this.props.language}
           />
+          <h6>add ticket</h6>
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}

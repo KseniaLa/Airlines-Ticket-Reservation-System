@@ -45,6 +45,7 @@ namespace AirlinesApp.DataAccess
                modelBuilder.Entity<Ticket>()
                    .HasIndex(t => new { t.FlightId, t.CompanyId, t.Category }).IsUnique();
 
+               // admin password: 12345678
                modelBuilder.Entity<User>().HasData(new User
                {
                     Id = 1,
@@ -56,8 +57,6 @@ namespace AirlinesApp.DataAccess
                });
 
                modelBuilder.Entity<Language>().HasData(new Language { Id = 1, Name = "ru" }, new Language { Id = 2, Name = "en" });
-
-
           }
      }
 }

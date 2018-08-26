@@ -20,7 +20,7 @@ import {
   makeSelectIsAdmin,
   makeSelectRestore,
 } from './selectors';
-import { logout, setSearch } from './actions';
+import { logout, setSearch, tryLogin } from './actions';
 import { discardDataReady } from '../SearchResultPage/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
@@ -62,6 +62,10 @@ class App extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.onTryLogin();
   }
 
   componentDidUpdate() {
@@ -132,6 +136,7 @@ App.propTypes = {
   changeLang: PropTypes.func,
   logout: PropTypes.func,
   getTickets: PropTypes.func,
+  onTryLogin: PropTypes.func,
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -146,6 +151,10 @@ export function mapDispatchToProps(dispatch) {
           ? config.availableLanguages[1]
           : config.availableLanguages[0];
       dispatch(changeLocale(nextLang));
+    },
+
+    onTryLogin() {
+      dispatch(tryLogin());
     },
 
     logout() {

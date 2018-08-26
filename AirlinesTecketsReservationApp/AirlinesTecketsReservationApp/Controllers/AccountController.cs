@@ -45,6 +45,20 @@ namespace AirlinesTicketsReservationApp.Controllers
                return BadRequest();
           }
 
+          [Authorize]
+          [HttpPost("update")]
+          public async Task<IActionResult> UpdateUser()
+          {
+               string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+               User usr = await _accountService.GetUserByEmail(email);
+               if (usr != null)
+               {
+                    string token = JwtGenerator.GenerateToken(usr);
+                    return Ok(new { token, name = usr.Name, surname = usr.Surname, isAdmin = usr.IsAdmin });
+               }
+               return BadRequest();
+          }
+
           [AllowAnonymous]
           [HttpPost("signup")]
           public async Task<IActionResult> Register([FromBody]SignupModel user)

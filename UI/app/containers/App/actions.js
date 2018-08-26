@@ -1,8 +1,14 @@
-import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE } from './constants';
+import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE, TRY_LOGIN } from './constants';
 
 export function logout() {
   return {
     type: LOGOUT,
+  };
+}
+
+export function tryLogin() {
+  return {
+    type: TRY_LOGIN,
   };
 }
 

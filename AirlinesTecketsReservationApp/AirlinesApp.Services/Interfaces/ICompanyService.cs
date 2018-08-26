@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.DataPresentation;
 
 namespace AirlinesApp.Services.Interfaces
 {

@@ -6,6 +6,7 @@ using AirlinesApp.Services;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using AirlinesTicketsReservationApp.Extensions;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,6 +64,7 @@ namespace AirlinesTicketsReservationApp
                     .WithScopedLifetime()
                );
 
+               services.AddAutoMapper();
                services.AddMemoryCache();
 
                services.AddTransient<TokenManagerMiddleware>();

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AirlinesApp.Services;
 using AirlinesApp.DataAccess.Models.Entities;
-using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Http;
+using AirlinesApp.DataPresentation;
+using AutoMapper;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {

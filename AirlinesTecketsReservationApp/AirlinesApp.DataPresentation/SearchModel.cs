@@ -1,5 +1,6 @@
 ﻿using System;
-namespace AirlinesApp.DataAccess.Models.SupportingModels
+
+namespace AirlinesApp.DataPresentation
 {
     public class SearchModel
     {

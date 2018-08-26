@@ -1,13 +1,14 @@
 ﻿using System;
 using AirlinesApp.DataAccess.Models.Entities;
-using AirlinesApp.DataAccess.Models.SupportingModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess;
+using AirlinesApp.DataPresentation;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Caching.Memory;

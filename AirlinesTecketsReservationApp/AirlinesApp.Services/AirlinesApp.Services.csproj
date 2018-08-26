@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.2" />
     <PackageReference Include="Sendgrid" Version="9.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
+    <ProjectReference Include="..\AirlinesApp.DataPresentation\AirlinesApp.DataPresentation.csproj" />
     <ProjectReference Include="..\AirlinesApp.Exceptions\AirlinesApp.Exceptions.csproj" />
   </ItemGroup>
 

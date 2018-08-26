@@ -1,5 +1,5 @@
 ﻿using AirlinesApp.DataAccess.Models.Entities;
-using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.DataPresentation;
 using System;
 using System.Collections.Generic;
 using System.Text;

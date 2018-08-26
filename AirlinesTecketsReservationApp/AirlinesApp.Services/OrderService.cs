@@ -1,11 +1,11 @@
 ﻿using AirlinesApp.DataAccess.Models.Entities;
-using AirlinesApp.DataAccess.Models.SupportingModels;
 using AirlinesApp.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess;
+using AirlinesApp.DataPresentation;
 using AirlinesApp.Services.Interfaces;
 
 namespace AirlinesApp.Services
@@ -28,12 +28,12 @@ namespace AirlinesApp.Services
                 {
                     Id = order.Id,
                     From = order.Ticket.Flight.Departure.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? order.Ticket.Flight.Departure.Default,
                     To = order.Ticket.Flight.Destination.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
+                        ?.Value ?? order.Ticket.Flight.Destination.Default,
                     Company = order.Ticket.Company.Translations.FirstOrDefault(t => t.Language.Name == language)
-                        ?.Value,
-                    Date = order.Ticket.Flight.DateTime,
+                        ?.Value ?? order.Ticket.Company.Default,
+                     Date = order.Ticket.Flight.DateTime,
                     Category = order.Ticket.Category,
                     Price = order.Ticket.Price,
                     TotalCount = order.Ticket.Count,

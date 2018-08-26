@@ -1,8 +1,8 @@
-﻿using AirlinesApp.DataAccess.Models.SupportingModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AirlinesApp.DataPresentation;
 
 namespace AirlinesApp.Services.Interfaces
 {

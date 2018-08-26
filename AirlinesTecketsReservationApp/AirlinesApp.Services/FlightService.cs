@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess;
 using AirlinesApp.DataAccess.Models.Entities;
-using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.DataPresentation;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;

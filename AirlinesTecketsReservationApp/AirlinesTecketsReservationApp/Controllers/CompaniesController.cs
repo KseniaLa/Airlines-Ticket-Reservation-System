@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AirlinesApp.DataAccess.Models.SupportingModels;
+using AirlinesApp.DataPresentation;
 using AirlinesApp.Exceptions;
 using AirlinesApp.Services;
 using AirlinesApp.Services.Interfaces;

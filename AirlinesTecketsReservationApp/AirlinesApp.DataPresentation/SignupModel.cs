@@ -1,4 +1,4 @@
-﻿namespace AirlinesApp.DataAccess.Models.SupportingModels
+﻿namespace AirlinesApp.DataPresentation
 {
     public class SignupModel
     {

@@ -63,7 +63,7 @@ export function emptyGet() {
   };
 }
 
-export function searchPost(from, to, date, flightClass) {
+export function searchPost(from, to, date, flightClass, initial) {
   return {
     ...getJsonTypePost(),
     body: JSON.stringify({
@@ -71,6 +71,7 @@ export function searchPost(from, to, date, flightClass) {
       to,
       date,
       flightClass,
+      isInitial: initial,
     }),
   };
 }

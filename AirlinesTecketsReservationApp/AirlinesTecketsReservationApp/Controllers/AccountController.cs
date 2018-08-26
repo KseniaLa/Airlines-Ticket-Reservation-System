@@ -11,6 +11,7 @@ using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Http;
 using AirlinesApp.DataPresentation;
+using AirlinesApp.Exceptions;
 using AutoMapper;
 
 namespace AirlinesTicketsReservationApp.Controllers
@@ -50,6 +51,10 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpPost("update")]
           public async Task<IActionResult> UpdateUser()
           {
+               if (!await _tokenManager.IsCurrentActiveToken())
+               {
+                    throw new UnauthorizedException();
+               }
                string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
                User usr = await _accountService.GetUserByEmail(email);
                if (usr != null)
@@ -85,9 +90,9 @@ namespace AirlinesTicketsReservationApp.Controllers
 
           
           [HttpPost("tokens/cancel")]
-          public IActionResult CancelAccessToken()
+          public async Task<IActionResult> CancelAccessToken()
           {
-                _tokenManager.DeactivateCurrent();
+               await _tokenManager.DeactivateCurrentAsync();
 
                return NoContent();
           }

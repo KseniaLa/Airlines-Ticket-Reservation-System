@@ -12,13 +12,13 @@ import { addTicket } from '../../utils/localStorageManager';
 
 function* fetchTickets(action) {
   try {
-    const { from, to, date, flightClass } = action.payload;
+    const { from, to, date, flightClass, initial } = action.payload;
     const responce = yield call(
       fetch,
       `${config.APIUrl + config.APIOptions.resultTickets + action.language}/${
         action.itemCount
       }/${action.pageNum}`,
-      searchPost(from, to, date, flightClass),
+      searchPost(from, to, date, flightClass, initial),
     );
     if (responce.ok) {
       const result = yield responce.json();

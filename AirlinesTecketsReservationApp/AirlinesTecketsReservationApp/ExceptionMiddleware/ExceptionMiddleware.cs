@@ -26,6 +26,10 @@ namespace AirlinesTicketsReservationApp.ExceptionMiddleware
                {
                     await _next(httpContext);
                }
+               catch (UnauthorizedException ex)
+               {
+                    await HandleExceptionAsync(httpContext, ex, HttpStatusCode.Unauthorized);
+               }
                catch (LocationException ex)
                {
                     await HandleExceptionAsync(httpContext, ex, HttpStatusCode.BadRequest);

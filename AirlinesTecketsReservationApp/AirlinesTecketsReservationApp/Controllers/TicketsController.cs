@@ -29,7 +29,10 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpPost("search/{lang}/{count}/{page}")]
           public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang, int count, int page)
           {
-               await _cityService.UpdateCityRating(search.To);
+               if (search.IsInitial)
+               {
+                    await _cityService.UpdateCityRating(search.To);
+               } 
                List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
                List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
                return Ok(new { tickets = pageTickets, count = rawTickets.Count });

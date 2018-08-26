@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { LOGOUT, SIGN_IN, SET_SEARCH, RESTORE } from './constants';
+import { RESULT_TICKETS_REQUESTED } from '../SearchResultPage/constants';
 
 const initialState = fromJS({
   isAuthorized: false,
@@ -16,6 +17,7 @@ const initialState = fromJS({
     to: '',
     date: null,
     flightClass: '',
+    initial: true,
   },
 });
 
@@ -38,7 +40,10 @@ const authReducer = (state = initialState, action) => {
         .setIn(['search', 'from'], action.from)
         .setIn(['search', 'to'], action.to)
         .setIn(['search', 'date'], action.date)
-        .setIn(['search', 'flightClass'], action.flightClass);
+        .setIn(['search', 'flightClass'], action.flightClass)
+        .setIn(['search', 'initial'], true);
+    case RESULT_TICKETS_REQUESTED:
+      return state.setIn(['search', 'initial'], false);
     case RESTORE:
       return state.set('isAuthorized', false);
     default:

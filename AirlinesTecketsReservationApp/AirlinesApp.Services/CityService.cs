@@ -75,20 +75,28 @@ namespace AirlinesApp.Services
                    .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
                return cityNames;
 
-               //IQueryable<City> cities;
+               // this works fine
+               //List<Language> lang= await Db.Languages.GetAll().ToListAsync();
+               //_cache.Set("lang", lang);
+               //List<Language> l;
+               //if (_cache.TryGetValue("lang", out l))
+               //{
+               //     // do
+               //}
+
+               //this fails
+               //List<City> cities;
                //List<string> cityNames;
                //if (_cache.TryGetValue("cities", out cities))
                //{
-               //     cityNames = await cities.Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
+               //     cityNames = cities.Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? c.Default).ToList();
                //     return cityNames;
                //}
 
-               //cities = Db.Cities.GetAll();
-               //var cacheEntryOptions = new MemoryCacheEntryOptions()
-               //     .SetSlidingExpiration(TimeSpan.FromMinutes(30));
-               //_cache.Set("cities", cities, cacheEntryOptions);
-               //cityNames = await cities
-               //   .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
+               //cities = await Db.Cities.GetAll().ToListAsync();
+               //_cache.Set("cities", cities);
+               //cityNames = cities
+               //   .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? c.Default).ToList();
                //return cityNames;
 
           }

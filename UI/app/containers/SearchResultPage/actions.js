@@ -17,10 +17,11 @@ export function searchForTickets(
   lang,
   count,
   page,
+  initial,
 ) {
   return {
     type: RESULT_TICKETS_REQUESTED,
-    payload: { from, to, date, flightClass },
+    payload: { from, to, date, flightClass, initial },
     language: lang,
     itemCount: count,
     pageNum: page,

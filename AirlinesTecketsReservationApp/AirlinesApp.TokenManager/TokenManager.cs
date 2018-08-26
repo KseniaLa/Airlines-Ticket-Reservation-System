@@ -14,10 +14,10 @@ namespace AirlinesApp.TokenManager
 {
     public class TokenManager : ITokenManager
     {
-         private readonly IMemoryCache _cache;
+         private readonly IDistributedCache _cache;
          private readonly IHttpContextAccessor _httpContextAccessor;
 
-         public TokenManager(IMemoryCache cache,
+         public TokenManager(IDistributedCache cache,
               IHttpContextAccessor httpContextAccessor
          )
          {
@@ -25,28 +25,24 @@ namespace AirlinesApp.TokenManager
               _httpContextAccessor = httpContextAccessor;
          }
 
-         public bool IsCurrentActiveToken()
-              =>  IsActive(GetCurrentAsync());
+         public async Task<bool> IsCurrentActiveToken()
+              => await IsActiveAsync(GetCurrentAsync());
 
-         public void DeactivateCurrent()
-              => Deactivate(GetCurrentAsync());
+         public async Task DeactivateCurrentAsync()
+              => await DeactivateAsync(GetCurrentAsync());
 
-          public bool IsActive(string token)
-          {
-               string item;
-               return !_cache.TryGetValue(GetKey(token), out item);
-          }
+         public async Task<bool> IsActiveAsync(string token)
+              => await _cache.GetStringAsync(GetKey(token)) == null;
 
-         public void Deactivate(string token)
-         {
-              var cacheEntryOptions = new MemoryCacheEntryOptions()
-                   .SetSlidingExpiration(TimeSpan.FromMinutes(JwtOptions.Lifetime));
+         public async Task DeactivateAsync(string token)
+              => await _cache.SetStringAsync(GetKey(token),
+                   " ", new DistributedCacheEntryOptions
+                   {
+                        AbsoluteExpirationRelativeToNow =
+                             TimeSpan.FromMinutes(JwtOptions.Lifetime)
+                   });
 
-              _cache.Set(GetKey(token), token, cacheEntryOptions);
-          }
-              
-
-         private string GetCurrentAsync()
+          private string GetCurrentAsync()
          {
               var authorizationHeader = _httpContextAccessor
                    .HttpContext.Request.Headers["authorization"];

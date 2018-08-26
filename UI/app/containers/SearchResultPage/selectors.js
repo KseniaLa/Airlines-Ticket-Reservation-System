@@ -19,6 +19,9 @@ const makeSelectDate = () =>
 const makeSelectClass = () =>
   createSelector(makeSelectSearch(), search => search.get('flightClass'));
 
+const makeSelectIsInitial = () =>
+  createSelector(makeSelectSearch(), search => search.get('initial'));
+
 const makeSelectIsDataReceived = () =>
   createSelector(selectSearchResult, searchResult =>
     searchResult.get('dataReceived'),
@@ -50,4 +53,5 @@ export {
   makeSelectTo,
   makeSelectDate,
   makeSelectClass,
+  makeSelectIsInitial,
 };

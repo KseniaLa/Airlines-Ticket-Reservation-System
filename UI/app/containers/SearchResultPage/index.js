@@ -28,6 +28,7 @@ import {
   makeSelectDate,
   makeSelectClass,
   makeSelectCount,
+  makeSelectIsInitial,
 } from './selectors';
 import { makeSelectIsAuthorized } from '../App/selectors';
 import messages from './messages';
@@ -52,8 +53,17 @@ class SearchResultPage extends React.PureComponent {
   }
 
   fetchTickets(count, page) {
-    const { from, to, date, flightClass, language } = this.props;
-    this.props.getTickets(from, to, date, flightClass, language, count, page);
+    const { from, to, date, flightClass, language, initial } = this.props;
+    this.props.getTickets(
+      from,
+      to,
+      date,
+      flightClass,
+      language,
+      count,
+      page,
+      initial,
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -196,17 +206,27 @@ SearchResultPage.propTypes = {
   discardAdd: PropTypes.func,
   from: PropTypes.string,
   to: PropTypes.string,
-  date: PropTypes.object,
+  date: PropTypes.string,
   flightClass: PropTypes.string,
   count: PropTypes.number,
+  initial: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getTickets(from, to, date, flightClass, lang, count, page) {
+    getTickets(from, to, date, flightClass, lang, count, page, initial) {
       dispatch(discardDataReady());
       dispatch(
-        searchForTickets(from, to, date, flightClass, lang, count, page),
+        searchForTickets(
+          from,
+          to,
+          date,
+          flightClass,
+          lang,
+          count,
+          page,
+          initial,
+        ),
       );
     },
 
@@ -232,6 +252,7 @@ const mapStateToProps = createStructuredSelector({
   to: makeSelectTo(),
   date: makeSelectDate(),
   flightClass: makeSelectClass(),
+  initial: makeSelectIsInitial(),
 });
 
 export default connect(

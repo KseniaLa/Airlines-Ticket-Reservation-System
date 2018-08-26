@@ -70,8 +70,7 @@ namespace AirlinesTicketsReservationApp
                services.AddTransient<TokenManagerMiddleware>();
                services.AddTransient<ITokenManager, TokenManager>();
                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-               //string a = Configuration["redis:connectionString"];
-               //services.AddDistributedRedisCache(r => { r.Configuration = Configuration["redis:connectionString"]; });
+               services.AddDistributedRedisCache(r => { r.Configuration = Configuration["redis:connectionString"]; });
 
                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
           }
@@ -89,6 +88,8 @@ namespace AirlinesTicketsReservationApp
                );
 
                app.UseAuthentication();
+
+               app.UseMiddleware<TokenManagerMiddleware>();
 
                app.ConfigureExceptionMiddleware();
 

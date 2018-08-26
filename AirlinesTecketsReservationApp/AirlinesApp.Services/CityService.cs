@@ -74,17 +74,22 @@ namespace AirlinesApp.Services
                    .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
                return cityNames;
 
-               //List<string> cities;
-               ////List<string> cityNames;
-               //if (_cache.TryGetValue("cities" + language, out cities))
+               //IQueryable<City> cities;
+               //List<string> cityNames;
+               //if (_cache.TryGetValue("cities", out cities))
                //{
-               //     return cities;
+               //     cityNames = await cities.Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
+               //     return cityNames;
                //}
 
-               //List<string> cityNames = await Db.Cities.GetAll()
-               //    .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value).ToListAsync();
-               //_cache.Set("cities" + language, cityNames);
+               //cities = Db.Cities.GetAll();
+               //var cacheEntryOptions = new MemoryCacheEntryOptions()
+               //     .SetSlidingExpiration(TimeSpan.FromMinutes(30));
+               //_cache.Set("cities", cities, cacheEntryOptions);
+               //cityNames = await cities
+               //   .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
                //return cityNames;
+
           }
 
           public async Task<List<CityModel>> GetTopCities(int topCount, string language)

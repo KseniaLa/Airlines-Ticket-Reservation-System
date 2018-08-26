@@ -49,24 +49,29 @@ namespace AirlinesTicketsReservationApp
                     });
 
                services.AddTransient<IAirlinesContext, AirlinesContext>();
-               services.AddDbContext<AirlinesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+               services.AddDbContext<AirlinesContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
                services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
                services.AddTransient<IUnitOfWork, AirlinesUnitOfWork>();
 
                services.Scan(scan => scan
-                   .FromAssembliesOf(new List<Type> { typeof(IAccountService), typeof(AccountService) })
-                   .AddClasses(classes => classes.AssignableTo<IScopedService>())
-                   .AsImplementedInterfaces()
-                   .WithScopedLifetime()
+                    .FromAssembliesOf(new List<Type> { typeof(IAccountService), typeof(AccountService) })
+                    .AddClasses(classes => classes.AssignableTo<IScopedService>())
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
                );
 
                services.AddMemoryCache();
 
+               services.AddTransient<TokenManagerMiddleware>();
+               services.AddTransient<ITokenManager, TokenManager>();
+               services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+               //string a = Configuration["redis:connectionString"];
+               //services.AddDistributedRedisCache(r => { r.Configuration = Configuration["redis:connectionString"]; });
+
                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

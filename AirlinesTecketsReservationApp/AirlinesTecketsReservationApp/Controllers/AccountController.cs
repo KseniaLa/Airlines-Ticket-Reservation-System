@@ -20,12 +20,14 @@ namespace AirlinesTicketsReservationApp.Controllers
           private readonly IAccountService _accountService;
           private readonly IIpService _ipService;
           private readonly IHttpContextAccessor _accessor;
+          private readonly ITokenManager _tokenManager;
 
-          public AccountController(IHttpContextAccessor accessor, IAccountService accountService, IIpService ipService)
+          public AccountController(IHttpContextAccessor accessor, IAccountService accountService, IIpService ipService, ITokenManager tokenManager)
           {
                _accountService = accountService;
                _ipService = ipService;
                _accessor = accessor;
+               _tokenManager = tokenManager;
           }
 
           [AllowAnonymous]
@@ -64,6 +66,15 @@ namespace AirlinesTicketsReservationApp.Controllers
                User user = await _accountService.GetUserByEmail(email);
                List<IpAddressModel> addresses = await _ipService.GetUserIpAddressLatest(user.Id, 10);
                return Ok(new { addresses });
+          }
+
+          
+          [HttpPost("tokens/cancel")]
+          public IActionResult CancelAccessToken()
+          {
+                _tokenManager.DeactivateCurrent();
+
+               return NoContent();
           }
      }
 }

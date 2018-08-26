@@ -5,7 +5,7 @@ const CONFIG = {
   APIUrl: 'http://localhost:57730/api/',
   APIOptions: {
     login: 'account/login',
-    logout: 'account/logout',
+    logout: 'account/tokens/cancel',
     signup: 'account/signup',
     getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',

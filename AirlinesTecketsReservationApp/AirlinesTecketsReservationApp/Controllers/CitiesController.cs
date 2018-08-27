@@ -35,7 +35,8 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpGet("{lang}")]
           public async Task<IActionResult> GetAllCities(string lang)
           {
-               List<string> cities = await _cityService.GetCities(lang);
+               //List<string> cities = await _cityService.GetCities(lang);
+               List<CityTranslationModel> cities = await _cityService.GetCitiesWithTranslations(lang);
                return Ok(new { cities = cities.ToArray() });
           }
 

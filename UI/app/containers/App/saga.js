@@ -15,7 +15,6 @@ function* logoutUser() {
     localStorage.removeItem('cartTickets');
     yield 'ok';
   } catch (e) {
-    console.log(e);
     yield 'error';
   }
 }

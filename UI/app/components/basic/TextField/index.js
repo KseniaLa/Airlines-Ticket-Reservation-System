@@ -16,6 +16,7 @@ class TextField extends React.PureComponent {
         type={this.props.type}
         placeholder={this.props.hint}
         min="1"
+        value={this.props.children}
         name={this.props.name}
         onChange={this.props.onUpdate}
       />

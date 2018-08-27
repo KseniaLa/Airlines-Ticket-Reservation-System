@@ -68,6 +68,32 @@ namespace AirlinesApp.Services
 
           }
 
+          public async Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language)
+          {
+               List<City> cities = await Db.Cities.GetAll().ToListAsync();
+               List<CityTranslationModel> result = new List<CityTranslationModel>();
+               foreach (var city in cities)
+               {
+                    List<TranslationModel> translations = new List<TranslationModel>();
+                    foreach (var translation in city.Translations.ToList())
+                    {
+                         translations.Add(new TranslationModel
+                         {
+                              Language = translation.Language.Name,
+                              Value = translation.Value
+                         });
+                    }
+                    result.Add(new CityTranslationModel
+                    {
+                         Id = city.Id,
+                         Name = city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? city.Default,
+                         Translations = translations
+                    });
+               }
+
+               return result;
+          }
+
           public async Task<List<string>> GetCities(string language)
           {
 

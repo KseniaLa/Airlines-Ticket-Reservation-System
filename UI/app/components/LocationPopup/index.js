@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
-//
 
 class LocationPopup extends React.Component {
   constructor(props) {
@@ -25,16 +25,15 @@ class LocationPopup extends React.Component {
           closeOnDocumentClick
           onClose={this.closeModal}
         >
-          <div className="modal">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-            magni omnis delectus nemo, maxime molestiae dolorem numquam
-            mollitia, voluptate ea, accusamus excepturi deleniti ratione
-            sapiente! Laudantium, aperiam doloribus. Odit, aut.
-          </div>
+          <div className="modal">{this.props.children}</div>
         </Popup>
       </div>
     );
   }
 }
+
+LocationPopup.propTypes = {
+  children: PropTypes.any,
+};
 
 export default LocationPopup;

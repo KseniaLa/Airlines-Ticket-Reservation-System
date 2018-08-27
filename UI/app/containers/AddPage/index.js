@@ -10,6 +10,7 @@ import ErrorMessage from '../../components/basic/ErrorMessage';
 import LocationPopup from '../../components/LocationPopup';
 import AddTicketForm from '../../components/AddTicketForm';
 import AddLocationForm from '../../components/AddLocationForm';
+import AddLocation from '../../components/AddLocation';
 import AddLanguageForm from '../../components/AddLanguageForm';
 import AddFlightForm from '../../components/AddFlightForm';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
@@ -50,6 +51,7 @@ import {
 } from './selectors';
 
 import messages from './messages';
+import Button from '../../components/basic/Button';
 
 class AddPage extends React.Component {
   constructor(props) {
@@ -172,12 +174,24 @@ class AddPage extends React.Component {
   }
 
   getCitiesList() {
+    const languages = this.props.langReceived
+      ? this.getLangList()
+      : { names: [], values: [] };
     const list = [];
     const { cities } = this.props;
     cities.forEach((element, index) => {
       list.push(
-        <div key={index}>
-          {element} <LocationPopup />
+        <div className="list-item" key={index}>
+          {element.name}
+          <LocationPopup>
+            <AddLocation
+              translations={element.translations}
+              lang={languages.names}
+              values={languages.values}
+              langTitle="lang"
+            />
+          </LocationPopup>
+          <Button text="delete" />
         </div>,
       );
     });
@@ -248,13 +262,13 @@ class AddPage extends React.Component {
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
     ) : (
-      <Spinner />
-    );
+        <Spinner />
+      );
     const companies = this.props.companiesReceived ? (
       this.getCompaniesList()
     ) : (
-      <Spinner />
-    );
+        <Spinner />
+      );
     return (
       <div className="container-flex">
         <div className="addticket-area">

@@ -6,16 +6,18 @@ using AirlinesApp.DataPresentation;
 
 namespace AirlinesApp.Services.Interfaces
 {
-    public interface ICityService
-    {
-        Task AddCity(List<TranslationModel> translations);
+     public interface ICityService
+     {
+          Task AddCity(List<TranslationModel> translations);
 
-        Task<List<string>> GetCities(string language);
+          Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language);
 
-        Task<List<CityModel>> GetTopCities(int topCount, string language);
+          Task<List<string>> GetCities(string language);
 
-        Task UpdateCityRating(string cityName);
+          Task<List<CityModel>> GetTopCities(int topCount, string language);
 
-        Task<List<CityModel>> GetAllCities(string language);
-    }
+          Task UpdateCityRating(string cityName);
+
+          Task<List<CityModel>> GetAllCities(string language);
+     }
 }

@@ -113,7 +113,7 @@ namespace AirlinesApp.Services
                     cities.Add(new CityModel
                     {
                          Id = city.Id,
-                         Url = "unknown",
+                         Url = city.Url,
                          Name = city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? city.Default
                     });
                }

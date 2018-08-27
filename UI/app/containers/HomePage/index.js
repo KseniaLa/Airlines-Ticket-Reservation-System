@@ -7,15 +7,14 @@ import { createStructuredSelector } from 'reselect';
 import messages from './messages';
 
 import './style.scss';
-import mainImage from '../../images/plane.png';
 import Spinner from '../../components/basic/Spinner';
-import cityImage2 from '../../images/saintp.jpg';
 import ImageSearch from '../../components/ImageSearch';
 import TextImageBlock from '../../components/TextImageBlock';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 import { makeSelectIsDataReceived, makeSelectCities } from './selectors';
 import { searchForCities, resetCities } from './actions';
+import { config } from '../../utils/configLoader';
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
@@ -33,10 +32,22 @@ class HomePage extends React.PureComponent {
       list.push(
         <div key={cities[i].id}>
           <div className="imageset-box__item">
-            <TextImageBlock image={cityImage2} text={cities[i].name} />
+            <TextImageBlock
+              image={
+                cities[i].url === 'no' ? config.defaultImage : cities[i].url
+              }
+              text={cities[i].name}
+            />
           </div>
           <div className="imageset-box__item">
-            <TextImageBlock image={cityImage2} text={cities[i + 1].name} />
+            <TextImageBlock
+              image={
+                cities[i + 1].url === 'no'
+                  ? config.defaultImage
+                  : cities[i + 1].url
+              }
+              text={cities[i + 1].name}
+            />
           </div>
         </div>,
       );
@@ -49,7 +60,7 @@ class HomePage extends React.PureComponent {
     return (
       <section className="container-flex">
         <ImageSearch
-          image={mainImage}
+          image="plane.png"
           onSearch={this.props.onSearch}
           language={this.props.language}
         />

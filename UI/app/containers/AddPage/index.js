@@ -225,13 +225,13 @@ class AddPage extends React.Component {
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
     ) : (
-        <Spinner />
-      );
+      <Spinner />
+    );
     const companies = this.props.companiesReceived ? (
       this.getCompaniesList()
     ) : (
-        <Spinner />
-      );
+      <Spinner />
+    );
     return (
       <div className="container-flex">
         <div className="addticket-area">
@@ -280,6 +280,17 @@ class AddPage extends React.Component {
           <h4>
             <FormattedMessage {...messages.addticket} />
           </h4>
+          <AddTicketForm
+            onTicketSubmit={this.addTicket}
+            flights={flights.names}
+            values={flights.values}
+            flightTitle={
+              <FormattedMessage id="app.components.AddPage.chooseflight">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
+          />
+
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}

@@ -44,6 +44,7 @@ const CONFIG = {
       doy: 4,
     },
   },
+  defaultImage: 'default.jpg',
 };
 
 export const config = CONFIG;

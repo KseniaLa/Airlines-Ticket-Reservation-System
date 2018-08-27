@@ -21,4 +21,32 @@ export default defineMessages({
     id: 'app.components.AddPage.adderror',
     defaultMessage: 'Ошибка добавления',
   },
+  language: {
+    id: 'app.components.AddPage.language',
+    defaultMessage: 'язык',
+  },
+  chooseflight: {
+    id: 'app.components.AddPage.chooseflight',
+    defaultMessage: 'Выберите рейс',
+  },
+  addlanguage: {
+    id: 'app.components.AddPage.addlanguage',
+    defaultMessage: 'Добавление языка',
+  },
+  addcity: {
+    id: 'app.components.AddPage.addcity',
+    defaultMessage: 'Добавление города',
+  },
+  addcompany: {
+    id: 'app.components.AddPage.addcompany',
+    defaultMessage: 'Добавление компании',
+  },
+  addflight: {
+    id: 'app.components.AddPage.addflight',
+    defaultMessage: 'Добавление рейса',
+  },
+  addticket: {
+    id: 'app.components.AddPage.addticket',
+    defaultMessage: 'Добавление билета',
+  },
 });

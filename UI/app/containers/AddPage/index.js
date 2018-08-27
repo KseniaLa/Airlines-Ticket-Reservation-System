@@ -225,20 +225,22 @@ class AddPage extends React.Component {
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
     ) : (
-      <Spinner />
-    );
+        <Spinner />
+      );
     const companies = this.props.companiesReceived ? (
       this.getCompaniesList()
     ) : (
-      <Spinner />
-    );
+        <Spinner />
+      );
     return (
       <div className="container-flex">
         <div className="addticket-area">
           <h3>
             <FormattedMessage {...messages.title} />
           </h3>
-          <h6>add language</h6>
+          <h4>
+            <FormattedMessage {...messages.addlanguage} />
+          </h4>
           <AddLanguageForm onSubmit={this.addLanguage} />
           <div className="list-container">
             <div className="list-container__list">{cities}</div>
@@ -249,23 +251,44 @@ class AddPage extends React.Component {
               onSubmit={this.addCity}
               lang={languages.names}
               values={languages.values}
+              title={<FormattedMessage {...messages.addcity} />}
+              langTitle={
+                <FormattedMessage id="app.components.AddPage.language">
+                  {placeholder => placeholder}
+                </FormattedMessage>
+              }
             />
             <AddLocationForm
               onSubmit={this.addCompany}
               lang={languages.names}
               values={languages.values}
+              title={<FormattedMessage {...messages.addcompany} />}
+              langTitle={
+                <FormattedMessage id="app.components.AddPage.language">
+                  {placeholder => placeholder}
+                </FormattedMessage>
+              }
             />
           </div>
-          <h6>add flight</h6>
+          <h4>
+            <FormattedMessage {...messages.addflight} />
+          </h4>
           <AddFlightForm
             onFlightSubmit={this.addFlight}
             language={this.props.language}
           />
-          <h6>add ticket</h6>
+          <h4>
+            <FormattedMessage {...messages.addticket} />
+          </h4>
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}
             values={flights.values}
+            flightTitle={
+              <FormattedMessage id="app.components.AddPage.chooseflight">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
           />
         </div>
       </div>

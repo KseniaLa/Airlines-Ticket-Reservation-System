@@ -64,7 +64,7 @@ class AddLocationForm extends React.Component {
             value={this.state.class}
             values={this.props.values}
             notSelected
-            placeholder="lang"
+            placeholder={this.props.langTitle}
             onChange={e => this.updateLangField(inputList.length, e)}
           />
         </div>,
@@ -125,7 +125,7 @@ class AddLocationForm extends React.Component {
   render() {
     return (
       <div>
-        <h6>add city/company</h6>
+        <h4>{this.props.title}</h4>
         <Button text="+" onClick={this.onAddBtnClick} />
         <Button text="-" onClick={this.onDeleteBtnClick} />
         <form className="add-location" onSubmit={this.onSubmit}>
@@ -147,6 +147,8 @@ class AddLocationForm extends React.Component {
 AddLocationForm.propTypes = {
   lang: PropTypes.array,
   values: PropTypes.array,
+  title: PropTypes.object,
+  langTitle: PropTypes.any,
   onSubmit: PropTypes.func,
 };
 

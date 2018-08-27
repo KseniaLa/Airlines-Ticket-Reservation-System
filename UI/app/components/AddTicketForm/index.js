@@ -74,7 +74,7 @@ class AddTicketForm extends React.PureComponent {
             values={this.props.values}
             onChange={this.onSelectFlightChange}
             notSelected
-            placeholder="Choose flight"
+            placeholder={this.props.flightTitle}
           />
           <FormattedMessage id="app.components.AddPage.company">
             {placeholder => (
@@ -134,6 +134,7 @@ class AddTicketForm extends React.PureComponent {
 AddTicketForm.propTypes = {
   flights: PropTypes.array,
   values: PropTypes.array,
+  flightTitle: PropTypes.any,
   onTicketSubmit: PropTypes.func,
 };
 

@@ -54,6 +54,13 @@ Popup.registerPlugin('successPopup', function on(content) {
   });
 });
 
+Popup.registerPlugin('locationPopup', function on(title, content) {
+  this.create({
+    title,
+    content,
+  });
+});
+
 class App extends React.Component {
   constructor() {
     super();

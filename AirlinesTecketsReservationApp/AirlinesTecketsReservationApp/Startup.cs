@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AirlinesApp.Config;
 using AirlinesApp.DataAccess;
 using AirlinesApp.DataAccess.Repositories;
 using AirlinesApp.Services;
@@ -19,81 +20,82 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AirlinesTicketsReservationApp
 {
-     public class Startup
-     {
-          public Startup(IConfiguration configuration)
-          {
-               Configuration = configuration;
-          }
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-          public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-          // This method gets called by the runtime. Use this method to add services to the container.
-          public void ConfigureServices(IServiceCollection services)
-          {
-               services.AddCors();
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors();
 
-               services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                         options.RequireHttpsMetadata = false;
-                         options.TokenValidationParameters = new TokenValidationParameters
-                         {
-                              ValidateIssuer = true,
-                              ValidIssuer = JwtOptions.Issuer,
-                              ValidateAudience = true,
-                              ValidAudience = JwtOptions.Audience,
-                              ValidateLifetime = true,
-                              IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
-                              ValidateIssuerSigningKey = true,
-                         };
-                    });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                 .AddJwtBearer(options =>
+                 {
+                     options.RequireHttpsMetadata = false;
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidateIssuer = true,
+                         ValidIssuer = JwtOptions.Issuer,
+                         ValidateAudience = true,
+                         ValidAudience = JwtOptions.Audience,
+                         ValidateLifetime = true,
+                         IssuerSigningKey = JwtOptions.GetSymmetricSecurityKey(),
+                         ValidateIssuerSigningKey = true,
+                     };
+                 });
 
-               services.AddTransient<IAirlinesContext, AirlinesContext>();
-               services.AddDbContext<AirlinesContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-               services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IConfig, Config>();
+            services.AddTransient<IAirlinesContext, AirlinesContext>();
+            services.AddDbContext<AirlinesContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-               services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-               services.AddTransient<IUnitOfWork, AirlinesUnitOfWork>();
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUnitOfWork, AirlinesUnitOfWork>();
 
-               services.Scan(scan => scan
-                    .FromAssembliesOf(new List<Type> { typeof(IAccountService), typeof(AccountService) })
-                    .AddClasses(classes => classes.AssignableTo<IScopedService>())
-                    .AsImplementedInterfaces()
-                    .WithScopedLifetime()
-               );
+            services.Scan(scan => scan
+                 .FromAssembliesOf(new List<Type> { typeof(IAccountService), typeof(AccountService) })
+                 .AddClasses(classes => classes.AssignableTo<IScopedService>())
+                 .AsImplementedInterfaces()
+                 .WithScopedLifetime()
+            );
 
-               services.AddAutoMapper();
-               services.AddMemoryCache();
+            services.AddAutoMapper();
+            services.AddMemoryCache();
 
-               services.AddTransient<TokenManagerMiddleware>();
-               services.AddTransient<ITokenManager, TokenManager>();
-               services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-               services.AddDistributedRedisCache(r => { r.Configuration = Configuration["redis:connectionString"]; });
+            services.AddTransient<TokenManagerMiddleware>();
+            services.AddTransient<ITokenManager, TokenManager>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDistributedRedisCache(r => { r.Configuration = Configuration["redis:connectionString"]; });
 
-               services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          }
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
 
-          // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-          public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-          {
-               if (env.IsDevelopment())
-               {
-                    app.UseDeveloperExceptionPage();
-               }
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
-               app.UseCors(
-                  options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
-               );
+            app.UseCors(
+               options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()
+            );
 
-               app.UseAuthentication();
+            app.UseAuthentication();
 
-               app.UseMiddleware<TokenManagerMiddleware>();
+            app.UseMiddleware<TokenManagerMiddleware>();
 
-               app.ConfigureExceptionMiddleware();
+            app.ConfigureExceptionMiddleware();
 
-               app.UseMvc();
-          }
-     }
+            app.UseMvc();
+        }
+    }
 }

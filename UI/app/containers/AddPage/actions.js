@@ -8,6 +8,9 @@ import {
   FLIGHTS_REQUESTED,
   FLIGHTS_SUCCEEDED,
   FLIGHTS_FAILED,
+  CITIES_LIST_REQUESTED,
+  CITIES_LIST_SUCCESS,
+  CITIES_LIST_ERROR,
   CITIES_REQUESTED,
   CITIES_SUCCESS,
   CITIES_ERROR,
@@ -62,6 +65,26 @@ export function addFlightSuccess() {
 export function addFlightError() {
   return {
     type: FLIGHT_ADD_FAILED,
+  };
+}
+
+export function getCitiesList(language) {
+  return {
+    type: CITIES_LIST_REQUESTED,
+    payload: language,
+  };
+}
+
+export function getCitiesListSuccess(cities) {
+  return {
+    type: CITIES_LIST_SUCCESS,
+    payload: cities,
+  };
+}
+
+export function getCitiesListError() {
+  return {
+    type: CITIES_LIST_ERROR,
   };
 }
 

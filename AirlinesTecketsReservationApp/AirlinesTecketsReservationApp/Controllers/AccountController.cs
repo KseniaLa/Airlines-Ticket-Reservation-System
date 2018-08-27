@@ -82,7 +82,7 @@ namespace AirlinesTicketsReservationApp.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> Register([FromBody]SignupModel user)
         {
-            await EmailService.SendTestEmail(user.Email);
+            //await EmailService.SendTestEmail(user.Email);
             User usr = await _accountService.SignUp(user);
             if (usr != null)
             {

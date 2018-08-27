@@ -41,20 +41,22 @@ namespace AirlinesApp.Services
 
           public async Task<Flight> AddFlight(FlightModel flight)
           {
-               City fromCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(flight.From, StringComparison.InvariantCultureIgnoreCase)))
+              int from = int.Parse(flight.From);
+              int to = int.Parse(flight.To);
+              if (from == to)
+              {
+                    throw new LocationException("Departure and destination cities are equal");
+              }
+            City fromCity = await Db.Cities
+                    .FindBy(c => c.Id == from)
                     .FirstOrDefaultAsync();
                City toCity = await Db.Cities
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(flight.To, StringComparison.InvariantCultureIgnoreCase)))
+                    .FindBy(c => c.Id == to)
                     .FirstOrDefaultAsync();
 
                if (fromCity == null || toCity == null)
                {
                     throw new LocationException("City not found");
-               }
-               if (fromCity.Equals(toCity))
-               {
-                    throw new LocationException("Departure and destination cities are equal");
                }
                DateTime dateTime = new DateTime(flight.Date.Year, flight.Date.Month, flight.Date.Day, flight.Date.Hour, flight.Date.Minute, 0, DateTimeKind.Local);
                if (dateTime < DateTime.Now)

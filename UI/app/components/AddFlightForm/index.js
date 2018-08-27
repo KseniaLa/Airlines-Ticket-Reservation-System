@@ -7,6 +7,7 @@ import 'moment/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import { config } from '../../utils/configLoader';
 import Button from '../basic/Button';
+import Select from '../basic/Select';
 import TextField from '../basic/TextField';
 import ErrorMessage from '../basic/ErrorMessage';
 import './style.scss';
@@ -64,7 +65,23 @@ class AddFlightForm extends React.PureComponent {
           />
         )}
         <div>
-          <FormattedMessage id="app.components.AddPage.fromfield">
+          <Select
+            items={this.props.cities}
+            value={this.state.class}
+            values={this.props.values}
+            onChange={this.updateFromField}
+            notSelected
+            placeholder="choose city"
+          />
+          <Select
+            items={this.props.cities}
+            value={this.state.class}
+            values={this.props.values}
+            onChange={this.updateToField}
+            notSelected
+            placeholder="choose city"
+          />
+          {/* <FormattedMessage id="app.components.AddPage.fromfield">
             {placeholder => (
               <TextField
                 type="text"
@@ -81,7 +98,7 @@ class AddFlightForm extends React.PureComponent {
                 onUpdate={this.updateToField}
               />
             )}
-          </FormattedMessage>
+          </FormattedMessage> */}
         </div>
         <div className="date-time">
           <DatePicker
@@ -102,6 +119,8 @@ class AddFlightForm extends React.PureComponent {
 }
 
 AddFlightForm.propTypes = {
+  cities: PropTypes.array,
+  values: PropTypes.array,
   language: PropTypes.string,
   onFlightSubmit: PropTypes.func,
 };

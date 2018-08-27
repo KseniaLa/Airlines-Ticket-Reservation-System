@@ -10,6 +10,14 @@ const makeSelectIsCitiesDataReceived = () =>
 const makeSelectCities = () =>
   createSelector(selectAddResult, searchState => searchState.get('cities'));
 
+const makeSelectIsCityListReceived = () =>
+  createSelector(selectAddResult, searchResult =>
+    searchResult.get('cityListReceived'),
+  );
+
+const makeSelectCityList = () =>
+  createSelector(selectAddResult, searchState => searchState.get('cityList'));
+
 const makeSelectIsCompaniesDataReceived = () =>
   createSelector(selectAddResult, searchResult =>
     searchResult.get('companiesReceived'),
@@ -91,4 +99,6 @@ export {
   makeSelectLanguages,
   makeSelectLanguageAdded,
   makeSelectLanguageAddError,
+  makeSelectIsCityListReceived,
+  makeSelectCityList,
 };

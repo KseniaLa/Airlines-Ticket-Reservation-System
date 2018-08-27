@@ -22,11 +22,12 @@ namespace AirlinesApp.DataAccess
             //    .AddJsonFile($"appsettings.{environmentName}.json", true)
             //    .AddEnvironmentVariables();
 
-             var builder = ConfigBuilder.GetBuilder(basePath)
-                  .AddJsonFile($"appsettings.{environmentName}.json", true)
-                  .AddEnvironmentVariables();
+            //var builder = ConfigBuilder.GetBuilder(basePath)
+            //     .AddJsonFile($"appsettings.{environmentName}.json", true)
+            //     .AddEnvironmentVariables();
+            var builder = Config.Config.GetBuilder(basePath);
 
-               var config = builder.Build();
+            var config = builder.Build();
             var connectionString = config.GetConnectionString("DefaultConnection");
 
             if (string.IsNullOrWhiteSpace(connectionString))
@@ -47,7 +48,7 @@ namespace AirlinesApp.DataAccess
 
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(connectionString);
-            return new AirlinesContext(optionsBuilder.Options);
+            return new AirlinesContext(optionsBuilder.Options, new Config.Config());
         }
 
     }

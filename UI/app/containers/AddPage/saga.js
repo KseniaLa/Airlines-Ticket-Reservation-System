@@ -9,6 +9,7 @@ import {
   FLIGHTS_REQUESTED,
   LANGUAGE_ADD_REQUESTED,
   LANGUAGES_REQUESTED,
+  CITIES_LIST_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -27,6 +28,8 @@ import {
   addLanguageError,
   getLanguagesSuccess,
   getLanguagesError,
+  getCitiesListSuccess,
+  getCitiesListError,
 } from './actions';
 import { restoreAuth } from '../App/actions';
 import { config } from '../../utils/configLoader';
@@ -107,6 +110,26 @@ function* getCompanies(action) {
     }
   } catch (e) {
     yield put(getAllCompaniesError());
+  }
+}
+
+function* getCityList(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.getCityList + action.payload,
+      authGet(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getCitiesListSuccess(result.cities));
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield put(getCitiesListError());
+    }
+  } catch (e) {
+    yield put(getCitiesListError());
   }
 }
 
@@ -209,4 +232,5 @@ export function* addSaga() {
   yield takeEvery(FLIGHTS_REQUESTED, getFlights);
   yield takeEvery(LANGUAGES_REQUESTED, getLanguages);
   yield takeEvery(LANGUAGE_ADD_REQUESTED, addLanguage);
+  yield takeEvery(CITIES_LIST_REQUESTED, getCityList);
 }

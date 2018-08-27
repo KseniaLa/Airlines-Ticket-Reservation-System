@@ -11,7 +11,7 @@ namespace AirlinesApp.Services
 {
      public class EmailService
      {
-          private static readonly IConfiguration Configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
+          /*private static readonly IConfiguration Configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
           private static readonly string ServerName = Configuration["SmtpServer"];
           private static readonly int ServerPort = int.Parse(Configuration["SmtpPort"]);
           private static readonly string SenderEmail = Configuration["SenderEmail"];
@@ -43,6 +43,6 @@ namespace AirlinesApp.Services
                {
                     return;
                }
-          }
+          }*/
      }
 }

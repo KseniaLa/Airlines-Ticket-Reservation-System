@@ -15,5 +15,7 @@ namespace AirlinesApp.Services.Interfaces
         Task<List<CityModel>> GetTopCities(int topCount, string language);
 
         Task UpdateCityRating(string cityName);
+
+        Task<List<CityModel>> GetAllCities(string language);
     }
 }

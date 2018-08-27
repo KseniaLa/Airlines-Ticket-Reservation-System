@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import Spinner from '../../components/basic/Spinner';
 import ErrorMessage from '../../components/basic/ErrorMessage';
+import LocationPopup from '../../components/LocationPopup';
 import AddTicketForm from '../../components/AddTicketForm';
 import AddLocationForm from '../../components/AddLocationForm';
 import AddLanguageForm from '../../components/AddLanguageForm';
@@ -25,6 +26,7 @@ import {
   getAllFlights,
   getLanguages,
   addLanguage,
+  getCitiesList,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -43,6 +45,8 @@ import {
   makeSelectLanguages,
   makeSelectLanguageAdded,
   makeSelectLanguageAddError,
+  makeSelectIsCityListReceived,
+  makeSelectCityList,
 } from './selectors';
 
 import messages from './messages';
@@ -133,6 +137,7 @@ class AddPage extends React.Component {
     this.props.getCompanies(this.props.language);
     this.props.getFlights(this.props.language);
     this.props.getAvailableLanguages();
+    this.props.getCityList(this.props.language);
   }
 
   addTicket(flightId, company, flightClass, price, count) {
@@ -170,7 +175,11 @@ class AddPage extends React.Component {
     const list = [];
     const { cities } = this.props;
     cities.forEach((element, index) => {
-      list.push(<p key={index}>{element}</p>);
+      list.push(
+        <div key={index}>
+          {element} <LocationPopup />
+        </div>,
+      );
     });
     return list;
   }
@@ -190,6 +199,17 @@ class AddPage extends React.Component {
     const { flights } = this.props;
     flights.forEach(element => {
       nameList.push(`${element.from} - ${element.to}  ${element.date}`);
+      valueList.push(element.id);
+    });
+    return { names: nameList, values: valueList };
+  }
+
+  getCityList() {
+    const nameList = [];
+    const valueList = [];
+    const { cityList } = this.props;
+    cityList.forEach(element => {
+      nameList.push(element.name);
       valueList.push(element.id);
     });
     return { names: nameList, values: valueList };
@@ -221,6 +241,9 @@ class AddPage extends React.Component {
       : { names: [], values: [] };
     const languages = this.props.langReceived
       ? this.getLangList()
+      : { names: [], values: [] };
+    const cityList = this.props.cityListReceived
+      ? this.getCityList()
       : { names: [], values: [] };
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
@@ -276,6 +299,8 @@ class AddPage extends React.Component {
           <AddFlightForm
             onFlightSubmit={this.addFlight}
             language={this.props.language}
+            cities={cityList.names}
+            values={cityList.values}
           />
           <h4>
             <FormattedMessage {...messages.addticket} />
@@ -327,6 +352,8 @@ AddPage.propTypes = {
   companies: PropTypes.any,
   langReceived: PropTypes.bool,
   languages: PropTypes.any,
+  cityListReceived: PropTypes.bool,
+  cityList: PropTypes.any,
   addTicketGroup: PropTypes.func,
   addNewFlight: PropTypes.func,
   getCities: PropTypes.func,
@@ -337,6 +364,7 @@ AddPage.propTypes = {
   discardAll: PropTypes.func,
   getAvailableLanguages: PropTypes.func,
   addNewLanguage: PropTypes.func,
+  getCityList: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -380,6 +408,10 @@ export function mapDispatchToProps(dispatch) {
     getAvailableLanguages() {
       dispatch(getLanguages());
     },
+
+    getCityList(language) {
+      dispatch(getCitiesList(language));
+    },
   };
 }
 
@@ -403,6 +435,8 @@ const mapStateToProps = createStructuredSelector({
   languages: makeSelectLanguages(),
   languageAdded: makeSelectLanguageAdded(),
   languageAddError: makeSelectLanguageAddError(),
+  cityListReceived: makeSelectIsCityListReceived(),
+  cityList: makeSelectCityList(),
 });
 
 export default connect(

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirlinesApp.Config\AirlinesApp.Config.csproj" />
     <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
     <ProjectReference Include="..\AirlinesApp.DataPresentation\AirlinesApp.DataPresentation.csproj" />
     <ProjectReference Include="..\AirlinesApp.Exceptions\AirlinesApp.Exceptions.csproj" />

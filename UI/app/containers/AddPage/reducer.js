@@ -6,6 +6,8 @@ import {
   FLIGHT_ADD_FAILED,
   LOCATION_ADD_SUCCEEDED,
   LOCATION_ADD_FAILED,
+  CITIES_LIST_SUCCESS,
+  CITIES_LIST_ERROR,
   CITIES_SUCCESS,
   CITIES_ERROR,
   COMPANIES_SUCCESS,
@@ -28,6 +30,8 @@ const initialState = fromJS({
   locationAdded: false,
   languageAddError: false,
   languageAdded: false,
+  cityListReceived: false,
+  cityList: null,
   citiesReceived: false,
   cities: null,
   companiesReceived: false,
@@ -56,6 +60,12 @@ const addReducer = (state = initialState, action) => {
       return state.set('citiesReceived', true).set('cities', action.payload);
     case CITIES_ERROR:
       return state.set('citiesReceived', false).set('cities', null);
+    case CITIES_LIST_SUCCESS:
+      return state
+        .set('cityListReceived', true)
+        .set('cityList', action.payload);
+    case CITIES_LIST_ERROR:
+      return state.set('cityListReceived', false).set('cityList', null);
     case FLIGHTS_SUCCEEDED:
       return state.set('flightsReceived', true).set('flights', action.payload);
     case FLIGHTS_FAILED:

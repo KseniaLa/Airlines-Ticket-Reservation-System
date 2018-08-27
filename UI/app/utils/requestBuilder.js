@@ -121,6 +121,6 @@ export function authPutString(content, token) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(JSON.stringify(content)),
+    body: JSON.stringify(content),
   };
 }

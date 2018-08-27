@@ -39,11 +39,21 @@ namespace AirlinesTicketsReservationApp.Controllers
                return Ok(new { cities = cities.ToArray() });
           }
 
-          [Authorize(Roles = Roles.Administrator)]
+         
+         [Authorize(Roles = Roles.Administrator)]
+         [HttpGet("list/{lang}")]
+         public async Task<IActionResult> GetAvailableCities(string lang)
+         {
+             List<CityModel> cities = await _cityService.GetAllCities(lang);
+             return Ok(new { cities });
+         }
+
+
+
+        [Authorize(Roles = Roles.Administrator)]
           [HttpPut("add")]
-          public async Task<IActionResult> AddCity([FromBody] string city)
+          public async Task<IActionResult> AddCity([FromBody] List<TranslationModel> cityTranslations)
           {
-               List<TranslationModel> cityTranslations = JsonConvert.DeserializeObject<List<TranslationModel>>(city);
                await _cityService.AddCity(cityTranslations);
                return Ok();
           }

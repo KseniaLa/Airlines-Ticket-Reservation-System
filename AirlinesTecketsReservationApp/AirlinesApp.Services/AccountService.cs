@@ -9,6 +9,7 @@ using AirlinesApp.DataAccess;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.DataPresentation;
 using AutoMapper;
+using AirlinesApp.Config;
 
 namespace AirlinesApp.Services
 {
@@ -19,15 +20,18 @@ namespace AirlinesApp.Services
           private readonly int _hashedPassSize;
           private readonly IMapper _mapper;
 
-          public AccountService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+          public AccountService(IUnitOfWork unitOfWork, IMapper mapper, IConfig config) : base(unitOfWork)
           {
                //IConfiguration configuration = new ConfigurationBuilder()
                //    .SetBasePath(Directory.GetCurrentDirectory())
                //    .AddJsonFile("appsettings.json").Build();
-               IConfiguration configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
-               _iterationsCount = int.Parse(configuration["PasswordHashing:IterationsCount"]);
-               _saltSize = int.Parse(configuration["PasswordHashing:SaltSize"]);
-               _hashedPassSize = int.Parse(configuration["PasswordHashing:HashedPasswordSize"]);
+               //IConfiguration configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
+               //_iterationsCount = int.Parse(configuration["PasswordHashing:IterationsCount"]);
+               //_saltSize = int.Parse(configuration["PasswordHashing:SaltSize"]);
+               //_hashedPassSize = int.Parse(configuration["PasswordHashing:HashedPasswordSize"]);
+              _saltSize = config.SaltSize;
+              _iterationsCount = config.IterationsCount;
+              _hashedPassSize = config.HashedPassSize;
                _mapper = mapper;
           }
 

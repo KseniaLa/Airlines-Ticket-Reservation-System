@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirlinesApp.Config\AirlinesApp.Config.csproj" />
     <ProjectReference Include="..\AirlinesApp.DataAccess.Models\AirlinesApp.DataAccess.Models.csproj" />
   </ItemGroup>
 

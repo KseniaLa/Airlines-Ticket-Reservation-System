@@ -31,9 +31,8 @@ namespace AirlinesTicketsReservationApp.Controllers
 
           [Authorize(Roles = Roles.Administrator)]
           [HttpPut("add")]
-          public async Task<IActionResult> AddCompany([FromBody] string company)
+          public async Task<IActionResult> AddCompany([FromBody] List<TranslationModel> companyTranslations)
           {
-               List<TranslationModel> companyTranslations = JsonConvert.DeserializeObject<List<TranslationModel>>(company);
                await _companyService.AddCompany(companyTranslations);
                return Ok();
           }

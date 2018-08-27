@@ -21,6 +21,7 @@ const CONFIG = {
     userOrder: 'orders/cart/submit',
     ticketCancellation: 'orders/userorders/cancel',
     addTickets: 'tickets/add',
+    getCityList: 'cities/list/',
     addCity: 'cities/add',
     addCompany: 'companies/add',
     addLanguage: 'languages/add',

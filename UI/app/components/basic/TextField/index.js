@@ -28,6 +28,7 @@ TextField.propTypes = {
   type: PropTypes.string,
   hint: PropTypes.string,
   name: PropTypes.string,
+  children: PropTypes.any,
   onUpdate: PropTypes.func,
 };
 

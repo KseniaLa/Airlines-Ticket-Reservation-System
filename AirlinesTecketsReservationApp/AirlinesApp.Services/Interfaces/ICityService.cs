@@ -10,6 +10,8 @@ namespace AirlinesApp.Services.Interfaces
      {
           Task AddCity(List<TranslationModel> translations);
 
+          Task DeleteCity(int id);
+
           Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language);
 
           Task<List<string>> GetCities(string language);

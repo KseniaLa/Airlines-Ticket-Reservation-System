@@ -17,6 +17,9 @@ import {
   COMPANIES_REQUESTED,
   COMPANIES_SUCCESS,
   COMPANIES_ERROR,
+  CITY_UPDATE_REQUESTED,
+  CITY_DELETE_REQUESTED,
+  CITY_DELETED,
   CITY_ADD_REQUESTED,
   COMPANY_ADD_REQUESTED,
   LOCATION_ADD_SUCCEEDED,
@@ -152,6 +155,27 @@ export function addCity(translations) {
   return {
     type: CITY_ADD_REQUESTED,
     payload: translations,
+  };
+}
+
+export function updateCity(id, translations) {
+  return {
+    type: CITY_UPDATE_REQUESTED,
+    id,
+    payload: translations,
+  };
+}
+
+export function deleteCity(id) {
+  return {
+    type: CITY_DELETE_REQUESTED,
+    payload: id,
+  };
+}
+
+export function deleteCitySuccess() {
+  return {
+    type: CITY_DELETED,
   };
 }
 

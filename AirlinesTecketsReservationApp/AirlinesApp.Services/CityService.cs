@@ -68,6 +68,32 @@ namespace AirlinesApp.Services
 
           }
 
+          public async Task DeleteCity(int id)
+          {
+               try
+               {
+                    List<Flight> flights =
+                         await Db.Flights.FindBy(f => f.DepartureId == id || f.DestinationId == id).ToListAsync();
+                    foreach (var flight in flights)
+                    {
+                         Db.Flights.Delete(flight.Id);
+                    }
+                    List<Translation> translations =
+                         await Db.Translations.FindBy(t => t.City.Id == id).ToListAsync();
+                    foreach (var translation in translations)
+                    {
+                         Db.Translations.Delete(translation.Id);
+                    }
+                    await Db.Save();
+                    Db.Cities.Delete(id);
+                    await Db.Save();
+               }
+               catch (Exception e)
+               {
+                    int we = 5;
+               }
+          }
+
           public async Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language)
           {
                List<City> cities = await Db.Cities.GetAll().ToListAsync();

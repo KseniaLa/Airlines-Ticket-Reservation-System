@@ -10,6 +10,8 @@ import {
   LANGUAGE_ADD_REQUESTED,
   LANGUAGES_REQUESTED,
   CITIES_LIST_REQUESTED,
+  CITY_UPDATE_REQUESTED,
+  CITY_DELETE_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -30,10 +32,16 @@ import {
   getLanguagesError,
   getCitiesListSuccess,
   getCitiesListError,
+  deleteCitySuccess,
 } from './actions';
 import { restoreAuth } from '../App/actions';
 import { config } from '../../utils/configLoader';
-import { authPut, authGet, authPutString } from '../../utils/requestBuilder';
+import {
+  authPut,
+  authGet,
+  authPutString,
+  authDelete,
+} from '../../utils/requestBuilder';
 
 function* addTickets(action) {
   try {
@@ -153,6 +161,25 @@ function* getFlights(action) {
   }
 }
 
+function* deleteCity(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.deleteCity + action.payload,
+      authDelete(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(deleteCitySuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield 'error';
+    }
+  } catch (e) {
+    yield 'error';
+  }
+}
+
 function* getLanguages() {
   try {
     const responce = yield call(
@@ -203,6 +230,25 @@ function* addLocation(action) {
   }
 }
 
+function* updateCity(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.updateCity + action.id,
+      authPutString(action.payload, localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(addLocationSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield put(addLocationError());
+    }
+  } catch (e) {
+    yield put(addLocationError());
+  }
+}
+
 function* addLanguage(action) {
   try {
     const responce = yield call(
@@ -233,4 +279,6 @@ export function* addSaga() {
   yield takeEvery(LANGUAGES_REQUESTED, getLanguages);
   yield takeEvery(LANGUAGE_ADD_REQUESTED, addLanguage);
   yield takeEvery(CITIES_LIST_REQUESTED, getCityList);
+  yield takeEvery(CITY_UPDATE_REQUESTED, updateCity);
+  yield takeEvery(CITY_DELETE_REQUESTED, deleteCity);
 }

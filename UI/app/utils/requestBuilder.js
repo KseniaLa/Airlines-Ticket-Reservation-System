@@ -57,6 +57,15 @@ export function authPost(token) {
   };
 }
 
+export function authDelete(token) {
+  return {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 export function emptyGet() {
   return {
     method: 'GET',

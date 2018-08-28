@@ -58,5 +58,21 @@ namespace AirlinesTicketsReservationApp.Controllers
                await _cityService.AddCity(cityTranslations);
                return Ok();
           }
+
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpPut("update/{id}")]
+          public async Task<IActionResult> UpdateCity([FromBody] List<TranslationModel> cityTranslations, string id)
+          {
+               //await _cityService.AddCity(cityTranslations);
+               return Ok();
+          }
+
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpDelete("delete/{id}")]
+          public async Task<IActionResult> DeleteCity(string id)
+          {
+               await _cityService.DeleteCity(int.Parse(id));
+               return Ok();
+          }
      }
 }

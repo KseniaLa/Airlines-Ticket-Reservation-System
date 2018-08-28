@@ -85,4 +85,13 @@
   margin: 5px;
   padding: 5px;
   border: 1px solid $page_color;
+
+  .page-button {
+    background-color: #ff0000;
+
+    &:hover {
+      background-color: #ffffff;
+      color: #ff0000;
+    }
+  }
 }

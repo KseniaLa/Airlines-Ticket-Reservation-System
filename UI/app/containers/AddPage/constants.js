@@ -16,6 +16,12 @@ export const FLIGHTS_SUCCEEDED = 'airlines/AddPage/FLIGHTS_SUCCEDED';
 
 export const FLIGHTS_FAILED = 'airlines/AddPage/FLIGHTS_FAILED';
 
+export const CITY_UPDATE_REQUESTED = 'airlines/AddPage/CITY_UPDATE_REQUESTED';
+
+export const CITY_DELETE_REQUESTED = 'airlines/AddPage/CITY_DELETE_REQUESTED';
+
+export const CITY_DELETED = 'airlines/AddPage/CITY_DELETED';
+
 export const CITIES_LIST_REQUESTED = 'airlines/AddPage/CITIES_LIST_REQUESTED';
 
 export const CITIES_LIST_SUCCESS = 'airlines/AddPage/CITIES_LIST_SUCCESS';

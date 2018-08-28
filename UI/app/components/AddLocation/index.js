@@ -12,8 +12,6 @@ class AddLocationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputList: [],
-      data: [],
       savedData: {},
       addedData: {},
     };
@@ -23,6 +21,8 @@ class AddLocationForm extends React.Component {
       this,
     );
     this.addItemToState = this.addItemToState.bind(this);
+    this.getTranslationsList = this.getTranslationsList.bind(this);
+    this.saveTranslations = this.saveTranslations.bind(this);
   }
 
   componentDidMount() {
@@ -43,8 +43,10 @@ class AddLocationForm extends React.Component {
 
   addItemToState() {
     const obj = this.state.addedData;
-    const newKey = Object.keys(obj).length;
-    // inc key
+    let newKey = Object.keys(obj).length;
+    while (obj.hasOwnProperty(newKey)) {
+      newKey += 1;
+    }
     obj[newKey] = { value: '', language: '' };
     this.setState({ addedData: obj });
   }
@@ -80,7 +82,6 @@ class AddLocationForm extends React.Component {
     const list = [];
     const { addedData } = this.state;
     Object.keys(addedData).forEach((key, index) => {
-      const element = addedData[key];
       list.push(
         <div key={index}>
           <Select
@@ -117,6 +118,38 @@ class AddLocationForm extends React.Component {
     this.setState({ addedData: obj });
   }
 
+  getTranslationsList() {
+    const list = [];
+    const { savedData, addedData } = this.state;
+    Object.keys(savedData).forEach(key => {
+      list.push(savedData[key]);
+    });
+    Object.keys(addedData).forEach(key => {
+      list.push(addedData[key]);
+    });
+    return list;
+  }
+
+  fieldsNotEmpty(fields) {
+    const hasEmpty = element => {
+      if (element.value && element.language) {
+        return false;
+      }
+      return true;
+    };
+    if (fields.find(hasEmpty) === undefined) {
+      return true;
+    }
+    return false;
+  }
+
+  saveTranslations() {
+    const translations = this.getTranslationsList();
+    if (this.fieldsNotEmpty(translations)) {
+      this.props.onSave(this.props.id, translations);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -125,7 +158,7 @@ class AddLocationForm extends React.Component {
           {this.getTranslations()}
           {this.getNewItems()}
           <div>
-            <Button text="save" />
+            <Button text="save" onClick={this.saveTranslations} />
           </div>
         </div>
       </div>
@@ -138,6 +171,8 @@ AddLocationForm.propTypes = {
   values: PropTypes.array,
   langTitle: PropTypes.any,
   translations: PropTypes.any,
+  id: PropTypes.number,
+  onSave: PropTypes.func,
 };
 
 export default AddLocationForm;

@@ -28,6 +28,8 @@ import {
   getLanguages,
   addLanguage,
   getCitiesList,
+  updateCity,
+  deleteCity,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -48,6 +50,7 @@ import {
   makeSelectLanguageAddError,
   makeSelectIsCityListReceived,
   makeSelectCityList,
+  makeSelectCityDeleted,
 } from './selectors';
 
 import messages from './messages';
@@ -64,6 +67,7 @@ class AddPage extends React.Component {
     this.addCompany = this.addCompany.bind(this);
     this.addLanguage = this.addLanguage.bind(this);
     this.getData = this.getData.bind(this);
+    this.deleteCity = this.deleteCity.bind(this);
   }
 
   componentDidMount() {
@@ -132,6 +136,12 @@ class AddPage extends React.Component {
       this.props.discardAll();
       this.getData();
     }
+
+    if (this.props.cityDeleted) {
+      Popup.plugins().successPopup('deleted');
+      this.props.discardAll();
+      this.getData();
+    }
   }
 
   getData() {
@@ -173,6 +183,10 @@ class AddPage extends React.Component {
     this.props.addNewLanguage(language);
   }
 
+  deleteCity(id) {
+    this.props.deleteCurrCity(id);
+  }
+
   getCitiesList() {
     const languages = this.props.langReceived
       ? this.getLangList()
@@ -185,13 +199,15 @@ class AddPage extends React.Component {
           {element.name}
           <LocationPopup>
             <AddLocation
+              id={element.id}
               translations={element.translations}
               lang={languages.names}
               values={languages.values}
               langTitle="lang"
+              onSave={this.props.updateCityTranslations}
             />
           </LocationPopup>
-          <Button text="delete" />
+          <Button text="delete" onClick={e => this.deleteCity(element.id, e)} />
         </div>,
       );
     });
@@ -262,13 +278,13 @@ class AddPage extends React.Component {
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
     ) : (
-        <Spinner />
-      );
+      <Spinner />
+    );
     const companies = this.props.companiesReceived ? (
       this.getCompaniesList()
     ) : (
-        <Spinner />
-      );
+      <Spinner />
+    );
     return (
       <div className="container-flex">
         <div className="addticket-area">
@@ -368,6 +384,7 @@ AddPage.propTypes = {
   languages: PropTypes.any,
   cityListReceived: PropTypes.bool,
   cityList: PropTypes.any,
+  cityDeleted: PropTypes.bool,
   addTicketGroup: PropTypes.func,
   addNewFlight: PropTypes.func,
   getCities: PropTypes.func,
@@ -379,6 +396,8 @@ AddPage.propTypes = {
   getAvailableLanguages: PropTypes.func,
   addNewLanguage: PropTypes.func,
   getCityList: PropTypes.func,
+  updateCityTranslations: PropTypes.func,
+  deleteCurrCity: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -426,6 +445,14 @@ export function mapDispatchToProps(dispatch) {
     getCityList(language) {
       dispatch(getCitiesList(language));
     },
+
+    updateCityTranslations(id, translations) {
+      dispatch(updateCity(id, translations));
+    },
+
+    deleteCurrCity(id) {
+      dispatch(deleteCity(id));
+    },
   };
 }
 
@@ -451,6 +478,7 @@ const mapStateToProps = createStructuredSelector({
   languageAddError: makeSelectLanguageAddError(),
   cityListReceived: makeSelectIsCityListReceived(),
   cityList: makeSelectCityList(),
+  cityDeleted: makeSelectCityDeleted(),
 });
 
 export default connect(

@@ -126,10 +126,10 @@ namespace AirlinesApp.Services
             await Db.Save();
         }
 
-        public async Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language)
+        public async Task<List<LocationModel>> GetCitiesWithTranslations(string language)
         {
             List<City> cities = await Db.Cities.GetAll().ToListAsync();
-            List<CityTranslationModel> result = new List<CityTranslationModel>();
+            List<LocationModel> result = new List<LocationModel>();
             foreach (var city in cities)
             {
                 List<TranslationModel> translations = new List<TranslationModel>();
@@ -141,7 +141,7 @@ namespace AirlinesApp.Services
                         Value = translation.Value
                     });
                 }
-                result.Add(new CityTranslationModel
+                result.Add(new LocationModel
                 {
                     Id = city.Id,
                     Name = city.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? city.Default,

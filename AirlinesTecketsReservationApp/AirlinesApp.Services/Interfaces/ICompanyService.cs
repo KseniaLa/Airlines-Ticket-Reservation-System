@@ -10,6 +10,12 @@ namespace AirlinesApp.Services.Interfaces
     {
         Task AddCompany(List<TranslationModel> translations);
 
+        Task UpdateCompany(List<TranslationModel> translations, int id);
+
+        Task DeleteCompany(int id);
+
         Task<List<string>> GetCompanies(string language);
+
+        Task<List<LocationModel>> GetCompaniesWithTranslations(string language);
     }
 }

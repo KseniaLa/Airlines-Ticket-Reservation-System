@@ -14,7 +14,7 @@ namespace AirlinesApp.Services.Interfaces
 
         Task DeleteCity(int id);
 
-        Task<List<CityTranslationModel>> GetCitiesWithTranslations(string language);
+        Task<List<LocationModel>> GetCitiesWithTranslations(string language);
 
         Task<List<string>> GetCities(string language);
 

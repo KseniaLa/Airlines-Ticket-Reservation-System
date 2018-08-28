@@ -29,7 +29,9 @@ import {
   addLanguage,
   getCitiesList,
   updateCity,
+  updateCompany,
   deleteCity,
+  deleteCompany,
   deleteLang,
 } from './actions';
 import {
@@ -70,6 +72,7 @@ class AddPage extends React.Component {
     this.addLanguage = this.addLanguage.bind(this);
     this.getData = this.getData.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
+    this.deleteCompany = this.deleteCompany.bind(this);
     this.deleteLang = this.deleteLang.bind(this);
   }
 
@@ -196,6 +199,10 @@ class AddPage extends React.Component {
     this.props.deleteCurrCity(id);
   }
 
+  deleteCompany(id) {
+    this.props.deleteCurrCompany(id);
+  }
+
   deleteLang(name) {
     this.props.deleteCurrLang(name);
   }
@@ -233,10 +240,33 @@ class AddPage extends React.Component {
   }
 
   getCompaniesList() {
+    const languages = this.props.langReceived
+      ? this.getLangList()
+      : { names: [], values: [] };
     const list = [];
     const { companies } = this.props;
     companies.forEach((element, index) => {
-      list.push(<p key={index}>{element}</p>);
+      list.push(
+        <div className="list-item" key={index}>
+          {element.name}
+          <div className="edit-set">
+            <LocationPopup>
+              <AddLocation
+                id={element.id}
+                translations={element.translations}
+                lang={languages.names}
+                values={languages.values}
+                langTitle="lang"
+                onSave={this.props.updateCompanyTranslations}
+              />
+            </LocationPopup>
+            <Button
+              text="delete"
+              onClick={e => this.deleteCompany(element.id, e)}
+            />
+          </div>
+        </div>,
+      );
     });
     return list;
   }
@@ -441,6 +471,8 @@ AddPage.propTypes = {
   getCityList: PropTypes.func,
   updateCityTranslations: PropTypes.func,
   deleteCurrCity: PropTypes.func,
+  updateCompanyTranslations: PropTypes.func,
+  deleteCurrCompany: PropTypes.func,
   deleteCurrLang: PropTypes.func,
 };
 
@@ -494,8 +526,16 @@ export function mapDispatchToProps(dispatch) {
       dispatch(updateCity(id, translations));
     },
 
+    updateCompanyTranslations(id, translations) {
+      dispatch(updateCompany(id, translations));
+    },
+
     deleteCurrCity(id) {
       dispatch(deleteCity(id));
+    },
+
+    deleteCurrCompany(id) {
+      dispatch(deleteCompany(id));
     },
 
     deleteCurrLang(lang) {

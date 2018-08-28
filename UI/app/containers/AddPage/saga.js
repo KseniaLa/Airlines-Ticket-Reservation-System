@@ -12,7 +12,9 @@ import {
   CITIES_LIST_REQUESTED,
   CITY_UPDATE_REQUESTED,
   CITY_DELETE_REQUESTED,
+  COMPANY_DELETE_REQUESTED,
   LANGUAGE_DELETE_REQUESTED,
+  COMPANY_UPDATE_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -182,6 +184,25 @@ function* deleteCity(action) {
   }
 }
 
+function* deleteCompany(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.deleteCompany + action.payload,
+      authDelete(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(deleteCitySuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield 'error';
+    }
+  } catch (e) {
+    yield 'error';
+  }
+}
+
 function* deleteLang(action) {
   try {
     const responce = yield call(
@@ -270,6 +291,25 @@ function* updateCity(action) {
   }
 }
 
+function* updateCompany(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.updateCompany + action.id,
+      authPutString(action.payload, localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(addLocationSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield put(addLocationError());
+    }
+  } catch (e) {
+    yield put(addLocationError());
+  }
+}
+
 function* addLanguage(action) {
   try {
     const responce = yield call(
@@ -301,6 +341,8 @@ export function* addSaga() {
   yield takeEvery(LANGUAGE_ADD_REQUESTED, addLanguage);
   yield takeEvery(CITIES_LIST_REQUESTED, getCityList);
   yield takeEvery(CITY_UPDATE_REQUESTED, updateCity);
+  yield takeEvery(COMPANY_UPDATE_REQUESTED, updateCompany);
   yield takeEvery(CITY_DELETE_REQUESTED, deleteCity);
+  yield takeEvery(COMPANY_DELETE_REQUESTED, deleteCompany);
   yield takeEvery(LANGUAGE_DELETE_REQUESTED, deleteLang);
 }

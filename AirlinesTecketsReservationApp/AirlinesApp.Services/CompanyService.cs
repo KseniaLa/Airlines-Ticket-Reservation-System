@@ -61,11 +61,95 @@ namespace AirlinesApp.Services
 
         }
 
+        public async Task UpdateCompany(List<TranslationModel> translations, int id)
+        {
+            Company company = await Db.Companies.FindBy(c => c.Id == id).FirstOrDefaultAsync();
+            if (company == null || translations == null || translations.Count == 0)
+            {
+                throw new LocationException();
+            }
+
+            List<Translation> transl = company.Translations.ToList();
+            foreach (var t in transl)
+            {
+                Db.Translations.Delete(t.Id);
+            }
+            translations = translations.Distinct().ToList();
+
+            // set default!!!!!!!!!!!!!!!
+
+            foreach (TranslationModel translation in translations)
+            {
+                Language lang = await Db.Languages.FindBy(l => l.Name == translation.Language)
+                    .FirstOrDefaultAsync();
+                if (lang == null)
+                {
+                    throw new LanguageException("No such language");
+                }
+
+                Translation t = new Translation
+                {
+                    Company = company,
+                    Language = lang,
+                    Value = translation.Value.ToLower(),
+                };
+                await Db.Translations.Add(t);
+            }
+
+            await Db.Save();
+        }
+
+
+        public async Task DeleteCompany(int id)
+        {
+            List<Ticket> tickets =
+                 await Db.Tickets.FindBy(t => t.CompanyId == id).ToListAsync();
+            foreach (var ticket in tickets)
+            {
+                Db.Tickets.Delete(ticket.Id);
+            }
+            List<Translation> translations =
+                 await Db.Translations.FindBy(t => t.Company.Id == id).ToListAsync();
+            foreach (var translation in translations)
+            {
+                Db.Translations.Delete(translation.Id);
+            }
+            await Db.Save();
+            Db.Companies.Delete(id);
+            await Db.Save();
+        }
+
         public async Task<List<string>> GetCompanies(string language)
         {
             List<string> companyNames = await Db.Companies.GetAll()
                 .Select(c => c.Translations.FirstOrDefault(t => t.Language.Name == language).Value ?? c.Default).ToListAsync();
             return companyNames;
+        }
+
+        public async Task<List<LocationModel>> GetCompaniesWithTranslations(string language)
+        {
+            List<Company> companies = await Db.Companies.GetAll().ToListAsync();
+            List<LocationModel> result = new List<LocationModel>();
+            foreach (var company in companies)
+            {
+                List<TranslationModel> translations = new List<TranslationModel>();
+                foreach (var translation in company.Translations.ToList())
+                {
+                    translations.Add(new TranslationModel
+                    {
+                        Language = translation.Language.Name,
+                        Value = translation.Value
+                    });
+                }
+                result.Add(new LocationModel
+                {
+                    Id = company.Id,
+                    Name = company.Translations.FirstOrDefault(t => t.Language.Name == language)?.Value ?? company.Default,
+                    Translations = translations
+                });
+            }
+
+            return result;
         }
     }
 }

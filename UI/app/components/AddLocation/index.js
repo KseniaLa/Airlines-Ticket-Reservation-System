@@ -82,17 +82,20 @@ class AddLocationForm extends React.Component {
     const list = [];
     const { addedData } = this.state;
     Object.keys(addedData).forEach((key, index) => {
+      const element = addedData[key];
       list.push(
-        <div key={index}>
+        <div key={index} className="new-item-box">
           <Select
             items={this.props.lang}
-            value={this.state.class}
+            value={element.language}
             values={this.props.values}
             notSelected
             placeholder={this.props.langTitle}
             onChange={e => this.updateSelect(key, e)}
           />
-          <TextField onUpdate={e => this.updateAddedField(key, e)} />
+          <TextField onUpdate={e => this.updateAddedField(key, e)}>
+            {element.value}
+          </TextField>
           <Button text="-" onClick={e => this.deleteAdded(key, e)} />
         </div>,
       );

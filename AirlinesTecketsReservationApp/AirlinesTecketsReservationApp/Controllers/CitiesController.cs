@@ -63,7 +63,7 @@ namespace AirlinesTicketsReservationApp.Controllers
           [HttpPut("update/{id}")]
           public async Task<IActionResult> UpdateCity([FromBody] List<TranslationModel> cityTranslations, string id)
           {
-               //await _cityService.AddCity(cityTranslations);
+               await _cityService.UpdateCity(cityTranslations, int.Parse(id));
                return Ok();
           }
 

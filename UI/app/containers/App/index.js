@@ -106,7 +106,7 @@ class App extends React.Component {
             isOpen={this.state.showModal}
             contentLabel="signIn modal"
             onRequestClose={this.handleCloseModal}
-            className="modal"
+            className="sign-modal"
             overlayClassName="overlay"
           >
             <SignIn onCloseClick={this.handleCloseModal} />

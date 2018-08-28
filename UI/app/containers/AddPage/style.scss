@@ -85,8 +85,12 @@
   margin: 5px;
   padding: 5px;
   border: 1px solid $page_color;
+}
 
-  .page-button {
+.edit-set {
+  @include flex_element(row);
+  
+  & > .page-button {
     background-color: #ff0000;
 
     &:hover {

@@ -4,7 +4,7 @@
 .header {
   position: sticky;
   top: 0px;
-  z-index: 9999;
+  z-index: 998;
   background-color: $page_color;
   @include media("<=phone"){
     position: static;

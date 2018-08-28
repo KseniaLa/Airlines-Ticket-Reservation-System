@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
+import './style.scss';
 
 class LocationPopup extends React.Component {
   constructor(props) {
@@ -17,13 +18,11 @@ class LocationPopup extends React.Component {
   render() {
     return (
       <div>
-        <button className="button" onClick={this.openModal}>
-          Edit
-        </button>
         <Popup
           open={this.state.open}
           closeOnDocumentClick
           onClose={this.closeModal}
+          trigger={<button className="edit-button">Edit</button>}
         >
           <div className="modal">{this.props.children}</div>
         </Popup>

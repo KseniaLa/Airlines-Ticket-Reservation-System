@@ -197,17 +197,22 @@ class AddPage extends React.Component {
       list.push(
         <div className="list-item" key={index}>
           {element.name}
-          <LocationPopup>
-            <AddLocation
-              id={element.id}
-              translations={element.translations}
-              lang={languages.names}
-              values={languages.values}
-              langTitle="lang"
-              onSave={this.props.updateCityTranslations}
+          <div className="edit-set">
+            <LocationPopup>
+              <AddLocation
+                id={element.id}
+                translations={element.translations}
+                lang={languages.names}
+                values={languages.values}
+                langTitle="lang"
+                onSave={this.props.updateCityTranslations}
+              />
+            </LocationPopup>
+            <Button
+              text="delete"
+              onClick={e => this.deleteCity(element.id, e)}
             />
-          </LocationPopup>
-          <Button text="delete" onClick={e => this.deleteCity(element.id, e)} />
+          </div>
         </div>,
       );
     });

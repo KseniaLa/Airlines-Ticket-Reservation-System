@@ -53,8 +53,7 @@ import {
   makeSelectLanguageAddError,
   makeSelectIsCityListReceived,
   makeSelectCityList,
-  makeSelectCityDeleted,
-  makeSelectLangDeleted,
+  makeSelectDeleted,
 } from './selectors';
 
 import messages from './messages';
@@ -143,14 +142,8 @@ class AddPage extends React.Component {
       this.getData();
     }
 
-    if (this.props.cityDeleted) {
-      Popup.plugins().successPopup('city deleted');
-      this.props.discardAll();
-      this.getData();
-    }
-
-    if (this.props.langDeleted) {
-      Popup.plugins().successPopup('lang deleted');
+    if (this.props.deleted) {
+      Popup.plugins().successPopup('deleted');
       this.props.discardAll();
       this.getData();
     }
@@ -456,7 +449,7 @@ AddPage.propTypes = {
   languages: PropTypes.any,
   cityListReceived: PropTypes.bool,
   cityList: PropTypes.any,
-  cityDeleted: PropTypes.bool,
+  deleted: PropTypes.bool,
   langDeleted: PropTypes.bool,
   addTicketGroup: PropTypes.func,
   addNewFlight: PropTypes.func,
@@ -566,8 +559,7 @@ const mapStateToProps = createStructuredSelector({
   languageAddError: makeSelectLanguageAddError(),
   cityListReceived: makeSelectIsCityListReceived(),
   cityList: makeSelectCityList(),
-  cityDeleted: makeSelectCityDeleted(),
-  langDeleted: makeSelectLangDeleted(),
+  deleted: makeSelectDeleted(),
 });
 
 export default connect(

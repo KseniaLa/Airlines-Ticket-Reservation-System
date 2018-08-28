@@ -42,8 +42,7 @@ const initialState = fromJS({
   flights: null,
   languagesReceived: false,
   languages: null,
-  cityDeleted: false,
-  langDeleted: false,
+  deleted: false,
 });
 
 const addReducer = (state = initialState, action) => {
@@ -91,9 +90,9 @@ const addReducer = (state = initialState, action) => {
     case LANGUAGES_ERROR:
       return state.set('languagesReceived', false).set('languages', null);
     case CITY_DELETED:
-      return state.set('cityDeleted', true);
+      return state.set('deleted', true);
     case LANGUAGE_DELETED:
-      return state.set('langDeleted', true);
+      return state.set('deleted', true);
     case DISCARD_STATE:
       return initialState;
     default:

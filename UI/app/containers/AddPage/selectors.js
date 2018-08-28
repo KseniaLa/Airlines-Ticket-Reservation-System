@@ -77,15 +77,8 @@ const makeSelectLanguageAdded = () =>
     searchState.get('languageAdded'),
   );
 
-const makeSelectCityDeleted = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('cityDeleted'),
-  );
-
-const makeSelectLangDeleted = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('langDeleted'),
-  );
+const makeSelectDeleted = () =>
+  createSelector(selectAddResult, searchState => searchState.get('deleted'));
 
 const makeSelectLanguageAddError = () =>
   createSelector(selectAddResult, searchState =>
@@ -111,6 +104,5 @@ export {
   makeSelectLanguageAddError,
   makeSelectIsCityListReceived,
   makeSelectCityList,
-  makeSelectCityDeleted,
-  makeSelectLangDeleted,
+  makeSelectDeleted,
 };

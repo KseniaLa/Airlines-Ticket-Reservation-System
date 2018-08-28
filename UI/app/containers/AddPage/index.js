@@ -30,6 +30,7 @@ import {
   getCitiesList,
   updateCity,
   deleteCity,
+  deleteLang,
 } from './actions';
 import {
   makeSelectIsCitiesDataReceived,
@@ -51,6 +52,7 @@ import {
   makeSelectIsCityListReceived,
   makeSelectCityList,
   makeSelectCityDeleted,
+  makeSelectLangDeleted,
 } from './selectors';
 
 import messages from './messages';
@@ -68,6 +70,7 @@ class AddPage extends React.Component {
     this.addLanguage = this.addLanguage.bind(this);
     this.getData = this.getData.bind(this);
     this.deleteCity = this.deleteCity.bind(this);
+    this.deleteLang = this.deleteLang.bind(this);
   }
 
   componentDidMount() {
@@ -138,7 +141,13 @@ class AddPage extends React.Component {
     }
 
     if (this.props.cityDeleted) {
-      Popup.plugins().successPopup('deleted');
+      Popup.plugins().successPopup('city deleted');
+      this.props.discardAll();
+      this.getData();
+    }
+
+    if (this.props.langDeleted) {
+      Popup.plugins().successPopup('lang deleted');
       this.props.discardAll();
       this.getData();
     }
@@ -185,6 +194,10 @@ class AddPage extends React.Component {
 
   deleteCity(id) {
     this.props.deleteCurrCity(id);
+  }
+
+  deleteLang(name) {
+    this.props.deleteCurrLang(name);
   }
 
   getCitiesList() {
@@ -261,6 +274,22 @@ class AddPage extends React.Component {
     return { names: nameList, values: valueList };
   }
 
+  getLangEditList() {
+    const list = [];
+    const { languages } = this.props;
+    languages.forEach((element, index) => {
+      list.push(
+        <div className="list-item" key={index}>
+          {element}
+          <div className="edit-set">
+            <Button text="delete" onClick={e => this.deleteLang(element, e)} />
+          </div>
+        </div>,
+      );
+    });
+    return list;
+  }
+
   render() {
     if (!this.props.isAuthorized || !this.props.isAdmin) {
       return (
@@ -277,6 +306,11 @@ class AddPage extends React.Component {
     const languages = this.props.langReceived
       ? this.getLangList()
       : { names: [], values: [] };
+    const langedit = this.props.langReceived ? (
+      this.getLangEditList()
+    ) : (
+      <Spinner />
+    );
     const cityList = this.props.cityListReceived
       ? this.getCityList()
       : { names: [], values: [] };
@@ -300,6 +334,9 @@ class AddPage extends React.Component {
             <FormattedMessage {...messages.addlanguage} />
           </h4>
           <AddLanguageForm onSubmit={this.addLanguage} />
+
+          <div className="list-container__list">{langedit}</div>
+
           <div className="list-container">
             <div className="list-container__list">{cities}</div>
             <div className="list-container__list">{companies}</div>
@@ -390,6 +427,7 @@ AddPage.propTypes = {
   cityListReceived: PropTypes.bool,
   cityList: PropTypes.any,
   cityDeleted: PropTypes.bool,
+  langDeleted: PropTypes.bool,
   addTicketGroup: PropTypes.func,
   addNewFlight: PropTypes.func,
   getCities: PropTypes.func,
@@ -403,6 +441,7 @@ AddPage.propTypes = {
   getCityList: PropTypes.func,
   updateCityTranslations: PropTypes.func,
   deleteCurrCity: PropTypes.func,
+  deleteCurrLang: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -458,6 +497,10 @@ export function mapDispatchToProps(dispatch) {
     deleteCurrCity(id) {
       dispatch(deleteCity(id));
     },
+
+    deleteCurrLang(lang) {
+      dispatch(deleteLang(lang));
+    },
   };
 }
 
@@ -484,6 +527,7 @@ const mapStateToProps = createStructuredSelector({
   cityListReceived: makeSelectIsCityListReceived(),
   cityList: makeSelectCityList(),
   cityDeleted: makeSelectCityDeleted(),
+  langDeleted: makeSelectLangDeleted(),
 });
 
 export default connect(

@@ -12,6 +12,7 @@ import {
   CITIES_LIST_REQUESTED,
   CITY_UPDATE_REQUESTED,
   CITY_DELETE_REQUESTED,
+  LANGUAGE_DELETE_REQUESTED,
 } from './constants';
 import {
   addTicketSuccess,
@@ -33,6 +34,7 @@ import {
   getCitiesListSuccess,
   getCitiesListError,
   deleteCitySuccess,
+  deleteLangSuccess,
 } from './actions';
 import { restoreAuth } from '../App/actions';
 import { config } from '../../utils/configLoader';
@@ -180,6 +182,25 @@ function* deleteCity(action) {
   }
 }
 
+function* deleteLang(action) {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.deleteLang + action.payload,
+      authDelete(localStorage.getItem('token')),
+    );
+    if (responce.ok) {
+      yield put(deleteLangSuccess());
+    } else if (responce.status === 401) {
+      yield put(restoreAuth());
+    } else {
+      yield 'error';
+    }
+  } catch (e) {
+    yield 'error';
+  }
+}
+
 function* getLanguages() {
   try {
     const responce = yield call(
@@ -281,4 +302,5 @@ export function* addSaga() {
   yield takeEvery(CITIES_LIST_REQUESTED, getCityList);
   yield takeEvery(CITY_UPDATE_REQUESTED, updateCity);
   yield takeEvery(CITY_DELETE_REQUESTED, deleteCity);
+  yield takeEvery(LANGUAGE_DELETE_REQUESTED, deleteLang);
 }

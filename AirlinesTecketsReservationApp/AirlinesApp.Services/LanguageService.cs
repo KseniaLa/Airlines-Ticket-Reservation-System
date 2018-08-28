@@ -23,22 +23,41 @@ namespace AirlinesApp.Services
             return languages.Select(l => l.Name).ToList();
         }
 
-         public async Task AddLanguage(string language)
-         {
-              Language testLanguage = await Db.Languages.FindBy(l =>
-                   l.Name.Equals(language, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefaultAsync();
+        public async Task AddLanguage(string language)
+        {
+            Language testLanguage = await Db.Languages.FindBy(l =>
+                 l.Name.Equals(language.Substring(0, 2), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefaultAsync();
 
-              if (testLanguage != null)
-              {
-                   return;
-              }
+            if (testLanguage != null)
+            {
+                return;
+            }
 
-              Language lang = new Language
-              {
-                   Name = language.Substring(0, 2).ToLower()
-              };
-              await Db.Languages.Add(lang);
-              await Db.Save();
-         }
-     }
+            Language lang = new Language
+            {
+                Name = language.Substring(0, 2).ToLower()
+            };
+            await Db.Languages.Add(lang);
+            await Db.Save();
+        }
+
+        public async Task DeleteLanguage(string language)
+        {
+            Language lang = await Db.Languages.FindBy(l =>
+                    l.Name.Equals(language.Substring(0, 2), StringComparison.InvariantCultureIgnoreCase))
+                .FirstOrDefaultAsync();
+            if (lang == null)
+            {
+                return;
+            }
+
+            List<Translation> transl = await Db.Translations.FindBy(t => t.Language.Id == lang.Id).ToListAsync();
+            foreach (var t in transl)
+            {
+                Db.Translations.Delete(t.Id);
+            }
+            Db.Languages.Delete(lang.Id);
+            await Db.Save();
+        }
+    }
 }

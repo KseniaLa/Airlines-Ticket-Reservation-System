@@ -19,6 +19,7 @@ import {
   LANGUAGE_ADD_SUCCEEDED,
   LANGUAGE_ADD_FAILED,
   CITY_DELETED,
+  LANGUAGE_DELETED,
   DISCARD_STATE,
 } from './constants';
 
@@ -42,6 +43,7 @@ const initialState = fromJS({
   languagesReceived: false,
   languages: null,
   cityDeleted: false,
+  langDeleted: false,
 });
 
 const addReducer = (state = initialState, action) => {
@@ -90,6 +92,8 @@ const addReducer = (state = initialState, action) => {
       return state.set('languagesReceived', false).set('languages', null);
     case CITY_DELETED:
       return state.set('cityDeleted', true);
+    case LANGUAGE_DELETED:
+      return state.set('langDeleted', true);
     case DISCARD_STATE:
       return initialState;
     default:

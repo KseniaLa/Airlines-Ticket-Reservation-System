@@ -35,5 +35,13 @@ namespace AirlinesTicketsReservationApp.Controllers
                await _languageService.AddLanguage(language);
                return Ok();
           }
-     }
+
+         [Authorize(Roles = Roles.Administrator)]
+         [HttpDelete("delete/{lang}")]
+         public async Task<IActionResult> DeleteLanguage(string lang)
+         {
+             await _languageService.DeleteLanguage(lang);
+             return Ok();
+         }
+    }
 }

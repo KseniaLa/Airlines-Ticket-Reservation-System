@@ -31,6 +31,8 @@ import {
   LANGUAGES_REQUESTED,
   LANGUAGES_SUCCESS,
   LANGUAGES_ERROR,
+  LANGUAGE_DELETE_REQUESTED,
+  LANGUAGE_DELETED,
 } from './constants';
 
 export function addTicket(ticket) {
@@ -176,6 +178,19 @@ export function deleteCity(id) {
 export function deleteCitySuccess() {
   return {
     type: CITY_DELETED,
+  };
+}
+
+export function deleteLang(lang) {
+  return {
+    type: LANGUAGE_DELETE_REQUESTED,
+    payload: lang,
+  };
+}
+
+export function deleteLangSuccess() {
+  return {
+    type: LANGUAGE_DELETED,
   };
 }
 

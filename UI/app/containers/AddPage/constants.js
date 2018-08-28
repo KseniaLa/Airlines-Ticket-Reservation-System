@@ -22,6 +22,11 @@ export const CITY_DELETE_REQUESTED = 'airlines/AddPage/CITY_DELETE_REQUESTED';
 
 export const CITY_DELETED = 'airlines/AddPage/CITY_DELETED';
 
+export const LANGUAGE_DELETE_REQUESTED =
+  'airlines/AddPage/LANGUAGE_DELETE_REQUESTED';
+
+export const LANGUAGE_DELETED = 'airlines/AddPage/LANGUAGE_DELETED';
+
 export const CITIES_LIST_REQUESTED = 'airlines/AddPage/CITIES_LIST_REQUESTED';
 
 export const CITIES_LIST_SUCCESS = 'airlines/AddPage/CITIES_LIST_SUCCESS';

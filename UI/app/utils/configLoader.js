@@ -14,6 +14,7 @@ const CONFIG = {
     companies: 'companies/',
     flights: 'flights/',
     getLanguages: 'languages',
+    deleteLang: 'languages/delete/',
     addFlight: 'flights/add',
     popularCities: 'cities/popular/',
     userHistory: 'account/iphistory',

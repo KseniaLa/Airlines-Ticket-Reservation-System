@@ -35,13 +35,13 @@ class AddLocationForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form-wrapper">
+        {this.state.isInputError && (
+          <ErrorMessage
+            text={<FormattedMessage {...messages.invalidinput} />}
+          />
+        )}
         <form className="add-language" onSubmit={this.onSubmit}>
-          {this.state.isInputError && (
-            <ErrorMessage
-              text={<FormattedMessage {...messages.invalidinput} />}
-            />
-          )}
           <TextField type="text" hint="" onUpdate={this.updateNameField} />
           <div>
             <Button text={<FormattedMessage {...messages.add} />} />

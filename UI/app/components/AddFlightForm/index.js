@@ -71,7 +71,7 @@ class AddFlightForm extends React.PureComponent {
             values={this.props.values}
             onChange={this.updateFromField}
             notSelected
-            placeholder="choose city"
+            placeholder={this.props.fromTitle}
           />
           <Select
             items={this.props.cities}
@@ -79,26 +79,8 @@ class AddFlightForm extends React.PureComponent {
             values={this.props.values}
             onChange={this.updateToField}
             notSelected
-            placeholder="choose city"
+            placeholder={this.props.toTitle}
           />
-          {/* <FormattedMessage id="app.components.AddPage.fromfield">
-            {placeholder => (
-              <TextField
-                type="text"
-                hint={placeholder}
-                onUpdate={this.updateFromField}
-              />
-            )}
-          </FormattedMessage>
-          <FormattedMessage id="app.components.AddPage.tofield">
-            {placeholder => (
-              <TextField
-                type="text"
-                hint={placeholder}
-                onUpdate={this.updateToField}
-              />
-            )}
-          </FormattedMessage> */}
         </div>
         <div className="date-time">
           <DatePicker
@@ -121,6 +103,8 @@ class AddFlightForm extends React.PureComponent {
 AddFlightForm.propTypes = {
   cities: PropTypes.array,
   values: PropTypes.array,
+  fromTitle: PropTypes.any,
+  toTitle: PropTypes.any,
   language: PropTypes.string,
   onFlightSubmit: PropTypes.func,
 };

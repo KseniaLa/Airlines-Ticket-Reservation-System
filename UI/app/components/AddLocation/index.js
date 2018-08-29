@@ -7,6 +7,7 @@ import Select from '../basic/Select';
 import TextField from '../basic/TextField';
 import ErrorMessage from '../basic/ErrorMessage';
 import './style.scss';
+import messages from './messages';
 
 class AddLocationForm extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class AddLocationForm extends React.Component {
     this.state = {
       savedData: {},
       addedData: {},
+      isInputError: false,
     };
     this.getTranslations = this.getTranslations.bind(this);
     this.getNewItems = this.getNewItems.bind(this);
@@ -149,19 +151,30 @@ class AddLocationForm extends React.Component {
   saveTranslations() {
     const translations = this.getTranslationsList();
     if (this.fieldsNotEmpty(translations)) {
+      this.setState({ isInputError: false });
       this.props.onSave(this.props.id, translations);
+    } else {
+      this.setState({ isInputError: true });
     }
   }
 
   render() {
     return (
       <div>
+        {this.state.isInputError && (
+          <ErrorMessage
+            text={<FormattedMessage {...messages.invalidinput} />}
+          />
+        )}
         <Button text="+" onClick={this.addItemToState} />
         <div className="add-location">
           {this.getTranslations()}
           {this.getNewItems()}
           <div>
-            <Button text="save" onClick={this.saveTranslations} />
+            <Button
+              text={<FormattedMessage {...messages.save} />}
+              onClick={this.saveTranslations}
+            />
           </div>
         </div>
       </div>

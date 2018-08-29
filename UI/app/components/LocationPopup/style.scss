@@ -20,9 +20,7 @@
 }
 
 .popup-content {
-  width: 20% !important;
-
-  @include media("<=tablet"){
+  @include media("<=phone"){
     width: 80% !important;
   }
 }

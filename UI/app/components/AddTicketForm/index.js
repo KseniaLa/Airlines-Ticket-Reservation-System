@@ -71,20 +71,19 @@ class AddTicketForm extends React.PureComponent {
           <Select
             items={this.props.flights}
             value={this.state.class}
-            values={this.props.values}
+            values={this.props.fvalues}
             onChange={this.onSelectFlightChange}
             notSelected
             placeholder={this.props.flightTitle}
           />
-          <FormattedMessage id="app.components.AddPage.company">
-            {placeholder => (
-              <TextField
-                type="text"
-                hint={placeholder}
-                onUpdate={this.updateCompanyField}
-              />
-            )}
-          </FormattedMessage>
+          <Select
+            items={this.props.companies}
+            value={this.state.class}
+            values={this.props.cvalues}
+            onChange={this.updateCompanyField}
+            notSelected
+            placeholder={this.props.companyTitle}
+          />
         </div>
         <div>
           <Select
@@ -133,8 +132,11 @@ class AddTicketForm extends React.PureComponent {
 
 AddTicketForm.propTypes = {
   flights: PropTypes.array,
-  values: PropTypes.array,
+  fvalues: PropTypes.array,
+  companies: PropTypes.array,
+  cvalues: PropTypes.array,
   flightTitle: PropTypes.any,
+  companyTitle: PropTypes.any,
   onTicketSubmit: PropTypes.func,
 };
 

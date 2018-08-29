@@ -1,9 +1,12 @@
 @import '../../common';
 @import '../../include-media';
 
+.form-wrapper {
+  width: 53%;
+}
+
 .add-language {
   @include flex_element(row);
-  width: 48%;
   padding: 10px;
   margin: 10px;
   align-items: center;

@@ -18,11 +18,13 @@ class LocationPopup extends React.Component {
   render() {
     return (
       <div>
+        <button className="edit-button" onClick={this.openModal}>
+          {this.props.text}
+        </button>
         <Popup
           open={this.state.open}
           closeOnDocumentClick
           onClose={this.closeModal}
-          trigger={<button className="edit-button">Edit</button>}
         >
           <div className="modal">{this.props.children}</div>
         </Popup>
@@ -32,6 +34,7 @@ class LocationPopup extends React.Component {
 }
 
 LocationPopup.propTypes = {
+  text: PropTypes.any,
   children: PropTypes.any,
 };
 

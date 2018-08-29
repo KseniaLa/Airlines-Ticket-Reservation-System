@@ -24,14 +24,16 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  ticketAddError: false,
-  ticketAdded: false,
-  flightAddError: false,
-  flightAdded: false,
-  locationAddError: false,
-  locationAdded: false,
-  languageAddError: false,
-  languageAdded: false,
+  added: false,
+  addError: false,
+  // ticketAddError: false,
+  // ticketAdded: false,
+  // flightAddError: false,
+  // flightAdded: false,
+  // locationAddError: false,
+  // locationAdded: false,
+  // languageAddError: false,
+  // languageAdded: false,
   cityListReceived: false,
   cityList: null,
   citiesReceived: false,
@@ -48,17 +50,17 @@ const initialState = fromJS({
 const addReducer = (state = initialState, action) => {
   switch (action.type) {
     case TICKETS_ADD_SUCCEEDED:
-      return state.set('ticketAdded', true).set('ticketAddError', false);
+      return state.set('added', true).set('addError', false);
     case TICKETS_ADD_FAILED:
-      return state.set('ticketAdded', false).set('ticketAddError', true);
+      return state.set('added', false).set('addError', true);
     case FLIGHT_ADD_SUCCEEDED:
-      return state.set('flightAdded', true).set('flightAddError', false);
+      return state.set('added', true).set('addError', false);
     case FLIGHT_ADD_FAILED:
-      return state.set('flightAdded', false).set('flightAddError', true);
+      return state.set('added', false).set('addError', true);
     case LANGUAGE_ADD_SUCCEEDED:
-      return state.set('languageAdded', true).set('languageAddError', false);
+      return state.set('added', true).set('addError', false);
     case LANGUAGE_ADD_FAILED:
-      return state.set('languageAdded', false).set('languageAddError', true);
+      return state.set('added', false).set('addError', true);
     case CITIES_SUCCESS:
       return state.set('citiesReceived', true).set('cities', action.payload);
     case CITIES_ERROR:
@@ -80,9 +82,9 @@ const addReducer = (state = initialState, action) => {
     case COMPANIES_ERROR:
       return state.set('companiesReceived', false).set('companies', null);
     case LOCATION_ADD_SUCCEEDED:
-      return state.set('locationAdded', true).set('locationAddError', false);
+      return state.set('added', true).set('addError', false);
     case LOCATION_ADD_FAILED:
-      return state.set('locationAdded', false).set('locationAddError', true);
+      return state.set('added', false).set('addError', true);
     case LANGUAGES_SUCCESS:
       return state
         .set('languagesReceived', true)

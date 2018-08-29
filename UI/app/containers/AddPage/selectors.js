@@ -42,66 +42,26 @@ const makeSelectIsFlightsDataReceived = () =>
 const makeSelectFlights = () =>
   createSelector(selectAddResult, searchState => searchState.get('flights'));
 
-const makeSelectLocationAdded = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('locationAdded'),
-  );
+const makeSelectAdded = () =>
+  createSelector(selectAddResult, searchState => searchState.get('added'));
 
-const makeSelectLocationAddError = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('locationAddError'),
-  );
-
-const makeSelectTicketAdded = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('ticketAdded'),
-  );
-
-const makeSelectTicketAddError = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('ticketAddError'),
-  );
-
-const makeSelectFlightAdded = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('flightAdded'),
-  );
-
-const makeSelectFlightAddError = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('flightAddError'),
-  );
-
-const makeSelectLanguageAdded = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('languageAdded'),
-  );
+const makeSelectAddError = () =>
+  createSelector(selectAddResult, searchState => searchState.get('addError'));
 
 const makeSelectDeleted = () =>
   createSelector(selectAddResult, searchState => searchState.get('deleted'));
 
-const makeSelectLanguageAddError = () =>
-  createSelector(selectAddResult, searchState =>
-    searchState.get('languageAddError'),
-  );
-
 export {
+  makeSelectAdded,
+  makeSelectAddError,
   makeSelectIsCitiesDataReceived,
   makeSelectCities,
   makeSelectIsCompaniesDataReceived,
   makeSelectCompanies,
-  makeSelectTicketAdded,
-  makeSelectTicketAddError,
-  makeSelectFlightAdded,
-  makeSelectFlightAddError,
-  makeSelectLocationAdded,
-  makeSelectLocationAddError,
   makeSelectIsFlightsDataReceived,
   makeSelectFlights,
   makeSelectIsLanguagesDataReceived,
   makeSelectLanguages,
-  makeSelectLanguageAdded,
-  makeSelectLanguageAddError,
   makeSelectIsCityListReceived,
   makeSelectCityList,
   makeSelectDeleted,

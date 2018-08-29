@@ -32,20 +32,45 @@
 
 .list-container {
   @include flex_element(row);
-  @include media("<=phone"){
+  @include media("<=tablet"){
     @include flex_element(column);
     width: 100%;
   }
 
-  &__list {
+  &__block {
     width: 50%;
+    margin: 10px;
+    @include media("<=tablet"){
+      width: 100%;
+    }
+  }
+
+  &__list {
     height: 250px;
     overflow-y: scroll;
     padding: 10px;
-    margin: 10px;
     background-color: #d3d2d3;
     border: 1px solid $page_color;
-    @include media("<=phone"){
+    @include media("<=tablet"){
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+  }
+
+  &__list--single {
+    width: 50%;
+    margin: 10px;
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #d3d2d3;
+    border: 1px solid $page_color;
+    @include media("<=tablet"){
       width: 100%;
     }
 
@@ -85,6 +110,12 @@
   margin: 5px;
   padding: 5px;
   border: 1px solid $page_color;
+
+  &__name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .edit-set {

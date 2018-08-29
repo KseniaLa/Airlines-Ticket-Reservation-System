@@ -49,4 +49,12 @@ export default defineMessages({
     id: 'app.components.AddPage.addticket',
     defaultMessage: 'Добавление билета',
   },
+  delete: {
+    id: 'app.components.AddPage.delete',
+    defaultMessage: 'Удалить',
+  },
+  edit: {
+    id: 'app.components.AddPage.edit',
+    defaultMessage: 'Изменить',
+  },
 });

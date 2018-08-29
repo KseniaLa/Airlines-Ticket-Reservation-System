@@ -35,22 +35,16 @@ import {
   deleteLang,
 } from './actions';
 import {
+  makeSelectAdded,
+  makeSelectAddError,
   makeSelectIsCitiesDataReceived,
   makeSelectCities,
   makeSelectIsCompaniesDataReceived,
   makeSelectCompanies,
-  makeSelectTicketAdded,
-  makeSelectTicketAddError,
-  makeSelectLocationAdded,
-  makeSelectLocationAddError,
   makeSelectIsFlightsDataReceived,
   makeSelectFlights,
-  makeSelectFlightAdded,
-  makeSelectFlightAddError,
   makeSelectIsLanguagesDataReceived,
   makeSelectLanguages,
-  makeSelectLanguageAdded,
-  makeSelectLanguageAddError,
   makeSelectIsCityListReceived,
   makeSelectCityList,
   makeSelectDeleted,
@@ -102,48 +96,17 @@ class AddPage extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.locationAdded) {
+    if (this.props.added) {
       this.getSuccessMsg();
       this.props.discardAll();
       this.getData();
-    } else if (this.props.locationAddError) {
-      this.getErrorMsg();
-      this.props.discardAll();
-      this.getData();
-    }
-
-    if (this.props.ticketAdded) {
-      this.getSuccessMsg();
-      this.props.discardAll();
-      this.getData();
-    } else if (this.props.ticketAddError) {
-      this.getErrorMsg();
-      this.props.discardAll();
-      this.getData();
-    }
-
-    if (this.props.flightAdded) {
-      this.getSuccessMsg();
-      this.props.discardAll();
-      this.getData();
-    } else if (this.props.flightAddError) {
-      this.getErrorMsg();
-      this.props.discardAll();
-      this.getData();
-    }
-
-    if (this.props.languageAdded) {
-      this.getSuccessMsg();
-      this.props.discardAll();
-      this.getData();
-    } else if (this.props.languageAddError) {
+    } else if (this.props.addError) {
       this.getErrorMsg();
       this.props.discardAll();
       this.getData();
     }
 
     if (this.props.deleted) {
-      Popup.plugins().successPopup('deleted');
       this.props.discardAll();
       this.getData();
     }
@@ -157,10 +120,10 @@ class AddPage extends React.Component {
     this.props.getCityList(this.props.language);
   }
 
-  addTicket(flightId, company, flightClass, price, count) {
+  addTicket(flightId, companyId, flightClass, price, count) {
     this.props.addTicketGroup({
       flightId,
-      company,
+      companyId,
       category: flightClass,
       price,
       count,
@@ -209,20 +172,24 @@ class AddPage extends React.Component {
     cities.forEach((element, index) => {
       list.push(
         <div className="list-item" key={index}>
-          {element.name}
+          <div className="list-item__name">{element.name}</div>
           <div className="edit-set">
-            <LocationPopup>
+            <LocationPopup text={<FormattedMessage {...messages.edit} />}>
               <AddLocation
                 id={element.id}
                 translations={element.translations}
                 lang={languages.names}
                 values={languages.values}
-                langTitle="lang"
+                langTitle={
+                  <FormattedMessage id="app.components.AddPage.language">
+                    {placeholder => placeholder}
+                  </FormattedMessage>
+                }
                 onSave={this.props.updateCityTranslations}
               />
             </LocationPopup>
             <Button
-              text="delete"
+              text={<FormattedMessage {...messages.delete} />}
               onClick={e => this.deleteCity(element.id, e)}
             />
           </div>
@@ -241,20 +208,24 @@ class AddPage extends React.Component {
     companies.forEach((element, index) => {
       list.push(
         <div className="list-item" key={index}>
-          {element.name}
+          <div className="list-item__name">{element.name}</div>
           <div className="edit-set">
-            <LocationPopup>
+            <LocationPopup text={<FormattedMessage {...messages.edit} />}>
               <AddLocation
                 id={element.id}
                 translations={element.translations}
                 lang={languages.names}
                 values={languages.values}
-                langTitle="lang"
+                langTitle={
+                  <FormattedMessage id="app.components.AddPage.language">
+                    {placeholder => placeholder}
+                  </FormattedMessage>
+                }
                 onSave={this.props.updateCompanyTranslations}
               />
             </LocationPopup>
             <Button
-              text="delete"
+              text={<FormattedMessage {...messages.delete} />}
               onClick={e => this.deleteCompany(element.id, e)}
             />
           </div>
@@ -275,11 +246,10 @@ class AddPage extends React.Component {
     return { names: nameList, values: valueList };
   }
 
-  getCityList() {
+  getList(list) {
     const nameList = [];
     const valueList = [];
-    const { cityList } = this.props;
-    cityList.forEach(element => {
+    list.forEach(element => {
       nameList.push(element.name);
       valueList.push(element.id);
     });
@@ -305,7 +275,10 @@ class AddPage extends React.Component {
         <div className="list-item" key={index}>
           {element}
           <div className="edit-set">
-            <Button text="delete" onClick={e => this.deleteLang(element, e)} />
+            <Button
+              text={<FormattedMessage {...messages.delete} />}
+              onClick={e => this.deleteLang(element, e)}
+            />
           </div>
         </div>,
       );
@@ -335,7 +308,10 @@ class AddPage extends React.Component {
       <Spinner />
     );
     const cityList = this.props.cityListReceived
-      ? this.getCityList()
+      ? this.getList(this.props.cityList)
+      : { names: [], values: [] };
+    const companyList = this.props.companiesReceived
+      ? this.getList(this.props.companies)
       : { names: [], values: [] };
     const cities = this.props.citiesReceived ? (
       this.getCitiesList()
@@ -356,38 +332,53 @@ class AddPage extends React.Component {
           <h4>
             <FormattedMessage {...messages.addlanguage} />
           </h4>
-          <AddLanguageForm onSubmit={this.addLanguage} />
-
-          <div className="list-container__list">{langedit}</div>
 
           <div className="list-container">
-            <div className="list-container__list">{cities}</div>
-            <div className="list-container__list">{companies}</div>
+            <AddLanguageForm onSubmit={this.addLanguage} />
+            <div className="list-container__list--single">{langedit}</div>
           </div>
-          <div className="form-container">
-            <AddLocationForm
-              onSubmit={this.addCity}
-              lang={languages.names}
-              values={languages.values}
-              title={<FormattedMessage {...messages.addcity} />}
-              langTitle={
-                <FormattedMessage id="app.components.AddPage.language">
-                  {placeholder => placeholder}
-                </FormattedMessage>
-              }
-            />
-            <AddLocationForm
-              onSubmit={this.addCompany}
-              lang={languages.names}
-              values={languages.values}
-              title={<FormattedMessage {...messages.addcompany} />}
-              langTitle={
-                <FormattedMessage id="app.components.AddPage.language">
-                  {placeholder => placeholder}
-                </FormattedMessage>
-              }
-            />
+
+          <div className="list-container">
+            <div className="list-container__block">
+              <h4>
+                <FormattedMessage {...messages.addcity} />
+              </h4>
+              <div className="list-container__list">
+                <div>{cities}</div>
+              </div>
+              <AddLocationForm
+                onSubmit={this.addCity}
+                lang={languages.names}
+                values={languages.values}
+                title={<FormattedMessage {...messages.addcity} />}
+                langTitle={
+                  <FormattedMessage id="app.components.AddPage.language">
+                    {placeholder => placeholder}
+                  </FormattedMessage>
+                }
+              />
+            </div>
+            <div className="list-container__block">
+              <h4>
+                <FormattedMessage {...messages.addcompany} />
+              </h4>
+              <div className="list-container__list">
+                <div>{companies}</div>
+              </div>
+              <AddLocationForm
+                onSubmit={this.addCompany}
+                lang={languages.names}
+                values={languages.values}
+                title={<FormattedMessage {...messages.addcompany} />}
+                langTitle={
+                  <FormattedMessage id="app.components.AddPage.language">
+                    {placeholder => placeholder}
+                  </FormattedMessage>
+                }
+              />
+            </div>
           </div>
+
           <h4>
             <FormattedMessage {...messages.addflight} />
           </h4>
@@ -396,6 +387,16 @@ class AddPage extends React.Component {
             language={this.props.language}
             cities={cityList.names}
             values={cityList.values}
+            fromTitle={
+              <FormattedMessage id="app.components.AddPage.fromfield">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
+            toTitle={
+              <FormattedMessage id="app.components.AddPage.tofield">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
           />
           <h4>
             <FormattedMessage {...messages.addticket} />
@@ -403,9 +404,16 @@ class AddPage extends React.Component {
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}
-            values={flights.values}
+            fvalues={flights.values}
+            companies={companyList.names}
+            cvalues={companyList.values}
             flightTitle={
               <FormattedMessage id="app.components.AddPage.chooseflight">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
+            companyTitle={
+              <FormattedMessage id="app.components.AddPage.company">
                 {placeholder => placeholder}
               </FormattedMessage>
             }
@@ -414,9 +422,16 @@ class AddPage extends React.Component {
           <AddTicketForm
             onTicketSubmit={this.addTicket}
             flights={flights.names}
-            values={flights.values}
+            fvalues={flights.values}
+            companies={companyList.names}
+            cvalues={companyList.values}
             flightTitle={
               <FormattedMessage id="app.components.AddPage.chooseflight">
+                {placeholder => placeholder}
+              </FormattedMessage>
+            }
+            companyTitle={
+              <FormattedMessage id="app.components.AddPage.company">
                 {placeholder => placeholder}
               </FormattedMessage>
             }
@@ -431,14 +446,8 @@ AddPage.propTypes = {
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
-  ticketAdded: PropTypes.bool,
-  ticketAddError: PropTypes.bool,
-  languageAdded: PropTypes.bool,
-  languageAddError: PropTypes.bool,
-  flightAdded: PropTypes.bool,
-  flightAddError: PropTypes.bool,
-  locationAdded: PropTypes.bool,
-  locationAddError: PropTypes.bool,
+  added: PropTypes.bool,
+  addError: PropTypes.bool,
   citiesReceived: PropTypes.bool,
   flightsReceived: PropTypes.bool,
   flights: PropTypes.any,
@@ -545,18 +554,12 @@ const mapStateToProps = createStructuredSelector({
   cities: makeSelectCities(),
   companiesReceived: makeSelectIsCompaniesDataReceived(),
   companies: makeSelectCompanies(),
-  ticketAdded: makeSelectTicketAdded(),
-  ticketAddError: makeSelectTicketAddError(),
-  flightAdded: makeSelectFlightAdded(),
-  flightAddError: makeSelectFlightAddError(),
-  locationAdded: makeSelectLocationAdded(),
-  locationAddError: makeSelectLocationAddError(),
+  added: makeSelectAdded(),
+  addError: makeSelectAddError(),
   flightsReceived: makeSelectIsFlightsDataReceived(),
   flights: makeSelectFlights(),
   langReceived: makeSelectIsLanguagesDataReceived(),
   languages: makeSelectLanguages(),
-  languageAdded: makeSelectLanguageAdded(),
-  languageAddError: makeSelectLanguageAddError(),
   cityListReceived: makeSelectIsCityListReceived(),
   cityList: makeSelectCityList(),
   deleted: makeSelectDeleted(),

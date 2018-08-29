@@ -94,10 +94,10 @@ namespace AirlinesApp.Services
 
           public async Task AddTicket(AddTicketModel ticket)
           {
-               Company company = await Db.Companies
-                    .FindBy(c => c.Translations.Any(tr => tr.Value.Equals(ticket.Company, StringComparison.InvariantCultureIgnoreCase)))
-                    .FirstOrDefaultAsync();
-               Flight testFlight = await Db.Flights
+            Company company = await Db.Companies
+                .FindBy(c => c.Id == ticket.CompanyId)
+                .FirstOrDefaultAsync();
+            Flight testFlight = await Db.Flights
                     .FindBy(fl => fl.Id == ticket.FlightId)
                     .FirstOrDefaultAsync();
 

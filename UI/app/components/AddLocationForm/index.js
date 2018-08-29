@@ -18,6 +18,7 @@ class AddLocationForm extends React.Component {
       data: [],
       inputOccured: false,
       isInputError: false,
+      editVisible: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.updateNameField = this.updateNameField.bind(this);
@@ -102,6 +103,7 @@ class AddLocationForm extends React.Component {
     e.preventDefault();
     if (!this.state.data.length) {
       this.addField();
+      this.setState({ editVisible: true });
       return;
     }
     if (this.fieldsNotEmpty(this.state.data) && this.state.inputOccured) {
@@ -125,9 +127,6 @@ class AddLocationForm extends React.Component {
   render() {
     return (
       <div>
-        <h4>{this.props.title}</h4>
-        <Button text="+" onClick={this.onAddBtnClick} />
-        <Button text="-" onClick={this.onDeleteBtnClick} />
         <form className="add-location" onSubmit={this.onSubmit}>
           {this.state.isInputError && (
             <ErrorMessage
@@ -139,6 +138,12 @@ class AddLocationForm extends React.Component {
             <Button text={<FormattedMessage {...messages.add} />} />
           </div>
         </form>
+        {this.state.editVisible && (
+          <div>
+            <Button text="+" onClick={this.onAddBtnClick} />
+            <Button text="-" onClick={this.onDeleteBtnClick} />
+          </div>
+        )}
       </div>
     );
   }

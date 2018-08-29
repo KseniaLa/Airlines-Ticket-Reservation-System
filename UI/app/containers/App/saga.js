@@ -6,7 +6,7 @@ import { logout, login } from './actions';
 
 function* logoutUser() {
   try {
-    const responce = yield call(
+    /* const responce = */ yield call(
       fetch,
       config.APIUrl + config.APIOptions.logout,
       authPost(localStorage.getItem('token')),
@@ -40,7 +40,6 @@ function* tryLogin() {
       }
     }
   } catch (e) {
-    console.log(e);
     yield put(logout());
   }
 }

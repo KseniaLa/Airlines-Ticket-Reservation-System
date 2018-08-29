@@ -8,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { config } from '../../utils/configLoader';
 import Button from '../basic/Button';
 import Select from '../basic/Select';
-import TextField from '../basic/TextField';
 import ErrorMessage from '../basic/ErrorMessage';
 import './style.scss';
 import messages from './messages';

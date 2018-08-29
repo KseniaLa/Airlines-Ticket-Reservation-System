@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`citiesReducer handles 1`] = `
+Immutable.Map {
+  "dataReceived": false,
+  "data": null,
+}
+`;
+
+exports[`citiesReducer returns the initial state 1`] = `
+Immutable.Map {
+  "dataReceived": false,
+  "data": null,
+}
+`;
+
+exports[`citiesReducer sets 1`] = `
+Immutable.Map {
+  "dataReceived": true,
+  "data": Object {},
+}
+`;
+
+exports[`citiesReducer the 1`] = `
+Immutable.Map {
+  "dataReceived": false,
+  "data": null,
+}
+`;

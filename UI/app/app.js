@@ -38,7 +38,7 @@ import './global-styles';
 
 // Create redux store with history
 const persistedState = loadState();
-const initialState = {};
+// const initialState = {};
 const history = createHistory();
 const store = configureStore(persistedState, history);
 const MOUNT_NODE = document.getElementById('app');

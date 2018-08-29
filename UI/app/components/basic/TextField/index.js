@@ -30,6 +30,7 @@ TextField.propTypes = {
   name: PropTypes.string,
   children: PropTypes.any,
   onUpdate: PropTypes.func,
+  className: PropTypes.any,
 };
 
 export default TextField;

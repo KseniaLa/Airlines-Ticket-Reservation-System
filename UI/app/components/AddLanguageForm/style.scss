@@ -3,6 +3,9 @@
 
 .form-wrapper {
   width: 53%;
+  @include media("<=tablet"){
+    width: 100%;
+  }
 }
 
 .add-language {
@@ -14,6 +17,7 @@
   border-radius: 5px;
   background-color: #d6dada;
   @include media("<=phone"){
+    @include flex_element(column);
     width: 100%;
     margin: 5px;
   }

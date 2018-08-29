@@ -136,6 +136,9 @@ class AddLocationForm extends React.Component {
   }
 
   fieldsNotEmpty(fields) {
+    if (fields.length === 0) {
+      return false;
+    }
     const hasEmpty = element => {
       if (element.value && element.language) {
         return false;

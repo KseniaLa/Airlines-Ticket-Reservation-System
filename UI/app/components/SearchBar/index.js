@@ -81,6 +81,7 @@ class SearchBar extends React.Component {
                   type="text"
                   hint={placeholder}
                   onUpdate={this.updateFromField}
+                  name="from"
                 />
               )}
             </FormattedMessage>
@@ -90,6 +91,7 @@ class SearchBar extends React.Component {
                   type="text"
                   hint={placeholder}
                   onUpdate={this.updateToField}
+                  name="to"
                 />
               )}
             </FormattedMessage>

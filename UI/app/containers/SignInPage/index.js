@@ -235,6 +235,7 @@ class SignInPage extends React.PureComponent {
                 type="text"
                 hint={placeholder}
                 onUpdate={this.updateSignInEmailField}
+                name="email"
               />
             )}
           </FormattedMessage>
@@ -245,6 +246,7 @@ class SignInPage extends React.PureComponent {
                 type="password"
                 hint={placeholder}
                 onUpdate={this.updateSignInPasswordField}
+                name="pass"
               />
             )}
           </FormattedMessage>

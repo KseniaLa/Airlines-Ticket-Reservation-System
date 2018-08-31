@@ -83,8 +83,6 @@ namespace AirlinesApp.Services
             }
             translations = translations.Distinct().ToList();
 
-            // set default!!!!!!!!!!!!!!!
-
             foreach (TranslationModel translation in translations)
             {
                 Language lang = await Db.Languages.FindBy(l => l.Name == translation.Language)

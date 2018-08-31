@@ -1,8 +1,6 @@
 ﻿using AirlinesApp.Config;
 using AirlinesApp.DataAccess.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace AirlinesApp.DataAccess
 {
@@ -31,13 +29,6 @@ namespace AirlinesApp.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //if (optionsBuilder.IsConfigured) return;
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json")
-            //    .Build();
-            //IConfigurationRoot configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
-            //var connectionString = configuration.GetConnectionString("DefaultConnection");
             var connectionString = _config.ConnectionString;
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
         }

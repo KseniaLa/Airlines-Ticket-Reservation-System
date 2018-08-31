@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess.Models.Entities;
 using AirlinesApp.DataPresentation;
-using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authorization;

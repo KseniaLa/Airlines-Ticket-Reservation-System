@@ -53,10 +53,6 @@ namespace AirlinesTicketsReservationApp.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> UpdateUser()
         {
-            //if (!await _tokenManager.IsCurrentActiveToken())
-            //{
-            //     throw new UnauthorizedException();
-            //}
             string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
             var authorizationHeader = HttpContext.Request.Headers["authorization"];
 
@@ -82,7 +78,6 @@ namespace AirlinesTicketsReservationApp.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> Register([FromBody]SignupModel user)
         {
-            //await EmailService.SendTestEmail(user.Email);
             User usr = await _accountService.SignUp(user);
             if (usr != null)
             {

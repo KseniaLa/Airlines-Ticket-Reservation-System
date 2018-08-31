@@ -183,7 +183,6 @@ class SearchResultPage extends React.PureComponent {
               pageRangeDisplayed={5}
               onChange={this.handlePageChange}
             />
-            <Button text="show all available" />
           </div>
           {content}
         </section>

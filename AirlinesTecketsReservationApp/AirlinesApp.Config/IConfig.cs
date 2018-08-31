@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AirlinesApp.Config
+﻿namespace AirlinesApp.Config
 {
     public interface IConfig
     {

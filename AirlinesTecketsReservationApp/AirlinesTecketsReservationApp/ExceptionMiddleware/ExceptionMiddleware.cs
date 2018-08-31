@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AirlinesApp.DataPresentation;
@@ -12,11 +10,9 @@ namespace AirlinesTicketsReservationApp.ExceptionMiddleware
      public class ExceptionMiddleware
      {
           private readonly RequestDelegate _next;
-          //private readonly ILoggerManager _logger;
 
           public ExceptionMiddleware(RequestDelegate next)
           {
-               //_logger = logger;
                _next = next;
           }
 
@@ -48,7 +44,6 @@ namespace AirlinesTicketsReservationApp.ExceptionMiddleware
                }
                catch (Exception ex)
                {
-                    //_logger.LogError($"Something went wrong: {ex}");
                     await HandleExceptionAsync(httpContext, ex, HttpStatusCode.InternalServerError);
                }
           }

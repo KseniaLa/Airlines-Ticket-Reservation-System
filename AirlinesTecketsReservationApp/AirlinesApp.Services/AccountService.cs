@@ -22,13 +22,6 @@ namespace AirlinesApp.Services
 
           public AccountService(IUnitOfWork unitOfWork, IMapper mapper, IConfig config) : base(unitOfWork)
           {
-               //IConfiguration configuration = new ConfigurationBuilder()
-               //    .SetBasePath(Directory.GetCurrentDirectory())
-               //    .AddJsonFile("appsettings.json").Build();
-               //IConfiguration configuration = ConfigBuilder.GetConfigRoot(Directory.GetCurrentDirectory());
-               //_iterationsCount = int.Parse(configuration["PasswordHashing:IterationsCount"]);
-               //_saltSize = int.Parse(configuration["PasswordHashing:SaltSize"]);
-               //_hashedPassSize = int.Parse(configuration["PasswordHashing:HashedPasswordSize"]);
               _saltSize = config.SaltSize;
               _iterationsCount = config.IterationsCount;
               _hashedPassSize = config.HashedPassSize;

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirlinesApp.DataPresentation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AirlinesApp.Services;
-using AirlinesApp.Exceptions;
 using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
-using Newtonsoft.Json;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {

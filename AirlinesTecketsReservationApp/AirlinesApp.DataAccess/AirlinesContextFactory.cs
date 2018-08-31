@@ -16,15 +16,6 @@ namespace AirlinesApp.DataAccess
 
         private AirlinesContext Create(string basePath, string environmentName)
         {
-            //var builder = new ConfigurationBuilder()
-            //    .SetBasePath(basePath)
-            //    .AddJsonFile("appsettings.json")
-            //    .AddJsonFile($"appsettings.{environmentName}.json", true)
-            //    .AddEnvironmentVariables();
-
-            //var builder = ConfigBuilder.GetBuilder(basePath)
-            //     .AddJsonFile($"appsettings.{environmentName}.json", true)
-            //     .AddEnvironmentVariables();
             var builder = Config.Config.GetBuilder(basePath);
 
             var config = builder.Build();

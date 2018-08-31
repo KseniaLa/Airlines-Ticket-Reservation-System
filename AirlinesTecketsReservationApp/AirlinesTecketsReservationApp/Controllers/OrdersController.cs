@@ -2,8 +2,6 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AirlinesApp.DataPresentation;
-using AirlinesApp.Exceptions;
-using AirlinesApp.Services;
 using AirlinesApp.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

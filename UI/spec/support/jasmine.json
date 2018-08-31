@@ -4,6 +4,9 @@
     "**/*.test.js"
   ],
   "helpers": [
+    "helpers/babel.js",
+    "helpers/enzyme.js",
+    "helpers/jsdom.js",
     "helpers/**/*.js"
   ],
   "stopSpecOnExpectationFailure": false,

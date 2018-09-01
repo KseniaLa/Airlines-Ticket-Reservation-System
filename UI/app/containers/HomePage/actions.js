@@ -2,6 +2,7 @@ import {
   RESULT_CITIES_REQUESTED,
   CITIES_FETCH_SUCCEEDED,
   CITIES_FETCH_FAILED,
+  RESET_CITIES,
 } from './constants';
 
 export function searchForCities(language) {
@@ -21,5 +22,11 @@ export function getCitiesSuccess(result) {
 export function getCitiesError() {
   return {
     type: CITIES_FETCH_FAILED,
+  };
+}
+
+export function resetCities() {
+  return {
+    type: RESET_CITIES,
   };
 }

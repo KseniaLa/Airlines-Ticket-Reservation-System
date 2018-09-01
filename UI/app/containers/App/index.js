@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import Popup from 'react-popup';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
@@ -14,12 +15,13 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
-import { makeSelectIsAuthorized, makeSelectIsAdmin } from './selectors';
-import { logout } from './actions';
 import {
-  searchForTickets,
-  discardDataReady,
-} from '../SearchResultPage/actions';
+  makeSelectIsAuthorized,
+  makeSelectIsAdmin,
+  makeSelectRestore,
+} from './selectors';
+import { logout, setSearch, tryLogin } from './actions';
+import { discardDataReady } from '../SearchResultPage/actions';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import { discardLogin } from '../SignInPage/actions';
@@ -27,6 +29,37 @@ import { discardLogin } from '../SignInPage/actions';
 import './style.scss';
 
 ReactModal.setAppElement('#app');
+
+Popup.registerPlugin('errorPopup', function on(content) {
+  this.create({
+    title: (
+      <div className="error">
+        <i className="fa fa-times" />
+      </div>
+    ),
+    content,
+    className: 'error',
+  });
+});
+
+Popup.registerPlugin('successPopup', function on(content) {
+  this.create({
+    title: (
+      <div className="success">
+        <i className="fa fa-check" />
+      </div>
+    ),
+    content,
+    className: 'success',
+  });
+});
+
+Popup.registerPlugin('locationPopup', function on(title, content) {
+  this.create({
+    title,
+    content,
+  });
+});
 
 class App extends React.Component {
   constructor() {
@@ -36,6 +69,16 @@ class App extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.onTryLogin();
+  }
+
+  componentDidUpdate() {
+    if (this.props.restore) {
+      this.handleOpenModal();
+    }
   }
 
   handleOpenModal() {
@@ -50,6 +93,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <div className="content">
+          <Popup wildClasses className="popup" />
           <Header
             language={this.props.language}
             isAuthorized={this.props.isAuthorized}
@@ -62,7 +106,7 @@ class App extends React.Component {
             isOpen={this.state.showModal}
             contentLabel="signIn modal"
             onRequestClose={this.handleCloseModal}
-            className="modal"
+            className="sign-modal"
             overlayClassName="overlay"
           >
             <SignIn onCloseClick={this.handleCloseModal} />
@@ -99,9 +143,11 @@ App.propTypes = {
   changeLang: PropTypes.func,
   logout: PropTypes.func,
   getTickets: PropTypes.func,
+  onTryLogin: PropTypes.func,
   language: PropTypes.string,
   isAuthorized: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  restore: PropTypes.bool,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -114,14 +160,19 @@ export function mapDispatchToProps(dispatch) {
       dispatch(changeLocale(nextLang));
     },
 
+    onTryLogin() {
+      dispatch(tryLogin());
+    },
+
     logout() {
       dispatch(logout());
       dispatch(discardLogin());
     },
 
-    getTickets(from, to, date, flightClass, lang) {
+    getTickets(from, to, date, flightClass) {
       dispatch(discardDataReady());
-      dispatch(searchForTickets(from, to, date, flightClass, lang));
+      dispatch(setSearch(from, to, date, flightClass));
+      // dispatch(searchForTickets(from, to, date, flightClass, lang));
     },
   };
 }
@@ -130,6 +181,7 @@ const mapStateToProps = createStructuredSelector({
   language: makeSelectLocale(),
   isAuthorized: makeSelectIsAuthorized(),
   isAdmin: makeSelectIsAdmin(),
+  restore: makeSelectRestore(),
 });
 
 export default connect(

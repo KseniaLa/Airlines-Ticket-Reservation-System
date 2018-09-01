@@ -13,6 +13,9 @@ const makeSelectIsModalVisible = () =>
 const makeSelectIsAuthorized = () =>
   createSelector(selectGlobal, globalState => globalState.get('isAuthorized'));
 
+const makeSelectRestore = () =>
+  createSelector(selectGlobal, globalState => globalState.get('restore'));
+
 const makeSelectUser = () =>
   createSelector(selectGlobal, globalState => globalState.get('user'));
 
@@ -29,4 +32,5 @@ export {
   makeSelectUser,
   makeSelectIsAdmin,
   makeSelectUserName,
+  makeSelectRestore,
 };

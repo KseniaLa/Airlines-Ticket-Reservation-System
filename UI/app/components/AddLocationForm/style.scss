@@ -1,0 +1,26 @@
+@import '../../common';
+@import '../../include-media';
+
+.add-location {
+  @include flex_element(column);
+  padding: 10px;
+  align-items: center;
+  background-color: #d6dada;
+
+  & > div {
+    margin: 5px;
+  }
+
+  input {
+    margin-right: 10px;
+  }
+
+  select {
+    height: 100%;
+    padding: 10px;
+
+    option {
+      height: 100%;
+    }
+  }
+}

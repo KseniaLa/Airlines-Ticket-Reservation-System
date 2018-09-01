@@ -8,4 +8,25 @@ const makeSelectIsDataReceived = () =>
 const makeSelectTickets = () =>
   createSelector(selectCartResult, searchState => searchState.get('data'));
 
-export { makeSelectIsDataReceived, makeSelectTickets };
+const makeSelectCartSubmitted = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('cartSubmitted'),
+  );
+
+const makeSelectOrderError = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('orderError'),
+  );
+
+const makeSelectDeletionOccured = () =>
+  createSelector(selectCartResult, searchState =>
+    searchState.get('deletionOccured'),
+  );
+
+export {
+  makeSelectIsDataReceived,
+  makeSelectTickets,
+  makeSelectCartSubmitted,
+  makeSelectOrderError,
+  makeSelectDeletionOccured,
+};

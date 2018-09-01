@@ -6,20 +6,32 @@ import {
   ADD_SUCCEEDED,
   ADD_FAILED,
   ADD_TICKET,
+  DISCARD_ADD_STATE,
 } from './constants';
 
-export function searchForTickets(from, to, date, flightClass, lang) {
+export function searchForTickets(
+  from,
+  to,
+  date,
+  flightClass,
+  lang,
+  count,
+  page,
+  initial,
+) {
   return {
     type: RESULT_TICKETS_REQUESTED,
-    payload: { from, to, date, flightClass },
+    payload: { from, to, date, flightClass, initial },
     language: lang,
+    itemCount: count,
+    pageNum: page,
   };
 }
 
-export function getTicketsSuccess(result) {
+export function getTicketsSuccess(tickets, count) {
   return {
     type: TICKETS_FETCH_SUCCEEDED,
-    payload: result,
+    payload: { tickets, count },
   };
 }
 
@@ -51,5 +63,11 @@ export function addTicketSuccess() {
 export function addTicketError() {
   return {
     type: ADD_FAILED,
+  };
+}
+
+export function discardAddState() {
+  return {
+    type: DISCARD_ADD_STATE,
   };
 }

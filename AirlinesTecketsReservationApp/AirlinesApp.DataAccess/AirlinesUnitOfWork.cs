@@ -5,99 +5,55 @@ using System.Threading.Tasks;
 
 namespace AirlinesApp.DataAccess
 {
-    public class AirlinesUnitOfWork
+    public class AirlinesUnitOfWork : IUnitOfWork
     {
-        private readonly AirlinesContext _db = new AirlinesContext();
-        private BaseRepository<User> _userRepository;
-        private BaseRepository<City> _cityRepository;
-        private BaseRepository<Flight> _flightRepository;
-        private BaseRepository<Ticket> _ticketRepository;
-        private BaseRepository<Translation> _translationRepository;
-        private BaseRepository<Order> _orderRepository;
+        private readonly AirlinesContext _db;
+        private readonly IServiceProvider _serviceProvider;
 
-        public BaseRepository<User> Users
+        public IGenericRepository<User> Users => GetGenericRepository<User>();
+        public IGenericRepository<City> Cities => GetGenericRepository<City>();
+        public IGenericRepository<Company> Companies => GetGenericRepository<Company>();
+        public IGenericRepository<Flight> Flights => GetGenericRepository<Flight>();
+        public IGenericRepository<Ticket> Tickets => GetGenericRepository<Ticket>();
+        public IGenericRepository<Translation> Translations => GetGenericRepository<Translation>();
+        public IGenericRepository<Language> Languages => GetGenericRepository<Language>();
+        public IGenericRepository<Order> Orders => GetGenericRepository<Order>();
+        public IGenericRepository<IpAddress> IpAddresses => GetGenericRepository<IpAddress>();
+
+        public AirlinesUnitOfWork(AirlinesContext context, IServiceProvider serviceProvider)
         {
-             get
-             {
-                  if (_userRepository == null)
-                       _userRepository = new BaseRepository<User>(_db);
-                  return _userRepository;
-             }
+            _db = context;
+            _serviceProvider = serviceProvider;
         }
 
-        public BaseRepository<City> Cities
+        private IGenericRepository<TEntity> GetGenericRepository<TEntity>() where TEntity : class
         {
-            get
-            {
-                if (_cityRepository == null)
-                    _cityRepository = new BaseRepository<City>(_db);
-                return _cityRepository;
-            }
-        }
-
-        public BaseRepository<Flight> Flights
-        {
-            get
-            {
-                if (_flightRepository == null)
-                    _flightRepository = new BaseRepository<Flight>(_db);
-                return _flightRepository;
-            }
-        }
-
-        public BaseRepository<Ticket> Tickets
-        {
-            get
-            {
-                if (_ticketRepository == null)
-                    _ticketRepository = new BaseRepository<Ticket>(_db);
-                return _ticketRepository;
-            }
-        }
-
-        public BaseRepository<Translation> Translations
-        {
-            get
-            {
-                if (_translationRepository == null)
-                    _translationRepository = new BaseRepository<Translation>(_db);
-                return _translationRepository;
-            }
-        }
-
-        public BaseRepository<Order> Orders
-        {
-            get
-            {
-                if (_orderRepository == null)
-                    _orderRepository = new BaseRepository<Order>(_db);
-                return _orderRepository;
-            }
+            return (IGenericRepository<TEntity>)_serviceProvider.GetService(typeof(IGenericRepository<TEntity>));
         }
 
         public async Task Save()
         {
-             await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
-        private bool _disposed = false;
+        private bool _disposed;
 
         public virtual void Dispose(bool disposing)
         {
-             if (!_disposed)
-             {
-                  if (disposing)
-                  {
-                       _db.Dispose();
-                  }
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _db.Dispose();
+                }
                 _disposed = true;
-             }
+            }
         }
 
         public void Dispose()
         {
-             Dispose(true);
-             GC.SuppressFinalize(this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

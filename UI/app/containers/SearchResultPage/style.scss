@@ -1,5 +1,73 @@
 @import '../../common';
 @import '../../include-media';
+$enable-rounded: true;
+$border-radius: 2px;
+$font-size-lg: 20rem;
+$line-height-lg: 20rem;
+$border-radius-lg: 2px;
+$font-size-sm: 20rem;
+$line-height-sm: 20rem;
+$border-radius-sm: 2px;
+
+@mixin pagination-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  .page-link {
+    padding: $padding-y $padding-x;
+    font-size: $font-size;
+    line-height: $line-height;
+  }
+
+  .page-item {
+    &:first-child {
+      .page-link {
+        @include border-left-radius($border-radius);
+      }
+    }
+    &:last-child {
+      .page-link {
+        @include border-right-radius($border-radius);
+      }
+    }
+  }
+}
+
+@mixin border-radius($radius: 2px) {
+  @if $enable-rounded {
+    border-radius: $radius;
+  }
+}
+
+@mixin border-top-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+  }
+}
+
+@mixin border-right-radius($radius) {
+  @if $enable-rounded {
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+}
+
+@mixin border-bottom-radius($radius) {
+  @if $enable-rounded {
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+}
+
+@mixin border-left-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+}
+
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
 
 .search {
   @include flex_element(row);
@@ -15,8 +83,34 @@
   }
 }
 
+.show-count {
+  margin: 10px;
+
+  button {
+    margin-right: 5px;
+    padding: 5px;
+  }
+}
+
+.page-controllers {
+  @include flex_element(row);
+
+  button {
+    margin: 10px;
+    background-color: #a52a2a;
+  }
+}
+
 .ticket-area {
   @include flex_element(column);
+
+  & > button {
+    align-self: center;
+    padding: 10px;
+    margin: 10px;
+    max-width: 200px;
+    background-color: #a52a2a;
+  }
 }
 
 .button-set {
@@ -45,3 +139,112 @@
   margin-bottom: 10px;
 }
 
+.pagination {
+  display: flex;
+  @include list-unstyled();
+  @include border-radius();
+  border-radius: 10px;
+  margin: 10px;
+
+  li {
+    padding: 5px 10px;
+    border: 1px solid #818080;
+    background-color: #dbdfdf;
+  }
+
+  .active {
+    font-size: 2.5rem;
+    background-color: $page_color;
+
+    a {
+      color: #ffffff;
+    }
+  }
+  
+  .disabled {
+    font-size: 2.5rem;
+    
+  }
+  
+  a {
+    font-size: 2.5rem;
+    text-decoration: none;
+    outline: none;
+    color: $page_color;
+
+    &:active {
+      color: $page_color;
+    }
+  }
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: $pagination-padding-y $pagination-padding-x;
+  margin-left: -$pagination-border-width;
+  line-height: $pagination-line-height;
+  color: $pagination-color;
+  background-color: $pagination-bg;
+  border: $pagination-border-width solid $pagination-border-color;
+
+  &:hover {
+    z-index: 2;
+    color: $pagination-hover-color;
+    text-decoration: none;
+    background-color: $pagination-hover-bg;
+    border-color: $pagination-hover-border-color;
+  }
+
+  &:focus {
+    z-index: 2;
+    outline: $pagination-focus-outline;
+    box-shadow: $pagination-focus-box-shadow;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+}
+
+.page-item {
+  &:first-child {
+    .page-link {
+      margin-left: 0;
+      @include border-left-radius($border-radius);
+    }
+  }
+  &:last-child {
+    .page-link {
+      @include border-right-radius($border-radius);
+    }
+  }
+
+  &.active .page-link {
+    z-index: 1;
+    color: $pagination-active-color;
+    background-color: $pagination-active-bg;
+    border-color: $pagination-active-border-color;
+  }
+
+  &.disabled .page-link {
+    color: $pagination-disabled-color;
+    pointer-events: none;
+    cursor: auto;
+    background-color: $pagination-disabled-bg;
+    border-color: $pagination-disabled-border-color;
+  }
+}
+
+
+//
+// Sizing
+//
+
+.pagination-lg {
+  @include pagination-size($pagination-padding-y-lg, $pagination-padding-x-lg, $font-size-lg, $line-height-lg, $border-radius-lg);
+}
+
+.pagination-sm {
+  @include pagination-size($pagination-padding-y-sm, $pagination-padding-x-sm, $font-size-sm, $line-height-sm, $border-radius-sm);
+}

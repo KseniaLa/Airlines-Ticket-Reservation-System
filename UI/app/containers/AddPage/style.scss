@@ -10,6 +10,7 @@
   margin-bottom: 20px;
   padding: 10px;
   font-size: 1.6rem;
+  text-align: center;
   @include media("<=phone"){
     align-items: center;
   }
@@ -29,75 +30,103 @@
   }
 }
 
-.info-area {
-  @include flex_element(column);
-  align-self: center;
-  width: 100%;
-  background-color: #e2e1de;
-  margin: 10px;
-  border-radius: 10px;
-  padding: 10px;
-  max-width: 900px;
+.list-container {
+  @include flex_element(row);
+  @include media("<=tablet"){
+    @include flex_element(column);
+    width: 100%;
+  }
+
+  &__block {
+    width: 50%;
+    margin: 10px;
+    @include media("<=tablet"){
+      width: 100%;
+    }
+  }
+
+  &__list {
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #d3d2d3;
+    border: 1px solid $page_color;
+    @include media("<=tablet"){
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+  }
+
+  &__list--single {
+    width: 50%;
+    margin: 10px;
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #d3d2d3;
+    border: 1px solid $page_color;
+    @include media("<=tablet"){
+      width: 100%;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+  }
+}
+
+.form-container {
+  @include flex_element(row);
+  @include media("<=large-phone"){
+    @include flex_element(column);
+    width: 100%;
+  }
 
   & > div {
-    @include flex_element(row);
-    justify-content: space-between;
-    width: 100%;
-    margin: 5px 0px;
-    @include media("<=phone"){
-      @include flex_element(column);
-    }
-  }
-
-  input {
-    width: 49%;
-    @include media("<=phone"){
+    width: 50%;
+    margin: 10px;
+    @include media("<=large-phone"){
       width: 100%;
-      margin-bottom: 10px;
     }
   }
+}
 
-  .datepicker {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #ffffff;
-    outline: none;
-    width: 100%;
-    margin: 0px;
+.error-message-container {
+  align-self: center;
+  margin: 15px;
+}
+
+.list-item {
+  @include flex_element(row);
+  justify-content: space-between;
+  text-align: left;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid $page_color;
+
+  &__name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+}
 
-  .date-time {
-    & > div {
-      width: 49%;
-      @include media("<=phone"){
-        width: 100%;
-      }
+.edit-set {
+  @include flex_element(row);
+  
+  & > .page-button {
+    background-color: #ff0000;
+
+    &:hover {
+      background-color: #ffffff;
+      color: #ff0000;
     }
   }
-
-  .react-datepicker-wrapper {
-    width: 100%;
-  }
-
-  .react-datepicker__input-container {
-    width: 100%;
-  }
-
-  select {
-    width: 49%;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    -webkit-appearance: none;
-    outline: none;
-    @include media("<=phone"){
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    option {
-      padding: 10px;
-    }
-  }
-
 }

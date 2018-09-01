@@ -1,42 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AirlinesApp.DataAccess.Models.SupportingModels;
-using AirlinesApp.Services;
+using AirlinesApp.DataAccess.Models.Entities;
+using AirlinesApp.DataPresentation;
+using AirlinesApp.Services.Interfaces;
 using AirlinesApp.TokenManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlinesTicketsReservationApp.Controllers
 {
-    [Route("api/tickets")]
-    public class TicketsController : Controller
-    {
-        private readonly TicketService _ticketService;
-        public TicketsController()
-        {
-            _ticketService = new TicketService();
-        }
+     [Route("api/tickets")]
+     public class TicketsController : Controller
+     {
+          private readonly ITicketService _ticketService;
+          private readonly ICityService _cityService;
 
 
-        [AllowAnonymous]
-        [HttpPost("search/{lang}")]
-        public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang)
-        {
-            try
-            {
-                List<TicketModel> tickets = await _ticketService.GetSearchTickets(search, lang);
-                return Ok(new { tickets });
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
+          public TicketsController(ICityService cityService, ITicketService ticketService)
+          {
+               _ticketService = ticketService;
+               _cityService = cityService;
+          }
 
-        [Authorize(Roles = Roles.Administrator)]
-        [HttpPost]
-        public void AddTickets([FromBody]string value)
-        {
-        }
-    }
+
+          [AllowAnonymous]
+          [HttpPost("search/{lang}/{count}/{page}")]
+          public async Task<IActionResult> FindTickets([FromBody]SearchModel search, string lang, int count, int page)
+          {
+               if (search.IsInitial)
+               {
+                    await _cityService.UpdateCityRating(search.To);
+               } 
+               List<Ticket> rawTickets = await _ticketService.GetRawTickets(search);
+               List<TicketModel> pageTickets = _ticketService.GetPageItems(rawTickets, lang, count, page);
+               return Ok(new { tickets = pageTickets, count = rawTickets.Count });
+          }
+
+          [Authorize(Roles = Roles.Administrator)]
+          [HttpPut("add")]
+          public async Task<IActionResult> AddTickets([FromBody]AddTicketModel ticket)
+          {
+               await _ticketService.AddTicket(ticket);
+               return Ok();
+          }
+     }
 }

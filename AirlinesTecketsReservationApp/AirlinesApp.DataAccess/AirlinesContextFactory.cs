@@ -16,11 +16,7 @@ namespace AirlinesApp.DataAccess
 
         private AirlinesContext Create(string basePath, string environmentName)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(basePath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{environmentName}.json", true)
-                .AddEnvironmentVariables();
+            var builder = Config.Config.GetBuilder(basePath);
 
             var config = builder.Build();
             var connectionString = config.GetConnectionString("DefaultConnection");
@@ -43,7 +39,7 @@ namespace AirlinesApp.DataAccess
 
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(connectionString);
-            return new AirlinesContext(optionsBuilder.Options);
+            return new AirlinesContext(optionsBuilder.Options, new Config.Config());
         }
 
     }

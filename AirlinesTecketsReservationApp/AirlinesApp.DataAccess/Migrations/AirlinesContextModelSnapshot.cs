@@ -25,6 +25,9 @@ namespace AirlinesApp.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Default")
+                        .IsRequired();
+
                     b.Property<int>("Rating");
 
                     b.Property<string>("Url")
@@ -40,6 +43,9 @@ namespace AirlinesApp.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Default")
+                        .IsRequired();
 
                     b.Property<int>("Stars");
 
@@ -62,11 +68,32 @@ namespace AirlinesApp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartureId");
-
                     b.HasIndex("DestinationId");
 
+                    b.HasIndex("DepartureId", "DestinationId", "DateTime")
+                        .IsUnique();
+
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.IpAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("IpAddr")
+                        .IsRequired();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IpAddresses");
                 });
 
             modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.Language", b =>
@@ -82,6 +109,11 @@ namespace AirlinesApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new { Id = 1, Name = "ru" },
+                        new { Id = 2, Name = "en" }
+                    );
                 });
 
             modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.Order", b =>
@@ -126,7 +158,8 @@ namespace AirlinesApp.DataAccess.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("FlightId");
+                    b.HasIndex("FlightId", "CompanyId", "Category")
+                        .IsUnique();
 
                     b.ToTable("Tickets");
                 });
@@ -183,6 +216,10 @@ namespace AirlinesApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new { Id = 1, Email = "airlines@ks.la", IsAdmin = true, Name = "airlines", PasswordHash = "ACmEat7zjCDM//KDXxqQugFlUr4TEx82LLtkRch3a9uJGvsB+WRHAs8jqIawzrxwSg==", Surname = "airlines" }
+                    );
                 });
 
             modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.Flight", b =>
@@ -195,6 +232,14 @@ namespace AirlinesApp.DataAccess.Migrations
                     b.HasOne("AirlinesApp.DataAccess.Models.Entities.City", "Destination")
                         .WithMany()
                         .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.IpAddress", b =>
+                {
+                    b.HasOne("AirlinesApp.DataAccess.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -226,11 +271,11 @@ namespace AirlinesApp.DataAccess.Migrations
 
             modelBuilder.Entity("AirlinesApp.DataAccess.Models.Entities.Translation", b =>
                 {
-                    b.HasOne("AirlinesApp.DataAccess.Models.Entities.City")
+                    b.HasOne("AirlinesApp.DataAccess.Models.Entities.City", "City")
                         .WithMany("Translations")
                         .HasForeignKey("CityId");
 
-                    b.HasOne("AirlinesApp.DataAccess.Models.Entities.Company")
+                    b.HasOne("AirlinesApp.DataAccess.Models.Entities.Company", "Company")
                         .WithMany("Translations")
                         .HasForeignKey("CompanyId");
 

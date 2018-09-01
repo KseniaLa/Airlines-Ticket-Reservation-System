@@ -3,12 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AirlinesApp.DataAccess.Models.Entities
 {
-    public class Company : Entity
-    {
-        [Required]
-        public int Stars { get; set; }
+     public class Company : Entity
+     {
+          [Required]
+          public int Stars { get; set; }
 
-        public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<Translation> Translations { get; set; }
-    }
+          [Required]
+          public string Default { get; set; }
+
+          public virtual ICollection<Ticket> Tickets { get; set; }
+          public virtual ICollection<Translation> Translations { get; set; }
+     }
 }

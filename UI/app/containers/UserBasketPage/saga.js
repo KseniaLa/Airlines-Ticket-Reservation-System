@@ -1,16 +1,84 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { TICKETS_REQUESTED } from './constants';
-import { getTicketsSuccess, getTicketsError } from './actions';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  TICKETS_REQUESTED,
+  ORDER_REQUESTED,
+  DELETE_TICKET,
+  UPDATE_TICKET,
+} from './constants';
+import {
+  getTicketsSuccess,
+  getTicketsError,
+  makeOrderSuccess,
+  makeOrderError,
+  setDeleteState,
+} from './actions';
+import { config } from '../../utils/configLoader';
+import { getTicketsPost } from '../../utils/requestBuilder';
+import { deleteTicket, updateTicket } from '../../utils/localStorageManager';
 
-function* fetchTickets() {
+function* fetchTickets(action) {
   try {
-    const tickets = JSON.parse(localStorage.getItem('cartTickets'));
-    yield put(getTicketsSuccess(tickets));
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.userCart + action.payload,
+      getTicketsPost(
+        localStorage.getItem('cartTickets'),
+        localStorage.getItem('token'),
+      ),
+    );
+    if (responce.ok) {
+      const result = yield responce.json();
+      yield put(getTicketsSuccess(result.tickets));
+    } else {
+      yield put(getTicketsError());
+    }
   } catch (e) {
     yield put(getTicketsError());
   }
 }
 
+function* sendOrder() {
+  try {
+    const responce = yield call(
+      fetch,
+      config.APIUrl + config.APIOptions.userOrder,
+      getTicketsPost(
+        localStorage.getItem('cartTickets'),
+        localStorage.getItem('token'),
+      ),
+    );
+    if (responce.ok) {
+      localStorage.removeItem('cartTickets');
+      yield put(makeOrderSuccess());
+    } else {
+      yield put(makeOrderError());
+    }
+  } catch (e) {
+    yield put(getTicketsError());
+  }
+}
+
+function* deleteFromCart(action) {
+  try {
+    deleteTicket('cartTickets', action.payload);
+    yield put(setDeleteState(true));
+  } catch (e) {
+    yield setDeleteState(false);
+  }
+}
+
+function* updateCount(action) {
+  try {
+    updateTicket('cartTickets', action.payload.ticket, action.payload.count);
+    yield 'ok';
+  } catch (e) {
+    yield 'error';
+  }
+}
+
 export function* cartSaga() {
   yield takeEvery(TICKETS_REQUESTED, fetchTickets);
+  yield takeEvery(ORDER_REQUESTED, sendOrder);
+  yield takeEvery(DELETE_TICKET, deleteFromCart);
+  yield takeEvery(UPDATE_TICKET, updateCount);
 }

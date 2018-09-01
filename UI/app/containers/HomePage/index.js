@@ -7,18 +7,22 @@ import { createStructuredSelector } from 'reselect';
 import messages from './messages';
 
 import './style.scss';
-import mainImage from '../../images/plane.png';
-import cityImage2 from '../../images/saintp.jpg';
+import Spinner from '../../components/basic/Spinner';
 import ImageSearch from '../../components/ImageSearch';
 import TextImageBlock from '../../components/TextImageBlock';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 import { makeSelectIsDataReceived, makeSelectCities } from './selectors';
-import { searchForCities } from './actions';
+import { searchForCities, resetCities } from './actions';
+import { config } from '../../utils/configLoader';
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
     this.props.getCities(this.props.language);
+  }
+
+  componentWillUnmount() {
+    this.props.discardCities();
   }
 
   getData() {
@@ -28,10 +32,22 @@ class HomePage extends React.PureComponent {
       list.push(
         <div key={cities[i].id}>
           <div className="imageset-box__item">
-            <TextImageBlock image={cityImage2} text={cities[i].name} />
+            <TextImageBlock
+              image={
+                cities[i].url === 'no' ? config.defaultImage : cities[i].url
+              }
+              text={cities[i].name}
+            />
           </div>
           <div className="imageset-box__item">
-            <TextImageBlock image={cityImage2} text={cities[i + 1].name} />
+            <TextImageBlock
+              image={
+                cities[i + 1].url === 'no'
+                  ? config.defaultImage
+                  : cities[i + 1].url
+              }
+              text={cities[i + 1].name}
+            />
           </div>
         </div>,
       );
@@ -40,11 +56,11 @@ class HomePage extends React.PureComponent {
   }
 
   render() {
-    const popularCities = this.props.dataReady ? this.getData() : null;
+    const popularCities = this.props.dataReady ? this.getData() : <Spinner />;
     return (
       <section className="container-flex">
         <ImageSearch
-          image={mainImage}
+          image="plane.png"
           onSearch={this.props.onSearch}
           language={this.props.language}
         />
@@ -62,15 +78,20 @@ class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   language: PropTypes.string,
   dataReady: PropTypes.bool,
-  cities: PropTypes.array,
+  cities: PropTypes.any,
   getCities: PropTypes.func,
   onSearch: PropTypes.func,
+  discardCities: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     getCities(language) {
       dispatch(searchForCities(language));
+    },
+
+    discardCities() {
+      dispatch(resetCities());
     },
   };
 }

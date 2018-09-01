@@ -68,6 +68,9 @@ module.exports = {
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
     'react/no-array-index-key': 1,
+    'no-plusplus': 1,
+    'no-prototype-builtins': 1,
+    'global-require': 1,
   },
   settings: {
     'import/resolver': {

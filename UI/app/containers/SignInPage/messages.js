@@ -43,7 +43,15 @@ export default defineMessages({
   },
   invalidinput: {
     id: 'app.components.SignInPage.invalidinput',
-    defaultMessage: 'Некоторые поля не заполнены',
+    defaultMessage: 'Некоторые поля содержат некорректные значения либо пусты',
+  },
+  invalidpass: {
+    id: 'app.components.SignInPage.invalidpass',
+    defaultMessage: 'Минимальная длина пароля - 8 символов',
+  },
+  invalidemail: {
+    id: 'app.components.SignInPage.invalidemail',
+    defaultMessage: 'Неверный формат электронной почты',
   },
   invalidemailpassword: {
     id: 'app.components.SignInPage.invalidemailpassword',
@@ -60,5 +68,9 @@ export default defineMessages({
   shortpassword: {
     id: 'app.components.SignInPage.shortpassword',
     defaultMessage: 'Пароль должен быть длиннее 8 символов',
+  },
+  userexists: {
+    id: 'app.components.SignInPage.userexists',
+    defaultMessage: 'Пользователь с таким e-mail уже зарегистрирован',
   },
 });

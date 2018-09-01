@@ -1,6 +1,11 @@
 @import '../../../common';
 @import '../../../include-media';
 
+.select-wrapper {
+  height: 70px;
+  overflow: auto;
+}
+
 .select {
   padding: 0px 10px;
   background-color: #ffffff;

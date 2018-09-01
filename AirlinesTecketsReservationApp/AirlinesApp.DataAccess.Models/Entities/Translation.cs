@@ -8,5 +8,7 @@ namespace AirlinesApp.DataAccess.Models.Entities
         public string Value { get; set; }
 
         public virtual Language Language { get; set; }
+        public virtual City City { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

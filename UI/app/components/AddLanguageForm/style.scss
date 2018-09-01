@@ -1,0 +1,32 @@
+@import '../../common';
+@import '../../include-media';
+
+.form-wrapper {
+  width: 53%;
+  @include media("<=tablet"){
+    width: 100%;
+  }
+}
+
+.add-language {
+  @include flex_element(row);
+  padding: 10px;
+  margin: 10px;
+  align-items: center;
+  align-self: center;
+  border-radius: 5px;
+  background-color: #d6dada;
+  @include media("<=phone"){
+    @include flex_element(column);
+    width: 100%;
+    margin: 5px;
+  }
+
+  button {
+    padding: 10px;
+  }
+
+  input {
+    margin-right: 10px;
+  }
+}

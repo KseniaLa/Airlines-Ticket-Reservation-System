@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import 'moment/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../basic/Button';
 import TextField from '../basic/TextField';
 import Select from '../basic/Select';
 import ErrorMessage from '../basic/ErrorMessage';
+import { config } from '../../utils/configLoader';
 
 import localMessages from './messages';
 import './style.scss';
+
+moment.locale('ru', config.locale_ru);
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -41,13 +45,7 @@ class SearchBar extends React.Component {
     if (this.state.from !== '' && this.state.to !== '') {
       this.setState({ isInputError: false });
       const { from, to, flightClass, startDate } = this.state;
-      this.props.onSearch(
-        from,
-        to,
-        startDate._d,
-        flightClass,
-        this.props.language,
-      );
+      this.props.onSearch(from, to, startDate, flightClass);
       this.props.history.push('/results');
     } else {
       this.setState({ isInputError: true });
@@ -67,6 +65,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    moment.locale(this.props.language);
     return (
       <div>
         {this.state.isInputError && (
@@ -82,6 +81,7 @@ class SearchBar extends React.Component {
                   type="text"
                   hint={placeholder}
                   onUpdate={this.updateFromField}
+                  name="from"
                 />
               )}
             </FormattedMessage>
@@ -91,6 +91,7 @@ class SearchBar extends React.Component {
                   type="text"
                   hint={placeholder}
                   onUpdate={this.updateToField}
+                  name="to"
                 />
               )}
             </FormattedMessage>
@@ -100,6 +101,7 @@ class SearchBar extends React.Component {
               selected={this.state.startDate}
               onChange={this.handleChange}
               className="field datepic"
+              timeFormat="HH:mm"
             />
             <Select
               items={[
@@ -116,6 +118,7 @@ class SearchBar extends React.Component {
               value={this.state.class}
               values={['business', 'first', 'budget']}
               onChange={this.onSelectValueChange}
+              notSelected={false}
             />
           </div>
           <div className="search-bar__button">

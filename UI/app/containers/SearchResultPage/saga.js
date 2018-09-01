@@ -8,18 +8,21 @@ import {
 } from './actions';
 import { config } from '../../utils/configLoader';
 import { searchPost } from '../../utils/requestBuilder';
+import { addTicket } from '../../utils/localStorageManager';
 
 function* fetchTickets(action) {
   try {
-    const { from, to, date, flightClass } = action.payload;
+    const { from, to, date, flightClass, initial } = action.payload;
     const responce = yield call(
       fetch,
-      config.APIUrl + config.APIOptions.resultTickets + action.language,
-      searchPost(from, to, date, flightClass),
+      `${config.APIUrl + config.APIOptions.resultTickets + action.language}/${
+        action.itemCount
+      }/${action.pageNum}`,
+      searchPost(from, to, date, flightClass, initial),
     );
     if (responce.ok) {
       const result = yield responce.json();
-      yield put(getTicketsSuccess(result.tickets));
+      yield put(getTicketsSuccess(result.tickets, result.count));
     } else {
       yield put(getTicketsError());
     }
@@ -30,15 +33,11 @@ function* fetchTickets(action) {
 
 function* addTicketToStorage(action) {
   try {
-    if (localStorage.getItem('cartTickets') === null) {
-      localStorage.setItem('cartTickets', JSON.stringify([action.payload]));
+    if (addTicket('cartTickets', action.payload)) {
+      yield put(addTicketSuccess());
     } else {
-      const currTickets = JSON.parse(localStorage.getItem('cartTickets'));
-      currTickets.push = [].push;
-      currTickets.push(action.payload);
-      localStorage.setItem('cartTickets', JSON.stringify(currTickets));
+      yield put(addTicketError());
     }
-    yield put(addTicketSuccess());
   } catch (e) {
     yield put(addTicketError());
   }

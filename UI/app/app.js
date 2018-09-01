@@ -29,7 +29,7 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
-
+import { loadState, saveState } from './localStorage';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
@@ -37,10 +37,16 @@ import { translationMessages } from './i18n';
 import './global-styles';
 
 // Create redux store with history
-const initialState = {};
+const persistedState = loadState();
+// const initialState = {};
 const history = createHistory();
-const store = configureStore(initialState, history);
+const store = configureStore(persistedState, history);
 const MOUNT_NODE = document.getElementById('app');
+
+store.subscribe(() => {
+  saveState(store.getState());
+  // saveState({global: store.getState().get('global')});
+});
 
 const render = messages => {
   ReactDOM.render(

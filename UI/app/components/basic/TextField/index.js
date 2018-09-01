@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 class TextField extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.checkIsError = this.checkIsError.bind(this);
-  }
-
-  checkIsError() {
-    return this.props.isError ? 'error-field' : 'field';
-  }
-
   render() {
+    let elemClass;
+    if (this.props.className !== undefined) {
+      elemClass = this.props.className;
+    } else {
+      elemClass = 'field';
+    }
     return (
       <input
-        className="field"
+        className={elemClass}
         type={this.props.type}
         placeholder={this.props.hint}
         min="1"
+        value={this.props.children}
         name={this.props.name}
         onChange={this.props.onUpdate}
       />
@@ -30,8 +28,9 @@ TextField.propTypes = {
   type: PropTypes.string,
   hint: PropTypes.string,
   name: PropTypes.string,
+  children: PropTypes.any,
   onUpdate: PropTypes.func,
-  isError: PropTypes.bool,
+  className: PropTypes.any,
 };
 
 export default TextField;

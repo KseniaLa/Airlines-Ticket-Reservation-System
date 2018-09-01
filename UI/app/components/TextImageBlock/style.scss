@@ -17,8 +17,9 @@
 
     }
 
-    .textimage-block__title {
+    &__title {
       padding: 10px;
+      text-transform: capitalize;
       text-align: center;
 
       h3 {

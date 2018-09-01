@@ -5,14 +5,74 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Button from '../../components/basic/Button';
+import ErrorMessage from '../../components/basic/ErrorMessage';
+import Spinner from '../../components/basic/Spinner';
+import EmptyResult from '../../components/EmptyResult';
 import UserBasketPage from '../UserBasketPage';
 import UserTicketsPage from '../UserTicketsPage';
-import { makeSelectUserName } from '../App/selectors';
+import { makeSelectUserName, makeSelectIsAuthorized } from '../App/selectors';
+import {
+  makeSelectIsIpDataReceived,
+  makeSelectUserIpHistory,
+} from './selectors';
 import './style.scss';
 import messages from './messages';
+import { getUserIpHistory } from './actions';
 
 class UserPage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.getUserHistory = this.getUserHistory.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthorized) {
+      this.props.getHistory();
+    }
+  }
+
+  getUserHistory() {
+    const list = [];
+    const { history } = this.props;
+    history.forEach(element => {
+      list.push(
+        <tr key={element.id}>
+          <td>{element.ipAddr}</td>
+          <td>{element.date}</td>
+        </tr>,
+      );
+    });
+    if (list.length === 0) {
+      return <EmptyResult />;
+    }
+    return list;
+  }
+
   render() {
+    if (!this.props.isAuthorized) {
+      return (
+        <div className="container-flex">
+          <div className="error-message-container">
+            <ErrorMessage text={<FormattedMessage {...messages.forbidden} />} />
+          </div>
+        </div>
+      );
+    }
+    const history = this.props.dataReady ? (
+      <table className="ip-table">
+        <tbody>
+          <tr>
+            <th>IP</th>
+            <th>
+              <FormattedMessage {...messages.date} />
+            </th>
+          </tr>
+          {this.getUserHistory()}
+        </tbody>
+      </table>
+    ) : (
+      <Spinner />
+    );
     return (
       <div className="container-flex">
         <section className="user-card">
@@ -34,6 +94,7 @@ class UserPage extends React.PureComponent {
               <Route exact path="/user/tickets" component={UserTicketsPage} />
               <Route exact path="/user/basket" component={UserBasketPage} />
             </Switch>
+            {history}
           </div>
         </section>
       </div>
@@ -43,13 +104,28 @@ class UserPage extends React.PureComponent {
 
 UserPage.propTypes = {
   userName: PropTypes.string,
+  isAuthorized: PropTypes.bool,
+  history: PropTypes.any,
+  dataReady: PropTypes.bool,
+  getHistory: PropTypes.func,
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    getHistory() {
+      dispatch(getUserIpHistory());
+    },
+  };
+}
 
 const mapStateToProps = createStructuredSelector({
   userName: makeSelectUserName(),
+  isAuthorized: makeSelectIsAuthorized(),
+  history: makeSelectUserIpHistory(),
+  dataReady: makeSelectIsIpDataReceived(),
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(UserPage);

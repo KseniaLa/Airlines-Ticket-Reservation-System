@@ -5,11 +5,52 @@ const CONFIG = {
   APIUrl: 'http://localhost:57730/api/',
   APIOptions: {
     login: 'account/login',
+    updateUser: 'account/update',
+    logout: 'account/tokens/cancel',
     signup: 'account/signup',
     getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',
-    popularCities: 'cities/',
+    cities: 'cities/',
+    companies: 'companies/',
+    flights: 'flights/',
+    getLanguages: 'languages',
+    deleteLang: 'languages/delete/',
+    addFlight: 'flights/add',
+    popularCities: 'cities/popular/',
+    userHistory: 'account/iphistory',
+    userCart: 'orders/cart/',
+    userOrder: 'orders/cart/submit',
+    ticketCancellation: 'orders/userorders/cancel',
+    addTickets: 'tickets/add',
+    getCityList: 'cities/list/',
+    updateCity: 'cities/update/',
+    updateCompany: 'companies/update/',
+    addCity: 'cities/add',
+    deleteCity: 'cities/delete/',
+    deleteCompany: 'companies/delete/',
+    addCompany: 'companies/add',
+    addLanguage: 'languages/add',
   },
+  locale_ru: {
+    months: 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'.split(
+      '_',
+    ),
+    monthsShort: 'Янв._Фев._Мар_Aпр._Май_Июн_Июл._Авг_Сен._Окт._Ноя._Дек.'.split(
+      '_',
+    ),
+    monthsParseExact: true,
+    weekdays: 'Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота'.split(
+      '_',
+    ),
+    weekdaysShort: 'Вс._Пн._Вт._Ср._Чт._Пт._Сб.'.split('_'),
+    weekdaysMin: 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
+    weekdaysParseExact: true,
+    week: {
+      dow: 1,
+      doy: 4,
+    },
+  },
+  defaultImage: 'default.jpg',
 };
 
 export const config = CONFIG;

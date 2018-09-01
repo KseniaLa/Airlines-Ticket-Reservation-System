@@ -48,13 +48,31 @@ export function authGet(token) {
   };
 }
 
+export function authPost(token) {
+  return {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
+export function authDelete(token) {
+  return {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 export function emptyGet() {
   return {
     method: 'GET',
   };
 }
 
-export function searchPost(from, to, date, flightClass) {
+export function searchPost(from, to, date, flightClass, initial) {
   return {
     ...getJsonTypePost(),
     body: JSON.stringify({
@@ -62,6 +80,56 @@ export function searchPost(from, to, date, flightClass) {
       to,
       date,
       flightClass,
+      isInitial: initial,
     }),
+  };
+}
+
+export function getTicketsPost(ticketsArr, token) {
+  return {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body:
+      ticketsArr === null ? JSON.stringify('[]') : JSON.stringify(ticketsArr),
+  };
+}
+
+export function cancelTicketPost(ticketId, token) {
+  return {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: ticketId,
+  };
+}
+
+export function authPut(content, token) {
+  return {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(content),
+  };
+}
+
+export function authPutString(content, token) {
+  return {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(content),
   };
 }

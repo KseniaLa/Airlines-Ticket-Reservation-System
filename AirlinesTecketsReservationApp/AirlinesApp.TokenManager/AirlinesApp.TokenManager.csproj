@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
@@ -12,10 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirlinesApp.Config\AirlinesApp.Config.csproj" />
     <ProjectReference Include="..\AirlinesApp.DataAccess.Models\AirlinesApp.DataAccess.Models.csproj" />
+    <ProjectReference Include="..\AirlinesApp.DataAccess\AirlinesApp.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.abstractions\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Server.IISIntegration">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.server.iisintegration\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Server.IISIntegration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
       <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
     </Reference>

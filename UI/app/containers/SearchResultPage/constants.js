@@ -15,3 +15,5 @@ export const ADD_TICKET = 'airlines/SearchResultPage/ADD_TICKET';
 export const ADD_SUCCEEDED = 'airlines/SearchResultPage/ADD_SUCCEEDED';
 
 export const ADD_FAILED = 'airlines/SearchResultPage/ADD_FAILED';
+
+export const DISCARD_ADD_STATE = 'airlines/SearchResultPage/DISCARD_ADD_STATE';

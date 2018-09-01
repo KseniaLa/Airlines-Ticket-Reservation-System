@@ -9,4 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 export const LOGOUT = 'airlines/App/LOGOUT';
+export const TRY_LOGIN = 'airlines/App/TRY_LOGIN';
 export const SIGN_IN = 'airlines/App/SIGN_IN';
+export const SET_SEARCH = 'airlines/App/SET_SERCH';
+export const RESTORE = 'airlines/App/RESTORE';

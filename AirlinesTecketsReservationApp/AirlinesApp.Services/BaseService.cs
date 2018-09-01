@@ -2,13 +2,13 @@
 
 namespace AirlinesApp.Services
 {
-    public class BaseService
+    public abstract class BaseService
     {
-        protected AirlinesUnitOfWork Db;
+        protected IUnitOfWork Db;
 
-        public BaseService()
+        public BaseService(IUnitOfWork unitOfWork)
         {
-            Db = new AirlinesUnitOfWork();
+            Db = unitOfWork;
         }
     }
 }

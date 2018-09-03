@@ -37,12 +37,13 @@ namespace AirlinesApp.Services
             byte[] cipherTextBytes = memoryStream.ToArray();
             memoryStream.Close();
             cryptoStream.Close();
-            return Convert.ToBase64String(cipherTextBytes);
+            return EncodeBase64(Convert.ToBase64String(cipherTextBytes));
         }
 
         public string Decrypt(string cipherText)
         {
             byte[] initVectorBytes = Encoding.UTF8.GetBytes(_initVector);
+            cipherText = DecodeBase64(cipherText);
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             PasswordDeriveBytes password = new PasswordDeriveBytes(_key, null);
             byte[] keyBytes = password.GetBytes(_keySize / 8);
@@ -57,5 +58,23 @@ namespace AirlinesApp.Services
             cryptoStream.Close();
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
+
+         private string EncodeBase64(string input)
+         {
+              char[] padding = { '=' };
+              return input.TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+          }
+
+         private string DecodeBase64(string input)
+         {
+              string result = input.Replace('_', '/').Replace('-', '+');
+              switch (input.Length % 4)
+              {
+                   case 2: result += "=="; break;
+                   case 3: result += "="; break;
+              }
+
+              return result;
+         }
     }
 }

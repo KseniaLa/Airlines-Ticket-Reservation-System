@@ -14,6 +14,7 @@ import {
 import { confirmEmail } from './actions';
 import SuccessMessage from '../../components/basic/SuccessMessage';
 import ErrorMessage from '../../components/basic/ErrorMessage';
+import Spinner from '../../components/basic/Spinner';
 
 class ConfirmedPage extends React.PureComponent {
   componentDidMount() {
@@ -22,12 +23,19 @@ class ConfirmedPage extends React.PureComponent {
   }
 
   render() {
-    return (
-      <section className="container-flex">
+    let content;
+    if (!this.props.confirmed && !this.props.confirmationError) {
+      content = <Spinner />;
+    } else if (this.props.confirmed) {
+      content = (
         <SuccessMessage text={<FormattedMessage {...messages.confirmed} />} />
+      );
+    } else {
+      content = (
         <ErrorMessage text={<FormattedMessage {...messages.confirmerror} />} />
-      </section>
-    );
+      );
+    }
+    return <section className="container-flex">{content}</section>;
   }
 }
 

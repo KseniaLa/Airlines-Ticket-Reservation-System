@@ -33,5 +33,9 @@ namespace AirlinesApp.Config
         public string Audience => _configuration["Audience"];
         public int Lifetime => int.Parse(_configuration["JWTLifetime"]);
         public string ConnectionString => _configuration["ConnectionStrings:DefaultConnection"];
+
+        public string InitVector => _configuration["Security:InitVector"];
+        public string Key => _configuration["Security:Key"];
+        public int KeySize => int.Parse(_configuration["Security:KeySize"]);
     }
 }

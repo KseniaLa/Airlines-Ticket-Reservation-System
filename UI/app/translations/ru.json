@@ -78,5 +78,7 @@
   "app.components.SignInPage.autherror": "Ошибка авторизации. Повторите запрос позже",
   "app.components.SignInPage.shortpassword": "Пароль должен быть длиннее 8 символов",
   "app.components.empty.notfound": "Ничего не найдено",
-  "app.components.AddPage.addgroup": "добавить группу"
+  "app.components.AddPage.addgroup": "добавить группу",
+  "app.components.ConfirmedPage.confirmed": "Ваш e-mail успешно подтвержден",
+  "app.components.ConfirmedPage.confirmerror": "Ошибка подтверждения e-mail"
 }

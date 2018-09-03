@@ -49,7 +49,9 @@ namespace AirlinesApp.DataAccess
                 Surname = "airlines",
                 Email = "airlines@ks.la",
                 PasswordHash = "ACmEat7zjCDM//KDXxqQugFlUr4TEx82LLtkRch3a9uJGvsB+WRHAs8jqIawzrxwSg==",
-                IsAdmin = true
+                IsAdmin = true,
+                Confirmed = true,
+                Token = "notoken"
             });
 
             modelBuilder.Entity<Language>().HasData(new Language { Id = 1, Name = "ru" }, new Language { Id = 2, Name = "en" });

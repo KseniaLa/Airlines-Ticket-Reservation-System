@@ -23,6 +23,12 @@ namespace AirlinesApp.DataAccess.Models.Entities
         [Required]
         public bool IsAdmin { get; set; }
 
+        [Required]
+        public bool Confirmed { get; set; }
+
+        [Required]
+        public string Token { get; set; }
+
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

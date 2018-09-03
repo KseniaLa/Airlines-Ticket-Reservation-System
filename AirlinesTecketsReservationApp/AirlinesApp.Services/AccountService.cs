@@ -74,6 +74,22 @@ namespace AirlinesApp.Services
             return null;
         }
 
+        public async Task<User> ConfirmEmail(string token)
+        {
+            User user = await Db.Users.FindBy(u => u.Token == token).FirstOrDefaultAsync();
+            if (user == null) return null;
+            string email = _encryptionService.Decrypt(token);
+            if (user.Email == email)
+            {
+                user.Confirmed = true;
+                Db.Users.Update(user);
+                await Db.Save();
+                return user;
+            }
+
+            return null;
+        }
+
         public async Task<User> GetUserByEmail(string email)
         {
             User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();

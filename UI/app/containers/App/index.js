@@ -129,7 +129,7 @@ class App extends React.Component {
                 />
               )}
             />
-            <Route exact path="/confirm" component={ConfirmedPage} />
+            <Route path="/confirm" component={ConfirmedPage} />
             <Route path="/user" component={UserPage} />
             <Route exact path="/add" component={AddPage} />
             <Route component={NotFoundPage} />

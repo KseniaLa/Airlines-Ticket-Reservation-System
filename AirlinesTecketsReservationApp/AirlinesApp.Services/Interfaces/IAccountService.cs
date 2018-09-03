@@ -11,5 +11,7 @@ namespace AirlinesApp.Services.Interfaces
         Task<User> SignUp(SignupModel registrationInfo);
 
         Task<User> GetUserByEmail(string email);
+
+        Task<User> ConfirmEmail(string token);
     }
 }

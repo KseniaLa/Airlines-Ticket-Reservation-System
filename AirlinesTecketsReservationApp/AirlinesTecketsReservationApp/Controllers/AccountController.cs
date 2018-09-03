@@ -49,6 +49,18 @@ namespace AirlinesTicketsReservationApp.Controllers
             return BadRequest();
         }
 
+        [AllowAnonymous]
+        [HttpGet("confirm/{token}")]
+        public async Task<IActionResult> ConfirmEmail(string token)
+        {
+            User usr = await _accountService.ConfirmEmail(token);
+            if (usr != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
         [Authorize]
         [HttpPost("update")]
         public async Task<IActionResult> UpdateUser()

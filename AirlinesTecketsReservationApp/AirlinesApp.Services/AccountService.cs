@@ -113,7 +113,6 @@ namespace AirlinesApp.Services
             await _emailService.SendEmail(email, subject, message);
         }
 
-
         private string HashPassword(string password)
         {
             byte[] salt;

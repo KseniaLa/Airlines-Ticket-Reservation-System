@@ -37,5 +37,12 @@ namespace AirlinesApp.Config
         public string InitVector => _configuration["Security:InitVector"];
         public string Key => _configuration["Security:Key"];
         public int KeySize => int.Parse(_configuration["Security:KeySize"]);
+
+        public string SenderEmail => _configuration["SenderEmail"];
+        public string SenderName => _configuration["SenderName"];
+        public string SenderPassword => _configuration["SenderPassword"];
+        public string SmtpServer => _configuration["SmtpServer"];
+        public int SmtpPort => int.Parse(_configuration["SmtpPort"]);
+        public string ConfirmationLink => _configuration["ConfirmationLink"];
     }
 }

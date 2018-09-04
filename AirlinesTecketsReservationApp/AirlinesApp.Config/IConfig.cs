@@ -12,5 +12,11 @@
         string InitVector { get; }
         string Key { get; }
         int KeySize { get; }
+        string SenderEmail { get; }
+        string SenderName { get; }
+        string SenderPassword { get; }
+        string SmtpServer { get; }
+        int SmtpPort { get; }
+        string ConfirmationLink { get; }
     }
 }

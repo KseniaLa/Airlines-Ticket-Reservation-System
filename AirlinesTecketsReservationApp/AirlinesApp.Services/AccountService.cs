@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using AirlinesApp.DataAccess;
 using AirlinesApp.Services.Interfaces;
@@ -20,14 +21,20 @@ namespace AirlinesApp.Services
         private readonly int _hashedPassSize;
         private readonly IMapper _mapper;
         private readonly IEncryptionService _encryptionService;
+        private readonly IEmailService _emailService;
+        private readonly IConfig _config;
 
-        public AccountService(IUnitOfWork unitOfWork, IMapper mapper, IConfig config, IEncryptionService encryptor) : base(unitOfWork)
+        public AccountService(IUnitOfWork unitOfWork, IMapper mapper,
+                              IConfig config, IEncryptionService encryptor,
+                              IEmailService emailService) : base(unitOfWork)
         {
             _saltSize = config.SaltSize;
             _iterationsCount = config.IterationsCount;
             _hashedPassSize = config.HashedPassSize;
+            _config = config;
             _mapper = mapper;
             _encryptionService = encryptor;
+            _emailService = emailService;
         }
 
         public async Task<User> TryAuthenticate(string email, string password)
@@ -68,6 +75,8 @@ namespace AirlinesApp.Services
                 await Db.Users.Add(user);
                 await Db.Save();
 
+                await SendConfirmationEmail(user.Email, user.Token);
+
                 return user;
             }
 
@@ -94,6 +103,14 @@ namespace AirlinesApp.Services
         {
             User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
             return user;
+        }
+
+        private async Task SendConfirmationEmail(string email, string token)
+        {
+            string subject = "Confirm your email";
+            string link = _config.ConfirmationLink + token;
+            string message = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(link)}'>clicking here</a>.";
+            await _emailService.SendEmail(email, subject, message);
         }
 
 

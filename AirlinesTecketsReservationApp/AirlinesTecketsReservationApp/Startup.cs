@@ -16,7 +16,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace AirlinesTicketsReservationApp
 {
@@ -53,7 +55,7 @@ namespace AirlinesTicketsReservationApp
             services.AddTransient<IConfig, Config>();
             services.AddTransient<IAirlinesContext, AirlinesContext>();
             services.AddDbContext<AirlinesContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -65,6 +67,10 @@ namespace AirlinesTicketsReservationApp
                  .AsImplementedInterfaces()
                  .WithScopedLifetime()
             );
+
+
+
+            services.AddSingleton<IHostedService, NotificationsService>();
 
             services.AddAutoMapper();
             services.AddMemoryCache();

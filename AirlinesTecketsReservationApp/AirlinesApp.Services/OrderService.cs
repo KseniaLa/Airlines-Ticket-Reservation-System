@@ -124,7 +124,7 @@ namespace AirlinesApp.Services
         public async Task CancelOrder(string email, int orderId)
         {
             User user = await Db.Users.FindBy(u => u.Email == email).FirstOrDefaultAsync();
-            Order order = await Db.Orders.FindBy(o => o.UserId == user.Id && o.Id == orderId) //remove userid
+            Order order = await Db.Orders.FindBy(o => o.UserId == user.Id && o.Id == orderId)
                 .FirstOrDefaultAsync();
             Ticket ticket = await Db.Tickets.FindBy(t => t.Id == order.TicketId).FirstOrDefaultAsync();
             if (ticket != null)

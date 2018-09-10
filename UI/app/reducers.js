@@ -15,6 +15,7 @@ import userTicketsReducer from 'containers/UserTicketsPage/reducer';
 import loginReducer from 'containers/SignInPage/reducer';
 import cartReducer from 'containers/UserBasketPage/reducer';
 import addReducer from 'containers/AddPage/reducer';
+import confirmationReducer from 'containers/ConfirmedPage/reducer';
 /*
  * routeReducer
  *
@@ -52,6 +53,7 @@ export default function createReducer(injectedReducers) {
     language: languageProviderReducer,
     global: globalReducer,
     userPage: userPageReducer,
+    confirmation: confirmationReducer,
     searchResult: searchReducer,
     citiesResult: citiesReducer,
     userTickets: userTicketsReducer,

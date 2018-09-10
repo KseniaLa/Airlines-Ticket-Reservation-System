@@ -78,5 +78,7 @@
   "app.components.SignInPage.password": "password",
   "app.components.SignInPage.shortpassword": "Password must be longer than 8 characters",
   "app.components.empty.notfound": "Not found",
-  "app.components.AddPage.addgroup": "add group"
+  "app.components.AddPage.addgroup": "add group",
+  "app.components.ConfirmedPage.confirmed": "E-mail successfully confirmed",
+  "app.components.ConfirmedPage.confirmerror": "E-mail confirmation error"
 }

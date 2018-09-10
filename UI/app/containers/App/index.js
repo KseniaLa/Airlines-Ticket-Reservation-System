@@ -15,6 +15,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SignIn from '../SignInPage';
 import UserPage from '../UserPage';
+import ConfirmedPage from '../ConfirmedPage';
 import {
   makeSelectIsAuthorized,
   makeSelectIsAdmin,
@@ -128,6 +129,7 @@ class App extends React.Component {
                 />
               )}
             />
+            <Route path="/confirm" component={ConfirmedPage} />
             <Route path="/user" component={UserPage} />
             <Route exact path="/add" component={AddPage} />
             <Route component={NotFoundPage} />

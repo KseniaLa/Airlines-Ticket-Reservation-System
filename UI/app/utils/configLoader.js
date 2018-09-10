@@ -8,6 +8,7 @@ const CONFIG = {
     updateUser: 'account/update',
     logout: 'account/tokens/cancel',
     signup: 'account/signup',
+    confirm: 'account/confirm/',
     getUserTickets: 'orders/userorders/',
     resultTickets: 'tickets/search/',
     cities: 'cities/',
